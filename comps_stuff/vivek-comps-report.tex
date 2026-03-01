@@ -510,11 +510,11 @@ This is critical for clinical translation: practitioners need confidence that ru
 
 \newpage
 
-% Section C.6: Preliminary Studies
+% Section D: Preliminary Studies
 % Added per Suresh's feedback: figures showing initial results
-% Placed after Innovation (C) and before Research Approach (D)
+% Placed after Innovation (C) and before Research Approach (now E)
 
-\section*{Preliminary Studies}
+\section*{D. Preliminary Studies}
 
 The innovations described above have been implemented and tested on synthetic ground truth data. This section presents initial results that demonstrate feasibility of the PAT Scan methodology, progressing from baseline reconstruction through systematic improvement via hyperparameter tuning, to challenging test cases and reliability analysis.
 
@@ -522,13 +522,41 @@ The innovations described above have been implemented and tested on synthetic gr
 
 At initialization (iteration 0), the U-Net produces a random material mask with no resemblance to the ground truth inclusion. The SSIM between the predicted and true material distributions is approximately 0.06, confirming that the network begins with no prior knowledge of the inclusion geometry.
 
+\begin{figure}[h!]
+\centering
+\includegraphics[width=\textwidth]{../inverse_problem_results/pre_training_visualization.png}
+\caption{Pre-training state (iteration 0) with random U-Net initialization. Left: ground truth material distribution with circular inclusion (red, $E = 10$) in background (blue, $E = 1$). Center: U-Net continuous prediction showing random material assignment (SSIM $\approx 0.06$). Right: level-set hard boundary extraction from the random prediction, bearing no resemblance to the true inclusion.}
+\label{fig:pre_training}
+\end{figure}
+
 After 1000 training iterations using only the L2 displacement loss (no regularization), the network achieves an SSIM of 0.72 and pixel-wise accuracy of 87.8\%. The predicted mask captures the approximate location and size of the inclusion but exhibits diffuse boundaries and spatial noise in the material prediction. This baseline establishes that the boundary-only displacement data contains sufficient information for the U-Net to localize the inclusion through the differentiable FEM pipeline, even with the simplest possible loss function.
 
+\begin{figure}[h!]
+\centering
+\includegraphics[width=\textwidth]{../inverse_problem_results/vanilla_results.png}
+\caption{Baseline reconstruction after 1000 iterations using only L2 displacement loss (no regularization). The U-Net localizes the inclusion (SSIM = 0.72, accuracy = 87.8\%) but the predicted boundary is diffuse with spatial noise, demonstrating the need for regularization.}
+\label{fig:vanilla}
+\end{figure}
+
 Adding total variation regularization and Gaussian smoothing to the pipeline substantially improves reconstruction quality. With the composite loss $\mathcal{L} = \mathcal{L}_{\text{MSE}} + \lambda_{\text{TV}} \mathcal{L}_{\text{TV}}$ and level-set post-processing, the SSIM increases to 0.91 with 94.6\% accuracy after 1000 iterations. The predicted inclusion boundary becomes crisp and closely matches the ground truth circular geometry. This improvement confirms that TV regularization serves its intended purpose: promoting the piecewise constant material distributions that the segmentation formulation assumes.
+
+\begin{figure}[h!]
+\centering
+\includegraphics[width=\textwidth]{../inverse_problem_results/post_training_visualization.png}
+\caption{Reconstruction with TV regularization, Gaussian smoothing, and level-set post-processing after 1000 iterations (SSIM = 0.91, accuracy = 94.6\%). The predicted inclusion boundary is crisp and closely matches the ground truth circular geometry, confirming the effectiveness of the composite loss function.}
+\label{fig:post_training_full}
+\end{figure}
 
 \subsection*{Grid Search Optimization}
 
 Systematic hyperparameter tuning via grid search over learning rate, TV weight $\lambda_{\text{TV}}$, smoothing kernel width $\sigma$, thresholding temperature $T$, and boundary condition sharpness yields further improvement in efficiency. The optimized configuration achieves an SSIM of 0.85 with 94.6\% accuracy in only 200 iterations---a five-fold reduction in iterations compared to the untuned baseline at comparable reconstruction quality. This demonstrates that the algorithm's performance is sensitive to hyperparameter selection and that systematic tuning is essential for practical deployment.
+
+\begin{figure}[h!]
+\centering
+\includegraphics[width=\textwidth]{../inverse_problem_results/post_training_visualization_grid_search_optimized.png}
+\caption{Grid-search-optimized reconstruction after only 200 iterations (SSIM = 0.85, accuracy = 94.6\%). Systematic hyperparameter tuning achieves comparable accuracy to the untuned result (Figure~\ref{fig:post_training_full}) in one-fifth the iterations.}
+\label{fig:grid_search}
+\end{figure}
 
 \subsection*{Challenging Scenarios: Faint and Small Inclusions}
 
@@ -536,9 +564,30 @@ To probe the limits of the methodology, we tested three progressively more chall
 
 For a faint inclusion with low stiffness contrast ($\alpha = 1.2$, compared to the standard $\alpha = 10$), the algorithm achieves an SSIM of 0.81 with 93.0\% accuracy. Despite the subtle displacement differences produced by a near-background-stiffness inclusion, the method successfully detects and localizes the inclusion. The reconstruction quality degrades gracefully relative to the high-contrast case.
 
+\begin{figure}[h!]
+\centering
+\includegraphics[width=\textwidth]{../inverse_problem_results/post_training_visualization_grid_search_optimized_faint_inclusion.png}
+\caption{Faint inclusion reconstruction ($\alpha = 1.2$, SSIM = 0.81, accuracy = 93.0\%). Despite the low stiffness contrast producing subtle boundary displacement differences, the method successfully detects and localizes the inclusion with graceful quality degradation.}
+\label{fig:faint}
+\end{figure}
+
 For a smaller inclusion with reduced radius, the algorithm achieves an SSIM of 0.40 with 88.5\% accuracy. The inclusion location is correctly identified, but the boundary geometry is less precisely recovered. Small inclusions produce weaker displacement signals at the boundary, reducing the information available for reconstruction.
 
+\begin{figure}[h!]
+\centering
+\includegraphics[width=\textwidth]{../inverse_problem_results/post_training_visualization_grid_search_optimized_smaller_inclusion.png}
+\caption{Smaller inclusion reconstruction (SSIM = 0.40, accuracy = 88.5\%). The inclusion location is correctly identified, but boundary geometry is less precisely recovered due to the weaker displacement signal produced by the reduced inclusion size.}
+\label{fig:smaller}
+\end{figure}
+
 The most challenging scenario combines both difficulties: a small inclusion with faint contrast ($\alpha = 1.2$). Here the algorithm achieves an SSIM of 0.49 with 89.5\% accuracy. The inclusion is still detected and approximately localized, but reconstruction fidelity is reduced. This case represents a fundamental sensitivity limit where the displacement signal from the inclusion approaches the numerical precision of the solver.
+
+\begin{figure}[h!]
+\centering
+\includegraphics[width=\textwidth]{../inverse_problem_results/post_training_visualization_grid_search_optimized_small_and_faint_inclusion.png}
+\caption{Most challenging scenario: small inclusion with faint contrast ($\alpha = 1.2$, SSIM = 0.49, accuracy = 89.5\%). The inclusion is detected and approximately localized, representing the sensitivity limit of the current methodology.}
+\label{fig:small_faint}
+\end{figure}
 
 These results establish a performance envelope: the method works well for standard clinical contrast ratios ($\alpha \geq 5$) and medium-to-large inclusions, with graceful degradation as either contrast or size decreases.
 
@@ -546,13 +595,43 @@ These results establish a performance envelope: the method works well for standa
 
 A critical concern for any optimization-based reconstruction method is sensitivity to random weight initialization. To assess this, we conducted a reliability study consisting of multiple independent runs with identical training procedures, hyperparameters, and datasets, varying only the random seed for U-Net weight initialization.
 
+\begin{figure}[h!]
+\centering
+\includegraphics[width=\textwidth]{../inverse_problem_results/sensitivity_to_initial_conditions.png}
+\caption{Robustness to initialization demonstrated across multiple independent runs. Each run uses identical training procedure and data with different random seeds. The reconstructions achieve consistent SSIM values above 0.90 with visually similar inclusion boundaries, confirming that the optimizer converges to the same solution regardless of initialization.}
+\label{fig:sensitivity}
+\end{figure}
+
 The results demonstrate tight clustering across runs. Individual reconstructions achieve SSIM values consistently above 0.90 with accuracy above 93\%, and the predicted inclusion boundaries are visually similar across all runs. No spurious local minima were observed---every run converged to a high-quality reconstruction. This tight clustering confirms that the combination of angular and symmetric scanning data provides sufficient constraints to guide the optimizer toward consistent solutions regardless of initialization, validating the robustness claims made for the symmetric scanning innovation.
+
+\begin{figure}[h!]
+\centering
+\includegraphics[width=0.9\textwidth]{../inverse_problem_results/reliability_study_poc_pat_scan.png}
+\caption{Summary of reliability study findings: accuracy consistently above 80\%, reduced sensitivity to initial conditions, and no spurious local minima. The tight clustering across runs motivates a practical ensemble strategy where the practitioner runs the algorithm 3--5 times, discards outliers, and averages the clustered results.}
+\label{fig:reliability_summary}
+\end{figure}
 
 \subsection*{Extension to Irregular Geometry}
 
 As an initial test of generalizability beyond the proof-of-concept circular geometry, we applied the methodology to an irregular, off-centered inclusion parameterized by Fourier series boundary perturbations. This represents a significantly harder reconstruction task: the inclusion boundary is non-convex with complex geometric features, and the off-center placement breaks the rotational symmetry exploited by symmetric scanning.
 
-An initial attempt without learning rate optimization achieved an SSIM of only 0.21 after 600 iterations (approximately 13 minutes of computation), failing to capture the irregular boundary shape. After including learning rate in the hyperparameter grid search, reconstruction quality improved dramatically to an SSIM of 0.80 with 92.7\% accuracy (approximately 17 minutes of computation). The predicted boundary captures the overall shape and location of the irregular inclusion, though fine geometric detail is smoothed. The loss curve shows stable convergence without oscillation.
+An initial attempt without learning rate optimization achieved an SSIM of only 0.21 after 600 iterations (approximately 13 minutes of computation), failing to capture the irregular boundary shape.
+
+\begin{figure}[h!]
+\centering
+\includegraphics[width=\textwidth]{../inverse_problem_results/irregular_inclusion_preliminary_results.png}
+\caption{Irregular inclusion reconstruction without learning rate optimization (SSIM = 0.21, approximately 13 minutes). The reconstruction fails to capture the complex boundary shape, highlighting the sensitivity of irregular geometries to hyperparameter selection. The training loss curve (bottom) shows convergence but to a poor local minimum.}
+\label{fig:irregular_no_lr}
+\end{figure}
+
+After including learning rate in the hyperparameter grid search, reconstruction quality improved dramatically to an SSIM of 0.80 with 92.7\% accuracy (approximately 17 minutes of computation). The predicted boundary captures the overall shape and location of the irregular inclusion, though fine geometric detail is smoothed. The loss curve shows stable convergence without oscillation.
+
+\begin{figure}[h!]
+\centering
+\includegraphics[width=\textwidth]{../inverse_problem_results/irregular_inclusion_learning_rate_optimized.png}
+\caption{Irregular inclusion reconstruction with learning rate optimization (SSIM = 0.80, accuracy = 92.7\%, approximately 17 minutes). The same U-Net architecture generalizes to non-convex, off-centered inclusion geometry without architectural modifications. The predicted boundary captures the overall shape and location, with the loss curve (bottom) showing stable convergence.}
+\label{fig:irregular_lr}
+\end{figure}
 
 This preliminary result on irregular geometry demonstrates that the same U-Net architecture generalizes beyond the idealized circular case without architectural modifications, while highlighting the importance of hyperparameter optimization---particularly learning rate selection---for more complex geometries. Full systematic evaluation of irregular inclusions is the subject of Specific Aim 2a.
 
@@ -562,11 +641,11 @@ These preliminary results establish several key findings. First, boundary-only d
 
 \newpage
 
-% Section D: Research Approach
+% Section E: Research Approach
 % Auto-generated from comps_skeleton_vivek-equations-extracted.md
 % Zero-deletion protocol: all prose preserved exactly
 
-\section*{D. Research Approach}
+\section*{E. Research Approach}
 
 The research strategy follows a natural progression from simplified proof-of-concept to realistic complexity, systematically addressing key challenges at each stage. This approach mirrors the development trajectory of successful imaging technologies: establish feasibility on idealized cases, then progressively incorporate real-world complexity until clinical translation becomes viable.
 

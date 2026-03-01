@@ -1,0 +1,260 @@
+AGENT: Phase 1-Obsessed Analysis
+SUBAGENT TYPE: general-purpose
+MODEL: sonnet
+DESCRIPTION: Phase 1-Obsessed Analysis
+
+PROMPT:
+========================================
+
+You are conducting an exhaustive analysis of the PAT Scan project to provide masterful guidance for writing a publication-quality comps document.
+
+CONTEXT:
+- Project: Palpation-Assisted Tomography (PAT Scan) - novel mesh-based PINN architecture
+- This is NOT just literature review - you're understanding the intellectual landscape to position breakthrough work
+- Your analysis will inform writing that needs to impress a PhD examining committee
+
+YOUR TASK (Target: 50-70 minutes, quality over speed):
+
+CRITICAL CONTEXT MANAGEMENT:
+You will read many documents. After reading EACH document, IMMEDIATELY extract key information and DISCARD the full content. This prevents API 413 errors and enables web operations later. Think: read → extract → discard → repeat.
+
+1. FOUNDATION MASTERY (8-10 min):
+   - Read Specific Aims.pdf
+     → Extract: All 3 aims (detailed), innovation claims, methodology, timeline, key technical decisions
+     → Discard full text
+
+   - Read CLAUDE.md
+     → Extract: Mesh-based PINN architecture details, what's implemented vs. planned, file structure, key nuances
+     → Discard full text
+
+   - Read comps.md
+     → Extract: All sections, structure, claims made, gaps, technical details mentioned
+     → Discard full text
+
+   - Synthesize: Understand project arc (proof-of-concept done → extension in progress → realism future)
+   - Note why mesh-based PINN is superior for this problem
+
+2. COMPREHENSIVE CODEBASE AUDIT (8-10 min):
+   - Use Glob/Grep to explore codebase structure
+   - Read key files (extract → discard pattern):
+     - fem_utils.py → Extract: FEM formulation, key functions, equations
+     - unet.py → Extract: Architecture details, layers, parameters
+     - unet_train_v5_upgraded.py → Extract: Training pipeline, loss functions, workflow
+     - create_irregular_inclusion.py → Extract: Geometry handling approach
+   - After each file: DISCARD content, keep only extractions
+   - Verify comps claims against extracted code details
+   - Document: implemented vs. planned vs. speculative
+
+3. DEEP LITERATURE REVIEW (20-25 min):
+
+   **Core Papers - Extract & Discard Pattern:**
+   - Read ALL 5 Final Selection papers thoroughly:
+     - Visual Vibration Tomography (Katie)
+     - Visual Surface Wave Elastography (Katie)
+     - Mechanics-based Tomography
+     - Palpation Tomography
+     - Mathematical Foundations
+
+   For EACH paper:
+   → Extract: Methodology, key results, limitations, how it cites others, intellectual lineage
+   → For Katie's papers ALSO extract: Writing style patterns (intro structure, transitions, narrative arc)
+   → DISCARD full content before next paper
+
+   - Read ALL PINNs-specific papers:
+     - Karniadakis elasticity papers
+   → Extract: Traditional PINN formulation, compare/contrast with mesh-based approach
+   → DISCARD full content
+
+   **Strategic Sampling:**
+   - Use Glob to navigate Preliminary/ folders
+   - Identify 5-7 highly relevant papers by filename ("exact_idea", "similar_idea")
+   - Read their abstracts + key sections
+   → Extract: Key contributions, how they relate to PAT Scan
+   → DISCARD after each
+
+   **Additional Context:**
+   - PhD reflections: Read thoroughly
+   → Extract: What confused advisor, why, how to prevent
+   → DISCARD
+
+   - Connected Papers graphs (PNG images): View
+   → Extract: Citation network structure, key groups
+
+   - Basics folder Wikipedia PDFs: Skim
+   → Extract: Context on palpation, elastography, inverse problems
+   → DISCARD
+
+   **Context Folder Navigation:**
+   - Use Glob to explore full structure
+   → Note: Themes, organization, what exists but can't read (videos/audio)
+   → Infer purpose from filenames
+
+   **CLEAR ALL CONTEXT NOW - you should have extracted summaries only, NO full documents in memory**
+
+4. MASTERFUL STYLE & AUDIENCE ANALYSIS (12-15 min):
+
+   **Katie Bouman - Deep Style Study (PRIMARILY From Local Papers):**
+
+   You deeply analyzed Katie's papers in step 3. Use that LOCAL analysis as your primary source:
+
+   - From LOCAL papers you already read, synthesize:
+     - **Problem Motivation**: How does she hook the reader? Clinical relevance? Big picture?
+     - **Gap Identification**: How does she reveal what's missing?
+     - **Solution Presentation**: Build intuition first or dive into details?
+     - **Technical Depth**: When does she use math? Balance of rigor vs. accessibility?
+     - **Narrative Arc**: motivation → background → method → results → impact
+     - **Sentence Structure**: Short vs. long? Active vs. passive voice?
+     - **Transition Techniques**: How does she move between ideas?
+     - **Figure Integration**: How does she use visuals?
+     - **Writing "Voice"**: What makes her writing distinctive?
+     - Extract 10-15 specific, actionable writing techniques
+     - Note direct quotes/phrases that exemplify her style
+
+   - Minimal Web Enhancement:
+     - WebSearch ONLY: "Katie Bouman Caltech" + "Event Horizon Telescope"
+       → Get: Current position, major recognition, research philosophy (3-5 key facts)
+
+     - Optional minimal WebFetch: Caltech bio page IF needed for research context
+       → Extract: Just research statement in 2-3 sentences
+       → Immediately discard
+
+     - Optional WebSearch: "Katie Bouman TED" OR "interviews"
+       → Extract: How she explains to non-experts (if relevant)
+
+   - DO NOT WebFetch her papers (you already read them locally!)
+
+   **Suresh Raghavan - Deep Audience Profiling (Web Research - EXTENSIVE):**
+
+   - WebSearch: "Suresh Raghavan University of Iowa"
+     → Find: Faculty page URL, department, position
+
+   - WebFetch: His Iowa faculty/lab page
+     → Extract: Background, research focus, priorities, current projects
+     → What problems does he care about?
+     → What frameworks/approaches does he value?
+
+   - WebSearch: "Suresh Raghavan biomechanics" + "Suresh Raghavan publications"
+     → Get: Research themes from paper titles (don't fetch full PDFs)
+     → Methodology preferences, technical interests
+
+   - WebSearch: "Suresh Raghavan continuum mechanics" OR "elasticity"
+     → Extract: Specific technical domains he works in
+
+   - Optional: Google Scholar search for his name
+     → See: Most cited work, collaboration patterns (from titles/abstracts only)
+
+   - Analyze as if pitching to him:
+     - **Technical Background**: continuum mechanics? biomechanics? computational methods?
+     - **Research Values**: rigor? novelty? clinical impact? theoretical foundations?
+     - **Hot Buttons**: What excites him? What concerns him?
+     - **Mental Models**: How does he frame problems? What frameworks?
+     - **Potential Objections**: What might he question about PAT Scan?
+     - **Selling Points**: What aspects would resonate?
+
+   - Create detailed psychological profile: "Suresh cares about X, values Y, would be impressed by Z"
+
+   **Synthesis - The Style Transfer Strategy:**
+   - **For Each Comps Section**, create detailed guidance:
+     - "Significance: Use Katie's [clinical motivation technique] + emphasize [Suresh's concern about accessibility]"
+     - "Innovation: Frame mesh-based PINN using Katie's [intuition-building approach] while addressing [Suresh's likely question about traditional PINNs]"
+     - "Methods: Katie's [progressive detail] style, but emphasize [mechanics rigor] for Suresh"
+   - **Phrase Bank**:
+     - Transitions Katie uses → adapt for PAT Scan
+     - Technical explanations Suresh would appreciate
+   - **Balance Points**:
+     - Where to be accessible (Katie) vs. rigorous (Suresh)
+     - When to use clinical motivation vs. technical motivation
+   - **Anticipated Objections**: Based on Suresh's perspective, what questions will he have? Preempt them Katie-style.
+
+5. CRITICAL ANALYSIS:
+   - **Intellectual History**: Trace the evolution from palpation → computational palpation → tomography approaches → PAT Scan
+   - **Research Groups**: Who's doing what? (Diet group, Rose Hulman, Iowa, Texas - check "Most Cited" folder)
+   - **Competing Approaches**: What are alternatives to PAT Scan? Why is PAT Scan better?
+   - **Gap in Literature**: What does PAT Scan do that NO ONE else has done?
+   - **Positioning Strategy**: How to frame this work to maximize perceived novelty and impact?
+
+6. OUTPUT - Write a publication-quality analysis document:
+
+   **I. Executive Summary** (1 page)
+   - Current state assessment
+   - Key findings
+   - Strategic recommendations
+
+   **II. Comps Reality Audit** (detailed)
+   - Line-by-line assessment of comps.md claims
+   - What's backed by code, what's speculation, what's misleading
+   - Specific corrections needed
+
+   **III. Literature Landscape** (comprehensive)
+   - Historical context (clinical palpation → elastography)
+   - Methodological families (MRE, ultrasound, computational approaches)
+   - Key papers and their contributions
+   - Citation network structure
+   - Research group focuses
+
+   **IV. Positioning Strategy**
+   - How to frame mesh-based PINN vs. traditional PINN (design advantage, not compromise)
+   - How to position vs. closest competitors (mechanics-based tomography, visual vibration tomography, etc.)
+   - What makes PAT Scan unique in the landscape
+
+   **V. Section-by-Section Citation Strategy**
+   - For EACH comps section (Significance, Innovation, Methods, Results, etc.):
+     - Specific papers to cite (with page numbers/key findings)
+     - Exact claims to make and how papers support them
+     - Suggested flow and narrative arc
+     - Technical details to include
+
+   **VI. Innovation Articulation**
+   - The 3-5 core innovations, precisely worded
+   - How each differs from prior work (with citations)
+   - Why each matters (technical + practical impact)
+
+   **VII. Advisor Confusion Analysis**
+   - Based on PhD reflections, what went wrong in presentations?
+   - What conceptual barriers exist for non-experts?
+   - How should comps preemptively address these?
+
+   **VIII. MASTERFUL STYLE GUIDE - "Katie's Swag for Suresh's Brain"**
+
+   A. **Katie Bouman's Writing DNA**
+   - 10-15 specific techniques with examples from her papers
+   - Sentence-level patterns
+   - Paragraph-level structures
+   - Section-level narrative arcs
+   - Her signature phrases and how to adapt them
+
+   B. **Suresh Raghavan's Wavelength**
+   - His technical priorities
+   - His values in research presentation
+   - Likely questions/objections
+   - What would impress him
+
+   C. **Section-by-Section Execution Plan**
+   For each major comps section:
+   - **Opening sentence strategy** (Katie-style hook adapted for Suresh)
+   - **Narrative flow** (Katie's progression, Suresh's priorities)
+   - **Technical depth calibration** (where to be rigorous vs. accessible)
+   - **Key phrases to use** (Katie's style, Suresh's language)
+   - **Phrases to AVOID** (AI tells, over-hedging, generic academic speak)
+   - **Anticipated objections** and how to preempt them
+
+   D. **Style Transfer Examples**
+   - Take 2-3 paragraphs from Katie's papers
+   - Show how to adapt that style for PAT Scan content
+   - Annotate: "This works because [Suresh values X]"
+
+   **IX. Gap Analysis & Recommendations**
+   - Missing elements in current comps
+   - Technical details to add
+   - Framing improvements
+   - Narrative flow fixes
+   - Prioritized by impact (must-fix vs. nice-to-have)
+
+CONSTRAINTS:
+- Take your time - quality matters more than speed
+- If something seems important but you can't read it (video/audio), note it and infer what you can from context
+- Be critical and thorough - this analysis will inform the final comps document
+- If you need 80+ minutes, that's fine - just deliver masterful analysis
+- The Style Guide section should be SO GOOD that Phase 2 can execute blindly and produce Katie-quality writing for Suresh-audience
+
+Save your output to: /home/vivekkarmarkar/Python Files/PAT-Scan-Copy/agents/phase1/obsessed_analysis.md

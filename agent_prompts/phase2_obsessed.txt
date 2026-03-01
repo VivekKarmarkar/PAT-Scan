@@ -1,0 +1,199 @@
+AGENT: Phase 2-Obsessed Writing
+SUBAGENT TYPE: general-purpose
+MODEL: sonnet
+DESCRIPTION: Phase 2-Obsessed - Publication-Quality Polished Document
+
+PROMPT:
+========================================
+
+You are writing a publication-quality comps document that will impress a PhD examining committee.
+
+INPUT: Phase 1-Obsessed comprehensive analysis document (read from /home/vivekkarmarkar/Python Files/PAT-Scan-Copy/agents/phase1/obsessed_analysis.md)
+
+YOUR TASK (Target: 35-50 minutes - take the time needed for quality):
+
+═══════════════════════════════════════════════════════════════════
+ITEM 1: CREATE THE PERFECT SKELETON
+═══════════════════════════════════════════════════════════════════
+
+CREATE: comps_skeleton_refined_obsessed.md
+
+**Title Page**
+- Title, author, date, committee members
+
+**Specific Aims** (1-2 pages outline)
+- [Paste from PDF]
+- Note any flow improvements
+
+**Significance** (3-4 pages of detailed bullets)
+- Clinical Relevance
+  - Cancer detection via palpation [citations]
+  - Limitations: subjectivity, cost of MRE/ultrasound [citations]
+- Inverse Problem Challenge
+  - Ill-posed nature [citations]
+  - Existing approaches and gaps [citations]
+- Knowledge Gap
+  - What's missing in literature
+- Potential Impact
+  - Healthcare accessibility
+  - Scientific contributions
+
+**Innovation** (2-3 pages of detailed bullets)
+- Innovation 1: Mesh-based PINN
+  - Technical description
+  - vs. traditional PINN [Karniadakis citations]
+  - Why superior for this problem
+- Innovation 2: Universal geometry framework
+  - [same structure]
+- Innovation 3-5: [Continue]
+
+**Research Approach** (10-12 pages of detailed bullets)
+- Overall Framework
+- Aim 1: Proof of Concept (6-7 pages)
+  - Methods (mesh, FEM, forces, verification)
+  - Results (achievements, metrics, figures)
+  - Discussion (lessons, limitations)
+- Aim 2: Extension (3-4 pages)
+  - Methods (irregular geometries, Fourier MLP)
+  - Preliminary Results
+  - Future Work
+- Aim 3: Realism (1-2 pages)
+  - 3D, CT integration, experimental validation
+
+**Conclusion** (1-2 pages of bullets)
+- Summary, impact, timeline
+
+**References**
+- Complete BibTeX bibliography
+
+QUALITY: No [TODO] markers, all citations identified, all parameters specified, figure captions written, this should be a perfect roadmap.
+
+═══════════════════════════════════════════════════════════════════
+ITEM 2: CREATE THE POLISHED FINAL DOCUMENT
+═══════════════════════════════════════════════════════════════════
+
+CREATE: comps_final_obsessed.md
+
+Convert the skeleton into publication-quality prose with MASTERFUL style execution.
+
+**Sections:**
+
+- **Title Page**: Professional formatting
+
+- **Specific Aims** (1-2 pages): Paste from PDF, minor polish if needed
+
+- **Significance** (3-4 pages):
+  - Compelling clinical motivation
+  - Thorough review of existing approaches and limitations
+  - Clear knowledge gap
+  - Impact statement (clinical + scientific)
+  - Properly cited throughout
+
+- **Innovation** (2-3 pages):
+  - 3-5 innovations, each with dedicated treatment
+  - Clear differentiation from prior work (with citations)
+  - Technical + practical significance
+  - Forward-looking implications
+
+- **Research Approach** (10-12 pages):
+  - Overall framework overview
+  - **Aim 1** (6-7 pages): Methods (detailed), Results (comprehensive), Discussion
+  - **Aim 2** (3-4 pages): Methods, Preliminary Results, Future Work
+  - **Aim 3** (1-2 pages): Overview, challenges, expected outcomes
+
+- **Conclusion** (1-2 pages):
+  - Synthesis of contributions
+  - Broader impact
+  - Timeline with milestones
+
+- **References**: Complete bibliography (BibTeX format)
+
+Total target: ~18-22 pages
+
+STYLE EXECUTION - MASTERFUL IMPLEMENTATION:
+
+**You have Phase 1's comprehensive Style Guide. USE IT RUTHLESSLY.**
+
+**Katie Bouman's Writing DNA - Execute These Techniques:**
+- [Refer to Phase 1's 10-15 specific techniques]
+- Apply her narrative arc: clinical hook → technical gap → elegant solution
+- Use her sentence structures and transition techniques
+- Build intuition before presenting technical details
+- Integrate figures conceptually (even if placeholders)
+- Match her balance of accessibility and rigor
+
+**Suresh Raghavan's Wavelength - Tune To His Frequency:**
+- [Refer to Phase 1's audience profile]
+- Emphasize mechanics foundations (he values this)
+- Address his likely objections preemptively
+- Use language/frameworks he respects
+- Hit his technical hot buttons
+- Demonstrate rigor he expects
+
+**Section-by-Section Execution:**
+- **Follow Phase 1's detailed section-by-section plan**
+- Each section should:
+  - Open with Katie-style hook adapted for Suresh
+  - Flow using her narrative techniques
+  - Hit technical depth Suresh expects
+  - Use phrases from Phase 1's phrase bank
+  - Avoid phrases Phase 1 flagged
+
+**Specific Mandates:**
+- **Significance opening**: Katie's big-picture clinical motivation + Suresh's concern for practical impact
+- **Innovation framing**: Katie's intuition-building + Suresh's appreciation for design rationale
+- **Methods presentation**: Katie's progressive detail + Suresh's mechanics rigor
+- **Mesh-based PINN explanation**: Frame as sophisticated design choice using Katie's clarity for Suresh's technical mind
+
+**Anti-Patterns to AVOID:**
+- Generic academic hedging ("It should be noted that...")
+- Formulaic transitions ("Furthermore," "Moreover," "Additionally")
+- Passive voice where active is clearer
+- Burying key insights mid-paragraph
+- Explaining what you're about to explain
+- AI writing signatures (repetitive structures, certain tell-tale phrases)
+
+**Quality Checks After Writing Each Section:**
+- Would Katie approve of the narrative flow?
+- Would Suresh find this convincing and rigorous?
+- Does it sound human-written (natural variation, occasional asymmetry)?
+- Are innovations clearly differentiated from prior work?
+- Is technical approach accessible yet precise?
+
+═══════════════════════════════════════════════════════════════════
+ITEM 3: CREATE LaTeX VERSION
+═══════════════════════════════════════════════════════════════════
+
+CREATE: comps_final_obsessed.tex
+
+- Professional academic document class
+- Proper formatting (title, sections, equations, citations)
+- Figure/table environments ready
+- BibTeX bibliography
+- Compiles without errors
+- Production-ready
+
+═══════════════════════════════════════════════════════════════════
+ITEM 4: CREATE WORD-COMPATIBLE VERSION
+═══════════════════════════════════════════════════════════════════
+
+CREATE: comps_final_obsessed_word.md
+
+- Pandoc-optimized markdown
+- Include conversion command in comments
+- Proper heading levels
+- Figure placeholders with captions
+- Page break markers
+- Word-compatible reference formatting
+
+CONSTRAINTS:
+- Quality over speed
+- Take 50+ minutes if needed for excellence
+- User should only need 30-60 min to refine, not rebuild
+- This should be SO GOOD that it could be defended with minimal changes
+
+Save your output to:
+- /home/vivekkarmarkar/Python Files/PAT-Scan-Copy/agents/phase2/comps_skeleton_refined_obsessed.md
+- /home/vivekkarmarkar/Python Files/PAT-Scan-Copy/agents/phase2/comps_final_obsessed.md
+- /home/vivekkarmarkar/Python Files/PAT-Scan-Copy/agents/phase2/comps_final_obsessed.tex
+- /home/vivekkarmarkar/Python Files/PAT-Scan-Copy/agents/phase2/comps_final_obsessed_word.md

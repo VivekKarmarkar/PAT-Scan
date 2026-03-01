@@ -1,0 +1,89 @@
+AGENT: Phase 2-Good Writing
+SUBAGENT TYPE: general-purpose
+MODEL: sonnet
+DESCRIPTION: Phase 2-Good - Solid Skeleton + Well-Written Draft
+
+PROMPT:
+========================================
+
+You are writing a well-structured, properly cited comps document based on Phase 1 analysis.
+
+INPUT: Phase 1-Good analysis document (read from /home/vivekkarmarkar/Python Files/PAT-Scan-Copy/agents/phase1/good_analysis.md)
+
+YOUR TASK (Target: 20-28 minutes):
+
+1. CREATE: comps_skeleton_refined_good.md
+   - Comprehensive skeleton with all sections from original comps
+   - Fix ALL gaps identified in Phase 1
+   - Full citation placeholders (Author et al., Year, "Paper Title")
+   - Clearly marked: ✅ (done), 🔄 (in progress), 🎯 (future)
+   - Detailed bullet points that could guide final writing
+   - Include key equations, parameters, method details
+   - Section headings optimized for flow
+
+2. CREATE: comps_final_good.md
+   - Convert skeleton to fluent prose
+   - Well-structured paragraphs with good topic sentences
+   - Smooth transitions between sections
+   - Academic tone with appropriate technical depth
+   - Sections:
+     - **Specific Aims**: Paste from PDF
+     - **Significance** (2-3 pages): Clinical relevance, limitations of existing methods, knowledge gap, potential impact
+     - **Innovation** (1-2 pages): 3-5 key innovations, clearly articulated and differentiated from prior work
+     - **Research Approach** (6-8 pages):
+       - Aim 1: Methods (detailed), Results (what's achieved), Discussion
+       - Aim 2: Methods (planned), Preliminary results (if any), Future work
+       - Aim 3: Overview (brief)
+     - **Conclusion** (1 page): Summary, impact, timeline
+     - **References**: Placeholder list (will populate in LaTeX)
+   - Total target: ~12-15 pages
+
+3. CREATE LaTeX VERSION: comps_final_good.tex
+   - Professional academic formatting
+   - Proper sections, subsections
+   - Placeholder for figures/tables
+   - BibTeX-ready citation format
+   - Clean, compilable LaTeX
+
+4. CREATE Word-compatible version: comps_final_good_word.md
+   - Markdown formatted for easy Pandoc → Word conversion
+   - Page break markers
+   - Figure/table placeholders
+
+STYLE EXECUTION (based on Phase 1 Style Guide):
+
+**Katie Bouman's Narrative Architecture:**
+- **Significance**: Big picture clinical motivation → current limitations → technical gap → impact potential
+- **Innovation**: Build intuition for each innovation before diving into technical details
+- **Methods**: Progressive detail - overview first, then zoom into specifics
+- **Use her transition techniques** from Phase 1 analysis
+- **Balance accessibility and rigor** as she does
+
+**Suresh Raghavan's Wavelength:**
+- **Emphasize**: Mechanics foundations, validation rigor, connection to real problems
+- **Address his likely concerns**: About mesh-based PINN, about synthetic data, about clinical translation
+- **Use language he values**: Quantitative validation, continuum mechanics, experimental verification
+- **Hit his hot buttons**: Whatever Phase 1 identified as his priorities
+
+**Specific Execution:**
+- Apply 5-7 Katie techniques from Phase 1 Style Guide
+- Reference Phase 1's section-by-section execution plan
+- Use phrase bank from Phase 1 where appropriate
+- Preemptively address Suresh's anticipated objections (from Phase 1)
+
+**Avoid:**
+- AI writing patterns (will be caught by Phase 3 agent, but try to avoid)
+- Generic transitions like "Furthermore," "Moreover," "In addition"
+- Excessive hedging unless warranted
+- Burying key insights in middle of paragraphs
+
+CONSTRAINTS:
+- Prioritize good structure and flow
+- Don't need to be perfect, but should be solid
+- If spending >35 min, you're polishing too much
+
+Save your output to:
+- /home/vivekkarmarkar/Python Files/PAT-Scan-Copy/agents/phase2/comps_skeleton_refined_good.md
+- /home/vivekkarmarkar/Python Files/PAT-Scan-Copy/agents/phase2/comps_final_good.md
+- /home/vivekkarmarkar/Python Files/PAT-Scan-Copy/agents/phase2/comps_final_good.tex
+- /home/vivekkarmarkar/Python Files/PAT-Scan-Copy/agents/phase2/comps_final_good_word.md

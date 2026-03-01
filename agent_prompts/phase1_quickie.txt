@@ -1,0 +1,104 @@
+AGENT: Phase 1-Quickie Analysis
+SUBAGENT TYPE: general-purpose
+MODEL: sonnet
+DESCRIPTION: Phase 1-Quickie Analysis
+
+PROMPT:
+========================================
+
+You are tasked with quickly analyzing the PAT Scan project to identify gaps in the current comps document and gather key citations.
+
+CONTEXT:
+- Project: Palpation-Assisted Tomography (PAT Scan) - mesh-based PINN for tissue stiffness reconstruction
+- Current comps.md exists but was built with incomplete context
+- Your job: Fast analysis to prepare for comps refinement
+
+YOUR TASK (Target: 12-15 minutes):
+
+CRITICAL CONTEXT MANAGEMENT:
+After reading each document, IMMEDIATELY extract key points and summarize. Do NOT hold full document content in memory. This prevents API size errors.
+
+1. READ FOUNDATION (3-4 min):
+   - Read /home/vivekkarmarkar/Python Files/PAT-Scan-Copy/inverse_problem_results/Specific Aims.pdf
+     → Extract: 3 aims, key innovation claims, methodology overview
+     → Discard full text, keep only extracted points
+
+   - Read /home/vivekkarmarkar/Python Files/PAT-Scan-Copy/CLAUDE.md
+     → Extract: What's actually implemented vs. planned, key technical details
+     → Discard full text, keep only extracted points
+
+   - Read /home/vivekkarmarkar/Python Files/PAT-Scan-Copy/inverse_problem_results/PAT_Scan_Comps_Skeleton.md
+     → Extract: Structure, claims made, gaps visible
+     → Discard full text, keep only extracted points
+
+2. SPOT-CHECK REALITY vs. SPECULATION (2-3 min):
+   - Using your extracted summaries (not full docs), compare comps claims vs. CLAUDE.md implementation
+   - Flag speculative claims
+   - Write notes, then CLEAR the extracted summaries from active context
+
+3. STRATEGIC READING (4-5 min):
+   - Read ONLY abstracts + conclusions from Final Selection papers:
+     - Visual_Vibration_Tomography_Katie_paper_2022.pdf
+     - Visual_Surface_Wave_Elastography_Katie_paper_2025.pdf
+     - Mechanics_based_Tomography_paper_2017.pdf
+     - Palpation_Tomography_paper_2003.pdf
+     - Mathematical_Foundations_Linear_3D_paper_1994.pdf
+
+   - For Katie's papers, also note:
+     → Introduction structure (big picture → problem → approach)
+     → 2-3 signature writing techniques
+     → Key transition phrases
+
+   - IMMEDIATELY after reading, extract key points and DISCARD full content
+
+   - Read PhD reflection: /home/vivekkarmarkar/Python Files/PAT-Scan-Copy/context/notes/PhD thesis reflection Monday 10 Nov 2025.pdf
+     → Extract: What confused advisor, why, key insights
+     → DISCARD full content
+
+4. STYLE & AUDIENCE ANALYSIS (2-3 min):
+
+   **Katie Bouman's Style (From Local Papers + Brief Web Bio):**
+   - You already analyzed her writing from local papers (VVT, VSWE) in step 3
+   - Extracted: Intro structure, narrative flow, signature techniques
+
+   - WebSearch ONLY: "Katie Bouman Caltech"
+     → Get: Current position, major recognition (Event Horizon Telescope)
+     → Extract just 2-3 key facts about her research philosophy
+
+   - NO WebFetch of her papers (you already have them locally)
+   - If needed, WebFetch ONLY her brief faculty bio page (keep it minimal)
+     → Extract: Research interests in 1-2 sentences
+     → Discard immediately
+
+   - Synthesize: 2-3 signature Katie writing techniques + her research context
+
+   **Suresh Raghavan's Perspective (Web Research - CRITICAL):**
+   - WebSearch: "Suresh Raghavan University of Iowa"
+     → Find: His faculty page URL
+
+   - WebFetch: His Iowa faculty/lab page
+     → Extract: Research focus, technical background, what problems he cares about
+     → What would resonate vs. confuse him?
+     → Keep only key points
+
+   - Optional WebSearch if time: "Suresh Raghavan biomechanics" for more context
+
+   **Synthesis**: How to write with Katie's clarity for Suresh's wavelength
+
+5. OUTPUT - Write a concise analysis document covering:
+   - **Reality Check**: What in comps.md is backed by code vs. speculative
+   - **Key Gaps**: Top 5-7 missing elements (citations, technical details, framing issues)
+   - **Citation Map**: For each comps section (Significance, Innovation, Methods), list 2-3 relevant papers from Final Selection
+   - **Quick Wins**: Low-hanging fruit improvements
+   - **Advisor Confusion Hypothesis**: Based on PhD reflection, what might have confused the advisor?
+   - **Style & Audience Notes**:
+     - Katie's writing patterns observed
+     - Suresh's likely priorities/perspective
+     - How Phase 2 should adapt style for audience
+
+CONSTRAINTS:
+- Be fast but not sloppy
+- Prioritize actionable insights over comprehensive analysis
+- If you're spending >15 min, you're overthinking it
+
+Save your output to: /home/vivekkarmarkar/Python Files/PAT-Scan-Copy/agents/phase1/quickie_analysis.md

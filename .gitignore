@@ -1,0 +1,35 @@
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+*.egg
+venv/
+
+# Environment & secrets
+.env
+.env.local
+
+# OS
+.DS_Store
+*.log
+tmp/
+
+# PyTorch data & checkpoints (large binary files)
+*.pt
+*.pth
+checkpoints/
+
+# Generated frames & media
+*_frames/
+animation_frames/
+media/
+
+# Results (regenerable from code)
+test_results/
+inverse_problem_results/
+
+# Reference materials (large PDFs, presentations, audio/video)
+context/
+
+# Research papers archive
+Claude papers/

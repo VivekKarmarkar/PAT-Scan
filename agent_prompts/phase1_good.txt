@@ -1,0 +1,136 @@
+AGENT: Phase 1-Good Analysis
+SUBAGENT TYPE: general-purpose
+MODEL: sonnet
+DESCRIPTION: Phase 1-Good Analysis
+
+PROMPT:
+========================================
+
+You are conducting a thorough analysis of the PAT Scan project to prepare comprehensive guidance for refining the comps document.
+
+CONTEXT:
+- Project: Palpation-Assisted Tomography (PAT Scan) - mesh-based PINN combining U-Net with differentiable FEM
+- Key innovation: Separates inverse problem (NN) from forward model (exact linear solver F=KU)
+- Current comps.md needs citations, technical grounding, and clearer positioning vs. prior work
+
+YOUR TASK (Target: 25-30 minutes):
+
+CRITICAL CONTEXT MANAGEMENT:
+After reading each document, IMMEDIATELY extract/summarize key information. Do NOT hold full document content in memory. This prevents API 413 errors and allows proper web operations later.
+
+1. READ FOUNDATION THOROUGHLY (5-6 min):
+   - Read Specific Aims.pdf
+     → Extract: All 3 aims in detail, innovation claims, methodology, timeline
+     → Discard full text after extraction
+
+   - Read CLAUDE.md
+     → Extract: Architecture (mesh-based PINN nuance vs Karniadakis), what's implemented, file structure
+     → Discard full text after extraction
+
+   - Read PAT_Scan_Comps_Skeleton.md
+     → Extract: All sections, claims, gaps, structure
+     → Discard full text after extraction
+
+2. AUDIT COMPS vs. CODEBASE (4-5 min):
+   - Compare comps claims against CLAUDE.md
+   - Spot-check 2-3 key code files mentioned in CLAUDE.md (e.g., fem_utils.py, unet_train_v5_upgraded.py)
+   - Identify what's implemented (Aim 1) vs. in-progress (Aim 2) vs. future (Aim 3)
+   - Flag any misalignment between comps framing and actual implementation
+
+3. STRATEGIC LITERATURE REVIEW (7-9 min):
+   **Final Selection papers** (all 5):
+   - Read each paper's abstract + intro + conclusions
+   - For Katie's papers, analyze intro structure and narrative flow
+   → After EACH paper: Extract key methodology, findings, Katie's writing patterns
+   → DISCARD full content, keep only extractions
+
+   **PINNs papers**:
+   - Read Karniadakis papers (traditional PINN approach)
+   → Extract: How traditional PINN works vs. mesh-based approach
+   → DISCARD full content
+
+   **PhD reflections**:
+   - Read thoroughly
+   → Extract: Advisor confusion points, lessons, what to clarify
+   → DISCARD full content
+
+   **Context folder**:
+   - Use Glob to see structure (don't read files)
+   → Note: computational palpation, mechanics tomography categories exist
+
+   **CLEAR CONTEXT NOW - should only have extracted summaries, not full documents**
+
+4. STYLE & AUDIENCE DEEP DIVE (5-7 min):
+
+   **Katie Bouman Analysis (Primarily From Local Papers):**
+   - You already deeply analyzed her writing from local papers in step 3
+   - You extracted: intro structure, narrative flow, transitions, writing patterns
+
+   - WebSearch ONLY: "Katie Bouman Caltech computational imaging"
+     → Get: Current position, major achievements (EHT black hole image), research philosophy
+     → Extract brief context (3-5 key facts)
+
+   - Optional minimal WebFetch: Her Caltech bio page IF you need research context
+     → Extract: Just her research statement/interests in 2-3 sentences
+     → Immediately discard
+
+   - DO NOT WebFetch her papers (you already read them locally)
+
+   - Synthesize from LOCAL paper analysis:
+     - How does she motivate problems? (clinical → technical gap → solution)
+     - How does she structure narrative flow?
+     - How does she balance accessibility vs. technical depth?
+     - Extract 5-7 specific writing patterns/techniques
+     - Signature transitions and phrases
+
+   **Suresh Raghavan Deep Profile (Web Research - CRITICAL):**
+   - WebSearch: "Suresh Raghavan University of Iowa"
+     → Find: Faculty page URL, department, research areas
+
+   - WebFetch: His Iowa faculty/lab page
+     → Extract: Background, research focus, priorities, current projects
+     → What problems does he care about?
+     → What frameworks/approaches does he value?
+     → What would resonate vs. confuse him?
+
+   - WebSearch: "Suresh Raghavan" + his research keywords
+     → Get: Publication themes, methodology preferences (from titles, no PDF fetching)
+
+   - Profile: His "mental model" of good research
+     - Technical background (mechanics, biomechanics, imaging?)
+     - Research values (rigor, novelty, clinical impact?)
+     - Hot buttons and concerns
+
+   **Synthesis - Style Guide for Phase 2:**
+   - Katie's techniques (from local analysis) mapped to comps sections
+   - Suresh's hot buttons and how to hit them
+   - Specific guidance: "For Significance, use Katie's [X] to address Suresh's concern about [Y]"
+
+5. OUTPUT - Write a comprehensive analysis document:
+   - **Executive Summary**: 3-4 sentences on current state and what needs fixing
+   - **Reality vs. Speculation Audit**: Detailed breakdown
+   - **Literature Landscape**:
+     - Who are the key players? (research groups mentioned in Final Selection)
+     - What's the progression of ideas? (palpation → elastography → tomography approaches)
+     - Where does PAT Scan fit?
+   - **Citation Strategy**: For EACH comps section, provide:
+     - Specific papers to cite
+     - Key claims those papers support
+     - Quotes or key findings to reference
+   - **Innovation Framing**: How to position mesh-based PINN as a design choice, not a limitation
+   - **Gap Analysis**: Organized by comps section (Significance, Innovation, Methods, etc.)
+   - **Advisor Confusion Points**: What to clarify based on reflections
+   - **Style & Audience Strategy Guide**:
+     - Katie's writing techniques (with examples from her papers)
+     - Suresh's priorities and perspective
+     - Section-by-section style execution plan
+     - Phrases to use / avoid
+     - How to balance Katie's accessibility with Suresh's technical expectations
+   - **Recommendations**: Top 10-12 specific improvements prioritized by impact
+
+CONSTRAINTS:
+- Be thorough but efficient - don't read full papers cover-to-cover unless critical
+- Focus on actionable insights for comps writing
+- If spending >35 min, you're going too deep
+
+Save your output to: /home/vivekkarmarkar/Python Files/PAT-Scan-Copy/agents/phase1/good_analysis.md

@@ -1,0 +1,48 @@
+AGENT: Phase 2-Quickie Writing
+SUBAGENT TYPE: general-purpose
+MODEL: sonnet
+DESCRIPTION: Phase 2-Quickie - Rapid Skeleton + Draft
+
+PROMPT:
+========================================
+
+You are writing a quick-turnaround refined comps document based on Phase 1 analysis.
+
+INPUT: Phase 1-Quickie analysis document (read from /home/vivekkarmarkar/Python Files/PAT-Scan-Copy/agents/phase1/quickie_analysis.md)
+
+YOUR TASK (Target: 8-12 minutes):
+
+1. CREATE: comps_skeleton_refined_quickie.md
+   - Take current comps.md structure
+   - Fix top 5 gaps identified in Phase 1
+   - Add key citations (just author + year, don't need full references yet)
+   - Mark what's implemented vs. planned
+   - Keep bullet-point format but make bullets more specific
+
+2. CREATE: comps_final_quickie.md
+   - Convert skeleton to prose
+   - Write concise paragraphs (2-4 sentences each)
+   - Focus on clarity over elegance
+   - Hit the key points from Phase 1
+   - Sections: Specific Aims (paste from PDF), Significance (1-2 pages), Innovation (1 page), Methods for Aim 1 (2-3 pages), Future Work for Aims 2-3 (1 page)
+   - Total target: ~8-10 pages
+
+3. FORMAT:
+   - Markdown only (skip LaTeX/Word for speed)
+   - Use proper markdown headers, lists, equations (if needed)
+
+STYLE EXECUTION (based on Phase 1 Style Guide):
+- **Katie Bouman's clarity**: Start with big picture, then zoom to specifics
+- **For Suresh's perspective**: Emphasize mechanics foundations and practical validation
+- **Key techniques from Phase 1**: Apply 2-3 of Katie's signature moves that Phase 1 identified
+- **Avoid**: Generic academic hedging, overly complex sentences, burying the lead
+- **Do**: Clear problem setup, logical flow, accessible explanations
+
+CONSTRAINTS:
+- Speed over perfection
+- If you're uncertain about something, use [TODO: clarify X] markers
+- If spending >15 min total, you're overthinking
+
+Save your output to:
+- /home/vivekkarmarkar/Python Files/PAT-Scan-Copy/agents/phase2/comps_skeleton_refined_quickie.md
+- /home/vivekkarmarkar/Python Files/PAT-Scan-Copy/agents/phase2/comps_final_quickie.md

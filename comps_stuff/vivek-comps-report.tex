@@ -524,7 +524,7 @@ At initialization (iteration 0), the U-Net produces a random material mask with 
 
 \begin{figure}[h!]
 \centering
-\includegraphics[width=\textwidth]{../inverse_problem_results/pre_training_visualization.png}
+\includegraphics[width=\textwidth]{figures/pre_training_visualization.png}
 \caption{Pre-training state (iteration 0) with random U-Net initialization. Left: ground truth material distribution with circular inclusion (red, $E = 10$) in background (blue, $E = 1$). Center: U-Net continuous prediction showing random material assignment (SSIM $\approx 0.06$). Right: level-set hard boundary extraction from the random prediction, bearing no resemblance to the true inclusion.}
 \label{fig:pre_training}
 \end{figure}
@@ -533,7 +533,7 @@ After 1000 training iterations using only the L2 displacement loss (no regulariz
 
 \begin{figure}[h!]
 \centering
-\includegraphics[width=\textwidth]{../inverse_problem_results/vanilla_results.png}
+\includegraphics[width=\textwidth]{figures/vanilla_results.png}
 \caption{Baseline reconstruction after 1000 iterations using only L2 displacement loss (no regularization). The U-Net localizes the inclusion (SSIM = 0.72, accuracy = 87.8\%) but the predicted boundary is diffuse with spatial noise, demonstrating the need for regularization.}
 \label{fig:vanilla}
 \end{figure}
@@ -542,7 +542,7 @@ Adding total variation regularization and Gaussian smoothing to the pipeline sub
 
 \begin{figure}[h!]
 \centering
-\includegraphics[width=\textwidth]{../inverse_problem_results/post_training_visualization.png}
+\includegraphics[width=\textwidth]{figures/post_training_visualization.png}
 \caption{Reconstruction with TV regularization, Gaussian smoothing, and level-set post-processing after 1000 iterations (SSIM = 0.91, accuracy = 94.6\%). The predicted inclusion boundary is crisp and closely matches the ground truth circular geometry, confirming the effectiveness of the composite loss function.}
 \label{fig:post_training_full}
 \end{figure}
@@ -553,7 +553,7 @@ Systematic hyperparameter tuning via grid search over learning rate, TV weight $
 
 \begin{figure}[h!]
 \centering
-\includegraphics[width=\textwidth]{../inverse_problem_results/post_training_visualization_grid_search_optimized.png}
+\includegraphics[width=\textwidth]{figures/post_training_visualization_grid_search_optimized.png}
 \caption{Grid-search-optimized reconstruction after only 200 iterations (SSIM = 0.85, accuracy = 94.6\%). Systematic hyperparameter tuning achieves comparable accuracy to the untuned result (Figure~\ref{fig:post_training_full}) in one-fifth the iterations.}
 \label{fig:grid_search}
 \end{figure}
@@ -566,7 +566,7 @@ For a faint inclusion with low stiffness contrast ($\alpha = 1.2$, compared to t
 
 \begin{figure}[h!]
 \centering
-\includegraphics[width=\textwidth]{../inverse_problem_results/post_training_visualization_grid_search_optimized_faint_inclusion.png}
+\includegraphics[width=\textwidth]{figures/post_training_visualization_grid_search_optimized_faint_inclusion.png}
 \caption{Faint inclusion reconstruction ($\alpha = 1.2$, SSIM = 0.81, accuracy = 93.0\%). Despite the low stiffness contrast producing subtle boundary displacement differences, the method successfully detects and localizes the inclusion with graceful quality degradation.}
 \label{fig:faint}
 \end{figure}
@@ -575,7 +575,7 @@ For a smaller inclusion with reduced radius, the algorithm achieves an SSIM of 0
 
 \begin{figure}[h!]
 \centering
-\includegraphics[width=\textwidth]{../inverse_problem_results/post_training_visualization_grid_search_optimized_smaller_inclusion.png}
+\includegraphics[width=\textwidth]{figures/post_training_visualization_grid_search_optimized_smaller_inclusion.png}
 \caption{Smaller inclusion reconstruction (SSIM = 0.40, accuracy = 88.5\%). The inclusion location is correctly identified, but boundary geometry is less precisely recovered due to the weaker displacement signal produced by the reduced inclusion size.}
 \label{fig:smaller}
 \end{figure}
@@ -584,7 +584,7 @@ The most challenging scenario combines both difficulties: a small inclusion with
 
 \begin{figure}[h!]
 \centering
-\includegraphics[width=\textwidth]{../inverse_problem_results/post_training_visualization_grid_search_optimized_small_and_faint_inclusion.png}
+\includegraphics[width=\textwidth]{figures/post_training_visualization_grid_search_optimized_small_and_faint_inclusion.png}
 \caption{Most challenging scenario: small inclusion with faint contrast ($\alpha = 1.2$, SSIM = 0.49, accuracy = 89.5\%). The inclusion is detected and approximately localized, representing the sensitivity limit of the current methodology.}
 \label{fig:small_faint}
 \end{figure}
@@ -597,7 +597,7 @@ A critical concern for any optimization-based reconstruction method is sensitivi
 
 \begin{figure}[h!]
 \centering
-\includegraphics[width=\textwidth]{../inverse_problem_results/sensitivity_to_initial_conditions.png}
+\includegraphics[width=\textwidth]{figures/sensitivity_to_initial_conditions.png}
 \caption{Robustness to initialization demonstrated across multiple independent runs. Each run uses identical training procedure and data with different random seeds. The reconstructions achieve consistent SSIM values above 0.90 with visually similar inclusion boundaries, confirming that the optimizer converges to the same solution regardless of initialization.}
 \label{fig:sensitivity}
 \end{figure}
@@ -606,7 +606,7 @@ The results demonstrate tight clustering across runs. Individual reconstructions
 
 \begin{figure}[h!]
 \centering
-\includegraphics[width=0.9\textwidth]{../inverse_problem_results/reliability_study_poc_pat_scan.png}
+\includegraphics[width=0.9\textwidth]{figures/reliability_study_poc_pat_scan.png}
 \caption{Summary of reliability study findings: accuracy consistently above 80\%, reduced sensitivity to initial conditions, and no spurious local minima. The tight clustering across runs motivates a practical ensemble strategy where the practitioner runs the algorithm 3--5 times, discards outliers, and averages the clustered results.}
 \label{fig:reliability_summary}
 \end{figure}
@@ -619,7 +619,7 @@ An initial attempt without learning rate optimization achieved an SSIM of only 0
 
 \begin{figure}[h!]
 \centering
-\includegraphics[width=\textwidth]{../inverse_problem_results/irregular_inclusion_preliminary_results.png}
+\includegraphics[width=\textwidth]{figures/irregular_inclusion_preliminary_results.png}
 \caption{Irregular inclusion reconstruction without learning rate optimization (SSIM = 0.21, approximately 13 minutes). The reconstruction fails to capture the complex boundary shape, highlighting the sensitivity of irregular geometries to hyperparameter selection. The training loss curve (bottom) shows convergence but to a poor local minimum.}
 \label{fig:irregular_no_lr}
 \end{figure}
@@ -628,7 +628,7 @@ After including learning rate in the hyperparameter grid search, reconstruction 
 
 \begin{figure}[h!]
 \centering
-\includegraphics[width=\textwidth]{../inverse_problem_results/irregular_inclusion_learning_rate_optimized.png}
+\includegraphics[width=\textwidth]{figures/irregular_inclusion_learning_rate_optimized.png}
 \caption{Irregular inclusion reconstruction with learning rate optimization (SSIM = 0.80, accuracy = 92.7\%, approximately 17 minutes). The same U-Net architecture generalizes to non-convex, off-centered inclusion geometry without architectural modifications. The predicted boundary captures the overall shape and location, with the loss curve (bottom) showing stable convergence.}
 \label{fig:irregular_lr}
 \end{figure}

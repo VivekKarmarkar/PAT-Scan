@@ -353,31 +353,21 @@ def find_boundary_nodes(points, R_outer, tolerance=1e-6):
 def find_node_at_angle(points, boundary_nodes, target_angle):
     """
     Find boundary node closest to target angle (in radians)
-    
+
     Args:
         points: Node coordinates tensor
         boundary_nodes: Indices of boundary nodes
         target_angle: Target angle in radians
-    
+
     Returns:
         Node index closest to target angle
     """
-    best_node = None
-    best_dist = float('inf')
-    
-    for node_idx in boundary_nodes:
-        x, y = points[node_idx]
-        node_angle = torch.atan2(y, x)
-        target_normalized = torch.atan2(torch.sin(target_angle), torch.cos(target_angle))
-        
-        angle_diff = torch.abs(node_angle - target_normalized)
-        angle_diff = torch.min(angle_diff, 2*torch.pi - angle_diff)
-        
-        if angle_diff < best_dist:
-            best_dist = angle_diff
-            best_node = node_idx
-    
-    return best_node
+    coords = points[boundary_nodes]
+    node_angles = torch.atan2(coords[:, 1], coords[:, 0])
+    target_normalized = torch.atan2(torch.sin(target_angle), torch.cos(target_angle))
+    angle_diff = torch.abs(node_angles - target_normalized)
+    angle_diff = torch.min(angle_diff, 2*torch.pi - angle_diff)
+    return boundary_nodes[angle_diff.argmin()]
 
 
 def apply_single_force_pair(points, boundary_nodes, force_magnitude, force_angle_deg, device):

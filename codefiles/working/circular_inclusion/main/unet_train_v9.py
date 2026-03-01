@@ -156,7 +156,8 @@ def assemble_stiffness_differentiable(points, elements, element_materials, nu):
 
 def solve_fem_soft(K, F, fixed_weights, free_weights, n_dof, device, penalty=1e6):
     """Differentiable FEM solve with soft boundary constraints"""
-    K_eff = K + torch.diag(penalty * fixed_weights)
+    K_eff = K.clone()
+    K_eff.diagonal().add_(penalty * fixed_weights)
     F_eff = F * free_weights
     U = torch.linalg.solve(K_eff, F_eff)
     n_nodes = n_dof // 2
@@ -178,13 +179,16 @@ def threshold_mask(element_mask_raw, temperature):
     element_mask_values = torch.sigmoid(temperature * (element_mask_raw - mask_mean))
     return element_mask_values
 
-def smooth_mask_differentiable(element_mask_values, centroids, sigma=0.05):
-    """Smooth the mask using differentiable Gaussian-like operation"""
+def precompute_smoothing_weights(centroids, sigma=0.05):
+    """Precompute Gaussian smoothing weights (constant for a fixed mesh)"""
     dist_matrix = torch.cdist(centroids.unsqueeze(0), centroids.unsqueeze(0)).squeeze(0)
     weights = torch.exp(-dist_matrix**2 / (2 * sigma**2))
     weights = weights / weights.sum(dim=1, keepdim=True)
-    smoothed = torch.matmul(weights, element_mask_values)
-    return smoothed
+    return weights
+
+def smooth_mask_differentiable(element_mask_values, smoothing_weights):
+    """Smooth the mask using precomputed Gaussian weights"""
+    return torch.matmul(smoothing_weights, element_mask_values)
 
 def estimate_inclusion_geometry(element_mask_values, centroids, R_outer, soft_min_temp=0.1):
     """Estimate inclusion center and safe fixed region radius"""
@@ -341,18 +345,18 @@ def forward_pass_and_loss(model, coords_input, points, elements, centroids,
                          force_vectors_angular, boundary_displacements_angular,
                          force_vectors_symmetric, boundary_displacements_symmetric,
                          boundary_nodes, gt_materials, n_samples_angular, n_samples_symmetric,
-                         n_dof, device, lambda_tv, smoothing_sigma, temperature, bc_sharpness, 
+                         n_dof, device, lambda_tv, smoothing_weights, temperature, bc_sharpness,
                          use_symmetric, soft_min_temp=0.1):
     """
     Complete forward pass: U-Net → materials → FEM → loss
     Now handles BOTH angular scanning and symmetric scanning datasets
     """
-    
+
     # U-Net forward pass (same material prediction for all samples)
     output_mask = model(coords_input)
     element_mask_raw = sample_mask_at_centroids(output_mask, centroids, R_outer)
     element_mask_values = threshold_mask(element_mask_raw, temperature)
-    element_mask_values = smooth_mask_differentiable(element_mask_values, centroids, smoothing_sigma)
+    element_mask_values = smooth_mask_differentiable(element_mask_values, smoothing_weights)
     unet_materials = E_b + (E_i - E_b) * element_mask_values
     
     # Assemble stiffness matrix (same for all samples)
@@ -366,35 +370,43 @@ def forward_pass_and_loss(model, coords_input, points, elements, centroids,
         points, center_x, center_y, fixed_region_radius, bc_sharpness
     )
     
+    # Build effective stiffness once (shared across all samples)
+    K_eff = K.clone()
+    K_eff.diagonal().add_(1e6 * fixed_weights)
+
     # ========================================================================
     # LOSS 1: Angular scanning dataset (diverse force configurations)
     # ========================================================================
+    # Batch solve: stack all force vectors and solve in one call (reuses LU factorization)
+    F_angular = torch.stack([force_vectors_angular[i] * free_weights for i in range(n_samples_angular)], dim=1)
+    U_angular = torch.linalg.solve(K_eff, F_angular)  # (n_dof, n_samples)
+    n_nodes = n_dof // 2
+    U_nodes_angular = U_angular.reshape(n_nodes, 2, n_samples_angular)  # (n_nodes, 2, n_samples)
+
     angular_loss = 0.0
     for i in range(n_samples_angular):
-        U, U_nodes = solve_fem_soft(
-            K, force_vectors_angular[i], fixed_weights, free_weights, n_dof, device
-        )
-        boundary_disp_predicted = U_nodes[boundary_nodes]
+        boundary_disp_predicted = U_nodes_angular[boundary_nodes, :, i]
         diff = (boundary_disp_predicted - boundary_displacements_angular[i]) / R_outer
         l2_loss = torch.sqrt(torch.sum(torch.square(diff))) / len(boundary_nodes)
         angular_loss += l2_loss
-    
+
     angular_loss = angular_loss / n_samples_angular
-    
+
     # ========================================================================
     # LOSS 2: Symmetric scanning dataset (rotational invariance)
     # ========================================================================
     symmetric_loss = 0.0
     if use_symmetric and n_samples_symmetric > 0:
+        F_symmetric = torch.stack([force_vectors_symmetric[i] * free_weights for i in range(n_samples_symmetric)], dim=1)
+        U_symmetric = torch.linalg.solve(K_eff, F_symmetric)
+        U_nodes_symmetric = U_symmetric.reshape(n_nodes, 2, n_samples_symmetric)
+
         for i in range(n_samples_symmetric):
-            U, U_nodes = solve_fem_soft(
-                K, force_vectors_symmetric[i], fixed_weights, free_weights, n_dof, device
-            )
-            boundary_disp_predicted = U_nodes[boundary_nodes]
+            boundary_disp_predicted = U_nodes_symmetric[boundary_nodes, :, i]
             diff = (boundary_disp_predicted - boundary_displacements_symmetric[i]) / R_outer
             l2_loss = torch.sqrt(torch.sum(torch.square(diff))) / len(boundary_nodes)
             symmetric_loss += l2_loss
-        
+
         symmetric_loss = symmetric_loss / n_samples_symmetric
     
     # ========================================================================
@@ -425,18 +437,18 @@ def forward_pass_and_loss(model, coords_input, points, elements, centroids,
 # VISUALIZATION FUNCTION FOR ANIMATION FRAMES
 # ============================================================================
 
-def create_animation_frame(iteration, current_time, loss_history, model, coords_input, 
+def create_animation_frame(iteration, current_time, loss_history, model, coords_input,
                           points_np, elements_np, centroids_np, gt_materials_np,
-                          temperature, smoothing_sigma, save_path):
+                          temperature, smoothing_weights, save_path):
     """Create a single frame for the animation with 2-row layout"""
-    
+
     # Run inference
     model.eval()
     with torch.no_grad():
         output_mask = model(coords_input)
         element_mask_raw = sample_mask_at_centroids(output_mask, centroids, R_outer)
         element_mask_values = threshold_mask(element_mask_raw, temperature)
-        element_mask_values = smooth_mask_differentiable(element_mask_values, centroids, smoothing_sigma)
+        element_mask_values = smooth_mask_differentiable(element_mask_values, smoothing_weights)
         unet_materials = E_b + (E_i - E_b) * element_mask_values
         center_x, center_y, fixed_region_radius = estimate_inclusion_geometry(
             element_mask_values, centroids, R_outer
@@ -732,16 +744,10 @@ centroids = torch.mean(points[elements], dim=1)
 # ============================================================================
 print("\nCreating ground truth materials...")
 
-gt_materials = torch.zeros(n_elements, dtype=torch.float64, device=device)
-for i in range(n_elements):
-    elem = elements[i]
-    centroid = torch.mean(points[elem], dim=0)
-    dist_to_center = torch.sqrt(centroid[0]**2 + centroid[1]**2)
-    
-    if dist_to_center <= R_inner:
-        gt_materials[i] = E_i
-    else:
-        gt_materials[i] = E_b
+dists = torch.sqrt(centroids[:, 0]**2 + centroids[:, 1]**2)
+gt_materials = torch.where(dists <= R_inner,
+                           torch.tensor(E_i, dtype=torch.float64, device=device),
+                           torch.tensor(E_b, dtype=torch.float64, device=device))
 
 print(f"  Background elements (E={E_b}): {torch.sum(gt_materials == E_b)}")
 print(f"  Inclusion elements (E={E_i}): {torch.sum(gt_materials == E_i)}")
@@ -800,15 +806,18 @@ if GRID_SEARCH_ENABLED:
         total_loss_sum = 0.0
         final_ssim = 0.0
         
+        # Precompute smoothing weights for this config's sigma
+        gs_smoothing_weights = precompute_smoothing_weights(centroids, config_dict['smoothing_sigma'])
+
         for iteration in range(GRID_SEARCH_ITERATIONS):
             loss, metrics = forward_pass_and_loss(
                 model_test, coords_input, points, elements, centroids,
                 force_vectors_angular, boundary_displacements_angular,
                 force_vectors_symmetric, boundary_displacements_symmetric,
                 boundary_nodes, gt_materials, n_samples_angular, n_samples_symmetric,
-                n_dof, device, 
-                config_dict['lambda_tv'], 
-                config_dict['smoothing_sigma'],
+                n_dof, device,
+                config_dict['lambda_tv'],
+                gs_smoothing_weights,
                 config_dict['temperature'],
                 config_dict['bc_sharpness'],
                 use_symmetric
@@ -900,6 +909,9 @@ else:
     bc_sharpness = 20.0
     soft_min_temp = 0.1
 
+# Precompute smoothing weights for main training (constant for fixed mesh + sigma)
+smoothing_weights = precompute_smoothing_weights(centroids, smoothing_sigma)
+
 print("\n" + "="*70)
 print("STARTING MAIN TRAINING WITH SELECTED HYPERPARAMETERS")
 print("="*70)
@@ -978,7 +990,7 @@ with torch.no_grad():
     output_mask = model(coords_input)
     element_mask_raw = sample_mask_at_centroids(output_mask, centroids, R_outer)
     element_mask_values = threshold_mask(element_mask_raw, temperature)
-    element_mask_values = smooth_mask_differentiable(element_mask_values, centroids, smoothing_sigma)
+    element_mask_values = smooth_mask_differentiable(element_mask_values, smoothing_weights)
     unet_materials = E_b + (E_i - E_b) * element_mask_values
     center_x, center_y, fixed_region_radius = estimate_inclusion_geometry(
         element_mask_values, centroids, R_outer
@@ -1121,7 +1133,7 @@ model.train()
 create_animation_frame(
     0, current_time, loss_history, model, coords_input,
     points_np, elements_np, centroids_np, gt_materials_np,
-    temperature, smoothing_sigma,
+    temperature, smoothing_weights,
     frames_dir / 'frame_0000.png'
 )
 
@@ -1134,7 +1146,7 @@ for iteration in range(num_iterations):
         force_vectors_angular, boundary_displacements_angular,
         force_vectors_symmetric, boundary_displacements_symmetric,
         boundary_nodes, gt_materials, n_samples_angular, n_samples_symmetric,
-        n_dof, device, lambda_tv, smoothing_sigma, temperature, bc_sharpness,
+        n_dof, device, lambda_tv, smoothing_weights, temperature, bc_sharpness,
         use_symmetric
     )
     
@@ -1186,7 +1198,7 @@ for iteration in range(num_iterations):
         create_animation_frame(
             iteration + 1, current_time, loss_history, model, coords_input,
             points_np, elements_np, centroids_np, gt_materials_np,
-            temperature, smoothing_sigma, frame_path
+            temperature, smoothing_weights, frame_path
         )
 
 print("\n" + "="*70)
@@ -1214,7 +1226,7 @@ with torch.no_grad():
     output_mask = model(coords_input)
     element_mask_raw = sample_mask_at_centroids(output_mask, centroids, R_outer)
     element_mask_values = threshold_mask(element_mask_raw, temperature)
-    element_mask_values = smooth_mask_differentiable(element_mask_values, centroids, smoothing_sigma)
+    element_mask_values = smooth_mask_differentiable(element_mask_values, smoothing_weights)
     unet_materials = E_b + (E_i - E_b) * element_mask_values
     center_x, center_y, fixed_region_radius = estimate_inclusion_geometry(
         element_mask_values, centroids, R_outer

@@ -121,10 +121,7 @@ n_elements = len(elements)
 print(f"  Elements: {n_elements}")
 
 # Extract element centroids
-centroids = torch.zeros((n_elements, 2), dtype=torch.float64, device=device)
-for i in range(n_elements):
-    elem = elements[i]
-    centroids[i] = torch.mean(points[elem], dim=0)
+centroids = torch.mean(points[elements], dim=1)
 
 # ============================================================================
 # DIFFERENTIABLE UTILS

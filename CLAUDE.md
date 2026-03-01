@@ -46,7 +46,7 @@ The U-Net learns material properties by: predicting an E(x,y) field → running 
 - **`fem_utils_differentiable.py`** — Batched/differentiable version of FEM assembly for GPU-accelerated training. `batched_element_stiffness()` operates on all elements simultaneously.
 - **`unet.py`** — 3-level encoder-decoder with skip connections. Input: 2 channels (forces + boundary displacements on a 64x64 grid). Output: 1 channel (material property field, sigmoid-bounded).
 - **`unet_forward_model.py` / `_differentiable.py`** — Connects U-Net output to FEM solver for end-to-end gradient flow.
-- **`unet_train_v[0-9].py`** — Training script versions. v9 is latest. Each version explores different loss functions, grid search spaces, or architectural choices. Loss = MSE + TV regularization.
+- **`unet_train_v5.py`** / **`v8.py`** / **`v9.py`** — Aim 1 training scripts (fixed known materials). v5 = first complete version, v8 = grid search, v9 = current production. Loss = MSE + TV regularization. Earlier versions (v0-v4) are in `circular_inclusion/development/`.
 - **`create_circle_sample.py`** — Generates structured polar grid mesh, saves as `circle_mesh.pt`.
 - **`angular_scanning.py`** — Sweeps force pair counts (1–20 pairs), runs forward FEM for each, saves dataset as `angular_scanning_dataset.pt`.
 - **`automated_tests.py`** — Force magnitude sweep (until penetration) and angular sweep validation tests.
@@ -55,9 +55,13 @@ The U-Net learns material properties by: predicting an E(x,y) field → running 
 
 Mirrors the circular inclusion structure but with non-circular geometry. Files suffixed `_upgraded` adapt the circular versions. Has its own `fem_utils.py` and `fem_utils_differentiable.py` copies.
 
+### Developmental History (`codefiles/working/circular_inclusion/development/`)
+
+Training script versions v0-v4 that preceded the Aim 1 deliverables. Preserved for reference.
+
 ### Experimental (`codefiles/experimental/`)
 
-Wavelet-based U-Net variants, alternative mesh geometries (ellipse, square, biological 3-component), mesh convergence studies.
+Wavelet-based U-Net variants, alternative mesh geometries (ellipse, square, biological 3-component), mesh convergence studies, and learnable-material training scripts (v6-v7, beyond Aim 1 scope).
 
 ## Conventions
 

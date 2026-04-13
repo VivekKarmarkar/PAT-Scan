@@ -1,0 +1,18 @@
+Applied Mathematical Modelling 134 (2024) 126–147
+
+Y. Mei et al.
+
+Fig. 7. The optimization process with six layers initially utilizing the explicit inverse scheme for Sample 1 (Without noise, Unit: MPa).
+
+Fig. 8. The reconstructed results with varying 3,6 and 9 surface displacement datasets corresponding to Sample 1 (Without noise, Unit: MPa).
+
+inverse method shows a slight spatial variation, which can be enhanced by incorporating more surface datasets.
+After adding 1 % noise to the surface displacement datasets, we observed that the shear modulus distributions were accurately
+mapped for both inverse methods in the homogeneous case (refer to Fig. 11). The average relative error for both implicit and explicit
+inverse methods was less than 0.2 % (see Table 1). However, when it came to Sample 2 and 3 (see Fig. 12, Fig. 13), the interface
+between neighboring layers in the implicit inverse method’s results was not as clear as the target. As the total number of layers in­
+creases, the challenges in solving the inverse problems escalate accordingly. Consequently, the relative error for Sample 2 and Sample
+3 exhibits a lower quality compared to Sample 1(see Table 1). Besides, the average relative error for the implicit inverse method was
+134
+
+

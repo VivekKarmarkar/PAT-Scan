@@ -1,0 +1,25 @@
+Y. Mei et al.                                                                                       Applied Mathematical Modelling 134 (2024) 126–147
+
+
+
+
+Fig. 12. The reconstructed results with varying 3,6 and 9 surface displacement datasets corresponding to Sample 2 (1 % noise is introduced into the
+measured data, Unit: MPa).
+
+
+
+
+Fig. 13. The reconstructed results with varying 3,6 and 9 surface displacement datasets corresponding to Sample 3 (1 % noise is introduced into the
+measured data, Unit: MPa).
+
+
+    When 1 % noise was introduced, the explicit inverse method continued to perform admirably, producing high-quality reconstructed
+results(see Fig. 20). However, the performance of the implicit inverse method continued to be inferior to that of the explicit inverse
+method. The average relative error for the implicit inverse method could exceed 40 %, indicating substantial inaccuracies in the
+reconstructed results. On the other hand, the average relative error for the explicit inverse method remained relatively low, around 5
+%, signifying its superior ability to handle the noise and produce more accurate reconstructions (see Table 3). The values of regula­
+rization factors used in each case from Fig. 19 and Fig. 20 are listed in Table 4.
+
+
+                                                                       137
+

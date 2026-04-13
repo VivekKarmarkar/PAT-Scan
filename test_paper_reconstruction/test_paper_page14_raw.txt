@@ -1,0 +1,100 @@
+Published as a conference paper at ICLR 2015
+
+
+
+
+                                                                                                   β2
+kθm − θn k∞ ≤ D∞ for any m, n ∈ {1, ..., T }, and β1 , β2 ∈ [0, 1) satisfy √β1 < 1. Let αt = √αt
+                                                                                2
+and β1,t = β1 λt−1 , λ ∈ (0, 1). Adam achieves the following guarantee, for all T ≥ 1.
+
+                    Xd                                        Xd               Xd          √
+           D2           p                 α(β1 + 1)G∞                               D∞2
+                                                                                        G ∞ 1 − β2
+R(T ) ≤                   T vbT,i +          √                    kg1:T,i k2 +
+        2α(1 − β1 ) i=1             (1 − β1 ) 1 − β2 (1 − γ)2 i=1              i=1
+                                                                                   2α(1 − β1 )(1 − λ)2
+
+
+
+Proof. Using Lemma 10.2, we have,
+
+                                                                       d
+                                                                       X
+                              ft (θt ) − ft (θ∗ ) ≤ gtT (θt − θ∗ ) =         gt,i (θt,i − θ,i∗ )
+                                                                       i=1
+
+
+From the update rules presented in algorithm 1,
+                                                   p
+                               θt+1 = θt − αt m
+                                              b t/    vbt
+                                                                              
+                                              αt       β1,t     (1 − β1,t )
+                                     = θt −            √ mt−1 +    √        gt
+                                            1 − β1t       vbt        vbt
+
+We focus on the ith dimension of the parameter vector θt ∈ Rd . Subtract the scalar θ,i∗ and square
+both sides of the above update rule, we have,
+
+                                          2αt     β1,t            β1,t )                         b t,i
+                                                                                                 m
+(θt+1,i − θ,i∗ )2 =(θt,i − θ,i∗ )2 −            ( p mt−1,i + (1 − p gt,i )(θt,i − θ,i∗ ) + αt2 ( p )2
+                                        1 − β1t    vbt,i            vbt,i                         vbt,i
+
+We can rearrange theq
+                    above equation and use Young’s inequality, ab ≤ a2 /2 + b2 /2. Also, it can be
+           p          Pt              t−j 2
+                                              p
+shown that vbt,i =      j=1 (1 − β2 )β2 gj,i / 1 − β2 ≤ kg1:t,i k2 and β1,t ≤ β1 . Then
+                                                     t
+
+
+                                  p                                       
+                        (1 − β1t ) vbt,i
+gt,i (θt,i − θ,i∗ ) =                             ∗ 2
+                                         (θt,i − θ,t ) − (θt+1,i − θ,i∗ )2
+                        2αt (1 − β1,t )
+                                      1                                                 p
+                          β1,t     vbt−1,i
+                                      4
+                                             ∗        √       mt−1,i       αt (1 − β1t ) vbt,i mb t,i
+                    +              √       (θ − θt,i ) αt−1 1           +                     ( p )2
+                      (1 − β1,t ) αt−1 ,i                     vbt−1,i
+                                                                  4            2(1 − β  1,t )    vbt,i
+                                                                     
+                          1                  ∗ 2
+                                                                        p                β1,t                   p
+                  ≤                 (θt,i − θ,t ) − (θt+1,i − θ,i∗ )2    vbt,i +                   (θ∗ − θt,i )2 vbt−1,i
+                    2αt (1 − β1 )                                                2αt−1 (1 − β1,t ) ,i
+                             β1 αt−1 m2t−1,i         αt    mb2
+                        +             p        +           p t,i
+                            2(1 − β1 ) vbt−1,i   2(1 − β1 ) vbt,i
+
+We apply Lemma 10.4 to the above inequality and derive the regret bound by summing across all
+the dimensions for i ∈ 1, ..., d in the upper bound of ft (θt ) − ft (θ∗ ) and the sequence of convex
+functions for t ∈ 1, ..., T :
+
+           d                                      d X T                              p         p
+           X      1                     p        X           1                         vbt,i     vbt−1,i
+                                    ∗ 2                                       ∗ 2
+R(T ) ≤                    (θ1,i − θ,i ) vb1,i +                     (θt,i − θ,i ) (         −           )
+        i=1
+            2α1 (1 − β 1 )                       i=1 t=2
+                                                         2(1 − β 1 )                  α  t      α  t−1
+
+                                         Xd                                        Xd
+                        β αG                                       αG∞
+           +            √1 ∞                 kg     k
+                                               1:T,i 2 +          √                    kg1:T,i k2
+               (1 − β1 ) 1 − β2 (1 − γ)2 i=1             (1 − β1 ) 1 − β2 (1 − γ)2 i=1
+               d X
+               X T
+                            β1,t                      p
+           +                           (θ,i∗ − θt,i )2 vbt,i
+               i=1 t=1
+                       2αt (1 − β1,t )
+
+
+                                                          14
+

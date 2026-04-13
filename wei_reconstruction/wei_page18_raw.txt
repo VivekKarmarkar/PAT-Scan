@@ -1,0 +1,43 @@
+Y. Mei et al.                                                                                       Applied Mathematical Modelling 134 (2024) 126–147
+
+
+while the implicit inverse method required a significantly higher number of iterations, reaching convergence after 4354 iterations.
+    In the absence of noise in the datasets, both the explicit and implicit inverse methods exhibited excellent performance in yielding
+shear modulus reconstructions, as demonstrated in Fig. 23. However, when 1 % noise was introduced to the datasets, the explicit
+inverse method outperformed the implicit inverse method(see Fig. 24). For the explicit inverse method, the average relative error in
+the reconstructed shear modulus values was approximately 2 %, indicating a relatively accurate estimation despite the presence of
+noise(see Table 5). On the other hand, the implicit inverse method exhibited a higher average error of more than 3 %, signifying a less
+precise reconstruction in the presence of noise. Overall, the explicit inverse method proved to be more robust and capable of handling
+noisy datasets, leading to more accurate shear modulus reconstructions compared to the implicit inverse method. Furthermore, it is
+noteworthy that the reconstructed results maintain good quality even when the noise level is increased to 5 % (see Fig. 25).
+    In the case where two inclusions were embedded in the background (as depicted in Fig. 21(b)), As shown in Fig. 26, the results
+obtained using the implicit inverse method showed a consistent underestimation of the recovered shear modulus values by at least 20
+% as the size of the mapped inclusions increased. Additionally, the shape of the mapped inclusions appeared to become more circular
+with the increase of surface displacement datasets. Conversely, when employing the explicit inverse method, the shear modulus values
+within the two inclusions were overestimated by approximately 20 %. Furthermore, the shape of the recovered inclusions exhibited a
+more circular appearance compared to those predicted by the implicit inverse method. The regularization factors used in Figs. 23–26
+are listed in Table 6.
+    To assess the robustness of the proposed explicit inverse method, we varied the shape of the inclusion in Sample 1, as depicted in
+Fig. 27(a) and (d). Our observations indicate that the reconstructed results obtained from the explicit inverse method effectively
+preserve the shape of the complex inclusion, even with only three displacement datasets. In contrast, the implicit inverse method failed
+to achieve this level of accuracy.
+
+Discussion
+
+   The paper proposes an explicit inverse approach for characterizing the nonhomogeneous elastic property distribution of three
+typical nonlinear biological structures with surface deformation. This approach is different from the prevalent implicit inverse
+approach in that it optimizes only the geometric parameters and shear moduli of each region, reducing the scale of the optimization
+problem. By doing so, the proposed method improves the uniqueness of the inverse solution since the total number of optimization
+variables is reduced. Additionally, the paper highlights an important advantage of the explicit method: it only requires surface
+deformation data, which can be measured with high accuracy using low-cost measurement techniques. This makes the proposed
+approach more practical and accessible for real-world applications, as it avoids the need for complex and expensive instrumentation to
+gather the full-field data.
+
+
+
+
+Fig. 24. The reconstructed results with varying 3,6 and 9 surface displacement datasets corresponding to Sample 1 (1 % noise is introduced into the
+measured data, Unit: MPa).
+
+                                                                       143
+

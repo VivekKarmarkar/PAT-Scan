@@ -1,0 +1,2616 @@
+\documentclass[11pt]{article}
+
+\usepackage[margin=1in]{geometry}
+\usepackage{amsmath, amssymb}
+\usepackage{mathrsfs}
+\usepackage{bm}
+\usepackage{xcolor}
+\usepackage{fancyhdr}
+\usepackage{booktabs}
+\usepackage{multirow}
+\usepackage{array}
+\usepackage{url}
+
+\pagestyle{plain}
+
+
+\begin{document}
+
+% =========== Page 1: wei_page1.tex ===========
+
+% ---------- Journal nameplate ----------
+\noindent
+{\footnotesize Contents lists available at ScienceDirect}\\[2pt]
+{\Large\bfseries Applied Mathematical Modelling}\\[2pt]
+{\footnotesize journal homepage: \texttt{www.elsevier.com/locate/apm}}
+
+\vspace{0.8em}
+\hrule
+\vspace{1em}
+
+% ---------- Title ----------
+{\large\bfseries
+Nondestructively identifying the mechanical behavior of soft
+tissues using surface deformation with an explicit inverse
+approach\par}
+
+\vspace{0.8em}
+
+% ---------- Authors ----------
+\noindent
+Yue Mei\textsuperscript{a,b},
+Dongmei Zhao\textsuperscript{a,b},
+Changjiang Xiao\textsuperscript{a,b},
+Zhi Sun\textsuperscript{a,b},
+Weisheng Zhang\textsuperscript{a,b,*},
+Xu Guo\textsuperscript{a,b,*}
+
+\vspace{0.5em}
+
+% ---------- Affiliations ----------
+\noindent
+{\footnotesize
+\textsuperscript{a}\,\emph{State Key Laboratory of Structural Analysis
+for Industrial Equipment, Department of Engineering Mechanics, Dalian
+University of Technology, Dalian 116023, PR China}\\[2pt]
+\textsuperscript{b}\,\emph{International Research Center for
+Computational Mechanics, Dalian University of Technology, Dalian
+116023, PR China}\par}
+
+\vspace{1em}
+\hrule
+\vspace{1em}
+
+% ---------- Article info / Abstract block (two columns) ----------
+\noindent
+\begin{minipage}[t]{0.30\textwidth}
+\textbf{A R T I C L E\ \ I N F O}\\[0.8em]
+\textbf{Keywords:}\\
+Inverse problem\\
+Layered structures\\
+Inclusion embedded structures\\
+Surface deformation\\
+Biological tissue
+\end{minipage}
+\hfill
+\begin{minipage}[t]{0.66\textwidth}
+\textbf{A B S T R A C T}\\[0.8em]
+Identifying the spatial variation of stiffness properties in soft
+tissues nondestructively, with limited surface measurements, poses
+significant challenges. In this paper, we present a novel explicit
+inverse approach designed to characterize the nonhomogeneous elastic
+property distribution of soft tissues using only surface displacement
+datasets. In contrast to the prevalent implicit inverse approach,
+which focuses on optimizing the elastic properties of individual
+pixels, our proposed method optimizes the geometric parameters of
+deformable and movable components, as well as shear moduli of each
+component. As a result, the proposed approach requires far fewer
+optimization variables, streamlining the process. Numerical tests
+conducted in this study demonstrate the superiority of the explicit
+inverse method over the implicit inverse method, providing
+much-improved reconstructed results. In particular for a ring
+structure, while the average relative error of reconstruction using
+the implicit inverse method can exceed 40\,\%, the explicit inverse
+method achieves a remarkable average relative error of only 5\,\%.
+Given that surface displacements are easily measurable, the
+integration of our proposed explicit inverse method with low-cost
+imaging techniques shows great potential in accurately mapping the
+elastic property distribution of biological tissues.
+\end{minipage}
+
+\vspace{1.2em}
+\hrule
+\vspace{0.8em}
+
+% ---------- Introduction ----------
+\section*{Introduction}
+
+\noindent
+Biological tissues often display significant heterogeneity. This
+diversity is evident in various tissues such as skin [1--3], blood
+vessels [4,5], and corneas [6,7], among others, which exhibit
+multi-layered structures. These layers offer a variety of
+functionalities, thus contributing to the complexity of biological
+systems. Interestingly, the emergence of cancerous tumors introduces
+an additional level of heterogeneity to these tissues. These tumors
+typically exhibit greater stiffness compared to their surrounding
+healthy tissues due to pathological alterations [8]. This stark
+contrast in mechanical properties can serve as a potential indicator
+of malignancy. It's also worth noting that the local mechanical
+properties of soft tissues are not static; they fluctuate in response
+to various factors such as age
+
+% ---------- Bottom-of-page footer (corresponding-author block) ----------
+\vfill
+\hrule
+\vspace{0.4em}
+\noindent
+{\footnotesize
+* Corresponding authors at: State Key Laboratory of Structural
+Analysis for Industrial Equipment, Department of Engineering
+Mechanics, Dalian University of Technology, Dalian 116023, PR China.\\[2pt]
+\textit{E-mail addresses:}
+\texttt{weishengzhang@dlut.edu.cn} (W.~Zhang),
+\texttt{guoxu@dlut.edu.cn} (X.~Guo).\\[4pt]
+\url{https://doi.org/10.1016/j.apm.2024.05.028}\\[2pt]
+Received 10 October 2023; Received in revised form 21 May 2024;
+Accepted 22 May 2024\\[2pt]
+Available online 31 May 2024\\[2pt]
+0307-904X/\textcopyright{} 2024 Elsevier Inc. All rights are reserved,
+including those for text and data mining, AI training, and similar
+technologies.\par}
+
+\newpage
+
+% =========== Page 2: wei_page2.tex ===========
+
+\noindent
+\ldots{}[9--11], dietary habits [12], and the presence of pathological
+conditions [13,14]. Therefore, understanding the nonhomogeneous
+biomechanical behavior of these tissues is of paramount importance,
+particularly in a non-destructive manner. Such knowledge can inform
+medical diagnostics and treatments, potentially leading to better
+patient outcomes.
+
+Considerable effort has been devoted into research aimed at
+identifying the nonhomogeneous biomechanical properties of biological
+tissues. Studies [15--18] have demonstrated the feasibility of
+estimating the mechanical properties of each layer in multi-layered
+biological tissues, provided that the thickness of each layer is known
+beforehand. However, in practice, determining the thickness of each
+layer prior to addressing the identification problem can be a
+challenging task. Furthermore, the interface between neighboring
+layers is seldom flat, a characteristic particularly pronounced in
+biological tissues. As such, a comprehensive solution requires
+knowledge of both the topology of the interface between the layers
+and the biomechanical properties of each layer. Additionally, the
+detection of tumors embedded within normal tissues introduces another
+layer of complexity. To accurately diagnose and plan treatment for
+these conditions, it is crucial to determine not only the elastic
+modulus values of these tumors but also their topology [19].
+
+A general strategy for tackling this challenge involves identifying
+the spatial variation of material properties, a process that
+necessitates solving a large-scale optimization problem to optimize
+the elastic properties of every pixel in the domain of interest,
+which can be referred to as the implicit inverse method [20--23]. The
+implicit inverse method has been successfully employed in tumor
+detection using real clinical data [8,24]. However, this implicit
+inverse method has its limitations. It not only demands significant
+computational resources but is also prone to severe uniqueness
+issues, which can hamper the reliability of the results. Given that
+biological tissues are often known a priori to exhibit either layered
+structures or inclusion-embedded structures, it's feasible to
+explicitly and simultaneously identify the topology of each
+nonhomogeneous region and its associated material properties. This
+approach bypasses some of the computational hurdles of the implicit
+method. Another inherent drawback of the implicit inverse method lies
+in the quality of the reconstruction results, which can be
+compromised if the full-field displacement field cannot be measured
+with high accuracy. Studies [25,26] that employed the implicit
+inverse method to reconstruct the nonhomogeneous elastic property
+distribution of solids using surface deformation have demonstrated
+this issue. While these methods are capable of visualizing the
+nonhomogeneous region, the quality of the reconstruction is highly
+sensitive to noise. This sensitivity arises from a disparity between
+the large number of unknown optimization variables in the implicit
+inverse method and the sparsity of the deformation information on the
+surface. In contrast, the explicit inverse method significantly
+reduces the total number of optimization variables [27--29],
+potentially improving the quality of the reconstructed results. This
+strategy holds promise for enhancing the accuracy of nonhomogeneous
+biomechanical property identification in biological tissues.
+
+This paper will present an explicit inverse method that utilizes
+surface deformation measurements to identify the mechanical behavior
+of two common nonhomogeneous structures: layered structures and
+inclusion embedded structures. The organization of this work is as
+follows: In the \textbf{Methods} Section, we provide a detailed
+explanation of the mathematical background underlying the explicit
+inverse approach. The \textbf{Results} Section presents a comparative
+study between the explicit and implicit inverse approaches, using
+various numerical examples. We discuss the obtained results in the
+\textbf{Discussion} Section and conclude the paper with a summary in
+the \textbf{Conclusion} Section.
+
+\section*{Methods}
+
+\subsection*{\textit{Forward problem}}
+
+\noindent
+Given the low elastic modulus of soft tissues, this study will
+consider finite deformation in the analysis. The strong form of the
+nonlinear elastic problem is stated as follows:
+\begin{equation}
+\left\{
+\begin{aligned}
+\mathrm{Div}(\mathbf{P}) &= \mathbf{0} && \text{in } \Omega \\
+\mathbf{u}               &= \mathbf{g} && \text{on } \Gamma_g \\
+\mathbf{P}\cdot\mathbf{N} &= \mathbf{T} && \text{on } \Gamma_T
+\end{aligned}
+\right.
+\end{equation}
+where $\mathbf{P} = \mathbf{F}\mathbf{S}$ is the first
+Piola--Kirchhoff stress tensor where $\mathbf{F}$ is the deformation
+gradient and $\mathbf{S}$ is the second Piola--Kirchhoff stress
+tensor. $\Omega$ is the problem domain at the reference
+configuration. $\mathbf{g}$ is the prescribed displacement on the
+displacement boundary $\Gamma_g$. $\mathbf{T}$ is the prescribed
+traction on the traction boundary $\Gamma_T$. The following
+restrictions apply to $\Gamma_g$ and $\Gamma_T$: $\Gamma_g \cup
+\Gamma_T = \partial\Omega$ and $\Gamma_g \cap \Gamma_T = \phi$. We
+assume the soft tissue of interest obeys the incompressible and
+neo-Hookean law:
+\begin{equation}
+\mathbf{S} = \mu\!\left(\mathbf{I} - \mathbf{C}^{-1}\right)
+             + p\,\mathbf{C}^{-1}
+\end{equation}
+where $\mathbf{C} = \mathbf{F}^{\mathsf{T}}\mathbf{F}$ is the
+Cauchy--Green tensor. $p$ is the hydrostatic pressure.
+
+The weak form of the nonlinear elastic forward problem is stated as:
+Find $[\mathbf{u}^h, p^h] \in \mathscr{M}^h \times \mathscr{P}^h$
+such that
+\begin{equation}
+\mathscr{A}\!\left(\mathbf{w}^h,\mathbf{u}^h,q^h,p^h\right)
+\;=\;
+\int_{\Gamma_T}\! \mathbf{w}^h\!\cdot\mathbf{T}\,\mathrm{d}\Gamma,
+\qquad
+\forall\,[\mathbf{w}^h, q^h] \in \ell^h \times \mathscr{P}^h
+\end{equation}
+\begin{equation}
+\mathscr{A}\!\left(\mathbf{w}^h,\mathbf{u}^h,q^h,p^h\right)
+\;\equiv\;
+\int_\Omega \nabla\mathbf{w}:\mathbf{P}\,\mathrm{d}\Omega
+\;+\;
+\int_\Omega q\,(J-1)\,\mathrm{d}\Omega
+\;-\;
+\sum_{i=1}^{NE}\!
+ \Bigl(\tau\,\mathrm{div}(\mathbf{F}^h\mathbf{S}^h),\;
+       (\mathbf{F}^h)^{-\mathsf{T}}\nabla q^h\Bigr)_{\Omega_i}
+\end{equation}
+
+\newpage
+
+% =========== Page 3: wei_page3.tex ===========
+\setcounter{equation}{4}
+
+\noindent
+where the superscript $h$ denotes the finite element subspace.
+$\mathscr{M}^h$, $\ell^h$ and $\mathscr{P}^h$ are the finite-element
+subspaces of the function space
+$\mathscr{M} \equiv \{\mathbf{u} \mid u_i \in H^1(\Omega);\,
+u_i = g_i \text{ on } \Gamma_g\}$,
+$\ell \equiv \{\mathbf{w} \mid w_i \in H^1(\Omega);\,
+w_i = 0 \text{ on } \Gamma_g\}$ and
+$\mathscr{P} \subseteq L^2(\Omega)$, respectively. The third term is
+the stabilized term to address the volumetric locking induced by the
+incompressibility where $NE$ is the total number of elements in the
+discretized domain. $\tau = \dfrac{\alpha h^{2}}{2\mu}$ represents the
+stabilization factor, where $h$ is the characteristic element length.
+$\alpha$ is set to $1.0$ [30].
+
+\subsection*{\textit{Topological description of nonhomogeneous elastic property distribution}}
+
+\noindent
+To describe the topology of the nonhomogeneous elastic property
+distribution, we introduce the B-spline function to express a curve:
+\begin{equation}
+\mathbf{C}(t) = \sum_{i=0}^{n+1} N_{i,p}(t)\,\mathbf{P}_i,
+\qquad (a \leq t \leq b)
+\end{equation}
+where $N_{i,p}(t)$ is the $p$-th order B-spline basis function
+generated by a knot vector $\{t_0, t_1, \ldots, t_{n+2+p}\}$.
+$\mathbf{P}_i\,(i = 0, \ldots, n+1)$ is the $i$-th control point.
+
+The function $N_{i,p}(t)$ can be determined by Eq.~(6):
+\begin{equation}
+\begin{cases}
+N_{i,0}(t) =
+\begin{cases}
+1, & \text{if } t_i \leq t \leq t_{i+1} \\
+0, & \text{otherwise}
+\end{cases}
+& (i = 0, \ldots, n+1;\ p = 0) \\[3.5ex]
+N_{i,p}(t) = \dfrac{t - t_i}{t_{i+p} - t_i}\,N_{i,p-1}(t)
++ \dfrac{t_{i+p+1} - t}{t_{i+p+1} - t_{i+1}}\,N_{i+1,p-1}(t),
+& (i = 0, \ldots, n+1;\ p \geq 1)
+\end{cases}
+\end{equation}
+
+To capture various types of nonhomogeneous elastic property
+distributions, we employ B-splines to approximate both open and
+closed curves, as depicted in Fig.~1. The open curve is utilized to
+represent the interface shape between adjacent layers in a layered
+composite, while the closed curve represents the shape of inclusions
+embedded within a soft solid. To avoid the self-intersection of the
+closed B-spline curve, we define the control points of the closed
+B-spline curve in Eq.~(7):
+\begin{equation}
+\mathbf{P}_i =
+\begin{cases}
+\left(
+x_o + d_i \sin\!\left(i\theta - \dfrac{\theta}{2}\right),\;
+y_o + d_i \cos\!\left(i\theta - \dfrac{\theta}{2}\right)
+\right),
+& \left(\theta = \dfrac{2\pi}{n};\ i = 1, \ldots, n\right) \\[3ex]
+\mathbf{P}_0 = \mathbf{P}_{n+1} = \dfrac{\mathbf{P}_1 + \mathbf{P}_n}{2}
+\end{cases}
+\end{equation}
+where $(x_o, y_o)$ is the location of the center of the closed
+B-spline curve, $d_i$ is the distance between the $i$-th control
+point and the center of the closed curve.
+
+With the curve expressed by the B-spline function, we can define
+each nonhomogeneous region in the problem domain by
+
+% ---------- Figure 1 placeholder ----------
+\vspace{1em}
+\begin{center}
+\fbox{\parbox{0.92\textwidth}{\centering\vspace{1em}
+\textbf{[Figure 1 — placeholder]}\\[0.8em]
+\textbf{(a) Open curve}: eight control points
+$\mathbf{P}_0, \mathbf{P}_1, \ldots, \mathbf{P}_7$ connected by dashed
+blue segments, with a smooth orange B-spline curve passing through
+the polygon.\\[0.4em]
+\textbf{(b) Closed curve}: nine control points
+$\mathbf{P}_0 = \mathbf{P}_9, \mathbf{P}_1, \ldots, \mathbf{P}_8$
+distributed around a center $(x_o, y_o)$, with radial distances
+$d_1, d_2, \ldots, d_8$ and angular spacing $\theta = 2\pi/n$.
+The closed B-spline curve (orange) is inscribed in the dashed
+control polygon, with $\mathbf{P}_0 = \mathbf{P}_9 = (\mathbf{P}_1 + \mathbf{P}_8)/2$.
+\vspace{1em}}}
+\end{center}
+\vspace{0.4em}
+\begin{center}
+\textbf{Fig. 1.} Two examples of the curve expressed by B-spline functions.
+\end{center}
+
+\newpage
+
+% =========== Page 4: wei_page4.tex ===========
+\setcounter{equation}{7}
+
+\noindent
+introducing the following topological description function (TDF):
+\begin{equation}
+\begin{cases}
+\phi^i(\mathbf{x}) < 0 & \text{if } \mathbf{x} \in \Omega^i \\
+\phi^i(\mathbf{x}) = 0 & \text{if } \mathbf{x} \in \partial\Omega^i \\
+\phi^i(\mathbf{x}) > 0 & \text{if } \mathbf{x} \in \Omega \setminus \Omega^i
+\end{cases}
+\end{equation}
+
+For the layered structure, $\phi^i$ is the TDF of the $i$-th
+interface and $\Omega^i$ is the region occupied from the curve $C^i$
+and $C^0$. The mathematical expression of TDF for a layered structure
+can be defined as:
+\begin{equation}
+\phi^i(\mathbf{x}) = r(t) - r^i(t)
+\end{equation}
+where $r^i(t)$ is the distance between the curve $C^i$ and $C^0$ at
+any arbitrary point on the domain. To this end, the $m$-th layer of
+the structure ($m > 1$) can be defined by $\phi^{m-1}(\mathbf{x}) > 0$
+and $\phi^{m}(\mathbf{x}) \leq 0$, except for the first layer
+$\phi^{1}(\mathbf{x}) < 0$ and last layer $\phi^{n}(\mathbf{x}) > 0$.
+To this end, A bilayer structure can be expressed by the proposed
+method as shown in Fig.~2. Note that we assume that each layer is
+homogeneous and did not consider spatial variations within a layer.
+
+For the domain with inclusion embedded, $\phi^i$ is the TDF of the
+$i$-th component and $\Omega^i$ is the region occupied by the $i$-th
+component. For an inclusion embedded composite, the mathematical
+expression of TDF is:
+\begin{equation}
+\phi^i(\mathbf{x}) = \sqrt{\bigl(x - x_o^i\bigr)^{2}
+                           + \bigl(y - y_o^i\bigr)^{2}}
+                     - r^i\!\left(\theta^i\right)
+\end{equation}
+where $\theta^i$ is the angle from the point $(x, y)$ to the center
+of the $i$-th component $\left(x_o^i, y_o^i\right)$ in polar
+coordinate system. $r^i(\theta^i)$ is the distance from the point
+with the angle of $\theta^i$ on $\partial\Omega^i$ to the center
+$\left(x_o^i, y_o^i\right)$ as shown in Fig.~3.
+
+With the defined TDF, the spatial variation of the shear modulus of
+a layered composite can be defined based on the Boolean operators
+[31]:
+\begin{equation}
+\mu(\mathbf{x}) = \mu^{0}\bigl(1 - H(\phi^{1}(\mathbf{x}))\bigr)
++ \sum_{i=1}^{n-1}\!\bigl[\mu^{i}\, H(\phi^{i}(\mathbf{x}))
+                           \bigl(1 - H(\phi^{i+1}(\mathbf{x}))\bigr)\bigr]
++ \mu^{n}\, H(\phi^{n}(\mathbf{x}))
+\end{equation}
+where $\mu^{0}$ is the shear modulus of background. $\mu^{n}$ is the
+shear modulus of the last layer. $H(z)$ is the Heaviside function.
+If there is no interface curve $C^i$, $\mu(\mathbf{x}) = \mu^{0}$ is
+a homogeneous domain. However, the TDF definitions of composite with
+embedded inclusions are different, that is:
+\begin{equation}
+\boldsymbol{\mu}\!\left(\boldsymbol{x}\right) =
+\boldsymbol{\mu}^{0} \prod_{i=1}^{n}
+  \mathbf{H}\!\left(\boldsymbol{\phi}^{i}(\boldsymbol{x})\right)
++ \sum_{i=1}^{n}\!\bigl(\boldsymbol{\mu}^{i}
+  \bigl(1 - \mathbf{H}(\boldsymbol{\phi}^{i}(\boldsymbol{x}))\bigr)\bigr)
+\end{equation}
+
+As the Heaviside function is a discontinuous function, we will
+utilize the following function to approximate the Heaviside function
+so that we can evaluate the spatial gradient of the Heaviside
+function:
+\begin{equation}
+H(z) = 0.5 \times \left(1 + \tanh\!\left(\dfrac{z}{\varepsilon}\right)\right)
+\end{equation}
+where $\varepsilon$ is a small constant. With the decrease of
+$\varepsilon$, the approximation of the Heaviside function is closer
+to the corresponding analytical expression (see Fig.~4). However, a
+smaller $\varepsilon$ might lead to an extremely large gradient at
+$z$ approaching to zero. Thus, the small constant $\varepsilon$
+should be carefully chosen.
+
+\subsection*{\textit{Inverse problem}}
+
+\noindent
+After discussing the TDF, the inverse problem can be stated as:
+Given $n_{\text{meas}}$ surface measured displacement fields, find
+the optimal geometric vectors $\mathbf{r}^1, \mathbf{r}^2, \ldots,
+\mathbf{r}^m$ and the shear moduli $\mu^0, \mu^1, \ldots, \mu^m$,
+such that the following objective function is minimized:
+\begin{equation}
+\Pi = \dfrac{1}{2} \sum_{i_{\text{meas}}=1}^{n_{\text{meas}}}
+\int \left|\mathbf{u}_i^{\text{com}} - \mathbf{u}_i^{\text{meas}}\right|^{2}
+\, d\partial\Omega_{i_{\text{meas}}} + \text{Reg}(\mu)
+\end{equation}
+
+% ---------- Figure 2 placeholder ----------
+\vspace{1em}
+\begin{center}
+\fbox{\parbox{0.92\textwidth}{\centering\vspace{1em}
+\textbf{[Figure 2 — placeholder]}\\[0.8em]
+Bilayer structure illustrating the TDF construction. The bottom
+layer $\mu^{0}$ (teal) is bounded below by the reference curve
+$C^{0}$; the top layer $\mu^{1}$ (pink) is bounded above by the
+interface curve $C^{1}$. Six control points
+$\mathbf{P}^{1}_{1}, \mathbf{P}^{1}_{2}, \ldots, \mathbf{P}^{1}_{6}$
+define the B-spline interface $C^{1}$ (orange). Radial distances
+$r^{1}_{1}, r^{1}_{2}, \ldots, r^{1}_{6}$ connect each control point
+back to $C^{0}$, parameterised along $t$.
+\vspace{1em}}}
+\end{center}
+\vspace{0.4em}
+\begin{center}
+\textbf{Fig. 2.} An example of the nonhomogeneous shear modulus
+distribution of a bilayer structure.
+\end{center}
+
+\newpage
+
+% =========== Page 5: wei_page5.tex ===========
+\setcounter{equation}{14}
+
+% ---------- Figure 3 placeholder ----------
+\noindent
+\begin{center}
+\fbox{\parbox{0.92\textwidth}{\centering\vspace{1em}
+\textbf{[Figure 3 — placeholder]}\\[0.8em]
+Square light-teal domain with background shear modulus $\mu^{0}$,
+containing an irregular pink inclusion region with shear modulus
+$\mu^{1}$ and boundary $\partial\Omega^{1}$. Eight control points
+$\mathbf{P}^{1}_{1}, \mathbf{P}^{1}_{2}, \ldots, \mathbf{P}^{1}_{8}$
+are distributed around the boundary, connected to each other by
+dashed blue segments (the control polygon) and smoothly interpolated
+by an orange closed B-spline curve. Eight radial distances
+$d^{1}_{1}, d^{1}_{2}, \ldots, d^{1}_{8}$ connect the inclusion
+center $(x^{1}_{0}, y^{1}_{0})$ to each control point, illustrating
+the polar parameterization used in Eq.~(7) and Eq.~(10).
+\vspace{1em}}}
+\end{center}
+\vspace{0.3em}
+\begin{center}
+\textbf{Fig. 3.} The nonhomogeneous shear modulus distribution of an
+inclusion embedded composite.
+\end{center}
+
+\vspace{0.8em}
+
+% ---------- Figure 4 placeholder ----------
+\noindent
+\begin{center}
+\fbox{\parbox{0.92\textwidth}{\centering\vspace{1em}
+\textbf{[Figure 4 — placeholder]}\\[0.8em]
+Graph of $H(z) = 0.5 \times (1 + \tanh(z/\varepsilon))$ (the smoothed
+Heaviside from Eq.~(13)) plotted over $z \in [-0.5, 0.5]$, with
+$H(z) \in [0, 1]$ on the vertical axis. Four curves show the effect
+of decreasing $\varepsilon$:\\[0.3em]
+\begin{tabular}{ll}
+\textcolor{red}{$\varepsilon = 0.01$} & sharpest transition (nearly a true step) \\
+\textcolor{green!60!black}{$\varepsilon = 0.05$} & moderate transition \\
+\textcolor{blue}{$\varepsilon = 0.10$} & smoother transition \\
+\textcolor{orange}{$\varepsilon = 0.15$} & smoothest transition
+\end{tabular}\\[0.3em]
+All four curves pass through $(0, 0.5)$. As $\varepsilon \to 0$ the
+approximation converges to the true Heaviside; as $\varepsilon$ grows
+the transition band widens.
+\vspace{1em}}}
+\end{center}
+\vspace{0.3em}
+\begin{center}
+\textbf{Fig. 4.} An approximation of Heaviside function.
+\end{center}
+
+\vspace{1em}
+
+% ---------- Eq. 15 ----------
+\noindent
+\begin{equation}
+\text{Reg}(\mu) = \dfrac{1}{2}\,\alpha \int_{\Omega}
+\sqrt{|\nabla\mu|^{2} + c^{2}}\, d\Omega
+\end{equation}
+
+\vspace{0.3em}
+
+% ---------- Prose after Eq. 15 ----------
+\noindent
+For the layered structure,
+$\mathbf{r}^i = \left[r^i_1(t_1),\, r^i_2(t_2),\, \cdots,\, r^i_n(t_n)\right]$
+is the geometric parameter vector representing the distance between
+the $i$-th interface and $C^0$ at the location $t_k$. For the
+structure with inclusions embedded, the geometric parameter vector
+$\mathbf{r}^i = \left[r^i_1,\, r^i_2,\, \cdots,\, r^i_n\right]
+= \left[x^i_0,\, y^i_0,\, d^i_1,\, \cdots,\, d^i_{n-2}\right]$
+is consisting of the coordinates of the center and distances between
+the control points to the center of $i$-th component. In Eq.~(14),
+the discrepancy between the computed displacement field and measured
+displacement field on partial surface $\partial\Omega_{i_{\text{meas}}}$
+is minimized in $L$-$2$ norm. The computed displacement field is
+obtained by solving a forward problem using the finite element method
+[32]. Due to the influence of noise in measurements, we introduce a
+total variation diminishing regularization (TVD) term (the second
+term in Eq.~(14)), and the specific form is given by Eq.~(15).
+$\alpha$ is the regularization factor which controls the significance
+of the regularization on the objective function. $c$ is a small
+constant to avoid singularities when evaluating the gradient of the
+regularization term with respect to optimization variables. It should
+be noted that there exist alternative forms for the regularization
+term apart from the domain integral forms. Nevertheless, we have
+chosen to adhere to the use of domain integrals due to practical
+considerations. In particular, the explicit inverse solver has been
+developed based on the established framework of the existing
+implicit inverse solver. This continuity in methodology ensures
+consistency and facilitates seamless integration between the two
+solvers [33]. The specific value of the regularization factor is
+chosen based on the smoothness criteria [22].
+
+\newpage
+
+% =========== Page 6: wei_page6.tex ===========
+\setcounter{equation}{15}
+
+\noindent
+The optimization problem is solved by the limited
+Broyden--Fletcher--Goldfarb--Shanno (L-BFGS) method which requires
+the objective function and the gradients of the objective function
+with respect to the optimization variables. The gradients of the
+objective function with respect to the optimization variables are
+obtained by the adjoint method which has been thoroughly discussed
+in [27]. The flow chart of the procedure to solve the inverse
+problem is shown in Fig.~5.
+
+To test the feasibility of the proposed inverse scheme, we adopt the
+displacement datasets generated by a forward finite element
+simulation with a target shear modulus distribution. The white
+Gaussian random is also added into the simulated surface displacement
+field. The noise level is defined by
+$\sqrt{\displaystyle\sum_{k=1}^{N_{\text{node}}}
+\left(u_k - u_k^{\text{noise}}\right)^{\!2}\bigg/
+\sum_{k=1}^{N_{\text{node}}} (u_k)^{2}} \times 100\,\%$,
+where $u_k$ and $u_k^{\text{noise}}$ are the simulated and noisy
+displacement of $k$-th node, $N_{\text{node}}$ is the total number of
+nodes in interest domain. In comparison, we also solve inverse
+problems using the prevalent implicit inverse method based on the
+adjoint method where the shear moduli are nodally defined [22]. To
+quantitatively analyze the performance of the proposed method, we
+define the average relative error by
+$\dfrac{1}{N_{\text{node}}}
+\displaystyle\sum_{k=1}^{N_{\text{node}}}
+\left|\left(\mu_k - \mu_k^{\text{target}}\right)
+\big/ \mu_k^{\text{target}}\right| \times 100\,\%$\,,
+where $\mu_k$ is the recovered shear modulus value of $k$-th node
+and $\mu_k^{\text{target}}$ is the target shear modulus value of
+$k$-th node.
+
+\subsection*{\textit{Gradient computation}}
+
+\noindent
+To efficiently compute the gradient of the objective function with
+respect to the optimization variable, we have adopted the adjoint
+method, which involves solving the associated adjoint equation. The
+adjoint equation is given by [34,35]:
+\begin{equation}
+\mathscr{B}\!\left(\mathbf{w}^h, q^h, \delta\mathbf{u}^h, \delta p^h
+;\, \mathbf{u}^h, p^h\right)
+= -\bigl(\delta\mathbf{u}^h,\,
+         \mathbf{u}^h - \mathbf{u}^{m}\bigr)_{\partial\Omega},
+\qquad
+\forall\,[\delta\mathbf{u}^h, \delta p^h]
+\in \mathscr{M}^h \times \mathscr{P}^h
+\end{equation}
+where
+$\mathscr{B}(\mathbf{w}^h, q^h, \delta\mathbf{u}^h, \delta p^h;\,
+\mathbf{u}^h, p^h) = \frac{d}{d\varepsilon}
+\mathscr{A}^{*}\!(\mathbf{w}^h, q^h, \mathbf{u}^h
++ \varepsilon\,\delta\mathbf{u}^h, p^h
++ \varepsilon\,\delta p^h)\big|_{\varepsilon=0}$
+is the linearization of $\mathscr{A}^{*}$. With the acquired state
+variables $\mathbf{u}^h, p^h$, we can solve for the dual variables
+$\mathbf{w}^h, q^h$ using Eq.~(16). To this end, the gradient of the
+objective function with respect to the shear modulus:
+\begin{equation}
+\delta\Pi = D_{\mu}\Pi\,\delta\mu = \mathscr{C}
++ \alpha \int_{\Omega}
+\dfrac{\nabla\mu \cdot \nabla\delta\mu}
+      {\sqrt{|\nabla\mu|^{2} + c^{2}}}\, d\Omega
+\end{equation}
+$\mathscr{C} = \frac{d}{d\varepsilon}
+\mathscr{A}^{*}\!(\mathbf{w}^h, q^h, \mathbf{u}^h, p^h,
+\mu + \varepsilon\,\delta\mu)\big|_{\varepsilon=0}$.
+This can be used to efficiently compute the gradient of the objective
+function with respect to
+
+% ---------- Figure 5 placeholder ----------
+\vspace{1em}
+\begin{center}
+\fbox{\parbox{0.92\textwidth}{\centering\vspace{1em}
+\textbf{[Figure 5 — placeholder: optimization flowchart]}\\[0.8em]
+\begin{tabular}{l}
+\fbox{Give initial guess: $\mathbf{r}^1, \mathbf{r}^2, \ldots,
+      \mathbf{r}^m$ and $\mu^0, \mu^1, \ldots, \mu^m$} \\[0.6em]
+\hspace{2em}$\downarrow$\quad \textit{Finite Element Method} \\[0.4em]
+\fbox{Solve forward problem $\to$ computed displacement
+      $\mathbf{u}^{\text{com}}$} \\[0.6em]
+\hspace{2em}$\downarrow$\quad \textit{Adjoint Method} \\[0.4em]
+\fbox{Evaluate $\Pi$ and its gradients w.r.t.\ optimization
+      variables} \\[0.6em]
+\hspace{2em}$\downarrow$ \\[0.4em]
+\fbox{Is $\Pi$ minimized?}
+$\xrightarrow{\textit{No}}$
+\fbox{Update variables (\textit{L-BFGS})}
+$\to$ loop back $\uparrow$ \\[0.6em]
+\hspace{2em}$\downarrow$\quad \textit{Yes} \\[0.4em]
+\fbox{Stop and output reconstruction results}
+\end{tabular}
+\vspace{1em}}}
+\end{center}
+\vspace{0.3em}
+\begin{center}
+\textbf{Fig. 5.} The flow chart of the proposed explicit inverse method.
+\end{center}
+
+\newpage
+
+% =========== Page 7: wei_page7.tex ===========
+\setcounter{equation}{17}
+
+\noindent
+nodal or elemental shear moduli. If the shear modulus is nodally
+defined, we can use the same interpolation function with the
+displacement field. In this case, the shear modulus can be expressed
+as:
+\begin{equation}
+\mu \approx \mu^{h} = \sum_{i=1}^{N} N_i\, \mu_i
+\end{equation}
+where $N$ is the total number of nodes in the finite element model
+and $N_i$ is the finite element shape function. $\mu_i$ is the nodal
+shear modulus.
+
+In the explicit inverse method, since shear modulus distribution is a
+function of geometric parameters and the shear modulus in each
+region, the gradient of the objective function with respect to the
+optimization variables can be calculated using the chain rule. To
+this end, we should seek $\delta\mu$ corresponding to a change in any
+optimization variable from $\beta$ to $\beta + \delta\beta$:
+\begin{equation}
+\delta\mu = \frac{\partial\mu}{\partial\beta}\,\delta\beta
+\end{equation}
+Thereby, comparing to the implicit inverse method, we need to
+evaluate the $\partial\mu / \partial\beta$.
+
+\medskip
+\noindent
+\textbf{(a) Layered structure}
+
+\medskip
+\noindent
+The evaluation of the gradient of geometric optimization variables in
+a layered structure with $n + 1$ layers should be discussed
+considering three cases. For the $m$-th geometric optimization
+variable $r^{1}_{m}$ at the first interface $C^{1}$,
+$\frac{\partial\mu}{\partial r^{1}_{m}}$ is given by:
+\begin{equation}
+\frac{\partial\mu}{\partial r^{1}_{m}}
+= \left[-\mu^{0} + \mu^{1}\!\left(1 - H\!\left(\phi^{2}(\mathbf{x})\right)\right)\right]
+  \frac{\partial H\!\left(\phi^{1}(\mathbf{x})\right)}{\partial\phi^{1}(\mathbf{x})}\,
+  \frac{\partial\phi^{1}(\mathbf{x})}{\partial r^{1}_{m}}
+\end{equation}
+
+For the $m$-th geometric optimization variable $r^{n}_{m}$ at the
+last interface $C^{n}$,
+$\frac{\partial\mu}{\partial r^{n}_{m}}$ is given by:
+\begin{equation}
+\frac{\partial\mu}{\partial r^{n}_{m}}
+= \left(-\mu^{n-1}\, H\!\left(\phi^{n-1}(\mathbf{x})\right) + \mu^{n}\right)
+  \frac{\partial H\!\left(\phi^{n}(\mathbf{x})\right)}{\partial\phi^{n}(\mathbf{x})}\,
+  \frac{\partial\phi^{n}(\mathbf{x})}{\partial r^{n}_{m}}
+\end{equation}
+
+For the $m$-th geometric optimization variable at the intermediate
+interface $C^{i}\,(2 \leq i \leq (n-1))$,
+$\frac{\partial\mu}{\partial r^{i}_{m}}$ is given by:
+\begin{equation}
+\frac{\partial\mu}{\partial r^{i}_{m}}
+= \left[-\mu^{i-1}\, H\!\left(\phi^{i-1}(\mathbf{x})\right)
+        + \mu^{i}\!\left(1 - H\!\left(\phi^{i+1}(\mathbf{x})\right)\right)\right]
+  \frac{\partial H\!\left(\phi^{i}(\mathbf{x})\right)}{\partial\phi^{i}(\mathbf{x})}\,
+  \frac{\partial\phi^{i}(\mathbf{x})}{\partial r^{i}_{m}}
+\end{equation}
+
+In Eqs.~(20--22),
+$\frac{\partial H(\phi^{j}(\mathbf{x}))}{\partial\phi^{j}(\mathbf{x})}$
+$(1 \leq j \leq n)$ can be evaluated by Eq.~(13) as the Heaviside
+function is approximated by a continuous and differentiable function.
+$\frac{\partial\phi^{j}(\mathbf{x})}{\partial r^{j}_{m}}$ can be
+evaluated by the finite difference method.
+
+For the shear modulus of the background $\mu^{0}$,
+$\frac{\partial\mu}{\partial\mu^{0}}$ is given by:
+\begin{equation}
+\frac{\partial\mu}{\partial\mu^{0}} = 1 - H\!\left(\phi^{1}(\mathbf{x})\right)
+\end{equation}
+
+For the shear modulus of the last layer $\mu^{n}$, we have
+\begin{equation}
+\frac{\partial\mu}{\partial\mu^{n}} = H(\phi^{n}(\mathbf{x}))
+\end{equation}
+
+For the shear modulus of the layer $\mu^{i}\,(1 \leq i \leq (n-1))$,
+we have
+\begin{equation}
+\frac{\partial\mu}{\partial\mu^{i}}
+= H\!\left(\phi^{i}(\mathbf{x})\right)
+  \left(1 - H\!\left(\phi^{i+1}(\mathbf{x})\right)\right)
+\end{equation}
+
+\medskip
+\noindent
+\textbf{(b) Domain with inclusion embedded}
+
+\medskip
+\noindent
+For each $m$-th geometric optimization variables of $j$-th component
+$r^{j}_{m}$,
+$\frac{\partial\mu}{\partial r^{j}_{m}}$ is given by:
+\begin{equation}
+\frac{\partial\mu}{\partial r^{j}_{m}}
+= \left[\mu^{0}\!\prod_{\substack{i=1 \\ i \neq j}}^{n}
+         H\!\left(\phi^{i}(\mathbf{x})\right)
+  - \mu^{j}\right]
+  \frac{\partial H\!\left(\phi^{j}(\mathbf{x})\right)}{\partial\phi^{j}(\mathbf{x})}\,
+  \frac{\partial\phi^{j}(\mathbf{x})}{\partial r^{j}_{m}}
+\end{equation}
+
+For the shear modulus of the background $\mu^{0}$, we have:
+
+% [page ends here — continues on page 8]
+
+\newpage
+
+% =========== Page 8: wei_page8.tex ===========
+\setcounter{equation}{26}
+
+\begin{equation}
+\frac{\partial\mu}{\partial\mu^{0}}
+= \prod_{i=1}^{n} H\!\left(\phi^{i}(\mathbf{x})\right)
+\end{equation}
+
+For the shear modulus $\mu^{j}$ of the $j$-th component,
+$\frac{\partial\mu}{\partial\mu^{j}}$ is given by:
+\begin{equation}
+\frac{\partial\mu}{\partial\mu^{j}}
+= 1 - H\!\left(\phi^{j}(\mathbf{x})\right)
+\end{equation}
+
+\section*{Results}
+
+\subsection*{\textit{Case 1: A layered rectangular structure}}
+
+\noindent
+In the first numerical example, we analyze a layered rectangular
+structure, illustrated in Fig.~6. The dimensions of this structure
+are 1.0\,mm $\times$ 0.2\,mm. To discretize the problem domain, we
+utilize 7200 linear triangular elements. In the forward finite
+element simulation, a concentrated force is applied to the top edge,
+while the bottom edge was restricted the vertical motion and the
+center point is fully fixed. In the inverse problem, our focus lies
+in utilizing displacement datasets collected from the top edge as
+inputs for the inverse scheme. Acknowledging that relying on a single
+surface displacement dataset may not produce optimal reconstruction
+results, we change the location of the concentrated force and
+incorporate multiple surface displacement datasets to solve the
+inverse problem. The target shear modulus distributions for one (the
+homogenous case), two, and three layers are depicted in Fig.~6(a),
+(b), and (c), respectively. The shear modulus values of each layer in
+the structure are of a similar order to that of skin tissue [36].
+Considering the uncertainty regarding the total number of layers, we
+initially assume a configuration with six layers for the inverse
+problem, as depicted in Fig.~7(a). For the explicit inverse scheme,
+we utilize 10 control points to interpolate each interface. Thus, the
+total number of optimization variables is 56 including 50 geometric
+variables and 6 shear moduli.
+
+From Fig.~7, it can be seen that both the shape of the interfaces
+between the neighboring layers and the shear modulus values of each
+layer varies and finally reach to the target shear modulus
+distribution (Sample 1). Note that it takes only 52 iterations for
+convergence. Figs.~8--10 are the reconstructed shear modulus
+distributions for Samples 1--3 using explicit and implicit inverse
+approaches for the noise free cases, respectively. In the implicit
+inverse method, the total number of optimization variables is
+linearly proportional to the mesh size. In this case, the total
+number of optimization variables is 3691, which is equal to the total
+number of nodes. The reconstructed results demonstrate that both
+inverse methods can yield decent reconstruction with noise free
+cases. Further, the implicit method fails to recover the
+heterogeneity at the upper corner compared with the results by the
+explicit inverse method. Since the total number of optimization
+variables is remarkably reduced in the explicit inverse method, the
+total number of minimization iterations is reduced. The total number
+of minimization iterations for the explicit inverse method is
+approximately 10 times less than that required for the implicit
+inverse method. Furthermore, the shear modulus reconstruction
+obtained through the implicit
+
+% ---------- Figure 6 placeholder ----------
+\vspace{1em}
+\begin{center}
+\fbox{\parbox{0.92\textwidth}{\centering\vspace{1em}
+\textbf{[Figure 6 — placeholder]}\\[0.8em]
+Three layered rectangular structures (1.0\,mm $\times$ 0.2\,mm),
+each showing the target shear modulus (SM) distribution in MPa
+with a jet-style colorbar on the right.\\[0.4em]
+\textbf{(a) Sample 1}: homogeneous, single layer, SM $= 3.00$\,MPa
+(uniform blue). Downward arrows on top edge indicate concentrated
+force locations. Red text ``displacement measurement'' with
+leftward arrows on left side.\\[0.3em]
+\textbf{(b) Sample 2}: two layers. Bottom layer SM $\approx 3$\,MPa
+(blue), top layer SM $\approx 10$\,MPa (red). Green circles on top
+boundary, red circles on bottom boundary mark displacement
+measurement points.\\[0.3em]
+\textbf{(c) Sample 3}: three layers (blue--red--blue sandwich). SM
+ranges 1.00--10.00\,MPa. Same boundary marker pattern as (b).\\[0.3em]
+All three samples share the same mesh (7200 triangular elements) and
+boundary conditions (top-edge force, bottom-edge vertical
+constraint, center point fixed).
+\vspace{1em}}}
+\end{center}
+\vspace{0.3em}
+\begin{center}
+\textbf{Fig. 6.} The target shear modulus distribution of three
+samples with different number of layers (Unit: MPa). SM stands for
+shear modulus.
+\end{center}
+
+\newpage
+
+% =========== Page 9: wei_page9.tex ===========
+
+% ---------- Figure 7 placeholder ----------
+\noindent
+\begin{center}
+\fbox{\parbox{0.92\textwidth}{\centering\vspace{1em}
+\textbf{[Figure 7 — placeholder]}\\[0.8em]
+Six-panel grid showing the optimization trajectory for the
+explicit inverse scheme on \textbf{Sample 1} (the homogeneous case,
+target $\text{SM} = 3.00$\,MPa), starting from a 6-layer initial
+guess. Each panel is a rectangular shear-modulus distribution
+($1.0$\,mm $\times 0.2$\,mm) with a jet colorbar.\\[0.4em]
+\begin{tabular}{@{}ll@{}}
+\textbf{(a) Initial guess} & uniform blue, SM $= 1.00$\,MPa everywhere \\
+\textbf{(b) Iteration 5} & SM range 1.27--1.95, layered artifacts emerging \\
+\textbf{(c) Iteration 12} & SM range 1.50--3.11, layered structure developed \\
+\textbf{(d) Iteration 24} & SM range 1.63--3.03, approaching target \\
+\textbf{(e) Iteration 48} & SM range 2.97--3.00, nearly converged \\
+\textbf{(f) Iteration 52 (Final)} & uniform red, SM $= 3.00$\,MPa everywhere
+\end{tabular}\\[0.4em]
+The trajectory shows the 6-layer parameterisation collapsing to a
+uniform solution over 52 iterations --- because the target is
+homogeneous, the optimiser correctly drives all six layers to the
+same shear modulus.
+\vspace{1em}}}
+\end{center}
+\vspace{0.3em}
+\begin{center}
+\textbf{Fig. 7.} The optimization process with six layers initially
+utilizing the explicit inverse scheme for Sample 1 (Without noise,
+Unit: MPa).
+\end{center}
+
+\vspace{0.8em}
+
+% ---------- Figure 8 placeholder ----------
+\noindent
+\begin{center}
+\fbox{\parbox{0.92\textwidth}{\centering\vspace{1em}
+\textbf{[Figure 8 — placeholder]}\\[0.8em]
+Six-panel side-by-side comparison of the
+\textbf{Explicit Inverse Method} (left column) vs.\
+\textbf{Implicit Inverse Method} (right column) on Sample 1
+(homogeneous, target SM $= 3.00$\,MPa), with 3, 6, and 9 surface
+displacement datasets as inputs.\\[0.4em]
+\textbf{Explicit (left column)}: all three rows show a perfectly
+uniform shear-modulus field at SM $= 3.00$\,MPa (uniform blue,
+colorbar pinned 3.00--3.00). The explicit parameterisation
+recovers the homogeneous target exactly.\\[0.4em]
+\textbf{Implicit (right column)}: all three rows show tiny spatial
+artifacts around the true value of 3.00\,MPa --- (d) 3 fields: SM
+range 2.9995--3.0001; (e) 6 fields: SM range 2.9992--3.0001;
+(f) 9 fields: SM range 3.0000--3.0002. The color blobs are
+visible even though the numerical error is on the order of
+$10^{-4}$--$10^{-3}$\,MPa.\\[0.4em]
+\textbf{Takeaway}: the explicit method produces a perfectly uniform
+field on the homogeneous case; the implicit method is quantitatively
+accurate but shows residual spatial noise patterns that decrease
+(slightly) as more displacement datasets are incorporated.
+\vspace{1em}}}
+\end{center}
+\vspace{0.3em}
+\begin{center}
+\textbf{Fig. 8.} The reconstructed results with varying 3, 6 and 9
+surface displacement datasets corresponding to Sample 1 (Without
+noise, Unit: MPa).
+\end{center}
+
+\vspace{1em}
+
+% ---------- Continuation prose (from page 8) + noise-test paragraph ----------
+\noindent
+inverse method shows a slight spatial variation, which can be
+enhanced by incorporating more surface datasets.
+
+After adding 1\,\% noise to the surface displacement datasets, we
+observed that the shear modulus distributions were accurately mapped
+for both inverse methods in the homogeneous case (refer to Fig.~11).
+The average relative error for both implicit and explicit inverse
+methods was less than 0.2\,\% (see Table~1). However, when it came
+to Sample 2 and 3 (see Fig.~12, Fig.~13), the interface between
+neighboring layers in the implicit inverse method's results was not
+as clear as the target. As the total number of layers increases, the
+challenges in solving the inverse problems escalate accordingly.
+Consequently, the relative error for Sample 2 and Sample 3 exhibits
+a lower quality compared to Sample 1 (see Table~1). Besides, the
+average relative error for the implicit inverse method was
+
+% [page ends here — continues on page 10]
+
+\newpage
+
+% =========== Page 10: wei_page10.tex ===========
+
+% ---------- Figure 9 placeholder ----------
+\noindent
+\begin{center}
+\fbox{\parbox{0.92\textwidth}{\centering\vspace{1em}
+\textbf{[Figure 9 — placeholder]}\\[0.8em]
+Six-panel side-by-side comparison of the \textbf{Explicit Inverse
+Method} (left column) vs.\ \textbf{Implicit Inverse Method} (right
+column) on \textbf{Sample 2} (the two-layer target from Fig.~6b,
+nominal SM values $\mu^0 \approx 3$\,MPa, $\mu^1 \approx 10$\,MPa),
+using 3, 6, and 9 surface displacement datasets as inputs.\\[0.4em]
+\textbf{Explicit (left column)}: bilayer structure recovered with a
+clean interface. Colorbar ranges:
+(a) 3 fields, SM $\in [1.00, 11.49]$\,MPa;
+(b) 6 fields, SM $\in [1.00, 11.63]$\,MPa;
+(c) 9 fields, SM $\in [1.00, 11.47]$\,MPa.\\[0.3em]
+\textbf{Implicit (right column)}: bilayer structure recovered but
+with a visibly rougher interface between the two layers; more
+artifacts at the top edge. Colorbar ranges:
+(d) 3 fields, SM $\in [1.00, 10.95]$\,MPa;
+(e) 6 fields, SM $\in [1.00, 10.77]$\,MPa;
+(f) 9 fields, SM $\in [1.00, 11.13]$\,MPa.\\[0.3em]
+\textbf{Takeaway}: both methods recover the two-layer structure;
+the explicit method produces a cleaner interface, while the implicit
+method's interface has more small-scale roughness. Slight overshoot
+in the top-layer SM values (colorbar max above the nominal 10\,MPa)
+is visible in all six panels.
+\vspace{1em}}}
+\end{center}
+\vspace{0.3em}
+\begin{center}
+\textbf{Fig. 9.} The reconstructed results with varying 3, 6 and 9
+surface displacement datasets corresponding to Sample 2 (Without
+noise, Unit: MPa).
+\end{center}
+
+\vspace{0.8em}
+
+% ---------- Figure 10 placeholder ----------
+\noindent
+\begin{center}
+\fbox{\parbox{0.92\textwidth}{\centering\vspace{1em}
+\textbf{[Figure 10 — placeholder]}\\[0.8em]
+Six-panel side-by-side comparison of the \textbf{Explicit Inverse
+Method} (left column) vs.\ \textbf{Implicit Inverse Method} (right
+column) on \textbf{Sample 3} (the three-layer target from Fig.~6c:
+blue bottom layer $\mu^0 \approx 3$\,MPa, green middle layer
+$\mu^1 \approx 6$\,MPa, red top layer $\mu^2 \approx 10$\,MPa),
+using 3, 6, and 9 surface displacement datasets as inputs.\\[0.4em]
+\textbf{Explicit (left column)}: three-layer stacked structure
+recovered, with the middle (green) layer visibly distinct from the
+top (red) and bottom (blue) layers. Colorbar ranges:
+(a) 3 fields, SM $\in [1.00, 10.49]$\,MPa;
+(b) 6 fields, SM $\in [1.00, 10.35]$\,MPa;
+(c) 9 fields, SM $\in [1.00, 10.44]$\,MPa.\\[0.3em]
+\textbf{Implicit (right column)}: three-layer structure recovered
+but with fuzzier interfaces between adjacent layers. Colorbar
+ranges:
+(d) 3 fields, SM $\in [1.00, 10.11]$\,MPa;
+(e) 6 fields, SM $\in [1.00, 10.26]$\,MPa;
+(f) 9 fields, SM $\in [1.00, 10.19]$\,MPa.\\[0.3em]
+\textbf{Takeaway}: as layer count increases (1 $\to$ 2 $\to$ 3),
+the quality gap between explicit and implicit widens. Sample 3's
+three-layer structure is harder for the implicit method to resolve
+cleanly than Sample 2's two-layer structure. More displacement
+datasets (3 $\to$ 6 $\to$ 9) improve both methods but do not close
+the gap.
+\vspace{1em}}}
+\end{center}
+\vspace{0.3em}
+\begin{center}
+\textbf{Fig. 10.} The reconstructed results with 3, 6 and 9 surface
+displacement datasets corresponding to Sample 3 (Without noise,
+Unit: MPa).
+\end{center}
+
+\vspace{1em}
+
+% ---------- Continuation prose (from page 9) + 5% noise paragraph ----------
+\noindent
+slightly larger than that for the explicit inverse method (see
+Table~1). Furthermore, it's worth noting that the quality of the
+reconstruction achieved by both inverse methods improved with an
+increase in the total number of measurements. By utilizing 9
+boundary displacement measurements, the average relative error
+could be reduced to less than 10\,\%. However, it should be
+mentioned that each layer was not accurately mapped as the
+homogeneous case when using the implicit inverse method.
+
+Additionally, we increased the noise level to 5\,\% and observed
+that the reconstructed results obtained by the explicit inverse
+method still outperform those obtained by the implicit inverse
+method (see Fig.~14, Fig.~15, Fig.~16). For the explicit inverse
+method, the resulting relative error in the case with 5\,\% noise
+is generally larger than that in the case with 1\,\% noise (see
+Table~1). However, even with a 5\,\% noise level, the relative
+error for the explicit inverse method remains lower than that for
+the implicit inverse method
+
+% [page ends here — continues on page 11]
+
+\newpage
+
+% =========== Page 11: wei_page11.tex ===========
+
+% ---------- Figure 11 placeholder ----------
+\noindent
+\begin{center}
+\fbox{\parbox{0.92\textwidth}{\centering\vspace{1em}
+\textbf{[Figure 11 --- placeholder]}\\[0.8em]
+Six-panel side-by-side comparison of the \textbf{Explicit Inverse
+Method} (left column) vs.\ \textbf{Implicit Inverse Method} (right
+column) on \textbf{Sample 1} (homogeneous, target SM $= 3.00$\,MPa),
+with \textbf{1\,\% noise} added to the measured surface
+displacements. Three rows correspond to 3, 6, and 9 displacement
+datasets.\\[0.4em]
+\textbf{Explicit (left column)}:
+(a) 3 fields: SM $\in [3.0013, 3.0013]$\,MPa, uniform red;
+(b) 6 fields: SM $\in [3.0000, 3.0001]$\,MPa, visible green/yellow
+patches emerge (non-monotone: noisier than (a) or (c));
+(c) 9 fields: SM $\in [2.9997, 2.9997]$\,MPa, uniform red.\\[0.3em]
+\textbf{Implicit (right column)}:
+(d) 3 fields: SM $\in [2.9981, 3.0083]$\,MPa, visible blue patch
+along the left edge;
+(e) 6 fields: SM $\in [2.9978, 3.0006]$\,MPa, small central blue
+blob;
+(f) 9 fields: SM $\in [2.9995, 2.9998]$\,MPa, small blue patches
+remain near the edges.\\[0.3em]
+\textbf{Takeaway}: under 1\,\% noise, both methods stay
+quantitatively close to the true 3.00\,MPa value ($\le 0.01$\,MPa
+deviation). The explicit method's 6-field result is the noisiest
+explicit panel on this page --- an artifact not discussed in the
+surrounding prose.
+\vspace{1em}}}
+\end{center}
+\vspace{0.3em}
+\begin{center}
+\textbf{Fig. 11.} The reconstructed results with varying 3, 6 and 9
+surface displacement datasets corresponding to Sample 1 (1\,\% noise
+is introduced into the measured data, Unit: MPa).
+\end{center}
+
+\vspace{1em}
+
+% ---------- Table 1 ----------
+\noindent\textbf{Table 1}\\[0.2em]
+{\small Comparison of the average relative error in the shear
+modulus distribution obtained by implicit inverse and explicit
+inverse methods for the layered structure.}
+\vspace{0.3em}
+
+\begin{center}
+\small
+\begin{tabular}{@{}ll ccc ccc@{}}
+\toprule
+\multicolumn{2}{l}{Inverse method}
+  & \multicolumn{3}{c}{Explicit inverse method}
+  & \multicolumn{3}{c}{Implicit inverse method} \\
+\cmidrule(lr){3-5}\cmidrule(lr){6-8}
+\multicolumn{2}{l}{Number of surface displacement datasets}
+  & 3 & 6 & 9 & 3 & 6 & 9 \\
+\midrule
+\multirow{3}{*}{1\,\% noise}
+  & Sample 1 & 0.04\,\%  & 0.00\,\%  & 0.01\,\%  & 0.18\,\%  & 0.01\,\%  & 0.01\,\%  \\
+  & Sample 2 & 11.56\,\% & 6.40\,\%  & 4.53\,\%  & 13.20\,\% & 7.44\,\%  & 4.69\,\%  \\
+  & Sample 3 & 14.03\,\% & 6.84\,\%  & 6.71\,\%  & 14.55\,\% & 11.37\,\% & 8.58\,\%  \\
+\multirow{3}{*}{5\,\% noise}
+  & Sample 1 & 0.36\,\%  & 0.22\,\%  & 0.003\,\% & 0.11\,\%  & 0.15\,\%  & 0.003\,\% \\
+  & Sample 2 & 15.29\,\% & 11.24\,\% & 8.12\,\%  & 24.44\,\% & 11.96\,\% & 8.61\,\%  \\
+  & Sample 3 & 25.00\,\% & 9.20\,\%  & 8.14\,\%  & 19.03\,\% & 13.61\,\% & 10.58\,\% \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\vspace{1em}
+
+% ---------- Prose: closing of 1% noise paragraph ----------
+\noindent
+with a 1\,\% noise level. Furthermore, we provided the values of
+the regularization factors for each case depicted in Figs.~8--16
+in Table~2.
+
+\vspace{0.8em}
+
+% ---------- Case 2 subsection heading (italic, matching paper style) ----------
+\noindent\textit{Case 2: A layered ring structure}
+
+\vspace{0.5em}
+
+\noindent
+In the second numerical example, we focused on a layered ring
+structure, as illustrated in Fig.~17. To discretize the problem
+domain, we employed 7610 triangular elements. The deformation of
+the ring structure was induced by applying inner pressures ranging
+from 10\,mmHg to 50\,mmHg, and we were only able to ``measure'' the
+displacement on the inner wall. The shear modulus values of the
+inner and outer layers were 0.129\,MPa and 0.386\,MPa [37],
+respectively. Our approach for the inverse problem relied on
+utilizing the measured displacement on the inner wall to determine
+the shear modulus distribution. Initially, we provided an initial
+guess of the shear modulus distribution, as shown in Fig.~18(a),
+where four layers were predefined. The shear modulus values, from
+the outermost layer to the innermost layer, ranged from 0.01\,MPa
+to 0.04\,MPa. During the inverse problem-solving process, we
+optimized both the shape of the interface between neighboring
+layers and the shear modulus value of each layer. In the initial
+assumption, the ring structure is considered to consist of 4
+layers. For the explicit inverse method, each interface is
+represented by 14 control points, leading to a total of 56
+optimization variables, which includes 4 shear moduli. On the
+other hand, the implicit inverse method involves a much larger
+number of optimization variables, specifically 4030 variables in
+total. Fig.~18 displays the variation of the reconstructed shear
+modulus distribution using the explicit inverse method for the
+noise free case. Notably, the reconstruction achieved through the
+explicit method closely resembled the ground truth. However, the
+same cannot be said for the implicit inverse method, where the
+reconstructed shear modulus distribution performed significantly
+worse than the explicit inverse method even for the noise free
+data (see Fig.~19(d)-(f)).
+
+% [page ends here — continues on page 12]
+
+\newpage
+
+% =========== Page 12: wei_page12.tex ===========
+
+% ---------- Figure 12 placeholder ----------
+\noindent
+\begin{center}
+\fbox{\parbox{0.92\textwidth}{\centering\vspace{1em}
+\textbf{[Figure 12 --- placeholder]}\\[0.8em]
+Six-panel side-by-side comparison of the \textbf{Explicit Inverse
+Method} (left column) vs.\ \textbf{Implicit Inverse Method} (right
+column) on \textbf{Sample 2} (the two-layer target: background
+$\mu^0 \approx 3$\,MPa, top layer $\mu^1 \approx 10$\,MPa),
+with \textbf{1\,\% noise} added to the measured surface
+displacements, using 3, 6, and 9 displacement datasets.\\[0.4em]
+\textbf{Explicit (left column)}: bilayer structure recovered with
+a relatively clean (though slightly wavy) interface. Colorbar
+ranges:
+(a) 3 fields, SM $\in [1.00, 11.33]$\,MPa;
+(b) 6 fields, SM $\in [1.00, 11.43]$\,MPa;
+(c) 9 fields, SM $\in [1.00, 11.34]$\,MPa.\\[0.3em]
+\textbf{Implicit (right column)}: bilayer structure visible but
+with significant artifacts, especially in panel (d) where a large
+green/blue patch intrudes into the red top layer from the left
+edge. Colorbar ranges:
+(d) 3 fields, SM $\in [1.00, 14.60]$\,MPa --- a \textbf{46\,\%
+overshoot} above the nominal 10\,MPa top layer, matching the
+paper's claim that the implicit method's average relative error
+``could exceed 40\,\%'' under 1\,\% noise;
+(e) 6 fields, SM $\in [1.00, 10.60]$\,MPa;
+(f) 9 fields, SM $\in [1.00, 10.71]$\,MPa.\\[0.3em]
+\textbf{Takeaway}: the noise amplifies the implicit method's
+difficulty with interface recovery dramatically in the 3-field
+case; 6 and 9 fields bring it back toward the nominal value but
+with visibly rougher interfaces than the explicit method.
+\vspace{1em}}}
+\end{center}
+\vspace{0.3em}
+\begin{center}
+\textbf{Fig. 12.} The reconstructed results with varying 3, 6 and
+9 surface displacement datasets corresponding to Sample 2 (1\,\%
+noise is introduced into the measured data, Unit: MPa).
+\end{center}
+
+\vspace{0.8em}
+
+% ---------- Figure 13 placeholder ----------
+\noindent
+\begin{center}
+\fbox{\parbox{0.92\textwidth}{\centering\vspace{1em}
+\textbf{[Figure 13 --- placeholder]}\\[0.8em]
+Six-panel side-by-side comparison of the \textbf{Explicit Inverse
+Method} (left column) vs.\ \textbf{Implicit Inverse Method} (right
+column) on \textbf{Sample 3} (the three-layer target: blue bottom
+layer $\mu^0 \approx 3$\,MPa, green middle layer
+$\mu^1 \approx 6$\,MPa, red top layer $\mu^2 \approx 10$\,MPa),
+with \textbf{1\,\% noise} added to the measured surface
+displacements, using 3, 6, and 9 displacement datasets.\\[0.4em]
+\textbf{Explicit (left column)}: three-layer structure recovered
+with wavy but distinct interfaces between the layers. Colorbar
+ranges:
+(a) 3 fields, SM $\in [1.01, 10.63]$\,MPa;
+(b) 6 fields, SM $\in [1.00, 10.25]$\,MPa;
+(c) 9 fields, SM $\in [1.00, 10.38]$\,MPa.\\[0.3em]
+\textbf{Implicit (right column)}: three-layer structure noticeably
+noisier, with fuzzier interfaces and small artifact patches.
+Colorbar ranges:
+(d) 3 fields, SM $\in [1.00, 11.78]$\,MPa;
+(e) 6 fields, SM $\in [1.00, 11.58]$\,MPa;
+(f) 9 fields, SM $\in [1.00, 9.96]$\,MPa --- notably, the 9-field
+implicit result \textbf{undershoots} the nominal 10\,MPa target,
+unusual relative to most other panels in the paper which tend to
+overshoot.\\[0.3em]
+\textbf{Takeaway}: as with Sample 2 under noise, the explicit
+method produces cleaner interfaces; but the quantitative
+colorbar-max values on Sample 3 are closer between explicit and
+implicit than on Sample 2 because the three-layer structure
+constrains both methods more tightly than the two-layer structure.
+\vspace{1em}}}
+\end{center}
+\vspace{0.3em}
+\begin{center}
+\textbf{Fig. 13.} The reconstructed results with varying 3, 6 and
+9 surface displacement datasets corresponding to Sample 3 (1\,\%
+noise is introduced into the measured data, Unit: MPa).
+\end{center}
+
+\vspace{1em}
+
+% ---------- Prose paragraph (from pdftotext, soft-hyphen cleaned) ----------
+\noindent
+When 1\,\% noise was introduced, the explicit inverse method
+continued to perform admirably, producing high-quality
+reconstructed results (see Fig.~20). However, the performance of
+the implicit inverse method continued to be inferior to that of
+the explicit inverse method. The average relative error for the
+implicit inverse method could exceed 40\,\%, indicating substantial
+inaccuracies in the reconstructed results. On the other hand, the
+average relative error for the explicit inverse method remained
+relatively low, around 5\,\%, signifying its superior ability to
+handle the noise and produce more accurate reconstructions (see
+Table~3). The values of regularization factors used in each case
+from Fig.~19 and Fig.~20 are listed in Table~4.
+
+% [page ends here — continues on page 13]
+
+\newpage
+
+% =========== Page 13: wei_page13.tex ===========
+
+% ---------- Figure 14 placeholder ----------
+\noindent
+\begin{center}
+\fbox{\parbox{0.92\textwidth}{\centering\vspace{1em}
+\textbf{[Figure 14 --- placeholder]}\\[0.8em]
+Six-panel side-by-side comparison of the \textbf{Explicit Inverse
+Method} (left column) vs.\ \textbf{Implicit Inverse Method} (right
+column) on \textbf{Sample 1} (the homogeneous target, true
+SM $= 3.00$\,MPa), with \textbf{5\,\% noise} added to the measured
+surface displacements, using 3, 6, and 9 displacement datasets.\\[0.4em]
+\textbf{Explicit (left column)}: the higher noise level corrupts
+the homogeneous recovery. Colorbar ranges:
+(a) 3 fields, SM $\in [2.9641, 3.0096]$\,MPa --- visible spurious
+\textbf{bilayer artifact} with a blue ``valley'' cutting through
+an otherwise red field (the homogeneous target should be uniform);
+(b) 6 fields, SM $\in [3.0014, 3.0099]$\,MPa --- wavy spurious
+bilayer pattern, red top over blue bottom;
+(c) 9 fields, SM $\in [3.0001, 3.0001]$\,MPa --- uniform blue, near
+perfect. The 9-field case recovers cleanly while 3-field and
+6-field hallucinate structure that isn't there.\\[0.3em]
+\textbf{Implicit (right column)}:
+(d) 3 fields, SM $\in [2.7156, 3.0220]$\,MPa --- mostly uniform red
+with a small localized blue blob;
+(e) 6 fields, SM $\in [3.0027, 3.0060]$\,MPa --- visible vertical
+gradient/striping;
+(f) 9 fields, SM $\in [2.9999, 3.0002]$\,MPa --- almost uniform with
+faint artifact pattern.\\[0.3em]
+\textbf{Takeaway}: under 5\,\% noise on a homogeneous target, the
+explicit method's 3-field and 6-field reconstructions show
+\emph{spurious bilayer patterns} that don't exist in the ground
+truth. This is a failure mode worth flagging: the method can
+invent structure under noise when very few displacement datasets
+are available. Nine fields restores clean recovery.
+\vspace{1em}}}
+\end{center}
+\vspace{0.3em}
+\begin{center}
+\textbf{Fig. 14.} The reconstructed results with varying 3, 6 and
+9 surface displacement datasets corresponding to Sample 1 (5\,\%
+noise is introduced into the measured data, Unit: MPa).
+\end{center}
+
+\vspace{0.8em}
+
+% ---------- Figure 15 placeholder ----------
+\noindent
+\begin{center}
+\fbox{\parbox{0.92\textwidth}{\centering\vspace{1em}
+\textbf{[Figure 15 --- placeholder]}\\[0.8em]
+Six-panel side-by-side comparison of the \textbf{Explicit Inverse
+Method} (left column) vs.\ \textbf{Implicit Inverse Method} (right
+column) on \textbf{Sample 2} (the two-layer target: background
+$\mu^0 \approx 3$\,MPa, top layer $\mu^1 \approx 10$\,MPa),
+with \textbf{5\,\% noise} added, using 3, 6, and 9 displacement
+datasets.\\[0.4em]
+\textbf{Explicit (left column)}: bilayer structure visible in all
+three panels. Colorbar ranges:
+(a) 3 fields, SM $\in [1.00, 8.91]$\,MPa --- notably, the colorbar
+max is \textbf{11\,\% below the nominal 10\,MPa} top layer. This
+is an \emph{undershoot}, opposite to the usual overshoot failure
+mode. The top layer is not fully recovered with only 3 fields
+under 5\,\% noise;
+(b) 6 fields, SM $\in [1.00, 10.87]$\,MPa --- slight overshoot,
+wavy interface;
+(c) 9 fields, SM $\in [1.00, 10.16]$\,MPa --- near-nominal with
+slight overshoot.\\[0.3em]
+\textbf{Implicit (right column)}:
+(d) 3 fields, SM $\in [1.00, 14.20]$\,MPa --- \textbf{42\,\%
+overshoot} above the 10\,MPa nominal, visible with significant
+green/yellow patches intruding into the top layer;
+(e) 6 fields, SM $\in [1.00, 11.42]$\,MPa;
+(f) 9 fields, SM $\in [1.00, 11.43]$\,MPa --- surprising that 9
+fields is not clearly better than 6 fields for the implicit
+method on this sample.\\[0.3em]
+\textbf{Takeaway}: the 3-field explicit case \emph{undershoots}
+while the 3-field implicit case \emph{overshoots} by 42\,\% ---
+the two methods fail in opposite directions under low-data +
+5\,\% noise. More displacement fields close the gap for explicit
+but not cleanly for implicit.
+\vspace{1em}}}
+\end{center}
+\vspace{0.3em}
+\begin{center}
+\textbf{Fig. 15.} The reconstructed results with varying 3, 6 and
+9 surface displacement datasets corresponding to Sample 2 (5\,\%
+noise is introduced into the measured data, Unit: MPa).
+\end{center}
+
+% [page ends here — continues on page 14]
+
+\newpage
+
+% =========== Page 14: wei_page14.tex ===========
+
+% ---------- Figure 16 placeholder ----------
+\noindent
+\begin{center}
+\fbox{\parbox{0.92\textwidth}{\centering\vspace{1em}
+\textbf{[Figure 16 --- placeholder]}\\[0.8em]
+Six-panel side-by-side comparison of the \textbf{Explicit Inverse
+Method} (left column) vs.\ \textbf{Implicit Inverse Method} (right
+column) on \textbf{Sample 3} (the three-layer target: blue bottom
+$\mu^0 \approx 3$\,MPa, green middle $\mu^1 \approx 6$\,MPa, red
+top $\mu^2 \approx 10$\,MPa), with \textbf{5\,\% noise} added,
+using 3, 6, and 9 displacement datasets.\\[0.4em]
+\textbf{Explicit (left column)}:
+(a) 3 fields, SM $\in [1.00, 8.46]$\,MPa --- undershoots the
+10\,MPa nominal top layer, matching the 3-field undershoot pattern
+seen in Fig.~15 for Sample 2;
+(b) 6 fields, SM $\in [1.00, 10.28]$\,MPa;
+(c) 9 fields, SM $\in [1.00, 10.34]$\,MPa.
+All three panels show wavy but distinguishable three-layer
+structure.\\[0.3em]
+\textbf{Implicit (right column)}:
+(d) 3 fields, SM $\in [1.00, 15.49]$\,MPa --- 55\,\% overshoot,
+significant green/yellow patches corrupting the top red layer;
+(e) 6 fields, SM $\in [1.00, 15.98]$\,MPa --- \textbf{worse than
+3 fields} on the max-SM axis, a \emph{non-monotone} degradation
+that the paper's prose does not call out;
+(f) 9 fields, SM $\in [1.00, 10.17]$\,MPa --- snaps back close to
+nominal, cleaner interfaces.\\[0.3em]
+\textbf{Takeaway}: the implicit method's colorbar max on Sample 3
+under 5\,\% noise is \emph{not monotone} in the number of
+displacement datasets ($15.49 \to 15.98 \to 10.17$ across 3, 6, 9
+fields). This is unusual in the paper's overall story; worth
+noting as a caveat to any ``more data always helps'' interpretation.
+\vspace{1em}}}
+\end{center}
+\vspace{0.3em}
+\begin{center}
+\textbf{Fig. 16.} The reconstructed results with varying 3, 6 and
+9 surface displacement datasets corresponding to Sample 3 (5\,\%
+noise is introduced into the measured data, Unit: MPa).
+\end{center}
+
+\vspace{1em}
+
+% ---------- Table 2 ----------
+\noindent\textbf{Table 2}\\[0.2em]
+{\small The values of the regularization factors utilized in
+Fig.~8, Fig.~9, Fig.~10, Fig.~11, Fig.~12, Fig.~13, Fig.~14,
+Fig.~15, Fig.~16.}
+\vspace{0.3em}
+
+\begin{center}
+\footnotesize
+\begin{tabular}{@{}ll ccc ccc@{}}
+\toprule
+\multicolumn{2}{l}{Inverse method}
+  & \multicolumn{3}{c}{Explicit inverse method}
+  & \multicolumn{3}{c}{Implicit inverse method} \\
+\cmidrule(lr){3-5}\cmidrule(lr){6-8}
+\multicolumn{2}{l}{Number of surface displacement datasets}
+  & 3 & 6 & 9 & 3 & 6 & 9 \\
+\midrule
+\multirow{3}{*}{Sample 1}
+  & no noise  & 0.00            & 0.00            & $5\times 10^{-27}$ & $2\times 10^{-14}$ & $5\times 10^{-14}$ & $1\times 10^{-13}$ \\
+  & 1\,\% noise & $1\times 10^{-11}$ & $1\times 10^{-11}$ & $1\times 10^{-18}$ & $2\times 10^{-11}$ & $6\times 10^{-11}$ & $6\times 10^{-10}$ \\
+  & 5\,\% noise & $5\times 10^{-12}$ & $1\times 10^{-10}$ & $1\times 10^{-10}$ & $1\times 10^{-10}$ & $6\times 10^{-10}$ & $6\times 10^{-9}$  \\
+\midrule
+\multirow{3}{*}{Sample 2}
+  & no noise  & 0.00            & 0.00            & 0.00            & $1\times 10^{-14}$ & $1\times 10^{-14}$ & $1\times 10^{-14}$ \\
+  & 1\,\% noise & $1\times 10^{-13}$ & $1\times 10^{-13}$ & $1\times 10^{-13}$ & $1\times 10^{-12}$ & $1\times 10^{-11}$ & $1\times 10^{-11}$ \\
+  & 5\,\% noise & $1\times 10^{-10}$ & $1\times 10^{-10}$ & $1\times 10^{-10}$ & $1\times 10^{-11}$ & $1\times 10^{-10}$ & $1\times 10^{-10}$ \\
+\midrule
+\multirow{3}{*}{Sample 3}
+  & no noise  & 0.00            & 0.00            & 0.00            & $1\times 10^{-14}$ & $1\times 10^{-14}$ & $1\times 10^{-14}$ \\
+  & 1\,\% noise & 0.00            & 0.00            & 0.00            & $1\times 10^{-12}$ & $1\times 10^{-12}$ & $1\times 10^{-11}$ \\
+  & 5\,\% noise & $1\times 10^{-11}$ & $1\times 10^{-11}$ & $1\times 10^{-11}$ & $1\times 10^{-11}$ & $1\times 10^{-11}$ & $1\times 10^{-10}$ \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\vspace{1em}
+
+% ---------- Figure 17 placeholder ----------
+\noindent
+\begin{center}
+\fbox{\parbox{0.80\textwidth}{\centering\vspace{1em}
+\textbf{[Figure 17 --- placeholder]}\\[0.8em]
+Target shear modulus distribution for the \textbf{Case 2} bilayer
+ring structure: a circular ring with an outer thicker red layer
+($\mu_\text{outer} = 0.386$\,MPa) surrounding an inner thinner
+blue layer ($\mu_\text{inner} = 0.129$\,MPa). Black arrows point
+radially inward around the perimeter, labeled ``displacement
+measurement'', indicating that the inverse problem uses only the
+displacement measured on the inner wall. Colorbar ticks at
+$\{0.129, 0.200, 0.267, 0.333, 0.386\}$\,MPa (jet colormap,
+matching the values $[37]$ for physiological soft tissue from the
+paper's bibliography). The stiffness ratio outer/inner
+$\approx 3.0$ is realistic for arterial wall tissue.
+\vspace{1em}}}
+\end{center}
+\vspace{0.3em}
+\begin{center}
+\textbf{Fig. 17.} Target shear modulus distribution of a bilayer
+ring structure (Unit: MPa).
+\end{center}
+
+% [page ends here — continues on page 15]
+
+\newpage
+
+% =========== Page 15: wei_page15.tex ===========
+
+% ---------- Figure 18 placeholder ----------
+\noindent
+\begin{center}
+\fbox{\parbox{0.92\textwidth}{\centering\vspace{1em}
+\textbf{[Figure 18 --- placeholder]}\\[0.8em]
+Six-panel optimization trajectory for the \textbf{Case 2 bilayer
+ring structure} (target: outer 0.386\,MPa, inner 0.129\,MPa) using
+the explicit inverse scheme with 3 surface displacement datasets
+(no noise), starting from a 4-layer initial guess. Each panel is
+a circular ring with a jet colorbar.\\[0.4em]
+\begin{tabular}{@{}ll@{}}
+\textbf{(a) Initial guess}  & 4-layer ring, SM $\in [0.01, 0.04]$\,MPa \\
+\textbf{(b) Iteration 20}   & SM $\in [0.145, 0.438]$\,MPa (overshoots outer layer) \\
+\textbf{(c) Iteration 50}   & SM $\in [0.131, 0.397]$\,MPa, wavy interface emerging \\
+\textbf{(d) Iteration 100}  & SM $\in [0.129, 0.393]$\,MPa \\
+\textbf{(e) Iteration 1000} & SM $\in [0.131, 0.387]$\,MPa (near target) \\
+\textbf{(f) Iteration 1322 (final)} & SM $\in [0.131, 0.384]$\,MPa
+\end{tabular}\\[0.4em]
+The outer-layer colorbar max converges to 0.386\,MPa
+\emph{from above}: the trajectory overshoots early
+($0.438 \to 0.397 \to 0.393 \to 0.387 \to 0.384$) and settles
+slightly under the nominal 0.386 target. The ring interface
+becomes increasingly wavy as iteration proceeds but the overall
+bilayer structure is recovered faithfully.
+\vspace{1em}}}
+\end{center}
+\vspace{0.3em}
+\begin{center}
+\textbf{Fig. 18.} The optimization process with four layers
+initially utilizing the explicit inverse scheme with 3 surface
+datasets (Without noise, Unit: MPa).
+\end{center}
+
+\vspace{0.8em}
+
+% ---------- Figure 19 placeholder ----------
+\noindent
+\begin{center}
+\fbox{\parbox{0.92\textwidth}{\centering\vspace{1em}
+\textbf{[Figure 19 --- placeholder]}\\[0.8em]
+Six-panel comparison of the \textbf{Explicit Inverse Method} (top
+row) vs.\ \textbf{Implicit Inverse Method} (bottom row) on the
+bilayer ring structure (\textbf{no noise}), with 3, 6, and 9
+surface displacement datasets.\\[0.4em]
+\textbf{Explicit (top row)}: all three reconstructions are
+visually near-identical to the Fig.~17 target --- clean bilayer
+ring with wavy inner interface. Colorbar ranges:
+(a) 3 fields, SM $\in [0.131, 0.384]$\,MPa;
+(b) 6 fields, SM $\in [0.131, 0.384]$\,MPa;
+(c) 9 fields, SM $\in [0.131, 0.384]$\,MPa.
+The explicit method reaches the same quality with 3 fields as
+with 9 --- consistent with its low parameter count
+(56 variables per the paper's earlier claim).\\[0.4em]
+\textbf{Implicit (bottom row)}: reconstructions are visibly
+\textbf{dominated by green/yellow artifacts} with no clear bilayer
+structure recovered. Colorbar ranges show a \emph{monotonically
+increasing max} as more datasets are added:
+(d) 3 fields, SM $\in [0.010, 0.478]$\,MPa;
+(e) 6 fields, SM $\in [0.010, 0.632]$\,MPa;
+(f) 9 fields, SM $\in [0.010, 0.813]$\,MPa.
+More data makes the implicit result \emph{worse}, not better ---
+the 9-field max overshoots the 0.386 nominal outer-layer value by
+\textbf{110\,\%}.\\[0.3em]
+\textbf{Takeaway}: this is the most dramatic failure mode of the
+implicit method in the entire paper. On the ring structure, with
+4030 optimization variables to the explicit method's 56, the
+implicit method cannot find the bilayer structure at all ---
+increasing displacement data only makes it diverge more. This
+suggests the implicit method's high dimensionality is
+\emph{actively harmful} on this problem, not just inefficient.
+\vspace{1em}}}
+\end{center}
+\vspace{0.3em}
+\begin{center}
+\textbf{Fig. 19.} The reconstructed results with varying 3, 6 and
+9 surface displacement datasets (Without noise, Unit: MPa).
+\end{center}
+
+\vspace{1em}
+
+% ---------- Case 3 subsection heading (italic, matching paper style) ----------
+\noindent\textit{Case 3: A composite with inclusions embedded}
+
+\vspace{0.5em}
+
+\noindent
+In the last example, we replicated a scenario where one or two
+tumors were embedded within soft tissues with a stiffness ratio
+of 5:1, as illustrated in Fig.~21. To simulate the forward problem,
+we applied an ``indentation'' force on the top surface of a square
+domain, discretized using 7200 triangular elements. The center
+point was fixed and other points where on the bottom edge are
+constrained in the vertical direction, and we only utilized the
+displacements on the top surface to tackle the inverse problem.
+To initiate the inverse problem, we employed four inclusions as
+the initial guess (refer to Fig.~22(a)). These inclusions were
+predefined in the problem
+
+% [page ends here — continues on page 16]
+
+\newpage
+
+% =========== Page 16: wei_page16.tex ===========
+
+% ---------- Figure 20 placeholder ----------
+\noindent
+\begin{center}
+\fbox{\parbox{0.92\textwidth}{\centering\vspace{1em}
+\textbf{[Figure 20 --- placeholder]}\\[0.8em]
+Six-panel comparison of \textbf{Explicit Inverse Method} (top row)
+vs.\ \textbf{Implicit Inverse Method} (bottom row) on the
+\textbf{Case 2 bilayer ring structure} with \textbf{1\,\% noise}
+added, using 3, 6, and 9 surface displacement datasets.\\[0.4em]
+\textbf{Explicit (top row)}: near-identical bilayer ring
+reconstructions, visually indistinguishable from the Fig.~17
+target. Colorbar ranges:
+(a) 3 fields, SM $\in [0.129, 0.385]$\,MPa;
+(b) 6 fields, SM $\in [0.132, 0.384]$\,MPa;
+(c) 9 fields, SM $\in [0.130, 0.386]$\,MPa.
+The explicit method tolerates 1\,\% noise essentially perfectly
+on the ring problem, with all three panels landing within
+$\pm 0.002$\,MPa of the 0.386 nominal outer layer.\\[0.4em]
+\textbf{Implicit (bottom row)}: severe overshoot pattern.
+Colorbar ranges:
+(d) 3 fields, SM $\in [0.010, 1.251]$\,MPa --- \textbf{224\,\%
+overshoot} above the 0.386 nominal outer layer; visually dominated
+by green/yellow artifacts;
+(e) 6 fields, SM $\in [0.010, 0.874]$\,MPa --- 126\,\% overshoot;
+(f) 9 fields, SM $\in [0.010, 0.975]$\,MPa --- 152\,\% overshoot.
+The implicit method's max is also non-monotone in this figure
+($1.251 \to 0.874 \to 0.975$), continuing the pattern from Fig.~16
+and Fig.~19.\\[0.3em]
+\textbf{Takeaway}: as in the noise-free case (Fig.~19), the
+implicit method is fundamentally failing on the ring problem. The
+1\,\% noise addition does not change the qualitative picture ---
+it is already broken without noise. See Table~3 for the
+quantitative confirmation (implicit $\approx 41$\,\% vs.\ explicit
+$\approx 5$\,\% average relative error).
+\vspace{1em}}}
+\end{center}
+\vspace{0.3em}
+\begin{center}
+\textbf{Fig. 20.} The reconstructed results with varying 3, 6 and
+9 surface displacement datasets (1\,\% noise is introduced,
+Unit: MPa).
+\end{center}
+
+\vspace{1em}
+
+% ---------- Table 3 ----------
+\noindent\textbf{Table 3}\\[0.2em]
+{\small Comparison of the average relative error in the shear
+modulus distribution obtained by implicit inverse and explicit
+inverse methods for the ring structure (1\,\% noise is introduced).}
+\vspace{0.3em}
+
+\begin{center}
+\small
+\begin{tabular}{@{}l ccc ccc@{}}
+\toprule
+Inverse method
+  & \multicolumn{3}{c}{Explicit inverse method}
+  & \multicolumn{3}{c}{Implicit inverse method} \\
+\cmidrule(lr){2-4}\cmidrule(lr){5-7}
+Number of surface displacement datasets
+  & 3 & 6 & 9 & 3 & 6 & 9 \\
+\midrule
+Average relative error
+  & 4.73\,\% & 5.38\,\% & 4.56\,\%
+  & 42.41\,\% & 40.99\,\% & 41.23\,\% \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\vspace{1em}
+
+% ---------- Table 4 ----------
+\noindent\textbf{Table 4}\\[0.2em]
+{\small The values of regularization factors used in Figs.~19 and 20.}
+\vspace{0.3em}
+
+\begin{center}
+\small
+\begin{tabular}{@{}ll ccc ccc@{}}
+\toprule
+\multicolumn{2}{l}{Inverse method}
+  & \multicolumn{3}{c}{Explicit inverse method}
+  & \multicolumn{3}{c}{Implicit inverse method} \\
+\cmidrule(lr){3-5}\cmidrule(lr){6-8}
+\multicolumn{2}{l}{Number of surface displacement datasets}
+  & 3 & 6 & 9 & 3 & 6 & 9 \\
+\midrule
+\multirow{2}{*}{Ring structure}
+  & no noise    & 0.00 & 0.00 & 0.00 & $1\times 10^{-12}$ & $1\times 10^{-12}$ & $1\times 10^{-12}$ \\
+  & 1\,\% noise & 0.00 & 0.00 & 0.00 & $1\times 10^{-12}$ & $1\times 10^{-12}$ & $1\times 10^{-12}$ \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\vspace{1em}
+
+% ---------- Figure 21 placeholder ----------
+\noindent
+\begin{center}
+\fbox{\parbox{0.85\textwidth}{\centering\vspace{1em}
+\textbf{[Figure 21 --- placeholder]}\\[0.8em]
+\textbf{Target shear modulus distribution} for the \textbf{Case 3
+composite with embedded inclusions}. Two sub-panels:\\[0.3em]
+\textbf{(a) Sample 1}: a square blue background (soft tissue,
+$\mu_\text{background} = 1.00$\,MPa) with a single red circular
+inclusion at the center (tumor, $\mu_\text{inclusion} = 5.00$\,MPa).
+Stiffness ratio 5:1, matching the Case~3 setup described on
+page~140.\\[0.3em]
+\textbf{(b) Sample 2}: same square background with \textbf{two}
+red circular inclusions side-by-side in the upper half of the
+domain.\\[0.3em]
+Both panels share boundary conditions: the top edge has an array
+of small downward-pointing arrows labeled ``displacement
+measurement'' (these are the indentation-force application points
+and where surface displacements are recorded for the inverse
+problem); the bottom edge is marked with small circles/triangles
+indicating fixed/vertical-direction constraints. Colorbar ticks
+at $\{1.00, 2.00, 3.00, 4.00, 5.00\}$\,MPa, jet colormap.
+\vspace{1em}}}
+\end{center}
+\vspace{0.3em}
+\begin{center}
+\textbf{Fig. 21.} Target shear modulus distribution of composite
+with inclusions embedded (Unit: MPa).
+\end{center}
+
+% [page ends here — continues on page 17]
+
+\newpage
+
+% =========== Page 17: wei_page17.tex ===========
+
+% ---------- Figure 22 placeholder ----------
+\noindent
+\begin{center}
+\fbox{\parbox{0.92\textwidth}{\centering\vspace{1em}
+\textbf{[Figure 22 --- placeholder]}\\[0.8em]
+Six-panel optimization trajectory for the \textbf{Case 3 Sample 1}
+(one embedded inclusion, target SM $\approx 5$\,MPa against a
+1\,MPa soft-tissue background), using the explicit inverse scheme
+with 3 surface displacement datasets (no noise). The initial
+guess has \textbf{four} inclusions predefined at the four corners
+of the square domain; the optimization merges them into a single
+central inclusion as it converges.\\[0.4em]
+\begin{tabular}{@{}ll@{}}
+\textbf{(a) Initial guess}    & 4 green circles at corners, SM $\in [1.00, 1.00]$\,MPa (uniform) \\
+\textbf{(b) Iteration 5}      & 4 merging blobs, SM $\in [1.00, 3.20]$\,MPa \\
+\textbf{(c) Iteration 10}     & 3 blobs (center two merging), SM $\in [1.00, 3.23]$\,MPa \\
+\textbf{(d) Iteration 15}     & 1--2 blobs (red central), SM $\in [1.00, 4.26]$\,MPa \\
+\textbf{(e) Iteration 275}    & 1 red inclusion, SM $\in [2.10, 5.32]$\,MPa \\
+\textbf{(f) Iteration 328 (final)} & 1 red inclusion, SM $\in [1.00, 5.10]$\,MPa
+\end{tabular}\\[0.4em]
+\textbf{Takeaway}: the 4-inclusion initialization does NOT cause
+the algorithm to find 4 tumors. Instead, the four components
+merge into the single ground-truth tumor by iteration 15. This
+is the opposite of the usual over-parameterization concern:
+redundant initial components collapse to the correct solution
+rather than forcing a spurious multi-component reconstruction.
+The explicit parameterization has 69 total variables
+(4 inclusions $\times$ 16 geometric parameters + 4 shear moduli +
+1 background shear modulus).
+\vspace{1em}}}
+\end{center}
+\vspace{0.3em}
+\begin{center}
+\textbf{Fig. 22.} The optimization process with four inclusions
+initially utilizing the explicit inverse scheme for a solid with
+inclusion embedded when 3 surface displacement datasets are
+utilized (Without noise, Unit: MPa).
+\end{center}
+
+\vspace{0.8em}
+
+% ---------- Prose paragraph (continuation from page 16) ----------
+\noindent
+domain. Each inclusion was represented by 16 geometric parameters
+and 1 material property, which is the shear modulus. Consequently,
+the total number of optimization variables reached 69, inclusive
+of the shear modulus value of the background.
+
+During the optimization process, the four predefined components
+gradually merged into one single inclusion. As convergence was
+reached, the shear modulus of this inclusion approached the
+target values effectively, demonstrating the success of the
+inverse problem-solving method. The reconstructed results, as
+shown in Fig.~22, illustrated the accurate estimation of the
+shear modulus for the inclusion after the convergence of the
+algorithm. Indeed, the explicit inverse method demonstrated a
+notably faster convergence rate compared to the implicit inverse
+method. Specifically, the explicit inverse method achieved
+convergence in just 328 iterations,
+
+\vspace{0.8em}
+
+% ---------- Figure 23 placeholder ----------
+\noindent
+\begin{center}
+\fbox{\parbox{0.92\textwidth}{\centering\vspace{1em}
+\textbf{[Figure 23 --- placeholder]}\\[0.8em]
+Six-panel comparison of the \textbf{Explicit Inverse Method} (top
+row) vs.\ \textbf{Implicit Inverse Method} (bottom row) on
+\textbf{Case 3 Sample 1} (one embedded inclusion, target
+$\approx 5$\,MPa), with \textbf{no noise}, using 3, 6, and 9
+surface displacement datasets.\\[0.4em]
+\textbf{Explicit (top row)}:
+(a) 3 fields, SM $\in [1.00, 5.10]$\,MPa;
+(b) 6 fields, SM $\in [1.00, 5.06]$\,MPa;
+(c) 9 fields, SM $\in [1.00, 4.97]$\,MPa.
+All three panels recover a clean single red inclusion on a blue
+background, near the 5\,MPa nominal target. The colorbar max
+drifts slightly downward as more fields are added
+($5.10 \to 5.06 \to 4.97$).\\[0.4em]
+\textbf{Implicit (bottom row)}:
+(d) 3 fields, SM $\in [1.00, 4.47]$\,MPa;
+(e) 6 fields, SM $\in [1.00, 4.58]$\,MPa;
+(f) 9 fields, SM $\in [1.00, 4.79]$\,MPa.
+\textbf{All three panels undershoot the 5\,MPa nominal target},
+with the 3-field case falling short by 10.6\,\%. The max values
+are non-monotone in dataset count
+($4.47 \to 4.58 \to 4.79$) but monotonically approach the target
+as more fields are added --- the opposite direction from the
+explicit method's slight drift.\\[0.3em]
+\textbf{Takeaway}: on the one-inclusion case without noise, both
+methods produce visually similar reconstructions, but the
+explicit method hits the target nominal from above
+(slight overshoot) while the implicit method hits it from below
+(persistent undershoot). More data helps the implicit method
+approach nominal but doesn't quite reach it.
+\vspace{1em}}}
+\end{center}
+\vspace{0.3em}
+\begin{center}
+\textbf{Fig. 23.} The reconstructed results with varying 3, 6 and
+9 surface displacement datasets corresponding to Sample 1
+(Without noise, Unit: MPa).
+\end{center}
+
+% [page ends here — continues on page 18]
+
+\newpage
+
+% =========== Page 18: wei_page18.tex ===========
+
+\noindent
+while the implicit inverse method required a significantly higher
+number of iterations, reaching convergence after 4354 iterations.
+
+In the absence of noise in the datasets, both the explicit and
+implicit inverse methods exhibited excellent performance in
+yielding shear modulus reconstructions, as demonstrated in
+Fig.~23. However, when 1\,\% noise was introduced to the
+datasets, the explicit inverse method outperformed the implicit
+inverse method (see Fig.~24). For the explicit inverse method,
+the average relative error in the reconstructed shear modulus
+values was approximately 2\,\%, indicating a relatively accurate
+estimation despite the presence of noise (see Table~5). On the
+other hand, the implicit inverse method exhibited a higher
+average error of more than 3\,\%, signifying a less precise
+reconstruction in the presence of noise. Overall, the explicit
+inverse method proved to be more robust and capable of handling
+noisy datasets, leading to more accurate shear modulus
+reconstructions compared to the implicit inverse method.
+Furthermore, it is noteworthy that the reconstructed results
+maintain good quality even when the noise level is increased to
+5\,\% (see Fig.~25).
+
+In the case where two inclusions were embedded in the background
+(as depicted in Fig.~21(b)). As shown in Fig.~26, the results
+obtained using the implicit inverse method showed a consistent
+underestimation of the recovered shear modulus values by at
+least 20\,\% as the size of the mapped inclusions increased.
+Additionally, the shape of the mapped inclusions appeared to
+become more circular with the increase of surface displacement
+datasets. Conversely, when employing the explicit inverse
+method, the shear modulus values within the two inclusions were
+overestimated by approximately 20\,\%. Furthermore, the shape
+of the recovered inclusions exhibited a more circular appearance
+compared to those predicted by the implicit inverse method. The
+regularization factors used in Figs.~23--26 are listed in
+Table~6.
+
+To assess the robustness of the proposed explicit inverse
+method, we varied the shape of the inclusion in Sample~1, as
+depicted in Fig.~27(a) and~(d). Our observations indicate that
+the reconstructed results obtained from the explicit inverse
+method effectively preserve the shape of the complex inclusion,
+even with only three displacement datasets. In contrast, the
+implicit inverse method failed to achieve this level of
+accuracy.
+
+\vspace{0.5em}
+
+\noindent\textbf{Discussion}
+
+\vspace{0.3em}
+
+\noindent
+The paper proposes an explicit inverse approach for
+characterizing the nonhomogeneous elastic property distribution
+of three typical nonlinear biological structures with surface
+deformation. This approach is different from the prevalent
+implicit inverse approach in that it optimizes only the
+geometric parameters and shear moduli of each region, reducing
+the scale of the optimization problem. By doing so, the proposed
+method improves the uniqueness of the inverse solution since the
+total number of optimization variables is reduced. Additionally,
+the paper highlights an important advantage of the explicit
+method: it only requires surface deformation data, which can be
+measured with high accuracy using low-cost measurement
+techniques. This makes the proposed approach more practical and
+accessible for real-world applications, as it avoids the need
+for complex and expensive instrumentation to gather the
+full-field data.
+
+\vspace{0.8em}
+
+% ---------- Figure 24 placeholder ----------
+\noindent
+\begin{center}
+\fbox{\parbox{0.92\textwidth}{\centering\vspace{1em}
+\textbf{[Figure 24 --- placeholder]}\\[0.8em]
+Six-panel comparison of \textbf{Explicit Inverse Method} (top
+row) vs.\ \textbf{Implicit Inverse Method} (bottom row) on
+\textbf{Case 3 Sample 1} (one embedded inclusion, target
+$\approx 5$\,MPa), with \textbf{1\,\% noise} added, using 3, 6,
+and 9 surface displacement datasets.\\[0.4em]
+\textbf{Explicit (top row)}:
+(a) 3 fields, SM $\in [1.00, 5.75]$\,MPa --- \textbf{15\,\%
+overshoot} of the 5\,MPa nominal tumor stiffness;
+(b) 6 fields, SM $\in [1.00, 5.30]$\,MPa;
+(c) 9 fields, SM $\in [1.00, 5.01]$\,MPa --- near-perfect with
+9 fields. The max drifts downward monotonically
+($5.75 \to 5.30 \to 5.01$) toward the nominal target.\\[0.4em]
+\textbf{Implicit (bottom row)}:
+(d) 3 fields, SM $\in [1.00, 3.26]$\,MPa --- \textbf{35\,\%
+undershoot}, a dramatically worse number than the paper's prose
+claim of ``$\approx 3$\,\% average error'' suggests (the prose
+error is measured over the whole domain, not the inclusion
+max);
+(e) 6 fields, SM $\in [1.00, 3.51]$\,MPa --- 30\,\% undershoot;
+(f) 9 fields, SM $\in [1.00, 4.82]$\,MPa --- still 3.6\,\% below
+nominal. Max drifts upward monotonically
+($3.26 \to 3.51 \to 4.82$) toward the target but doesn't
+reach it.\\[0.3em]
+\textbf{Takeaway}: with 1\,\% noise, the explicit and implicit
+methods fail in \emph{opposite directions} on this problem ---
+explicit \emph{overshoots} the tumor stiffness, implicit
+\emph{undershoots} it. Both approach the 5\,MPa target from
+their respective sides as more fields are added, but the
+explicit method gets closer faster. The prose's ``2\,\% vs
+3\,\% average error'' framing understates the practical
+significance: a 35\,\% undershoot of the tumor stiffness
+(panel d) would have very different clinical implications than
+a 2\,\% average-domain error suggests.
+\vspace{1em}}}
+\end{center}
+\vspace{0.3em}
+\begin{center}
+\textbf{Fig. 24.} The reconstructed results with varying 3, 6
+and 9 surface displacement datasets corresponding to Sample 1
+(1\,\% noise is introduced into the measured data, Unit: MPa).
+\end{center}
+
+% [page ends here — continues on page 19]
+
+\newpage
+
+% =========== Page 19: wei_page19.tex ===========
+
+% ---------- Table 5 ----------
+\noindent\textbf{Table 5}\\[0.2em]
+{\small Comparison of the average relative error in the shear
+modulus distribution obtained by implicit inverse and explicit
+inverse methods for the case with one inclusion embedded
+(Figs.~24 and~25).}
+\vspace{0.3em}
+
+\begin{center}
+\small
+\begin{tabular}{@{}l ccc ccc@{}}
+\toprule
+Inverse method
+  & \multicolumn{3}{c}{Explicit inverse method}
+  & \multicolumn{3}{c}{Implicit inverse method} \\
+\cmidrule(lr){2-4}\cmidrule(lr){5-7}
+Number of surface displacement datasets
+  & 3 & 6 & 9 & 3 & 6 & 9 \\
+\midrule
+1\,\% noise & 1.81\,\% & 1.50\,\% & 1.60\,\% & 4.28\,\% & 3.58\,\% & 3.41\,\% \\
+5\,\% noise & 1.88\,\% & 1.86\,\% & 1.74\,\% & 6.49\,\% & 6.05\,\% & 4.26\,\% \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\vspace{1em}
+
+% ---------- Figure 25 placeholder ----------
+\noindent
+\begin{center}
+\fbox{\parbox{0.92\textwidth}{\centering\vspace{1em}
+\textbf{[Figure 25 --- placeholder]}\\[0.8em]
+Six-panel comparison of \textbf{Explicit Inverse Method} (top
+row) vs.\ \textbf{Implicit Inverse Method} (bottom row) on
+Sample 1 with \textbf{5\,\% noise} added, using 3, 6, and 9
+displacement datasets.\\[0.4em]
+\textbf{Explicit (top row)}:
+(a) 3 fields, SM $\in [1.00, 5.83]$\,MPa --- 17\,\% overshoot;
+(b) 6 fields, SM $\in [1.00, 6.09]$\,MPa --- \textbf{22\,\%
+overshoot, WORSE than 3-field};
+(c) 9 fields, SM $\in [1.00, 4.66]$\,MPa --- now 7\,\%
+\emph{undershoot}. The max is non-monotone
+($5.83 \to 6.09 \to 4.66$) and crosses the nominal 5\,MPa target
+between 6 and 9 fields. This contradicts the intuitive ``more
+data $\Rightarrow$ better'' story.\\[0.4em]
+\textbf{Implicit (bottom row)}:
+(d) 3 fields, SM $\in [1.00, 2.90]$\,MPa --- \textbf{42\,\%
+undershoot};
+(e) 6 fields, SM $\in [1.00, 3.21]$\,MPa;
+(f) 9 fields, SM $\in [1.00, 3.40]$\,MPa --- still 32\,\%
+undershoot.
+The implicit method never approaches the 5\,MPa target under
+5\,\% noise; even 9 fields leaves it severely below
+nominal.\\[0.3em]
+\textbf{Table 5 vs. this figure --- an important disconnect}:
+Table 5 reports the explicit-9-fields-5\%-noise case as
+\emph{1.74\,\% average relative error}, but panel (c) shows the
+tumor-stiffness max at \emph{4.66 instead of 5.00 MPa}. Both
+numbers are correct --- Table 5 averages over the whole 2D
+domain (which is mostly 1\,MPa background where any method is
+trivially correct), while the figure shows the peak inside the
+tumor itself. A clinician looking at the ``$\approx 2\,\%$
+error'' claim would expect a $\pm 0.1$\,MPa estimate of the
+tumor; the figure shows a $-7\,\%$ bias in the quantity that
+actually matters. The prose should have reported tumor-specific
+error alongside the domain-average metric.
+\vspace{1em}}}
+\end{center}
+\vspace{0.3em}
+\begin{center}
+\textbf{Fig. 25.} The reconstructed results with varying 3, 6
+and 9 surface displacement datasets corresponding to Sample 1
+(5\,\% noise is introduced into the measured data, Unit: MPa).
+\end{center}
+
+\vspace{1em}
+
+% ---------- Discussion paragraphs ----------
+\noindent
+In the numerical cases presented in the paper, the total number
+of predefined interfaces (for layered structures) or components
+(for composites with embedded inclusions) in the initial guesses
+is intentionally kept not much larger than the actual target.
+This is because the topological information of the elastic
+property distribution can often be determined beforehand based
+on prior knowledge or observations. For example, in biomedical
+imaging, characteristics such as the number, location, and rough
+shape of tumors can be observed and identified. Similarly, for
+typical layered biological tissues like skins or corneas, the
+total number of layers has likely been well studied through in
+vitro experiments or other research. Due to this available prior
+knowledge, it is unnecessary to set a large number of
+deformable components or interfaces in the initial guess for
+the explicit inverse method. By constraining the initial guesses
+to a reasonable and relevant number of interfaces or inclusions,
+the optimization process can be more focused and efficient.
+This can lead to faster convergence and more accurate
+characterization of the elastic property distribution with a
+reduced risk of convergence to a non-physical solution.
+
+However, it should be noted that the results of this study do
+not conclusively demonstrate that the explicit inverse method
+outperforms the implicit inverse method in all cases. In
+scenarios where the elastic property distribution lacks
+significant heterogeneity or where no prior knowledge is
+available, the explicit inverse method may indeed perform less
+effectively compared to the implicit inverse method. This is
+because the explicit inverse method relies on predefined
+interfaces or inclusions, which may not accurately capture the
+complexity of the underlying distribution. In such situations,
+the implicit inverse method, with its greater flexibility and
+ability to explore a wider range of possibilities, might yield
+more accurate and robust results. The choice between the
+explicit and implicit inverse methods, therefore, depends on
+the specific characteristics of the problem and the availability
+of prior information, ensuring the selection of the most
+suitable approach for achieving meaningful and reliable results.
+
+Due to the limited availability of experimental datasets, this
+paper primarily focuses on numerical verification. It should be
+noted that the implicit inverse method has demonstrated
+successful applications in reconstructing the nonhomogeneous
+shear modulus distribution of soft solids using experimental
+datasets [38]. However, considering the superior performance of
+the explicit inverse solver in numerical validation, we are
+confident that it can achieve even better results when applied
+to the experimental datasets. In
+
+% [page ends here — continues on page 20]
+
+\newpage
+
+% =========== Page 20: wei_page20.tex ===========
+
+% ---------- Figure 26 placeholder ----------
+\noindent
+\begin{center}
+\fbox{\parbox{0.92\textwidth}{\centering\vspace{1em}
+\textbf{[Figure 26 --- placeholder]}\\[0.8em]
+Six-panel comparison of \textbf{Explicit Inverse Method} (top
+row) vs.\ \textbf{Implicit Inverse Method} (bottom row) on
+\textbf{Case 3 Sample 2} (two embedded inclusions side-by-side,
+target $\approx 5$\,MPa each), with \textbf{no noise}, using 3,
+6, and 9 displacement datasets.\\[0.4em]
+\textbf{Explicit (top row)} --- both inclusions are recovered as
+distinct red blobs on a uniform blue background. Colorbar
+ranges:
+(a) 3 fields, SM $\in [1.00, 7.06]$\,MPa --- \textbf{41\,\%
+overshoot};
+(b) 6 fields, SM $\in [1.00, 6.06]$\,MPa --- 21\,\% overshoot;
+(c) 9 fields, SM $\in [1.00, 5.97]$\,MPa --- 19\,\% overshoot.
+Max drifts downward monotonically as more fields are added,
+approaching but not reaching the 5\,MPa nominal.\\[0.4em]
+\textbf{Implicit (bottom row)} --- both inclusions are
+recovered as green/yellow blobs (distinctly underbright relative
+to the explicit method's red). Colorbar ranges:
+(d) 3 fields, SM $\in [1.00, 2.61]$\,MPa --- \textbf{48\,\%
+undershoot};
+(e) 6 fields, SM $\in [1.00, 3.00]$\,MPa --- 40\,\% undershoot;
+(f) 9 fields, SM $\in [1.00, 3.82]$\,MPa --- 24\,\% undershoot.
+Max drifts upward monotonically, approaching but nowhere close
+to the 5\,MPa nominal.\\[0.3em]
+\textbf{Takeaway}: on the two-inclusion case (even without
+noise), the explicit method overshoots by 19--41\,\% and the
+implicit method undershoots by 24--48\,\%. The paper's prose
+reports both deviations (see page~18: ``overestimated by
+approximately 20\,\%'' for explicit, ``underestimation ...\ by
+at least 20\,\%'' for implicit). In this case the prose framing
+and the visible data agree --- unlike the Fig.~25 case where
+the ``2\,\% average error'' claim hid a 7\,\% inclusion-specific
+undershoot.
+\vspace{1em}}}
+\end{center}
+\vspace{0.3em}
+\begin{center}
+\textbf{Fig. 26.} The reconstructed results with varying 3, 6
+and 9 surface displacement datasets corresponding to Sample 2
+(Without noise, Unit: MPa).
+\end{center}
+
+\vspace{1em}
+
+% ---------- Table 6 ----------
+\noindent\textbf{Table 6}\\[0.2em]
+{\small The regularization factors of Figs.~23--26.}
+\vspace{0.3em}
+
+\begin{center}
+\footnotesize
+\begin{tabular}{@{}ll ccc ccc@{}}
+\toprule
+\multicolumn{2}{l}{Inverse method}
+  & \multicolumn{3}{c}{Explicit inverse method}
+  & \multicolumn{3}{c}{Implicit inverse method} \\
+\cmidrule(lr){3-5}\cmidrule(lr){6-8}
+\multicolumn{2}{l}{Number of surface displacement datasets}
+  & 3 & 6 & 9 & 3 & 6 & 9 \\
+\midrule
+\multirow{3}{*}{Sample 1}
+  & no noise    & $1\times 10^{-15}$ & $1\times 10^{-16}$ & $1\times 10^{-17}$ & $1\times 10^{-14}$ & $1\times 10^{-14}$ & $1\times 10^{-14}$ \\
+  & 1\,\% noise & $1\times 10^{-13}$ & $1\times 10^{-13}$ & $2\times 10^{-13}$ & $5\times 10^{-13}$ & $3\times 10^{-13}$ & $2\times 10^{-12}$ \\
+  & 5\,\% noise & $1\times 10^{-12}$ & $1\times 10^{-12}$ & $1\times 10^{-12}$ & $1\times 10^{-11}$ & $1\times 10^{-11}$ & $1\times 10^{-12}$ \\
+\midrule
+Sample 2 & no noise & 0.00 & 0.00 & 0.00 & $1\times 10^{-13}$ & $1\times 10^{-13}$ & $1\times 10^{-14}$ \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\vspace{1em}
+
+% ---------- Prose transition ----------
+\noindent
+future research, we plan to explore the integration of optical
+measurement techniques with the proposed explicit inverse
+approach to conduct practical experiments and further test this
+novel structural health monitoring approach. By combining
+optical measurement data with our method, we aim to validate
+its effectiveness in real-world scenarios and enhance its
+applicability for monitoring the variation of biomechanical
+behavior of soft tissues. This would provide valuable insights
+into the method's performance under realistic conditions and
+potentially open up new avenues for its practical implementation
+in biomedical applications.
+
+Overall, the explicit inverse approach presented in the paper
+offers a more efficient and cost-effective method for
+characterizing the elastic property distribution of biological
+structures with surface deformation. The reduction in
+optimization variables and the reliance on easily measurable
+surface deformation data make it a valuable contribution to the
+field.
+
+\vspace{0.5em}
+
+\noindent\textbf{Conclusion}
+
+\vspace{0.3em}
+
+\noindent
+In this paper, we propose an explicit inverse approach to map
+the nonhomogeneous elastic property distribution of three
+typical tissue structure by surface deformation nondestructively.
+Several numerical examples are employed to assess the
+feasibility and performance of the proposed method. The results
+of the numerical study demonstrate the robust capability of the
+explicit inverse method in accurately reconstructing the
+nonhomogeneous shear modulus distribution of soft tissues,
+surpassing the performance of the implicit inverse method with
+limited surface deformation datasets. Specifically for the
+layered ring structure, we observe that the average relative
+error of the reconstruction can exceed 40\,\% when using the
+implicit inverse method, while the explicit inverse method
+achieves a remarkable average relative error of only 5\,\%.
+The outcomes of our research underscore the efficacy of the
+proposed explicit inverse approach, offering a more efficient
+and cost-effective means to characterize the elastic property
+distribution of biological structures utilizing a reduced
+number of optimization variables.
+
+% [page ends here — continues on page 21]
+
+\newpage
+
+% =========== Page 21: wei_page21.tex ===========
+
+% ---------- Figure 27 placeholder ----------
+\noindent
+\begin{center}
+\fbox{\parbox{0.92\textwidth}{\centering\vspace{1em}
+\textbf{[Figure 27 --- placeholder]}\\[0.8em]
+Six-panel comparison of \textbf{two different inclusion shapes}
+reconstructed with 3 displacement datasets (Sample 1, no noise).
+The two rows show different target shapes; the columns show
+target, explicit method result, and implicit method result.\\[0.4em]
+\textbf{Top row (irregular/elongated inclusion)}:
+(a) target: red elongated/irregular shape, SM $\in [1.00, 5.00]$\,MPa;
+(b) Explicit, 3 fields: SM $\in [1.00, 5.00]$\,MPa --- the
+reconstructed shape faithfully preserves the irregular target
+geometry;
+(c) Implicit, 3 fields: SM $\in [1.00, 4.98]$\,MPa --- the shape
+is \emph{distorted}, rendered as a green/yellow blob without
+the sharp edges of the target, and fails to capture the elongated
+profile.\\[0.4em]
+\textbf{Bottom row (square inclusion)}:
+(d) target: red square shape, SM $\in [1.00, 5.00]$\,MPa;
+(e) Explicit, 3 fields: SM $\in [1.00, 5.00]$\,MPa --- the
+reconstructed shape is a rounded-square, closely matching the
+target;
+(f) Implicit, 3 fields: SM $\in [1.00, 4.71]$\,MPa --- the shape
+is rendered as a green amorphous blob, significantly distorting
+the square target.\\[0.3em]
+\textbf{Takeaway}: this figure is the qualitative case for the
+explicit inverse method's main selling point on non-circular
+inclusion geometries. The explicit method's B-spline-based shape
+parameterization allows it to faithfully represent elongated or
+square shapes; the implicit method's pixel-based optimization
+reverts to blob-like reconstructions regardless of the target
+shape. This is a shape-fidelity argument, not a shear-modulus
+accuracy argument --- and it's where the explicit method's prior
+knowledge (topology + rough shape) pays off most visibly.
+\vspace{1em}}}
+\end{center}
+\vspace{0.3em}
+\begin{center}
+\textbf{Fig. 27.} The target and reconstructed results for
+varying shapes of inclusion with 3 displacement datasets
+corresponding to Sample 1 (Without noise, Unit: MPa).
+\end{center}
+
+\vspace{1em}
+
+% ---------- CRediT authorship contribution statement ----------
+\noindent\textbf{CRediT authorship contribution statement}
+
+\vspace{0.3em}
+
+\noindent
+\textbf{Yue Mei:} Writing -- review \& editing, Writing --
+original draft, Methodology, Formal analysis, Conceptualization.
+\textbf{Dongmei Zhao:} Writing -- review \& editing, Writing --
+original draft, Software, Formal analysis, Data curation.
+\textbf{Changjiang Xiao:} Writing -- original draft,
+Investigation, Formal analysis, Data curation.
+\textbf{Zhi Sun:} Methodology, Formal analysis, Data curation.
+\textbf{Weisheng Zhang:} Writing -- review \& editing, Writing
+-- original draft, Supervision, Funding acquisition.
+\textbf{Xu Guo:} Writing -- review \& editing, Writing --
+original draft, Supervision, Funding acquisition.
+
+\vspace{0.5em}
+
+% ---------- Declaration of competing interest ----------
+\noindent\textbf{Declaration of competing interest}
+
+\vspace{0.3em}
+
+\noindent
+The authors declare that they have no known competing financial
+interests or personal relationships that could have appeared to
+influence the work reported in this paper.
+
+\vspace{0.5em}
+
+% ---------- Data availability ----------
+\noindent\textbf{Data availability}
+
+\vspace{0.3em}
+
+\noindent
+Data will be made available on request.
+
+\vspace{0.5em}
+
+% ---------- Acknowledgments ----------
+\noindent\textbf{Acknowledgments}
+
+\vspace{0.3em}
+
+\noindent
+The authors acknowledge the support from Innovative Research
+Groups of the National Natural Science Foundation of China
+(11821202), National Natural Science Foundation of China
+(12002075), Liao Ning Revitalization Talents Program
+(XLYC1907119), Program for Changjiang Scholars, Innovative
+Research Team in University (PCSIRT) and 111 Project (B14013).
+
+\noindent
+We also acknowledge Bo Wang and Jiaqi Hong for their helpful
+suggestions on the revised manuscript.
+
+\vspace{0.5em}
+
+% ---------- References [1]-[4] ----------
+\noindent\textbf{References}
+
+\vspace{0.3em}
+
+\begin{list}{}{%
+  \setlength{\leftmargin}{2em}%
+  \setlength{\itemindent}{-2em}%
+  \setlength{\itemsep}{0.5em}%
+  \setlength{\parsep}{0pt}%
+}
+
+\item [1] O. Osanai, M. Ohtsuka, M. Hotta, T. Kitaharai, Y.
+Takema, A new method for the visualization and quantification
+of internal skin elasticity by ultrasound imaging,
+\emph{Skin Res. Technol.} 17 (3) (2011) 270--277,
+https://doi.org/10.1111/j.1600-0846.2010.00492.x.
+
+\item [2] Y. Zhao, B. Feng, J. Lee, N. Lu, D.M. Pierce, A
+multi-layered computational model for wrinkling of human skin
+predicts aging effects, \emph{J. Mech. Behav. Biomed. Mater.}
+103 (2020) 103552, https://doi.org/10.1016/j.jmbbm.2019.103552.
+
+\item [3] I.L. Kruglikov, P.E. Scherer, Skin aging as a
+mechanical phenomenon: the main weak links, \emph{Nutr. Healthy
+Aging} 4 (4) (2018) 291--307,
+https://doi.org/10.3233/NHA-170037.
+
+\item [4] G.A. Holzapfel, T.C. Gasser, R.W. Ogden, A New
+Constitutive Framework for Arterial Wall Mechanics and a
+Comparative Study of Material Models, \emph{J. Elast. Phys.
+Sci. Solids} 61 (1) (2000) 1--48,
+https://doi.org/10.1023/A:1010835316564.
+
+\end{list}
+
+% [page ends here — continues on page 22]
+
+\newpage
+
+% =========== Page 22: wei_page22.tex ===========
+
+\begin{list}{}{%
+  \setlength{\leftmargin}{2em}%
+  \setlength{\itemindent}{-2em}%
+  \setlength{\itemsep}{0.5em}%
+  \setlength{\parsep}{0pt}%
+}
+
+\item [5] N.J.B. Driessen, W. Wilson, C.V.C. Bouten, F.P.T.
+Baaijens, A computational model for collagen fibre remodelling
+in the arterial wall, \emph{J. Theor. Biol.} 226 (1) (2004)
+53--64, https://doi.org/10.1016/j.jtbi.2003.08.004.
+
+\item [6] F. Zvietcovich, P. Pongchalee, P. Meemon, J.P.
+Rolland, K.J. Parker, Reverberant 3D optical coherence
+elastography maps the elasticity of individual corneal layers,
+\emph{Nat. Commun.} 10 (1) (2019) 4895,
+https://doi.org/10.1038/s41467-019-12803-4.
+
+\item [7] J. Ma, Y. Wang, P. Wei, V. Jhanji, Biomechanics and
+structure of the cornea: implications and association with
+corneal disorders, \emph{Surv. Ophthalmol.} 63 (6) (2018)
+851--861, https://doi.org/10.1016/j.survophthal.2018.05.004.
+
+\item [8] S. Goenezen, J. Dord, Z. Sink, P.E. Barbone, J. Jiang,
+T.J. Hall, A.A. Oberai, Linear and nonlinear elastic modulus
+imaging: an application to breast cancer diagnosis, \emph{IEEE
+Trans. Med. Imaging} 31 (8) (2012) 1628--1637,
+https://doi.org/10.1109/TMI.2012.2201497.
+
+\item [9] B. Coudrillier, J. Tian, S. Alexander, K.M. Myers,
+H.A. Quigley, T.D. Nguyen, Biomechanics of the Human Posterior
+Sclera: age- and Glaucoma-Related Changes Measured Using
+Inflation Testing, \emph{Invest. Ophthalmol. Vis. Sci.} 53 (4)
+(2012) 1714--1728, https://doi.org/10.1167/iovs.11-8009.
+
+\item [10] M. Butlin, A.P. Avolio, Age-Related Changes in the
+Mechanical Properties of Large Arteries, in: B. Derby, K.
+Akhtar (Eds.), \emph{Mechanical Properties of Aging Soft
+Tissues}, Springer International Publishing, Cham, 2015,
+pp.~37--74, https://doi.org/10.1007/978-3-319-03970-1\_3.
+
+\item [11] P.G. Agache, C. Monneur, J.L. Leveque, J. De Rigal,
+Mechanical properties and Young's modulus of human skin in
+vivo, \emph{Arch. Dermatol. Res.} 269 (3) (1980) 221--232,
+https://doi.org/10.1007/BF00406415.
+
+\item [12] I.Z. Apostolakis, G.M. Karageorgos, P. Nauleau, S.D.
+Nandlall, E.E. Konofagou, Adaptive Pulse Wave Imaging:
+automated Spatial Vessel Wall Inhomogeneity Detection in
+Phantoms and in-Vivo, \emph{IEEE Trans. Med. Imaging} 39 (1)
+(2020) 259--269, https://doi.org/10.1109/TMI.2019.2926141.
+
+\item [13] M.B. Bersi, et al., Multimodality Imaging-Based
+Characterization of Regional Material Properties in a Murine
+Model of Aortic Dissection, \emph{Sci. Rep.} 10 (1) (2020)
+9244, https://doi.org/10.1038/s41598-020-65624-7.
+
+\item [14] M. Ambroziak, P. Pietruski, B. Noszczyk, L. Paluch,
+Ultrasonographic elastography in the evaluation of normal and
+pathological skin -- a review, \emph{Postepy Dermatol. Alergol.}
+36 (6) (2019) 667--672, https://doi.org/10.5114/ada.2018.77069.
+
+\item [15] C. Pailler-Mattei, S. Bec, H. Zahouani, In vivo
+measurements of the elastic mechanical properties of human
+skin by indentation tests, \emph{Med. Eng. Phys.} 30 (5) (2008)
+599--606, https://doi.org/10.1016/j.medengphy.2007.06.011.
+
+\item [16] G.Y. Li, et al., Mechanical characterization of
+functionally graded soft materials with ultrasound elastography,
+\emph{Philos. Trans. R. Soc. Math. Phys. Eng. Sci.} 377 (2144)
+(2019) 20180075, https://doi.org/10.1098/rsta.2018.0075.
+
+\item [17] G.Y. Li, Y. Zheng, Y.X. Jiang, Z. Zhang, Y. Cao,
+Guided wave elastography of layered soft tissues, \emph{Acta
+Biomater} 84 (2019) 293--304,
+https://doi.org/10.1016/j.actbio.2018.12.002.
+
+\item [18] M. Hajhashemkhani, M. Hematiyan, An inverse method
+for elastic constants identification of two-layer hyperelastic
+bodies with suction loading, \emph{Proc. Inst. Mech. Eng., Part L}
+(2023), https://doi.org/10.1177/14644207231203294.
+
+\item [19] M. Hajhashemkhani, M. Hematiyan, S. Goenezen, Inverse
+determination of elastic constants of a hyper-elastic member
+with inclusions using simple displacement/length measurements,
+\emph{J. Strain Anal. Eng. Des.} 53 (7) (2018) 529--542,
+https://doi.org/10.1177/0309324718792452.
+
+\item [20] Z. Liu, Y. Sun, J. Deng, D. Zhao, Y. Mei, J. Luo, A
+Comparative Study of Direct and Iterative Inversion Approaches
+to Determine the Spatial Shear Modulus Distribution of Elastic
+Solids, \emph{Int. J. Appl. Mech.} 11 (10) (2019) 1950097,
+https://doi.org/10.1142/S1758825119500977.
+
+\item [21] Y. Mei, S. Goenezen, Quantifying the anisotropic
+linear elastic behavior of solids, \emph{Int. J. Mech. Sci.}
+163 (2019) 105131,
+https://doi.org/10.1016/j.ijmecsci.2019.105131.
+
+\item [22] Y. Mei, et al., A comparative study of two
+constitutive models within an inverse approach to determine
+the spatial stiffness distribution in soft materials,
+\emph{Int. J. Mech. Sci.} 140 (2018) 446--454,
+https://doi.org/10.1016/j.ijmecsci.2018.03.004.
+
+\item [23] Z. Zhao, et al., Optical Coherence Elastography of
+3D bilayer soft solids using full-field and partial displacement
+measurements, \emph{Med. Nov. Technol. Devices} (2022) 100134,
+https://doi.org/10.1016/j.medndl.2022.100134.
+
+\item [24] D.I. Grodin, et al., Repeatability of Linear and
+Nonlinear Elastic Modulus Maps From Repeat Scans in the Breast,
+\emph{IEEE Trans. Med. Imaging} 40 (2) (Feb.~2021) 748--757,
+https://doi.org/10.1109/TMI.2020.3036552.
+
+\item [25] Y. Mei, S. Wang, X. Shen, S. Rabke, S. Goenezen,
+Mechanics Based Topography: a Preliminary Feasibility Study,
+\emph{Sensors} 17 (5) (2017),
+https://doi.org/10.3390/s17051075.
+
+\item [26] Y. Mei, R. Fulmer, V. Raja, S. Wang, S. Goenezen,
+Estimating the non-homogeneous elastic modulus distribution
+from surface deformations, \emph{Int. J. Solids Struct.} 83
+(2016) 73--80, https://doi.org/10.1016/j.ijsolstr.2016.01.001.
+
+\item [27] Y. Mei, Z. Du, D. Zhao, W. Zhang, C. Liu, X. Guo,
+Moving Morphable Inclusion Approach: an Explicit Framework to
+Solve Inverse Problem in Elasticity, \emph{J. Appl. Mech.} 88
+(4) (2020), https://doi.org/10.1115/1.4049142.
+
+\item [28] D. Liu, J. Du, A Moving Morphable Components Based
+Shape Reconstruction Framework for Electrical Capacitance
+Tomography, \emph{IEEE Trans. Med. Imaging} 38 (12) (2019)
+2937--2948, https://doi.org/10.1109/TMI.2019.2918566.
+
+\item [29] D. Liu, D. Gu, D. Smyl, J. Deng, J. Du, Shape
+Reconstruction Using Boolean Operations in Electrical
+Impedance Tomography, \emph{IEEE Trans. Med. Imaging} 39 (9)
+(2020) 2954--2964, https://doi.org/10.1109/TMI.2020.2983555.
+
+\item [30] T.J.R. Hughes, L.P. Franca, M. Balestra, A new
+finite element formulation for computational fluid dynamics:
+V. Circumventing the Babuska-Brezzi condition: a stable
+Petrov-Galerkin formulation of the Stokes problem
+accommodating equal-order interpolations, \emph{Comput. Methods
+Appl. Mech. Engrg.} 59 (1) (1986) 85--99,
+https://doi.org/10.1016/0045-7825(86)90025-3.
+
+\item [31] W. Zhang, Z. Song, J. Zhou, Z. Du, Y. Zhu, Z. Sun,
+X. Guo, Topology optimization with multiple materials via
+moving morphable component (MMC) method, \emph{Int. J. Numer.
+Methods Eng.} 133 (11) (2018) 1653--1675,
+https://doi.org/10.1002/nme.5714.
+
+\item [32] J.N. Reddy, \emph{Introduction to the Finite Element
+Method}, McGraw-Hill Education, 2019.
+
+\item [33] Y. Mei, S. Goenezen, Spatially Weighted Objective
+Function to Solve the Inverse Elasticity Problem for the
+Elastic Modulus, in: B. Doyle, K. Miller, A. Wittek, P. Nielsen
+(Eds.), \emph{Computational Biomechanics for Medicine},
+Springer International Publishing, Cham, 2015, pp.~47--58,
+https://doi.org/10.1007/978-3-319-15503-6\_5.
+
+\item [34] A.A. Oberai, N.H. Gokhale, G.R. Feij\'oo, Solution of
+inverse problems in elasticity imaging using the adjoint
+method, \emph{Inverse Probl} 19 (2) (2003) 297,
+https://doi.org/10.1088/0266-5611/19/2/304.
+
+\item [35] S. Goenezen, P. Barbone, A.A. Oberai, Solution of
+the nonlinear elasticity imaging inverse problem: the
+incompressible case, \emph{Comput. Method. Appl. M.} 200
+(13--16) (2011) 1406--1420,
+https://doi.org/10.1016/j.cma.2010.12.018.
+
+\item [36] A. Kalra, A. Lowe, A.M. Al-Jumaily, Mechanical
+behaviour of skin: a review, \emph{J. Mater. Sci. Eng.} 5
+(2016) 1--7, https://doi.org/10.4172/2169-0022.1000254.
+
+\item [37] F. Gao, Z. Guo, M. Sakamoto, et al., Fluid-structure
+Interaction within a Layered Aortic Wall Model, \emph{J. Biol.
+Phys.} 32 (2006) 435--454,
+https://doi.org/10.1007/s10867-006-9027-7.
+
+\item [38] S. Goenezen, B.J. Kim, M. Kotecha, P. Luo, M.R.
+Hematiyan, Mechanics based tomography (MBT): validation using
+experimental data, \emph{J. Mech. Phys. Solids} 146 (2021)
+104187, https://doi.org/10.1016/j.jmps.2020.104187.
+
+\end{list}
+
+% [end of paper — page 22 of 22]
+
+\end{document}

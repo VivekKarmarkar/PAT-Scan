@@ -1,0 +1,45 @@
+Y. Mei et al.                                                                                         Applied Mathematical Modelling 134 (2024) 126–147
+
+
+Table 5
+Comparison of the average relative error in the shear modulus distribution obtained by implicit inverse and explicit inverse methods for the case with
+one inclusion embedded (Figs. 24 and 25).
+  Inverse method                                  Explicit inverse method                                Implicit inverse method
+
+  Number of surface displacement datasets         3                  6                 9                 3                  6                 9
+  1 % noise                                       1.81 %             1.50 %            1.60 %            4.28 %             3.58 %            3.41 %
+  5 % noise                                       1.88 %             1.86 %            1.74 %            6.49 %             6.05 %            4.26 %
+
+
+
+
+Fig. 25. The reconstructed results with varying 3,6 and 9 surface displacement datasets corresponding to Sample 1 (5 % noise is introduced into the
+measured data, Unit: MPa).
+
+
+    In the numerical cases presented in the paper, the total number of predefined interfaces (for layered structures) or components (for
+composites with embedded inclusions) in the initial guesses is intentionally kept not much larger than the actual target. This is because
+the topological information of the elastic property distribution can often be determined beforehand based on prior knowledge or
+observations. For example, in biomedical imaging, characteristics such as the number, location, and rough shape of tumors can be
+observed and identified. Similarly, for typical layered biological tissues like skins or corneas, the total number of layers has likely been
+well studied through in vitro experiments or other research. Due to this available prior knowledge, it is unnecessary to set a large
+number of deformable components or interfaces in the initial guess for the explicit inverse method. By constraining the initial guesses
+to a reasonable and relevant number of interfaces or inclusions, the optimization process can be more focused and efficient. This can
+lead to faster convergence and more accurate characterization of the elastic property distribution with a reduced risk of convergence to
+a non-physical solution.
+    However, it should be noted that the results of this study do not conclusively demonstrate that the explicit inverse method out­
+performs the implicit inverse method in all cases. In scenarios where the elastic property distribution lacks significant heterogeneity or
+where no prior knowledge is available, the explicit inverse method may indeed perform less effectively compared to the implicit
+inverse method. This is because the explicit inverse method relies on predefined interfaces or inclusions, which may not accurately
+capture the complexity of the underlying distribution. In such situations, the implicit inverse method, with its greater flexibility and
+ability to explore a wider range of possibilities, might yield more accurate and robust results. The choice between the explicit and
+implicit inverse methods, therefore, depends on the specific characteristics of the problem and the availability of prior information,
+ensuring the selection of the most suitable approach for achieving meaningful and reliable results.
+    Due to the limited availability of experimental datasets, this paper primarily focuses on numerical verification. It should be noted
+that the implicit inverse method has demonstrated successful applications in reconstructing the nonhomogeneous shear modulus
+distribution of soft solids using experimental datasets [38]. However, considering the superior performance of the explicit inverse
+solver in numerical validation, we are confident that it can achieve even better results when applied to the experimental datasets. In
+
+
+                                                                            144
+

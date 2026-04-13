@@ -1,0 +1,19 @@
+Applied Mathematical Modelling 134 (2024) 126–147
+
+Y. Mei et al.
+
+Fig. 9. The reconstructed results with varying 3,6 and 9 surface displacement datasets corresponding to Sample 2 (Without noise, Unit: MPa).
+
+Fig. 10. The reconstructed results with 3,6 and 9 surface displacement datasets corresponding to Sample 3 (Without noise, Unit: MPa).
+
+slightly larger than that for the explicit inverse method (see Table 1). Furthermore, it’s worth noting that the quality of the recon­
+struction achieved by both inverse methods improved with an increase in the total number of measurements. By utilizing 9 boundary
+displacement measurements, the average relative error could be reduced to less than 10 %. However, it should be mentioned that each
+layer was not accurately mapped as the homogeneous case when using the implicit inverse method.
+Additionally, we increased the noise level to 5 % and observed that the reconstructed results obtained by the explicit inverse
+method still outperform those obtained by the implicit inverse method (see Fig. 14, Fig. 15, Fig. 16). For the explicit inverse method,
+the resulting relative error in the case with 5 % noise is generally larger than that in the case with 1 % noise (see Table 1). However,
+even with a 5 % noise level, the relative error for the explicit inverse method remains lower than that for the implicit inverse method
+135
+
+

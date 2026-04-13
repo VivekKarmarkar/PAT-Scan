@@ -1,0 +1,24 @@
+Y. Mei et al.                                                                                         Applied Mathematical Modelling 134 (2024) 126–147
+
+
+
+
+Fig. 18. The optimization process with four layers initially utilizing the explicit inverse scheme with 3 surface datasets (Without noise, Unit: MPa).
+
+
+
+
+                Fig. 19. The reconstructed results with varying 3,6 and 9 surface displacement datasets (Without noise, Unit: MPa).
+
+
+Case 3: A composite with inclusions embedded
+
+    In the last example, we replicated a scenario where one or two tumors were embedded within soft tissues with a stiffness ratio of
+5:1, as illustrated in Fig. 21. To simulate the forward problem, we applied an "indentation" force on the top surface of a square domain,
+discretized using 7200 triangular elements. The center point was fixed and other points where on the bottom edge are constrained in
+the vertical direction, and we only utilized the displacements on the top surface to tackle the inverse problem. To initiate the inverse
+problem, we employed four inclusions as the initial guess (refer to Fig. 22(a)). These inclusions were predefined in the problem
+
+
+                                                                         140
+

@@ -1,0 +1,39 @@
+Y. Mei et al.                                                                                        Applied Mathematical Modelling 134 (2024) 126–147
+
+
+
+
+           Fig. 20. The reconstructed results with varying 3,6 and 9 surface displacement datasets (1 % noise is introduced, Unit: MPa).
+
+
+
+Table 3
+Comparison of the average relative error in the shear modulus distribution obtained by implicit inverse and explicit inverse methods for the ring
+structure (1 % noise is introduced).
+  Inverse method                                  Explicit inverse method                            Implicit inverse method
+
+  Number of surface displacement datasets         3                 6                 9              3                    6                   9
+  Average relative error                          4.73 %            5.38 %            4.56 %         42.41 %              40.99 %             41.23 %
+
+
+
+
+Table 4
+The values of regularization factors used in Figs. 19 and 20.
+  Inverse method                                       Explicit inverse method                   Implicit inverse method
+
+  Number of surface displacement datasets              3              6           9              3                    6                   9
+
+  Ring structure          no noise                     0.00           0.00        0.00           1 × 10− 12           1 × 10− 12          1 × 10− 12
+                          1 % noise                    0.00           0.00        0.00           1 × 10− 12           1 × 10− 12          1 × 10− 12
+
+
+
+
+                          Fig. 21. Target shear modulus distribution of composite with inclusions embedded (Unit: MPa).
+
+
+
+
+                                                                            141
+

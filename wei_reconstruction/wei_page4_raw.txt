@@ -1,0 +1,118 @@
+Applied Mathematical Modelling 134 (2024) 126–147
+
+Y. Mei et al.
+
+introducing the following topological description function (TDF):
+⎧ i
+⎨ ϕ (x) < 0 if x ∈ Ωi
+ϕi (x) = 0 if x ∈ ∂Ωi
+⎩ i
+ϕ (x) > 0 if x ∈ Ω \ Ωi
+
+(8)
+
+For the layered structure, ϕi is the TDF of the i-th interface and Ωi is the region occupied from the curve Ciand C0. The mathematical
+expression of TDF for a layered structure can be defined as:
+ϕi (x) = r(t) − ri (t)
+
+(9)
+
+where ri(t) is the distance between the curve Ciand C0 at any arbitrary point on the domain. To this end, the m-th layer of the structure
+(m > 1) can be defined by ϕm − 1(x) > 0 and ϕm(x) ≤ 0, except for the first layer ϕ1(x) < 0and last layer ϕn(x) > 0. To this end, A bilayer
+structure can be expressed by the proposed method as shown in Fig. 2. Note that we assume that each layer is homogeneous and did not
+consider spatial variations within a layer.
+For the domain with inclusion embedded, ϕi is the TDF of the i-th component and Ωi is the region occupied by the i-th component.
+For an inclusion embedded composite, the mathematical expression of TDF is:
+√̅̅̅̅̅̅̅̅̅̅̅̅̅̅̅̅̅̅̅̅̅̅̅̅̅̅̅̅̅̅̅̅̅̅̅̅̅̅̅̅̅̅̅̅
+)2 (
+)2̅
+( )
+(
+ϕi (x) =
+(10)
+x − xio + y − yio − ri θi
+)
+(
+where θi is the angle from the point (x, y) to the center of the i-th component xio , yio in polar coordinate system. ri(θi) is the distance
+)
+(
+from the point with the angle of θi on ∂Ωi to the center xio , yio as shown in Fig. 3.
+With the defined TDF, the spatial variation of the shear modulus of a layered composite can be defined based on the Boolean
+operators [31]:
+(
+
+(
+
+))
+
+μ(x) = μ0 1 − H ϕ1 (x)
+
++
+
+n− 1
+∑
+[
+i=1
+
+(
+
+)(
+
+(
+
+))]
+
+μi H ϕi (x) 1 − H ϕi+1 (x)
+
++ μn H(ϕn (x))
+
+(11)
+
+where μ0 is the shear modulus of background. μn is the shear modulus of the last layer. H(z) is the Heaviside function. If there is no
+interface curve Ci,μ(x) = μ0 is a homogeneous domain. However, the TDF definitions of composite with embedded inclusions are
+different, that is:
+( )
+n
+n
+∏
+∑
+( i
+( (
+( (
+(12)
+μ x = μ0
+H ϕi x)) +
+μ (1 − H ϕi x))))
+i=1
+
+i=1
+
+As the Heaviside function is a discontinuous function, we will utilize the following function to approximate the Heaviside function
+so that we can evaluate the spatial gradient of the Heaviside function:
+(
+(z))
+H(z) = 0.5 × 1 + tanh
+(13)
+
+ε
+
+where ε is a small constant. With the decrease of ε, the approximation of the Heaviside function is closer to the corresponding analytical
+expression (see Fig. 4). However, a smaller ε might lead to an extremely large gradient at z approaching to zero. Thus, the small
+constant ε should be carefully chosen.
+Inverse problem
+After discussing the TDF, the inverse problem can be stated as: Given nmeas surface measured displacement fields, find the optimal
+geometric vectors r1,r2,⋅⋅⋅, rm and the shear moduli μ0,μ1,⋅⋅⋅, μm, such that the following objective function is minimized:
+∑ ∫ ⃒
+⃒
+1 nmeas
+⃒ucom − umeas ⃒2 d∂Ωimeas + Reg(μ)
+Π=
+(14)
+i
+i
+2 imeas=1
+
+Fig. 2. An example of the nonhomogeneous shear modulus distribution of a bilayer structure.
+129
+
+

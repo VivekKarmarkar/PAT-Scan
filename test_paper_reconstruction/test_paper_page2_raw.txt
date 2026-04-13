@@ -1,0 +1,70 @@
+Published as a conference paper at ICLR 2015
+
+
+
+
+Algorithm 1: Adam, our proposed algorithm for stochastic optimization. See section 2 for details,
+and for a slightly more efficient (but less clear) order of computation. gt2 indicates the elementwise
+square gt gt . Good default settings for the tested machine learning problems are α = 0.001,
+β1 = 0.9, β2 = 0.999 and  = 10−8 . All operations on vectors are element-wise. With β1t and β2t
+we denote β1 and β2 to the power t.
+Require: α: Stepsize
+Require: β1 , β2 ∈ [0, 1): Exponential decay rates for the moment estimates
+Require: f (θ): Stochastic objective function with parameters θ
+Require: θ0 : Initial parameter vector
+  m0 ← 0 (Initialize 1st moment vector)
+  v0 ← 0 (Initialize 2nd moment vector)
+  t ← 0 (Initialize timestep)
+  while θt not converged do
+     t←t+1
+     gt ← ∇θ ft (θt−1 ) (Get gradients w.r.t. stochastic objective at timestep t)
+     mt ← β1 · mt−1 + (1 − β1 ) · gt (Update biased first moment estimate)
+     vt ← β2 · vt−1 + (1 − β2 ) · gt2 (Update biased second raw moment estimate)
+     mb t ← mt /(1 − β1t ) (Compute bias-corrected first moment estimate)
+     vbt ← vt /(1 − β2t ) (Compute
+                              √      bias-corrected second raw moment estimate)
+     θt ← θt−1 − α · m  b t /( vbt + ) (Update parameters)
+  end while
+  return θt (Resulting parameters)
+
+
+In section 2 we describe the algorithm and the properties of its update rule. Section 3 explains
+our initialization bias correction technique, and section 4 provides a theoretical analysis of Adam’s
+convergence in online convex programming. Empirically, our method consistently outperforms other
+methods for a variety of models and datasets, as shown in section 6. Overall, we show that Adam is
+a versatile algorithm that scales to large-scale high-dimensional machine learning problems.
+
+2     A LGORITHM
+See algorithm 1 for pseudo-code of our proposed algorithm Adam. Let f (θ) be a noisy objec-
+tive function: a stochastic scalar function that is differentiable w.r.t. parameters θ. We are in-
+terested in minimizing the expected value of this function, E[f (θ)] w.r.t. its parameters θ. With
+f1 (θ), ..., , fT (θ) we denote the realisations of the stochastic function at subsequent timesteps
+1, ..., T . The stochasticity might come from the evaluation at random subsamples (minibatches)
+of datapoints, or arise from inherent function noise. With gt = ∇θ ft (θ) we denote the gradient, i.e.
+the vector of partial derivatives of ft , w.r.t θ evaluated at timestep t.
+The algorithm updates exponential moving averages of the gradient (mt ) and the squared gradient
+(vt ) where the hyper-parameters β1 , β2 ∈ [0, 1) control the exponential decay rates of these moving
+averages. The moving averages themselves are estimates of the 1st moment (the mean) and the
+2nd raw moment (the uncentered variance) of the gradient. However, these moving averages are
+initialized as (vectors of) 0’s, leading to moment estimates that are biased towards zero, especially
+during the initial timesteps, and especially when the decay rates are small (i.e. the βs are close to 1).
+The good news is that this initialization bias can be easily counteracted, resulting in bias-corrected
+estimates mb t and vbt . See section 3 for more details.
+Note that the efficiency of algorithm 1 can, at the expense of clarity, be improved upon by changing
+the order p
+          of computation, e.g. by replacing the last three lines in the loop with the following lines:
+                                                          √
+αt = α · 1 − β2t /(1 − β1t ) and θt ← θt−1 − αt · mt /( vt + ˆ).
+
+2.1   A DAM ’ S UPDATE RULE
+
+An important property of Adam’s update rule is its careful choice of √ stepsizes. Assuming  = 0, the
+effective step taken in parameter space at √
+                                           timestep t is ∆t = α · m
+                                                                  b t / vbt . The
+                                                                               √ effective stepsize has
+two upper bounds: |∆t | ≤ α · (1 − β1 )/ 1 − β2 in the case (1 − β1 ) > 1 − β2 , and |∆t | ≤ α
+
+
+                                                   2
+

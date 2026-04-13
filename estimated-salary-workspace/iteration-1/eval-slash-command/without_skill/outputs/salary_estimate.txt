@@ -1,0 +1,84 @@
+======================================================================
+PAT-SCAN PROJECT -- ESTIMATED SALARY ANALYSIS
+======================================================================
+
+Total development effort:  2,411 hours
+FTE-equivalent duration:   1.16 years (13.9 months)
+Unique Python lines:       21,237
+
+----------------------------------------------------------------------
+ANNUAL SALARY EQUIVALENTS (Base Salary = Hourly Rate x 2,080 hrs)
+----------------------------------------------------------------------
+Tier                Hourly      Base Salary          Total Comp
+                      Rate        (annual)        (w/ benefits)
+----------------------------------------------------------------------
+Low-end          $    100/hr  $     208,000  $   260,000 - $   291,200
+Average          $    135/hr  $     280,800  $   351,000 - $   393,120
+High-end         $    175/hr  $     364,000  $   455,000 - $   509,600
+
+----------------------------------------------------------------------
+PROJECT COST (Engineering Hours x Rate)
+----------------------------------------------------------------------
+Low-end         2,411 hrs x $100/hr = $   241,100
+Average         2,411 hrs x $135/hr = $   325,485
+High-end        2,411 hrs x $175/hr = $   421,925
+
+----------------------------------------------------------------------
+MARKET SALARY BENCHMARKS (2026 US, for comparison)
+----------------------------------------------------------------------
+  ML Engineer (mid)                       $   145,000
+  ML Engineer (senior)                    $   195,000
+  Computational Scientist                 $   160,000
+  Research Engineer (FEM+ML)              $   185,000
+  Staff ML Engineer (FAANG)               $   300,000
+
+----------------------------------------------------------------------
+INTERPRETATION
+----------------------------------------------------------------------
+
+This project requires a rare combination of:
+  - PyTorch / deep learning engineering (U-Net, GPU training)
+  - Finite Element Methods (plane stress, triangular elements)
+  - Differentiable programming (end-to-end gradients through FEM solver)
+  - Inverse problem theory (PINN-based reconstruction)
+
+The recommended salary range for a developer capable of building this
+project from scratch is:
+
+  BASE SALARY:    $208,000 - $364,000 / year
+  TOTAL COMP:     $260,000 - $510,000 / year (including benefits/equity)
+
+  RECOMMENDED MIDPOINT:  $281,000 base / $365,000 total comp
+
+This places the role between a Senior ML Engineer and a Staff-level
+Research Engineer at a technology company, reflecting the specialized
+domain knowledge required.
+
+Project cost if contracted out: $241,000 - $422,000
+(equivalent to ~14 months of a single senior developer's time)
+
+----------------------------------------------------------------------
+METHODOLOGY
+----------------------------------------------------------------------
+
+1. HOURLY RATES: Taken from cost_estimate.md market research for
+   senior developers with ML + computational science expertise
+   (2026 US market).
+
+2. ANNUALIZATION: Hourly rate x 2,080 hours/year (standard FTE).
+
+3. TOTAL COMPENSATION: Base salary x 1.25-1.40 multiplier to account
+   for employer costs (health insurance, 401k match, PTO, payroll
+   taxes ~7.65%, equipment, software licenses).
+
+4. COMPLEXITY PREMIUM: The rates already reflect the specialized
+   nature of the work (differentiable FEM, PINNs, inverse problems).
+   A generic Python/ML developer would be $75-$120/hr; the $100-$175
+   range accounts for the niche domain expertise required.
+
+5. HOURS BREAKDOWN:
+   - Base coding:          1,205 hrs (50%)
+   - Overhead (debug,      1,206 hrs (50%)
+     design, testing,
+     learning curve):
+   - Total:                2,411 hrs

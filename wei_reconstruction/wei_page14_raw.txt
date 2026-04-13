@@ -1,0 +1,36 @@
+Y. Mei et al.                                                                                              Applied Mathematical Modelling 134 (2024) 126–147
+
+
+
+
+Fig. 16. The reconstructed results with varying 3,6 and 9 surface displacement datasets corresponding to Sample 3 (5 % noise is introduced into the
+measured data, Unit: MPa).
+
+
+
+Table 2
+The values of the regularization factors utilized in Fig. 8, Fig. 9, Fig. 10, Fig. 11, Fig. 12, Fig. 13, Fig. 14, Fig. 15, Fig. 16.
+  Inverse method                                      Explicit inverse method                                Implicit inverse method
+
+  Number of surface displacement datasets             3                 6                  9                 3                 6                9
+                                                                                                 − 27               − 14               − 14
+  Sample 1         no noise                           0.00              0.00               5 × 10            2 × 10            5 × 10           1 × 10− 13
+                   1 % noise                          1 × 10− 11        1 × 10− 11         1 × 10− 18        2 × 10− 11        6 × 10− 11       6 × 10− 10
+                   5 % noise                          5 × 10− 12        1 × 10− 10         1 × 10− 10        1 × 10− 10        6 × 10− 10       6 × 10− 9
+  Sample 2         no noise                           0.00              0.00               0.00              1 × 10− 14        1 × 10− 14       1 × 10− 14
+                   1 % noise                          1 × 10− 13        1 × 10− 13         1 × 10− 13        1 × 10− 12        1 × 10− 11       1 × 10− 11
+                   5 % noise                          1 × 10− 10        1 × 10− 10         1 × 10− 10        1 × 10− 11        1 × 10− 10       1 × 10− 10
+  Sample 3         no noise                           0.00              0.00               0.00              1 × 10− 14        1 × 10− 14       1 × 10− 14
+                   1 % noise                          0.00              0.00               0.00              1 × 10− 12        1 × 10− 12       1 × 10− 11
+                   5 % noise                          1 × 10− 11        1 × 10− 11         1 × 10− 11        1 × 10− 11        1 × 10− 11       1 × 10− 10
+
+
+
+
+                                 Fig. 17. Target shear modulus distribution of a bilayer ring structure (Unit: MPa).
+
+
+
+
+                                                                             139
+

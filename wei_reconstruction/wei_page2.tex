@@ -1,0 +1,159 @@
+%% =================================================================
+%% Wei, Mei, Zhao, Xiao, Sun, Zhang, Guo.
+%% "Nondestructively identifying the mechanical behavior of soft
+%%  tissues using surface deformation with an explicit inverse
+%%  approach."
+%% Appl. Math. Modelling 134 (2024) 126--147.
+%%
+%% Reconstruction of page 2 (printed p. 127) as study notes.
+%% Prose: extracted verbatim from the PDF text layer via pdftotext
+%%        (hyphens and line breaks cleaned up only).
+%% Math:  hand-transcribed from the rendered page image to preserve
+%%        equation layout that pdftotext mangles.
+%% =================================================================
+
+\documentclass[11pt]{article}
+
+\usepackage[margin=1in]{geometry}
+\usepackage{amsmath, amssymb}
+\usepackage{mathrsfs}
+\usepackage{fancyhdr}
+
+\pagestyle{fancy}
+\fancyhf{}
+\lhead{\small Y.~Mei et al.}
+\rhead{\small Applied Mathematical Modelling 134 (2024) 126--147}
+\cfoot{\small \thepage}
+\renewcommand{\headrulewidth}{0.4pt}
+
+\setcounter{page}{127}
+
+\begin{document}
+
+\noindent
+\ldots{}[9--11], dietary habits [12], and the presence of pathological
+conditions [13,14]. Therefore, understanding the nonhomogeneous
+biomechanical behavior of these tissues is of paramount importance,
+particularly in a non-destructive manner. Such knowledge can inform
+medical diagnostics and treatments, potentially leading to better
+patient outcomes.
+
+Considerable effort has been devoted into research aimed at
+identifying the nonhomogeneous biomechanical properties of biological
+tissues. Studies [15--18] have demonstrated the feasibility of
+estimating the mechanical properties of each layer in multi-layered
+biological tissues, provided that the thickness of each layer is known
+beforehand. However, in practice, determining the thickness of each
+layer prior to addressing the identification problem can be a
+challenging task. Furthermore, the interface between neighboring
+layers is seldom flat, a characteristic particularly pronounced in
+biological tissues. As such, a comprehensive solution requires
+knowledge of both the topology of the interface between the layers
+and the biomechanical properties of each layer. Additionally, the
+detection of tumors embedded within normal tissues introduces another
+layer of complexity. To accurately diagnose and plan treatment for
+these conditions, it is crucial to determine not only the elastic
+modulus values of these tumors but also their topology [19].
+
+A general strategy for tackling this challenge involves identifying
+the spatial variation of material properties, a process that
+necessitates solving a large-scale optimization problem to optimize
+the elastic properties of every pixel in the domain of interest,
+which can be referred to as the implicit inverse method [20--23]. The
+implicit inverse method has been successfully employed in tumor
+detection using real clinical data [8,24]. However, this implicit
+inverse method has its limitations. It not only demands significant
+computational resources but is also prone to severe uniqueness
+issues, which can hamper the reliability of the results. Given that
+biological tissues are often known a priori to exhibit either layered
+structures or inclusion-embedded structures, it's feasible to
+explicitly and simultaneously identify the topology of each
+nonhomogeneous region and its associated material properties. This
+approach bypasses some of the computational hurdles of the implicit
+method. Another inherent drawback of the implicit inverse method lies
+in the quality of the reconstruction results, which can be
+compromised if the full-field displacement field cannot be measured
+with high accuracy. Studies [25,26] that employed the implicit
+inverse method to reconstruct the nonhomogeneous elastic property
+distribution of solids using surface deformation have demonstrated
+this issue. While these methods are capable of visualizing the
+nonhomogeneous region, the quality of the reconstruction is highly
+sensitive to noise. This sensitivity arises from a disparity between
+the large number of unknown optimization variables in the implicit
+inverse method and the sparsity of the deformation information on the
+surface. In contrast, the explicit inverse method significantly
+reduces the total number of optimization variables [27--29],
+potentially improving the quality of the reconstructed results. This
+strategy holds promise for enhancing the accuracy of nonhomogeneous
+biomechanical property identification in biological tissues.
+
+This paper will present an explicit inverse method that utilizes
+surface deformation measurements to identify the mechanical behavior
+of two common nonhomogeneous structures: layered structures and
+inclusion embedded structures. The organization of this work is as
+follows: In the \textbf{Methods} Section, we provide a detailed
+explanation of the mathematical background underlying the explicit
+inverse approach. The \textbf{Results} Section presents a comparative
+study between the explicit and implicit inverse approaches, using
+various numerical examples. We discuss the obtained results in the
+\textbf{Discussion} Section and conclude the paper with a summary in
+the \textbf{Conclusion} Section.
+
+\section*{Methods}
+
+\subsection*{\textit{Forward problem}}
+
+\noindent
+Given the low elastic modulus of soft tissues, this study will
+consider finite deformation in the analysis. The strong form of the
+nonlinear elastic problem is stated as follows:
+\begin{equation}
+\left\{
+\begin{aligned}
+\mathrm{Div}(\mathbf{P}) &= \mathbf{0} && \text{in } \Omega \\
+\mathbf{u}               &= \mathbf{g} && \text{on } \Gamma_g \\
+\mathbf{P}\cdot\mathbf{N} &= \mathbf{T} && \text{on } \Gamma_T
+\end{aligned}
+\right.
+\end{equation}
+where $\mathbf{P} = \mathbf{F}\mathbf{S}$ is the first
+Piola--Kirchhoff stress tensor where $\mathbf{F}$ is the deformation
+gradient and $\mathbf{S}$ is the second Piola--Kirchhoff stress
+tensor. $\Omega$ is the problem domain at the reference
+configuration. $\mathbf{g}$ is the prescribed displacement on the
+displacement boundary $\Gamma_g$. $\mathbf{T}$ is the prescribed
+traction on the traction boundary $\Gamma_T$. The following
+restrictions apply to $\Gamma_g$ and $\Gamma_T$: $\Gamma_g \cup
+\Gamma_T = \partial\Omega$ and $\Gamma_g \cap \Gamma_T = \phi$. We
+assume the soft tissue of interest obeys the incompressible and
+neo-Hookean law:
+\begin{equation}
+\mathbf{S} = \mu\!\left(\mathbf{I} - \mathbf{C}^{-1}\right)
+             + p\,\mathbf{C}^{-1}
+\end{equation}
+where $\mathbf{C} = \mathbf{F}^{\mathsf{T}}\mathbf{F}$ is the
+Cauchy--Green tensor. $p$ is the hydrostatic pressure.
+
+The weak form of the nonlinear elastic forward problem is stated as:
+Find $[\mathbf{u}^h, p^h] \in \mathscr{M}^h \times \mathscr{P}^h$
+such that
+\begin{equation}
+\mathscr{A}\!\left(\mathbf{w}^h,\mathbf{u}^h,q^h,p^h\right)
+\;=\;
+\int_{\Gamma_T}\! \mathbf{w}^h\!\cdot\mathbf{T}\,\mathrm{d}\Gamma,
+\qquad
+\forall\,[\mathbf{w}^h, q^h] \in \ell^h \times \mathscr{P}^h
+\end{equation}
+\begin{equation}
+\mathscr{A}\!\left(\mathbf{w}^h,\mathbf{u}^h,q^h,p^h\right)
+\;\equiv\;
+\int_\Omega \nabla\mathbf{w}:\mathbf{P}\,\mathrm{d}\Omega
+\;+\;
+\int_\Omega q\,(J-1)\,\mathrm{d}\Omega
+\;-\;
+\sum_{i=1}^{NE}\!
+ \Bigl(\tau\,\mathrm{div}(\mathbf{F}^h\mathbf{S}^h),\;
+       (\mathbf{F}^h)^{-\mathsf{T}}\nabla q^h\Bigr)_{\Omega_i}
+\end{equation}
+
+\end{document}

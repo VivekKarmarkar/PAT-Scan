@@ -1,0 +1,121 @@
+Published as a conference paper at ICLR 2015
+
+
+
+
+                           β2                                                   β2
+Lemma 10.4. Let γ , √β1 . For β1 , β2 ∈ [0, 1) that satisfy √β1 < 1 and bounded gt , kgt k2 ≤ G,
+                          2                                    2
+kgt k∞ ≤ G∞ , the following inequality holds
+                                  XT
+                                      mb2       2       1
+                                      p t,i ≤       √        kg1:T,i k2
+                                  t=1
+                                       tb
+                                        vt,i  1 − γ   1 − β2
+
+                                 √
+                                    1−β t
+Proof. Under the assumption, (1−β t )22 ≤ (1−β   1
+                                                   1)
+                                                     2 . We can expand the last term in the summation
+                                      1
+using the update rules in Algorithm 1,
+          T              T −1             p             PT
+         X    mb 2t,i    X    mb 2t,i        1 − β2T ( k=1 (1 − β1 )β1T −k gk,i )2
+             p        =       p       +               q
+         t=1
+                tb
+                 vt,i    t=1
+                                tb
+                                 vt,i     (1 − β1T )2 T PT (1 − β )β T −j g 2
+                                                                       j=1             2        2             j,i
+                         T −1               p    T
+                         X             1 − β2T X T ((1 − β1 )β1T −k gk,i )2
+                                  b 2t,i
+                                  m
+                     ≤     p      +                q
+                       t=1
+                            tb
+                             vt,i   (1 − β1T )2 k=1 T PT (1 − β )β T −j g 2
+                                                       j=1       2 2        j,i
+                         T −1          p            T
+                         X     mb2        1 − β2T X T ((1 − β1 )β1T −k gk,i )2
+                     ≤         p t,i +                q
+                           t=1
+                                tb
+                                 vt,i  (1 − β1T )2 k=1 T (1 − β )β T −k g 2
+                                                                2                           2         k,i
+                         T −1               p                                    T                           T −k
+                         X        b 2t,i
+                                  m        1 − β2T (1 − β1 )                2    X                  β12
+                     ≤         p      +            p                T √                                               kgk,i k2
+                           t=1
+                                tb
+                                 vt,i   (1 − β1T )2 T (1 − β2 ) k=1     β2
+                         T
+                         X −1                        XT
+                               mb2          T
+                     ≤         p t,i + p                 γ T −k kgk,i k2
+                           t=1
+                                tb
+                                 vt,i    T (1 − β2 ) k=1
+
+
+Similarly, we can upper bound the rest of the terms in the summation.
+                                  XT          XT              T
+                                                              X −t
+                                      mb2          kg k
+                                      p t,i ≤     p t,i 2          tγ j
+                                  t=1
+                                       tb
+                                        v t,i t=1  t(1 − β  )
+                                                           2 j=0
+
+                                                      T
+                                                      X                         T
+                                                                                X
+                                                                 kgt,i k2
+                                                 ≤          p                        tγ j
+                                                      t=1        t(1 − β2 ) j=0
+
+
+                                                                                            P
+For γ < 1, using the upper bound on the arithmetic-geometric series,                            t tγ
+                                                                                                          t         1
+                                                                                                               < (1−γ)2:
+
+
+                     T
+                     X                     T
+                                           X                               XT
+                                kgt,i k2                            1          kgt,i k2
+                           p                     tγ j ≤            2
+                                                                     √           √
+                     t=1        t(1 − β2 ) j=0              (1 − γ) 1 − β2 t=1     t
+
+Apply Lemma 10.3,
+                                 XT
+                                     mb2           2G∞
+                                     p t,i ≤         √
+                                                    2 1−β
+                                                            kg1:T,i k2
+                                 t=1
+                                      tb
+                                       v t,i (1 − γ)      2
+
+
+
+
+                                                     β2
+To simplify the notation, we define γ , √β1 . Intuitively, our following theorem holds when the
+                                                      2
+                                                 1
+learning rate αt is decaying at a rate of t− 2 and first moment running average coefficient β1,t decay
+exponentially with λ, that is typically close to 1, e.g. 1 − 10−8 .
+Theorem 10.5. Assume that the function ft has bounded gradients, k∇ft (θ)k2 ≤ G, k∇ft (θ)k∞ ≤
+G∞ for all θ ∈ Rd and distance between any θt generated by Adam is bounded, kθn − θm k2 ≤ D,
+
+
+                                                            13
+

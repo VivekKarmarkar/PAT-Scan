@@ -1,0 +1,569 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>PAT-Scan Developer Salary Estimate</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --bg-primary: #0f1729;
+  --bg-secondary: #162040;
+  --bg-card: rgba(30, 45, 80, 0.6);
+  --border-subtle: rgba(100, 140, 200, 0.15);
+  --text-primary: #e8edf5;
+  --text-secondary: #8ea4c8;
+  --text-muted: #5a7199;
+  --accent-teal: #36d6c3;
+  --accent-coral: #ff6b8a;
+  --accent-gold: #ffc857;
+  --accent-blue: #4d8df7;
+  --accent-purple: #a78bfa;
+  --glass-bg: rgba(22, 32, 64, 0.7);
+  --glass-border: rgba(100, 140, 200, 0.2);
+}
+
+body {
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+  background: var(--bg-primary);
+  color: var(--text-primary);
+  line-height: 1.6;
+  min-height: 100vh;
+}
+
+.container { max-width: 960px; margin: 0 auto; padding: 2rem 1.5rem; }
+
+/* Hero */
+.hero {
+  text-align: center;
+  padding: 3rem 1rem 2.5rem;
+  position: relative;
+}
+.hero::before {
+  content: '';
+  position: absolute;
+  top: -80px; left: 50%; transform: translateX(-50%);
+  width: 600px; height: 600px;
+  background: radial-gradient(circle, rgba(54,214,195,0.08) 0%, transparent 70%);
+  pointer-events: none;
+}
+.hero-badge {
+  display: inline-block;
+  background: rgba(54,214,195,0.12);
+  color: var(--accent-teal);
+  padding: 0.35rem 1rem;
+  border-radius: 20px;
+  font-size: 0.8rem;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+  margin-bottom: 1rem;
+  border: 1px solid rgba(54,214,195,0.2);
+}
+.hero h1 {
+  font-size: 2rem;
+  font-weight: 300;
+  color: var(--text-secondary);
+  margin-bottom: 0.5rem;
+}
+.hero h1 strong { color: var(--text-primary); font-weight: 700; }
+.hero-tagline {
+  color: var(--text-muted);
+  font-size: 0.95rem;
+  margin-bottom: 2rem;
+}
+.hero-number {
+  font-size: 4rem;
+  font-weight: 800;
+  background: linear-gradient(135deg, var(--accent-teal), var(--accent-blue));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  line-height: 1.1;
+}
+.hero-number-label {
+  color: var(--text-muted);
+  font-size: 0.85rem;
+  margin-top: 0.25rem;
+}
+
+/* Cards */
+.card {
+  background: var(--glass-bg);
+  backdrop-filter: blur(12px);
+  border: 1px solid var(--glass-border);
+  border-radius: 16px;
+  padding: 1.75rem;
+  margin-bottom: 1.5rem;
+  transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+.card:hover {
+  border-color: rgba(54,214,195,0.3);
+  box-shadow: 0 8px 32px rgba(0,0,0,0.3);
+}
+.card-title {
+  font-size: 0.75rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
+  color: var(--accent-teal);
+  margin-bottom: 1.25rem;
+}
+
+/* Controls */
+.controls-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 1.25rem;
+}
+.control-group label {
+  display: block;
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: var(--text-secondary);
+  margin-bottom: 0.5rem;
+}
+.toggle-group {
+  display: flex;
+  background: rgba(15, 23, 41, 0.6);
+  border-radius: 10px;
+  overflow: hidden;
+  border: 1px solid var(--border-subtle);
+}
+.toggle-btn {
+  flex: 1;
+  padding: 0.6rem 0.5rem;
+  border: none;
+  background: transparent;
+  color: var(--text-muted);
+  font-family: inherit;
+  font-size: 0.82rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+.toggle-btn.active {
+  background: rgba(54,214,195,0.15);
+  color: var(--accent-teal);
+}
+.toggle-btn:hover:not(.active) { color: var(--text-secondary); }
+
+select {
+  width: 100%;
+  padding: 0.6rem 0.75rem;
+  background: rgba(15, 23, 41, 0.6);
+  border: 1px solid var(--border-subtle);
+  border-radius: 10px;
+  color: var(--text-primary);
+  font-family: inherit;
+  font-size: 0.85rem;
+  cursor: pointer;
+  appearance: none;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' fill='%238ea4c8' viewBox='0 0 16 16'%3E%3Cpath d='M8 11L3 6h10z'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 12px center;
+}
+select:focus { outline: none; border-color: var(--accent-teal); }
+
+/* Salary Display */
+.salary-display {
+  text-align: center;
+  padding: 2rem 0 1rem;
+}
+.salary-main {
+  font-size: 3.2rem;
+  font-weight: 800;
+  color: var(--text-primary);
+  transition: all 0.4s ease;
+}
+.salary-range {
+  color: var(--text-muted);
+  font-size: 0.9rem;
+  margin-top: 0.25rem;
+}
+
+/* Donut Chart */
+.chart-section {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 2.5rem;
+  flex-wrap: wrap;
+}
+.donut-container {
+  position: relative;
+  width: 200px;
+  height: 200px;
+  flex-shrink: 0;
+}
+.donut-container svg { width: 200px; height: 200px; transform: rotate(-90deg); }
+.donut-container circle {
+  fill: none;
+  stroke-width: 28;
+  transition: stroke-dasharray 0.6s ease, stroke-dashoffset 0.6s ease;
+}
+.donut-center {
+  position: absolute;
+  top: 50%; left: 50%;
+  transform: translate(-50%, -50%);
+  text-align: center;
+}
+.donut-center-value { font-size: 1.4rem; font-weight: 700; }
+.donut-center-label { font-size: 0.7rem; color: var(--text-muted); }
+
+.legend { display: flex; flex-direction: column; gap: 0.75rem; }
+.legend-item {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+.legend-dot {
+  width: 12px; height: 12px;
+  border-radius: 3px;
+  flex-shrink: 0;
+}
+.legend-label { font-size: 0.82rem; color: var(--text-secondary); min-width: 70px; }
+.legend-value { font-size: 0.9rem; font-weight: 600; color: var(--text-primary); transition: all 0.3s ease; }
+
+/* Context Cards */
+.context-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 1rem;
+}
+.context-card {
+  background: rgba(15, 23, 41, 0.5);
+  border: 1px solid var(--border-subtle);
+  border-radius: 12px;
+  padding: 1.25rem;
+  text-align: center;
+  transition: transform 0.3s ease, border-color 0.3s ease;
+}
+.context-card:hover {
+  transform: translateY(-2px);
+  border-color: rgba(54,214,195,0.25);
+}
+.context-value {
+  font-size: 1.5rem;
+  font-weight: 700;
+  margin-bottom: 0.25rem;
+}
+.context-label {
+  font-size: 0.78rem;
+  color: var(--text-muted);
+  line-height: 1.4;
+}
+
+/* Methodology */
+.methodology { margin-top: 0.5rem; }
+.method-toggle {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  background: none;
+  border: none;
+  color: var(--text-muted);
+  font-family: inherit;
+  font-size: 0.82rem;
+  cursor: pointer;
+  padding: 0.5rem 0;
+  transition: color 0.3s ease;
+}
+.method-toggle:hover { color: var(--text-secondary); }
+.method-toggle .arrow { transition: transform 0.3s ease; display: inline-block; }
+.method-toggle .arrow.open { transform: rotate(90deg); }
+.method-content {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.4s ease;
+  color: var(--text-muted);
+  font-size: 0.82rem;
+  line-height: 1.8;
+}
+.method-content.open { max-height: 600px; }
+.method-content p { margin-bottom: 0.5rem; }
+
+/* Animation */
+@keyframes countUp {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+.animate-in { animation: countUp 0.6s ease forwards; }
+
+/* Print */
+@media print {
+  body { background: white; color: #222; }
+  .card { border: 1px solid #ddd; background: white; backdrop-filter: none; }
+  .toggle-btn, select { border: 1px solid #ccc; }
+  .hero-number { color: #0a7; -webkit-text-fill-color: #0a7; }
+}
+
+@media (max-width: 600px) {
+  .hero-number { font-size: 2.8rem; }
+  .salary-main { font-size: 2.4rem; }
+  .container { padding: 1rem; }
+  .chart-section { flex-direction: column; }
+}
+</style>
+</head>
+<body>
+<div class="container">
+
+  <!-- Hero -->
+  <section class="hero">
+    <div class="hero-badge">PAT-Scan Codebase</div>
+    <h1>What would you pay the developer<br>who <strong>built this</strong>?</h1>
+    <p class="hero-tagline">Salary projection based on 2,411 hours of ML + computational mechanics engineering</p>
+    <div class="hero-number" id="heroNumber">$196,560</div>
+    <div class="hero-number-label">Recommended annual salary (Senior, US avg, Growth-stage company)</div>
+  </section>
+
+  <!-- Salary Explorer -->
+  <div class="card">
+    <div class="card-title">Salary Explorer</div>
+    <div class="controls-grid">
+      <div class="control-group">
+        <label>Company Tier</label>
+        <div class="toggle-group" id="tierToggle">
+          <button class="toggle-btn" data-tier="startup">Startup</button>
+          <button class="toggle-btn active" data-tier="growth">Growth</button>
+          <button class="toggle-btn" data-tier="enterprise">Enterprise</button>
+        </div>
+      </div>
+      <div class="control-group">
+        <label>Location</label>
+        <select id="locationSelect">
+          <option value="1.20">SF Bay Area / NYC</option>
+          <option value="1.10">Seattle / Boston / LA</option>
+          <option value="1.00">Austin / Denver / Chicago</option>
+          <option value="0.95" selected>Remote (US avg)</option>
+          <option value="0.87">Western Europe</option>
+          <option value="0.55">Eastern Europe / LatAm</option>
+          <option value="0.40">South / SE Asia</option>
+        </select>
+      </div>
+      <div class="control-group">
+        <label>Experience Level</label>
+        <div class="toggle-group" id="expToggle">
+          <button class="toggle-btn" data-exp="mid">Mid</button>
+          <button class="toggle-btn active" data-exp="senior">Senior</button>
+          <button class="toggle-btn" data-exp="staff">Staff</button>
+          <button class="toggle-btn" data-exp="lead">Lead</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="salary-display">
+      <div class="salary-main" id="salaryMain">$196,560</div>
+      <div class="salary-range" id="salaryRange">Range: $145,600 - $254,800</div>
+    </div>
+  </div>
+
+  <!-- Compensation Breakdown -->
+  <div class="card">
+    <div class="card-title">Total Compensation Breakdown</div>
+    <div class="chart-section">
+      <div class="donut-container">
+        <svg viewBox="0 0 200 200">
+          <circle id="ring-benefits" cx="100" cy="100" r="72" stroke="#a78bfa" />
+          <circle id="ring-equity" cx="100" cy="100" r="72" stroke="#ffc857" />
+          <circle id="ring-bonus" cx="100" cy="100" r="72" stroke="#ff6b8a" />
+          <circle id="ring-base" cx="100" cy="100" r="72" stroke="#36d6c3" />
+        </svg>
+        <div class="donut-center">
+          <div class="donut-center-value" id="totalComp">$285K</div>
+          <div class="donut-center-label">Total Comp</div>
+        </div>
+      </div>
+      <div class="legend">
+        <div class="legend-item">
+          <div class="legend-dot" style="background:#36d6c3"></div>
+          <span class="legend-label">Base</span>
+          <span class="legend-value" id="legendBase">$196,560</span>
+        </div>
+        <div class="legend-item">
+          <div class="legend-dot" style="background:#ff6b8a"></div>
+          <span class="legend-label">Bonus</span>
+          <span class="legend-value" id="legendBonus">$29,484</span>
+        </div>
+        <div class="legend-item">
+          <div class="legend-dot" style="background:#ffc857"></div>
+          <span class="legend-label">Equity</span>
+          <span class="legend-value" id="legendEquity">$49,140</span>
+        </div>
+        <div class="legend-item">
+          <div class="legend-dot" style="background:#a78bfa"></div>
+          <span class="legend-label">Benefits</span>
+          <span class="legend-value" id="legendBenefits">$49,140</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Context Cards -->
+  <div class="card">
+    <div class="card-title">What Drives This Estimate</div>
+    <div class="context-grid">
+      <div class="context-card">
+        <div class="context-value" style="color:var(--accent-teal)">2,411</div>
+        <div class="context-label">Development hours estimated</div>
+      </div>
+      <div class="context-card">
+        <div class="context-value" style="color:var(--accent-coral)">4</div>
+        <div class="context-label">Complexity domains (ML, FEM, data gen, agents)</div>
+      </div>
+      <div class="context-card">
+        <div class="context-value" style="color:var(--accent-gold)">$135/hr</div>
+        <div class="context-label">Contractor rate (avg)</div>
+      </div>
+      <div class="context-card">
+        <div class="context-value" style="color:var(--accent-blue)">Top 15%</div>
+        <div class="context-label">Market percentile (niche ML + FEM intersection)</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Tech stack -->
+  <div class="card">
+    <div class="card-title">Tech Stack & Specializations</div>
+    <div style="display:flex;flex-wrap:wrap;gap:0.5rem;">
+      <span class="hero-badge" style="font-size:0.72rem;">Python</span>
+      <span class="hero-badge" style="font-size:0.72rem;">PyTorch</span>
+      <span class="hero-badge" style="font-size:0.72rem;">CUDA / GPU</span>
+      <span class="hero-badge" style="font-size:0.72rem;">FEM Solvers</span>
+      <span class="hero-badge" style="font-size:0.72rem;">Differentiable Programming</span>
+      <span class="hero-badge" style="font-size:0.72rem;">PINNs</span>
+      <span class="hero-badge" style="font-size:0.72rem;">Inverse Problems</span>
+      <span class="hero-badge" style="font-size:0.72rem;">U-Net</span>
+      <span class="hero-badge" style="font-size:0.72rem;">LaTeX</span>
+    </div>
+  </div>
+
+  <!-- Methodology -->
+  <div class="card">
+    <div class="methodology">
+      <button class="method-toggle" id="methodToggle">
+        <span class="arrow" id="methodArrow">&#9654;</span> Methodology &amp; Assumptions
+      </button>
+      <div class="method-content" id="methodContent">
+        <p><strong>Contractor-to-Salary Conversion:</strong> Hourly contractor rate x 2,080 hrs/yr x 0.70 discount factor. The 0.70x reflects that salaried employees receive benefits (health, 401k, PTO) that contractors must self-fund.</p>
+        <p><strong>Hourly Rates:</strong> Low $100/hr (remote senior Python/ML), Average $135/hr (senior ML + computational science), High $175/hr (SF/NYC specialized FEM+ML niche). Sourced from cost_estimate.md analysis.</p>
+        <p><strong>Company Tiers:</strong> Startup (higher equity 35%, lower bonus 10%), Growth (balanced: 15% bonus, 25% equity), Enterprise (20% bonus, 40% equity, full benefits 30%).</p>
+        <p><strong>Geographic Multipliers:</strong> SF/NYC 1.20x, Seattle/Boston 1.10x, Austin/Denver 1.00x, Remote US 0.95x, W. Europe 0.87x, E. Europe/LatAm 0.55x, S/SE Asia 0.40x.</p>
+        <p><strong>Experience Scaling:</strong> Mid-level 0.75x, Senior 1.0x (base), Staff 1.30x, Lead/Architect 1.45x of senior salary.</p>
+        <p><strong>Market Cross-Reference:</strong> This skill set (differentiable physics + ML + FEM) is highly niche. Standard ML engineer salaries undercount the computational mechanics specialization. We estimate top-15% market positioning due to the rare skill intersection.</p>
+        <p>Full cost breakdown: see <code>cost_estimate.md</code> in the project root.</p>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<script>
+(function() {
+  const RAW_BASE_LOW  = 100 * 2080 * 0.70;
+  const RAW_BASE_AVG  = 135 * 2080 * 0.70;
+  const RAW_BASE_HIGH = 175 * 2080 * 0.70;
+
+  const TIER_CONFIG = {
+    startup:    { bonus: 0.10, equity: 0.35, benefits: 0.20 },
+    growth:     { bonus: 0.15, equity: 0.25, benefits: 0.25 },
+    enterprise: { bonus: 0.20, equity: 0.40, benefits: 0.30 }
+  };
+
+  const EXP_MULT = { mid: 0.75, senior: 1.0, staff: 1.30, lead: 1.45 };
+
+  let currentTier = 'growth';
+  let currentExp  = 'senior';
+
+  function getLocation() {
+    return parseFloat(document.getElementById('locationSelect').value);
+  }
+
+  function calc() {
+    const loc = getLocation();
+    const exp = EXP_MULT[currentExp];
+    const tier = TIER_CONFIG[currentTier];
+
+    const baseAvg  = Math.round(RAW_BASE_AVG * loc * exp);
+    const baseLow  = Math.round(RAW_BASE_LOW * loc * exp);
+    const baseHigh = Math.round(RAW_BASE_HIGH * loc * exp);
+
+    const bonus    = Math.round(baseAvg * tier.bonus);
+    const equity   = Math.round(baseAvg * tier.equity);
+    const benefits = Math.round(baseAvg * tier.benefits);
+    const totalComp = baseAvg + bonus + equity + benefits;
+
+    return { baseAvg, baseLow, baseHigh, bonus, equity, benefits, totalComp, tier };
+  }
+
+  function fmt(n) {
+    return '$' + n.toLocaleString('en-US');
+  }
+  function fmtK(n) {
+    return '$' + Math.round(n / 1000) + 'K';
+  }
+
+  function updateDonut(base, bonus, equity, benefits) {
+    const total = base + bonus + equity + benefits;
+    const C = 2 * Math.PI * 72;
+    const pBase = (base / total) * C;
+    const pBonus = (bonus / total) * C;
+    const pEquity = (equity / total) * C;
+    const pBenefits = (benefits / total) * C;
+
+    document.getElementById('ring-base').style.strokeDasharray = pBase + ' ' + C;
+    document.getElementById('ring-base').style.strokeDashoffset = '0';
+    document.getElementById('ring-bonus').style.strokeDasharray = pBonus + ' ' + C;
+    document.getElementById('ring-bonus').style.strokeDashoffset = -pBase + '';
+    document.getElementById('ring-equity').style.strokeDasharray = pEquity + ' ' + C;
+    document.getElementById('ring-equity').style.strokeDashoffset = -(pBase + pBonus) + '';
+    document.getElementById('ring-benefits').style.strokeDasharray = pBenefits + ' ' + C;
+    document.getElementById('ring-benefits').style.strokeDashoffset = -(pBase + pBonus + pEquity) + '';
+  }
+
+  function render() {
+    const d = calc();
+    document.getElementById('heroNumber').textContent = fmt(d.baseAvg);
+    document.getElementById('salaryMain').textContent = fmt(d.baseAvg);
+    document.getElementById('salaryRange').textContent = 'Range: ' + fmt(d.baseLow) + ' - ' + fmt(d.baseHigh);
+    document.getElementById('legendBase').textContent = fmt(d.baseAvg);
+    document.getElementById('legendBonus').textContent = fmt(d.bonus);
+    document.getElementById('legendEquity').textContent = fmt(d.equity);
+    document.getElementById('legendBenefits').textContent = fmt(d.benefits);
+    document.getElementById('totalComp').textContent = fmtK(d.totalComp);
+    updateDonut(d.baseAvg, d.bonus, d.equity, d.benefits);
+  }
+
+  document.querySelectorAll('#tierToggle .toggle-btn').forEach(function(btn) {
+    btn.addEventListener('click', function() {
+      document.querySelectorAll('#tierToggle .toggle-btn').forEach(function(b) { b.classList.remove('active'); });
+      btn.classList.add('active');
+      currentTier = btn.dataset.tier;
+      render();
+    });
+  });
+
+  document.querySelectorAll('#expToggle .toggle-btn').forEach(function(btn) {
+    btn.addEventListener('click', function() {
+      document.querySelectorAll('#expToggle .toggle-btn').forEach(function(b) { b.classList.remove('active'); });
+      btn.classList.add('active');
+      currentExp = btn.dataset.exp;
+      render();
+    });
+  });
+
+  document.getElementById('locationSelect').addEventListener('change', render);
+
+  document.getElementById('methodToggle').addEventListener('click', function() {
+    document.getElementById('methodContent').classList.toggle('open');
+    document.getElementById('methodArrow').classList.toggle('open');
+  });
+
+  render();
+})();
+</script>
+</body>
+</html>

@@ -1,0 +1,203 @@
+\relax 
+\providecommand\hyper@newdestlabel[2]{}
+\providecommand\HyperFirstAtBeginDocument{\AtBeginDocument}
+\HyperFirstAtBeginDocument{\ifx\hyper@anchor\@undefined
+\global\let\oldcontentsline\contentsline
+\gdef\contentsline#1#2#3#4{\oldcontentsline{#1}{#2}{#3}}
+\global\let\oldnewlabel\newlabel
+\gdef\newlabel#1#2{\newlabelxx{#1}#2}
+\gdef\newlabelxx#1#2#3#4#5#6{\oldnewlabel{#1}{{#2}{#3}}}
+\AtEndDocument{\ifx\hyper@anchor\@undefined
+\let\contentsline\oldcontentsline
+\let\newlabel\oldnewlabel
+\fi}
+\fi}
+\global\let\hyper@last\relax 
+\gdef\HyperFirstAtBeginDocument#1{#1}
+\providecommand\HyField@AuxAddToFields[1]{}
+\providecommand\HyField@AuxAddToCoFields[2]{}
+\bibstyle{unsrtnat}
+\citation{bates2021physical}
+\citation{Ophir1991}
+\citation{Hounsfield1973}
+\citation{Raissi2019}
+\citation{Karniadakis2021}
+\citation{Mei2017}
+\citation{Ackerman1998}
+\citation{Chase2019}
+\citation{Levental2009}
+\citation{Schade1912}
+\citation{Kirk1949}
+\citation{Sapuntsov1979}
+\citation{Newman1998}
+\citation{Donald1958}
+\citation{Lerner1987,Lerner1988}
+\citation{Ophir1991}
+\citation{Ormachea2020}
+\citation{Muthupillai1995}
+\citation{Ophir1991}
+\citation{Konofagou2003}
+\citation{Mei2017}
+\citation{Goenezen2011}
+\citation{Plessix2006}
+\citation{Mei2017}
+\citation{Boussinesq1885}
+\citation{Ronneberger2015}
+\citation{Feng2022}
+\citation{Wadhwa2013}
+\citation{Wang2023}
+\citation{Jumper2021}
+\citation{Willard2022,Cuomo2022}
+\citation{Raissi2019}
+\citation{Lu2021}
+\citation{Li2020}
+\citation{Rackauckas2020}
+\citation{DeRyck2022,Mishra2022}
+\citation{Brunton2016}
+\citation{Udrescu2020}
+\citation{Cranmer2023}
+\citation{Xie2022}
+\citation{Bouman2025}
+\citation{Levis2022}
+\citation{Moseley2020}
+\citation{Moseley2023}
+\citation{Karniadakis2021}
+\citation{Willard2022}
+\citation{Ragoza2023}
+\citation{ElastoNet2025}
+\citation{FDTDNet2025}
+\citation{Mohammadi2023}
+\citation{Chen2021}
+\citation{Raissi2019}
+\citation{Zhang2022}
+\citation{Zhang2020}
+\citation{Paszke2019}
+\citation{Wu2024}
+\citation{Xue2023}
+\citation{Ragoza2023,ElastoNet2025}
+\citation{Mohammadi2023}
+\citation{Chen2021}
+\citation{Xue2023}
+\citation{Wu2024}
+\citation{Mei2017}
+\citation{Ronneberger2015}
+\citation{Mohammadi2023}
+\citation{Karniadakis2021}
+\citation{Cybenko1989}
+\citation{Ronneberger2015}
+\citation{Paszke2019}
+\citation{Kingma2015}
+\citation{burns2023untrained}
+\citation{Xue2023}
+\citation{Wu2024}
+\citation{Karniadakis2021}
+\citation{Ronneberger2015}
+\citation{Zienkiewicz2013}
+\citation{Kaipio2007}
+\citation{Kaipio2007}
+\citation{Hounsfield1973}
+\citation{Boussinesq1885}
+\@writefile{lof}{\contentsline {figure}{\numberline {1}{\ignorespaces Pre-training state (iteration 0) with random U-Net initialization. Left: ground truth material distribution with circular inclusion (red, $E = 10$) in background (blue, $E = 1$). Center: U-Net continuous prediction showing random material assignment (SSIM $\approx 0.06$). Right: level-set hard boundary extraction from the random prediction, bearing no resemblance to the true inclusion.}}{20}{figure.1}\protected@file@percent }
+\newlabel{fig:pre_training}{{1}{20}{Pre-training state (iteration 0) with random U-Net initialization. Left: ground truth material distribution with circular inclusion (red, $E = 10$) in background (blue, $E = 1$). Center: U-Net continuous prediction showing random material assignment (SSIM $\approx 0.06$). Right: level-set hard boundary extraction from the random prediction, bearing no resemblance to the true inclusion}{figure.1}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {2}{\ignorespaces Baseline reconstruction after 1000 iterations using only L2 displacement loss (no regularization). The U-Net localizes the inclusion (SSIM = 0.72, accuracy = 87.8\%) but the predicted boundary is diffuse with spatial noise, demonstrating the need for regularization.}}{21}{figure.2}\protected@file@percent }
+\newlabel{fig:vanilla}{{2}{21}{Baseline reconstruction after 1000 iterations using only L2 displacement loss (no regularization). The U-Net localizes the inclusion (SSIM = 0.72, accuracy = 87.8\%) but the predicted boundary is diffuse with spatial noise, demonstrating the need for regularization}{figure.2}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {3}{\ignorespaces Reconstruction with TV regularization, Gaussian smoothing, and level-set post-processing after 1000 iterations (SSIM = 0.91, accuracy = 94.6\%). The predicted inclusion boundary is crisp and closely matches the ground truth circular geometry, confirming the effectiveness of the composite loss function.}}{21}{figure.3}\protected@file@percent }
+\newlabel{fig:post_training_full}{{3}{21}{Reconstruction with TV regularization, Gaussian smoothing, and level-set post-processing after 1000 iterations (SSIM = 0.91, accuracy = 94.6\%). The predicted inclusion boundary is crisp and closely matches the ground truth circular geometry, confirming the effectiveness of the composite loss function}{figure.3}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {4}{\ignorespaces Grid-search-optimized reconstruction after only 200 iterations (SSIM = 0.85, accuracy = 94.6\%). Systematic hyperparameter tuning achieves comparable accuracy to the untuned result (Figure\nobreakspace  {}\ref  {fig:post_training_full}) in one-fifth the iterations.}}{22}{figure.4}\protected@file@percent }
+\newlabel{fig:grid_search}{{4}{22}{Grid-search-optimized reconstruction after only 200 iterations (SSIM = 0.85, accuracy = 94.6\%). Systematic hyperparameter tuning achieves comparable accuracy to the untuned result (Figure~\ref {fig:post_training_full}) in one-fifth the iterations}{figure.4}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {5}{\ignorespaces Faint inclusion reconstruction ($\alpha = 1.2$, SSIM = 0.81, accuracy = 93.0\%). Despite the low stiffness contrast producing subtle boundary displacement differences, the method successfully detects and localizes the inclusion with graceful quality degradation.}}{22}{figure.5}\protected@file@percent }
+\newlabel{fig:faint}{{5}{22}{Faint inclusion reconstruction ($\alpha = 1.2$, SSIM = 0.81, accuracy = 93.0\%). Despite the low stiffness contrast producing subtle boundary displacement differences, the method successfully detects and localizes the inclusion with graceful quality degradation}{figure.5}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {6}{\ignorespaces Smaller inclusion reconstruction (SSIM = 0.40, accuracy = 88.5\%). The inclusion location is correctly identified, but boundary geometry is less precisely recovered due to the weaker displacement signal produced by the reduced inclusion size.}}{22}{figure.6}\protected@file@percent }
+\newlabel{fig:smaller}{{6}{22}{Smaller inclusion reconstruction (SSIM = 0.40, accuracy = 88.5\%). The inclusion location is correctly identified, but boundary geometry is less precisely recovered due to the weaker displacement signal produced by the reduced inclusion size}{figure.6}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {7}{\ignorespaces Most challenging scenario: small inclusion with faint contrast ($\alpha = 1.2$, SSIM = 0.49, accuracy = 89.5\%). The inclusion is detected and approximately localized, representing the sensitivity limit of the current methodology.}}{23}{figure.7}\protected@file@percent }
+\newlabel{fig:small_faint}{{7}{23}{Most challenging scenario: small inclusion with faint contrast ($\alpha = 1.2$, SSIM = 0.49, accuracy = 89.5\%). The inclusion is detected and approximately localized, representing the sensitivity limit of the current methodology}{figure.7}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {8}{\ignorespaces Robustness to initialization demonstrated across multiple independent runs. Each run uses identical training procedure and data with different random seeds. The reconstructions achieve consistent SSIM values above 0.90 with visually similar inclusion boundaries, confirming that the optimizer converges to the same solution regardless of initialization.}}{23}{figure.8}\protected@file@percent }
+\newlabel{fig:sensitivity}{{8}{23}{Robustness to initialization demonstrated across multiple independent runs. Each run uses identical training procedure and data with different random seeds. The reconstructions achieve consistent SSIM values above 0.90 with visually similar inclusion boundaries, confirming that the optimizer converges to the same solution regardless of initialization}{figure.8}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {9}{\ignorespaces Summary of reliability study findings: accuracy consistently above 80\%, reduced sensitivity to initial conditions, and no spurious local minima. The tight clustering across runs motivates a practical ensemble strategy where the practitioner runs the algorithm 3--5 times, discards outliers, and averages the clustered results.}}{24}{figure.9}\protected@file@percent }
+\newlabel{fig:reliability_summary}{{9}{24}{Summary of reliability study findings: accuracy consistently above 80\%, reduced sensitivity to initial conditions, and no spurious local minima. The tight clustering across runs motivates a practical ensemble strategy where the practitioner runs the algorithm 3--5 times, discards outliers, and averages the clustered results}{figure.9}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {10}{\ignorespaces Irregular inclusion reconstruction without learning rate optimization (SSIM = 0.21, approximately 13 minutes). The reconstruction fails to capture the complex boundary shape, highlighting the sensitivity of irregular geometries to hyperparameter selection. The training loss curve (bottom) shows convergence but to a poor local minimum.}}{25}{figure.10}\protected@file@percent }
+\newlabel{fig:irregular_no_lr}{{10}{25}{Irregular inclusion reconstruction without learning rate optimization (SSIM = 0.21, approximately 13 minutes). The reconstruction fails to capture the complex boundary shape, highlighting the sensitivity of irregular geometries to hyperparameter selection. The training loss curve (bottom) shows convergence but to a poor local minimum}{figure.10}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {11}{\ignorespaces Irregular inclusion reconstruction with learning rate optimization (SSIM = 0.80, accuracy = 92.7\%, approximately 17 minutes). The same U-Net architecture generalizes to non-convex, off-centered inclusion geometry without architectural modifications. The predicted boundary captures the overall shape and location, with the loss curve (bottom) showing stable convergence.}}{26}{figure.11}\protected@file@percent }
+\newlabel{fig:irregular_lr}{{11}{26}{Irregular inclusion reconstruction with learning rate optimization (SSIM = 0.80, accuracy = 92.7\%, approximately 17 minutes). The same U-Net architecture generalizes to non-convex, off-centered inclusion geometry without architectural modifications. The predicted boundary captures the overall shape and location, with the loss curve (bottom) showing stable convergence}{figure.11}{}}
+\citation{Greaves2011}
+\citation{Goenezen2011,Mei2017}
+\citation{Greaves2011}
+\citation{Paszke2019}
+\citation{Ronneberger2015}
+\citation{Paszke2019}
+\citation{He2015}
+\citation{He2016}
+\citation{Paszke2019}
+\citation{Rudin1992}
+\citation{Kingma2015}
+\citation{vanderWalt2014}
+\citation{Wang2004}
+\citation{Tancik2020}
+\citation{Feng2022}
+\citation{Ackerman1998}
+\bibdata{references}
+\bibcite{bates2021physical}{{1}{2021}{{Bickley}}{{}}}
+\bibcite{Ophir1991}{{2}{1991}{{Ophir et~al.}}{{Ophir, C\'{e}spedes, Ponnekanti, Yazdi, and Li}}}
+\bibcite{Hounsfield1973}{{3}{1973}{{Hounsfield}}{{}}}
+\bibcite{Raissi2019}{{4}{2019}{{Raissi et~al.}}{{Raissi, Perdikaris, and Karniadakis}}}
+\bibcite{Karniadakis2021}{{5}{2021}{{Karniadakis et~al.}}{{Karniadakis, Kevrekidis, Lu, Perdikaris, Wang, and Yang}}}
+\bibcite{Mei2017}{{6}{2017}{{Mei et~al.}}{{Mei, Wang, Shen, Rabke, and Goenezen}}}
+\bibcite{Ackerman1998}{{7}{1998}{{Ackerman}}{{}}}
+\bibcite{Chase2019}{{8}{2019}{{Chase and Follmer}}{{}}}
+\bibcite{Levental2009}{{9}{2009}{{Levental et~al.}}{{Levental, Yu, Kass, Lakins, Egeblad, Erler, Fong, Csiszar, Giaccia, Weninger, Yamauchi, Gasser, and Weaver}}}
+\bibcite{Schade1912}{{10}{1912}{{Schade}}{{}}}
+\bibcite{Kirk1949}{{11}{1949}{{Kirk and Kvorning}}{{}}}
+\bibcite{Sapuntsov1979}{{12}{1979}{{Sapuntsov et~al.}}{{Sapuntsov, Mitrofanova, and Savchenko}}}
+\bibcite{Newman1998}{{13}{1998}{{Newman and Rozycki}}{{}}}
+\bibcite{Donald1958}{{14}{1958}{{Donald et~al.}}{{Donald, MacVicar, and Brown}}}
+\bibcite{Lerner1987}{{15}{1987}{{Lerner and Parker}}{{}}}
+\bibcite{Lerner1988}{{16}{1988}{{Lerner et~al.}}{{Lerner, Parker, Holen, Gramiak, and Waag}}}
+\bibcite{Ormachea2020}{{17}{2020}{{Ormachea and Parker}}{{}}}
+\bibcite{Muthupillai1995}{{18}{1995}{{Muthupillai et~al.}}{{Muthupillai, Lomas, Rossman, Greenleaf, Manduca, and Ehman}}}
+\bibcite{Konofagou2003}{{19}{2003}{{Konofagou and Harrigan}}{{}}}
+\bibcite{Goenezen2011}{{20}{2011}{{Goenezen et~al.}}{{Goenezen, Barbone, and Oberai}}}
+\bibcite{Plessix2006}{{21}{2006}{{Plessix}}{{}}}
+\bibcite{Boussinesq1885}{{22}{1885}{{Boussinesq}}{{}}}
+\bibcite{Ronneberger2015}{{23}{2015}{{Ronneberger et~al.}}{{Ronneberger, Fischer, and Brox}}}
+\bibcite{Feng2022}{{24}{2022}{{Feng et~al.}}{{Feng, Ogren, Daraio, and Bouman}}}
+\bibcite{Wadhwa2013}{{25}{2013}{{Wadhwa et~al.}}{{Wadhwa, Rubinstein, Durand, and Freeman}}}
+\bibcite{Wang2023}{{26}{2023}{{Wang et~al.}}{{Wang, Fu, Du, Gao, Huang, Liu, Chandak, Liu, Van~Katwyk, Deac, Anandkumar, Bergen, Gomes, Ho, Kohli, Lasenby, Leskovec, Liu, Manber, others, and Zitnik}}}
+\bibcite{Jumper2021}{{27}{2021}{{Jumper et~al.}}{{Jumper, Evans, Pritzel, Green, Figurnov, Ronneberger, Tunyasuvunakool, Bates, \v {Z}\'{i}dek, Potapenko, Bridgland, Meyer, Kohl, Ballard, Cowie, Romera-Paredes, Nikolov, Jain, Adler, others, and Hassabis}}}
+\bibcite{Willard2022}{{28}{2022}{{Willard et~al.}}{{Willard, Jia, Xu, Steinbach, and Kumar}}}
+\bibcite{Cuomo2022}{{29}{2022}{{Cuomo et~al.}}{{Cuomo, Di~Cola, Giampaolo, Rozza, Raissi, and Piccialli}}}
+\bibcite{Lu2021}{{30}{2021}{{Lu et~al.}}{{Lu, Jin, Pang, Zhang, and Karniadakis}}}
+\bibcite{Li2020}{{31}{2020}{{Li et~al.}}{{Li, Kovachki, Azizzadenesheli, Liu, Bhattacharya, Stuart, and Anandkumar}}}
+\bibcite{Rackauckas2020}{{32}{2020}{{Rackauckas et~al.}}{{Rackauckas, Ma, Martensen, Warner, Zubov, Supekar, Skinner, Ramadhan, and Edelman}}}
+\bibcite{DeRyck2022}{{33}{2022}{{De~Ryck and Mishra}}{{}}}
+\bibcite{Mishra2022}{{34}{2022}{{Mishra and Molinaro}}{{}}}
+\bibcite{Brunton2016}{{35}{2016}{{Brunton et~al.}}{{Brunton, Proctor, and Kutz}}}
+\bibcite{Udrescu2020}{{36}{2020}{{Udrescu and Tegmark}}{{}}}
+\bibcite{Cranmer2023}{{37}{2023}{{Cranmer}}{{}}}
+\bibcite{Xie2022}{{38}{2022}{{Xie et~al.}}{{Xie, Takikawa, Saito, Litany, Yan, Khan, Tombari, Tompkin, Sitzmann, and Sridhar}}}
+\bibcite{Bouman2025}{{39}{2025}{{Zhao et~al.}}{{Zhao, Levis, Connor, Srinivasan, and Bouman}}}
+\bibcite{Levis2022}{{40}{2022}{{Levis et~al.}}{{Levis, Srinivasan, Chael, Ng, and Bouman}}}
+\bibcite{Moseley2020}{{41}{2020}{{Moseley et~al.}}{{Moseley, Markham, and Nissen-Meyer}}}
+\bibcite{Moseley2023}{{42}{2023}{{Moseley et~al.}}{{Moseley, Markham, and Nissen-Meyer}}}
+\bibcite{Ragoza2023}{{43}{2023}{{Ragoza and Batmanghelich}}{{}}}
+\bibcite{ElastoNet2025}{{44}{2025}{{Bustin et~al.}}{{}}}
+\bibcite{FDTDNet2025}{{45}{2025}{{FDTDNet authors}}{{}}}
+\bibcite{Mohammadi2023}{{46}{2024}{{Kamali and Laksari}}{{}}}
+\bibcite{Chen2021}{{47}{2021}{{Chen and Gu}}{{}}}
+\bibcite{Zhang2022}{{48}{2022}{{Zhang et~al.}}{{Zhang, Dao, Karniadakis, and Suresh}}}
+\bibcite{Zhang2020}{{49}{2020}{{Zhang et~al.}}{{Zhang, Yin, and Karniadakis}}}
+\bibcite{Paszke2019}{{50}{2019}{{Paszke et~al.}}{{Paszke, Gross, Massa, Lerer, Bradbury, Chanan, Killeen, Lin, Gimelshein, Antiga, Desmaison, K\"{o}pf, Yang, DeVito, Raison, Tejani, Chilamkurthy, Steiner, Fang, Bai, and Chintala}}}
+\bibcite{Wu2024}{{51}{2024}{{Wu}}{{}}}
+\bibcite{Xue2023}{{52}{2023}{{Xue et~al.}}{{Xue, Liao, Gan, Park, Xie, Liu, and Cao}}}
+\bibcite{Cybenko1989}{{53}{1989}{{Cybenko}}{{}}}
+\bibcite{Kingma2015}{{54}{2015}{{Kingma and Ba}}{{}}}
+\bibcite{burns2023untrained}{{55}{2023}{{Burns and Liu}}{{}}}
+\bibcite{Zienkiewicz2013}{{56}{2013}{{Zienkiewicz et~al.}}{{Zienkiewicz, Taylor, and Zhu}}}
+\bibcite{Kaipio2007}{{57}{2007}{{Kaipio and Somersalo}}{{}}}
+\bibcite{Greaves2011}{{58}{2011}{{Greaves et~al.}}{{Greaves, Greer, Lakes, and Rouxel}}}
+\bibcite{He2015}{{59}{2015}{{He et~al.}}{{He, Zhang, Ren, and Sun}}}
+\bibcite{He2016}{{60}{2016}{{He et~al.}}{{He, Zhang, Ren, and Sun}}}
+\bibcite{Rudin1992}{{61}{1992}{{Rudin et~al.}}{{Rudin, Osher, and Fatemi}}}
+\bibcite{vanderWalt2014}{{62}{2014}{{van~der Walt et~al.}}{{van~der Walt, Sch\"{o}nberger, Nunez-Iglesias, Boulogne, Warner, Yager, Gouillart, Yu, and {the scikit-image contributors}}}}
+\bibcite{Wang2004}{{63}{2004}{{Wang et~al.}}{{Wang, Bovik, Sheikh, and Simoncelli}}}
+\bibcite{Tancik2020}{{64}{2020}{{Tancik et~al.}}{{Tancik, Srinivasan, Mildenhall, Fridovich-Keil, Raghavan, Singhal, Ramamoorthi, Barron, and Ng}}}
+\gdef \@abspage@last{44}

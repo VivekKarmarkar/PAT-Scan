@@ -1,0 +1,43 @@
+Applied Mathematical Modelling 134 (2024) 126–147
+
+Y. Mei et al.
+
+Fig. 3. The nonhomogeneous shear modulus distribution of an inclusion embedded composite.
+
+Fig. 4. An approximation of Heaviside function.
+
+Reg(μ) =
+
+∫ √̅̅̅̅̅̅̅̅̅̅̅̅̅̅̅̅̅̅̅̅̅̅
+1
+2
+α
+|∇μ| + c2 dΩ
+2
+
+(15)
+
+Ω
+
+]
+[
+For the layered structure, ri = r1i (t1 ), r2i (t2 ), ⋯, rni (tn ) is the geometric parameter vector representing the distance between the i th
+] [
+[
+interface and C0 at the location ti. For the structure with inclusions embedded, the geometric parameter vector ri = r1i , r2i , ⋯, rni = xi0 ,
+]
+yi0 , di1 , ⋯, din− 2 is consisting of the coordinates of the center and distances between the control points to the center of i th component. In
+
+Eq. (14), the discrepancy between the computed displacement field and measured displacement field on partial surface ∂Ωimeas is
+minimized in L-2 norm. The computed displacement field is obtained by solving a forward problem using the finite element method
+[32]. Due to the influence of noise in measurements, we introduce a total variation diminishing regularization (TVD) term (the second
+term in Eq. (14)), and the specific form is given by Eq. (15). α is the regularization factor which controls the significance of the
+regularization on the objective function. c is a small constant to avoid singularities when evaluating the gradient of the regularization
+term with respect to optimization variables. It should be noted that there exist alternative forms for the regularization term apart from
+the domain integral forms. Nevertheless, we have chosen to adhere to the use of domain integrals due to practical considerations. In
+particular, the explicit inverse solver has been developed based on the established framework of the existing implicit inverse solver.
+This continuity in methodology ensures consistency and facilitates seamless integration between the two solvers [33]. The specific
+value of the regularization factor is chosen based on the smoothness criteria [22].
+130
+
+

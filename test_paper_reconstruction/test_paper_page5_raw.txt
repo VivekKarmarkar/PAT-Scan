@@ -1,0 +1,75 @@
+Published as a conference paper at ICLR 2015
+
+
+
+
+from first-order information. The Sum-of-Functions Optimizer (SFO) (Sohl-Dickstein et al., 2014)
+is a quasi-Newton method based on minibatches, but (unlike Adam) has memory requirements linear
+in the number of minibatch partitions of a dataset, which is often infeasible on memory-constrained
+systems such as a GPU. Like natural gradient descent (NGD) (Amari, 1998), Adam employs a
+preconditioner that adapts to the geometry of the data, since vbt is an approximation to the diagonal
+of the Fisher information matrix (Pascanu & Bengio, 2013); however, Adam’s preconditioner (like
+AdaGrad’s) is more conservative in its adaption than vanilla NGD by preconditioning with the square
+root of the inverse of the diagonal Fisher information matrix approximation.
+
+RMSProp: An optimization method closely related to Adam is RMSProp (Tieleman & Hinton,
+2012). A version with momentum has sometimes been used (Graves, 2013). There are a few impor-
+tant differences between RMSProp with momentum and Adam: RMSProp with momentum gener-
+ates its parameter updates using a momentum on the rescaled gradient, whereas Adam updates are
+directly estimated using a running average of first and second moment of the gradient. RMSProp
+also lacks a bias-correction term; this matters most in case of a value of β2 close to 1 (required in
+case of sparse gradients), since in that case not correcting the bias leads to very large stepsizes and
+often divergence, as we also empirically demonstrate in section 6.4.
+
+AdaGrad: An algorithm that works well for sparse gradients qP is AdaGrad (Duchi et al., 2011). Its
+                                                                 t
+basic version updates parameters as θt+1 = θt − α · gt /         i=1 gt . Note that if we choose β2 to be
+                                                                      2
+                                                                   P  t
+infinitesimally close to 1 from below, then limβ2 →1 vbt = t−1 · i=1 gt2 . AdaGrad corresponds to a
+version of Adam with β1 = 0, infinitesimal (1 − β2 ) and a replacement of α by an      qannealed  version
+                                                p                                            Pt
+αt = α · t −1/2
+                , namely θt − α · t −1/2
+                                         ·mb t / limβ2 →1 vbt = θt − α · t −1/2
+                                                                                 · gt / t · i=1 gt2 =
+                                                                                         −1
+             qP
+                    t
+                    i=1 gt . Note that this direct correspondence between Adam and Adagrad does
+θt − α · gt /            2
+
+not hold when removing the bias-correction terms; without bias correction, like in RMSProp, a β2
+infinitesimally close to 1 would lead to infinitely large bias, and infinitely large parameter updates.
+
+6     E XPERIMENTS
+To empirically evaluate the proposed method, we investigated different popular machine learning
+models, including logistic regression, multilayer fully connected neural networks and deep convolu-
+tional neural networks. Using large models and datasets, we demonstrate Adam can efficiently solve
+practical deep learning problems.
+We use the same parameter initialization when comparing different optimization algorithms. The
+hyper-parameters, such as learning rate and momentum, are searched over a dense grid and the
+results are reported using the best hyper-parameter setting.
+
+6.1   E XPERIMENT: L OGISTIC R EGRESSION
+
+We evaluate our proposed method on L2-regularized multi-class logistic regression using the MNIST
+dataset. Logistic regression has a well-studied convex objective, making it suitable for comparison
+of different optimizers without worrying √about local minimum issues. The stepsize α in our logistic
+regression experiments is adjusted by 1/ t decay, namely αt = √αt that matches with our theorat-
+ical prediction from section 4. The logistic regression classifies the class label directly on the 784
+dimension image vectors. We compare Adam to accelerated SGD with Nesterov momentum and
+Adagrad using minibatch size of 128. According to Figure 1, we found that the Adam yields similar
+convergence as SGD with momentum and both converge faster than Adagrad.
+As discussed in (Duchi et al., 2011), Adagrad can efficiently deal with sparse features and gradi-
+ents
+   √ as one of its main theoretical results whereas SGD is low at learning rare features. Adam with
+1/ t decay on its stepsize should theoratically match the performance of Adagrad. We examine the
+sparse feature problem using IMDB movie review dataset from (Maas et al., 2011). We pre-process
+the IMDB movie reviews into bag-of-words (BoW) feature vectors including the first 10,000 most
+frequent words. The 10,000 dimension BoW feature vector for each review is highly sparse. As sug-
+gested in (Wang & Manning, 2013), 50% dropout noise can be applied to the BoW features during
+
+
+                                                   5
+

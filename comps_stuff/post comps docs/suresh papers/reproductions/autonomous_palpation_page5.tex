@@ -1,0 +1,236 @@
+%% =================================================================
+%% Beber, Lamon, Saveriano, Fontanelli, Palopoli.
+%% "Autonomous Robotic Tissue Palpation and Abnormalities
+%%  Characterisation via Ergodic Exploration."
+%% IEEE Robotics and Automation Letters, preprint accepted Feb. 2026.
+%% DOI: 10.1109/LRA.2026.3673907
+%%
+%% Reconstruction of page 5 as study notes.
+%% Contents: Figure 2 (three synthetic stiffness distributions),
+%% Table I (performance metrics: 50 runs, noise-free vs noisy),
+%% prose for Simulation Setup + start of section IV-B.
+%% No NUMBERED equations; one inline unnumbered BO acquisition function.
+%% Preamble adds booktabs/multirow/array for Table I.
+%% =================================================================
+
+\documentclass[11pt]{article}
+
+\usepackage[margin=1in]{geometry}
+\usepackage{amsmath, amssymb}
+\usepackage{mathrsfs}
+\usepackage{bm}
+\usepackage{xcolor}
+\usepackage{fancyhdr}
+\usepackage{url}
+\usepackage{booktabs}
+\usepackage{multirow}
+\usepackage{array}
+
+\pagestyle{fancy}
+\fancyhf{}
+\lhead{\small Beber et al.: Ergodic Palpation for Tissue Mapping}
+\rhead{\small IEEE RA-L Preprint, Accepted Feb.\ 2026}
+\cfoot{\small 5 $\to$ \arabic{page}}
+\renewcommand{\headrulewidth}{0.4pt}
+
+\setcounter{page}{1}
+\setcounter{equation}{6}   % page 4 ended with eq. (6); no numbered eqs on page 5
+\setlength{\parskip}{4pt}
+
+\begin{document}
+
+% ---------- Preprint notice strip ----------
+\begin{center}
+{\footnotesize\itshape
+This article has been accepted for publication in IEEE Robotics and
+Automation Letters. This is the author's version which has not been
+fully edited and content may change prior to final publication.
+Citation information: DOI 10.1109/LRA.2026.3673907\par}
+\end{center}
+
+\vspace{0.4em}
+\hrule
+\vspace{0.6em}
+
+\noindent
+{\footnotesize\scshape Beber et al.: Ergodic Palpation for Tissue Mapping \hfill 5}
+
+\vspace{1.2em}
+
+% ---------- Continuation of IV-A Setup and Baselines from page 4 ----------
+\noindent
+They were generated as mixtures of Gaussian components with varying
+locations, covariances, and amplitudes, modelling localised stiff
+inclusions (over 100~kPa in pathological areas) in a softer
+background (few kilopascal in healthy regions) [29], similarly to
+related research [15]--[17]. Three scenarios in a square domain
+(with side 45~mm) were considered: (i) a single stiff region,
+(ii) two stiff regions, and (iii) three distinct stiff areas, whose
+distributions are illustrated in Fig.~2.
+
+% ---------- Figure 2 placeholder ----------
+\vspace{0.4em}
+\begin{center}
+\fbox{\parbox{0.92\textwidth}{\centering\vspace{1em}
+\textbf{[Figure 2 --- placeholder]}\\[0.8em]
+Three side-by-side 2D colour maps showing the synthetic ground-truth
+elasticity distributions used as simulation targets, labelled
+\textit{1 Stiff Area}, \textit{2 Stiff Areas}, \textit{3 Stiff
+Areas}. Each panel plots $x_{1}$ horizontally and $x_{2}$ vertically
+(both in mm, on a 0--45 grid). A shared vertical colour bar on the
+right encodes the elastic modulus in kPa, with the background at a
+low value (a few kPa, healthy tissue) and localised peaks above
+100~kPa marking the stiff inclusions. The inclusion patterns are
+Gaussian blobs of varying covariance and amplitude, placed at
+different locations in each of the three panels.
+\vspace{1em}}}
+\end{center}
+
+\vspace{0.3em}
+
+\begin{center}
+\textbf{Fig. 2.} Synthetic elasticity distributions for simulated
+scenarios, from 1 to 3 stiffer regions. The colour scale refers to
+the elastic modulus (in kPa).
+\end{center}
+
+\vspace{0.8em}
+
+\noindent
+These regions were first densely sampled with a grid-based approach
+to generate the ground truth, used to compute the estimation and
+segmentation errors. The simulation environment was implemented in
+Python, with GPR and BO components built using the \texttt{PyTorch}
+framework, thus ensuring efficient GPU-based inference and
+optimisation during online execution. All simulations and
+experiments were executed on a mini PC equipped with an Intel
+i7-13700HX CPU (24 cores), 64~GB RAM, and an NVIDIA RTX 4070 GPU
+with 8~GB of memory. The proposed framework runs in real time, with
+HEDAC trajectory updates and EKF-based viscoelastic estimation both
+requiring less than 1~ms per control loop iteration at 100~Hz. GPR
+updates are performed asynchronously at a lower frequency (1~Hz),
+with a maximum observed update time of 105~ms. Elasticity samples
+were collected at a frequency of 4~Hz and a maximum velocity of
+1~cm/s. In this configuration, the maximum distance between two
+consecutive sampled points equals half of the indenter radius, which
+is set here to 2.5~mm. These simulations were conducted to evaluate
+the performance of the proposed ergodic search strategy
+(Sec.~IV-B) across the three distribution scenarios.
+
+\vspace{0.4em}
+
+\noindent
+We compared ergodic search with two variants of Bayesian
+Optimisation (BO), which is the standard baseline for robotic
+palpation (Sec.~IV-C). BO models an expensive-to-evaluate objective
+function $f(x)$ using a Gaussian Process (GP) and selects sampling
+locations by maximising an acquisition function that balances
+exploration and exploitation. Given data
+$\mathcal{D} = (x_{i}, y_{i})_{i=1}^{n}$, the GP provides a
+posterior predictive distribution
+$f(x) \sim \mathcal{N}(\mu(x),\,\sigma^{2}(x))$. As an acquisition
+function, the Expected Improvement (EI) [15], [16] is employed,
+$a_{\mathrm{EI}}(x) = (f_{\min} - \mu(x))\,\Phi(z) + \sigma(x)\,
+\phi(z)$, where $f_{\min}$ is the minimum observed value and
+$z = \dfrac{f_{\min} - \mu(x)}{\sigma(x)}$. This variant is denoted
+BO-EI. However, the standard point-to-point implementation of BO has
+limitations for robotic palpation. Due to safety constraints,
+especially in medical settings, the robot must follow smooth and
+predictable trajectories and cannot move rapidly between distant
+sampling points as typically generated by the BO. Moreover, each
+probing action can take up to 5~s due to indentation and
+viscoelastic estimation time. To ensure a fair comparison with the
+proposed ergodic planner, we adapted BO to perform continuous
+palpation, which characterises our ergodic search. This prevents BO
+from penalising non-sampled regions during motion. Specifically,
+additional samples are collected every 2.5~mm (half the indenter
+radius) along the path between BO-selected targets, enabling BO to
+exploit intermediate data, similarly to the ergodic approach
+(variant termed BO-EIS).
+
+% ---------- Table I ----------
+\vspace{0.8em}
+
+\noindent\textbf{Table I}\\[0.2em]
+{\small Performance metrics across 50 runs with noise-free elasticity
+measurements (w/o) and with white noise $\mathcal{N}(0,\,6.25\,
+\mathrm{kPa}^{2})$ (w/). NR is the number of stiff regions, DR the
+detection rate, $l$ the lenght of the trajectory, and RMSE is the
+root mean square error.}
+
+\vspace{0.3em}
+
+\begin{center}
+\small
+\begin{tabular}{c c c c c}
+\toprule
+NR & DR (\%) $\uparrow$ & $l$ [mm] & Time [s] $\downarrow$ & RMSE [kPa] $\downarrow$ \\
+\midrule
+\multicolumn{5}{c}{\textit{w/o Measurement Noise}} \\
+\midrule
+1 & 100\,\% & 664 & 70 & 0.37 \\
+2 & 100\,\% & 660 & 69 & 0.97 \\
+3 & 99\,\%  & 665 & 70 & 1.96 \\
+\midrule
+\multicolumn{5}{c}{\textit{w/\phantom{o} Measurement Noise}} \\
+\midrule
+1 & 100\,\% & 633 & 66 & 1.57 \\
+2 & 99\,\%  & 630 & 65 & 2.17 \\
+3 & 97\,\%  & 580 & 60 & 3.14 \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\vspace{0.6em}
+
+\noindent
+To assess the spatial accuracy of the reconstructed stiffness maps,
+we applied a segmentation pipeline to identify distinct stiff
+regions. Based on the elasticity estimates in Sec.~IV-B and IV-C,
+KMeans clustering (\texttt{SciPy}) was used to separate stiffer
+regions from the surrounding soft tissue. Unlike fixed thresholding
+approaches [12], this method does not require manual parameter
+tuning and adapts to the distribution of estimated stiffness values.
+The number of detected regions was obtained by counting connected
+components in the stiff cluster. In Sec.~IV-D, the segmented regions
+are converted into polygonal boundaries using \texttt{Shapely} and
+compared against ground truth using standard segmentation metrics.
+
+\vspace{0.6em}
+
+% ---------- B. Robustness of Ergodic Exploration ----------
+\noindent\textit{B.~Robustness of Ergodic Exploration}
+
+\vspace{0.2em}
+
+\noindent
+In this section, the performance of the ergodic controller is tested
+with different numbers of stiffer regions. To assess the robustness
+of the algorithm, for each map, the simulation is executed 50 times
+with a random starting position, while three performance metrics
+were considered: 1. the detection rate (DR), i.e., the percentage of
+trials in which the algorithm correctly estimates the number and
+position of the stiff regions present in the ground truth (higher is
+better); 2. the elapsed time (lower is better); 3. the root mean
+square error (RMSE, lower is better). For completeness, we report
+also the trajectory length $l$. Each exploration terminates when the
+ergodic metric $\alpha$ reaches 0.4 (set experimentally). Two
+experimental conditions were examined: one involved noise-free
+elasticity measurements and another incorporated noisy measurements
+$\mathcal{N}(0,\,6.25\,\mathrm{kPa}^{2})$, where the variance equals
+the noise of the elasticity estimation in the worst case. The
+results of the study are reported in Tab.~I. Overall, the algorithm
+exhibited comparable performance in terms of DR and execution
+
+% ---------- Bottom license strip ----------
+\vfill
+\hrule
+\vspace{0.3em}
+\begin{center}
+{\footnotesize\itshape
+This work is licensed under a Creative Commons Attribution 4.0
+License. For more information, see
+\url{https://creativecommons.org/licenses/by/4.0/}\par}
+\end{center}
+
+\end{document}

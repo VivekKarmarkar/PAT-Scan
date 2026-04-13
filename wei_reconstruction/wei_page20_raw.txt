@@ -1,0 +1,48 @@
+Y. Mei et al.                                                                                   Applied Mathematical Modelling 134 (2024) 126–147
+
+
+
+
+Fig. 26. The reconstructed results with varying 3,6 and 9 surface displacement datasets corresponding to Sample 2 (Without noise, Unit: MPa).
+
+
+
+Table 6
+The regularization factors of Figs. 23-26.
+  Inverse method                                Explicit inverse method                           Implicit inverse method
+
+  Number of surface displacement datasets       3                 6              9                3                 6                9
+                                                      − 15                − 16         − 17             − 14                − 14
+  Sample 1         no noise                     1 × 10            1 × 10         1 × 10           1 × 10            1 × 10           1 × 10− 14
+                   1 % noise                    1 × 10− 13        1 × 10− 13     2 × 10− 13       5 × 10− 13        3 × 10− 13       2 × 10− 13
+                   5 % noise                    1 × 10− 12        5 × 10− 12     1 × 10− 12       1 × 10− 11        1 × 10− 11       1 × 10− 12
+  Sample 2         no noise                     0.00              0.00           0.00             1 × 10− 13        1 × 10− 13       1 × 10− 14
+
+
+
+future research, we plan to explore the integration of optical measurement techniques with the proposed explicit inverse approach to
+conduct practical experiments and further test this novel structural health monitoring approach. By combining optical measurement
+data with our method, we aim to validate its effectiveness in real-world scenarios and enhance its applicability for monitoring the
+variation of biomechanical behavior of soft tissues. This would provide valuable insights into the method’s performance under realistic
+conditions and potentially open up new avenues for its practical implementation in biomedical applications.
+    Overall, the explicit inverse approach presented in the paper offers a more efficient and cost-effective method for characterizing the
+elastic property distribution of biological structures with surface deformation. The reduction in optimization variables and the reliance
+on easily measurable surface deformation data make it a valuable contribution to the field.
+
+Conclusion
+
+    In this paper, we propose an explicit inverse approach to map the nonhomogeneous elastic property distribution of three typical
+tissue structure by surface deformation nondestructively. Several numerical examples are employed to assess the feasibility and
+performance of the proposed method. The results of the numerical study demonstrate the robust capability of the explicit inverse
+method in accurately reconstructing the nonhomogeneous shear modulus distribution of soft tissues, surpassing the performance of the
+implicit inverse method with limited surface deformation datasets. Specifically for the layered ring structure, we observe that the
+average relative error of the reconstruction can exceed 40 % when using the implicit inverse method, while the explicit inverse method
+achieves a remarkable average relative error of only 5 %. The outcomes of our research underscore the efficacy of the proposed explicit
+inverse approach, offering a more efficient and cost-effective means to characterize the elastic property distribution of biological
+structures utilizing a reduced number of optimization variables.
+
+
+
+
+                                                                      145
+

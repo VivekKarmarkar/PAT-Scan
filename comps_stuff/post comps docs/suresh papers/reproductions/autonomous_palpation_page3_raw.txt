@@ -1,0 +1,85 @@
+                 This article has been accepted for publication in IEEE Robotics and Automation Letters. This is the author's version which has not been fully edited and
+                                           content may change prior to final publication. Citation information: DOI 10.1109/LRA.2026.3673907
+
+BEBER et al.: ERGODIC PALPATION FOR TISSUE MAPPING                                                                                                                            3
+
+
+
+spatial gradients. Although viscoelastic modelling supports ro-                            B. Expected Information Density for Elasticity Maps
+bust estimation, lesion search and characterisation in this work                              To prioritise regions for further palpation, we define an EID
+are driven solely by elasticity. Our framework is structured as                            function ξEID (x) that balances two objectives: exploration of
+a closed-loop search algorithm comprising four main com-                                   uncertain areas, and exploitation of predicted high-stiffness
+ponents: A. a target distribution over tissue stiffness, which is                          regions and refinement near region boundaries. Formally, we
+updated at every iteration; B. an Expected Information Density                             define
+(EID) map to prioritise sampling locations; C. a trajectory                                                                             
+planner using ergodic control, guided by the EID; D. a                                                               g(x)         µ(x)           σ(x)
+                                                                                            ξ˜EID (x) = (1−α) R              +R            +α R          (1)
+data acquisition executed during trajectory execution, which                                                         X
+                                                                                                                       g(x)      X
+                                                                                                                                    µ(x)        X
+                                                                                                                                                   σ(x)
+enables updates in the target distribution. These steps are
+                                                                                           the un-normalised distribution, where g(x) = ∥∇µ(x)∥ is
+executed cyclically, updating the target distribution (E.) until
+                                                                                           the gradient norm of the predicted elasticity, highlighting
+a predefined stopping criterion is met (F.). Each component
+                                                                                           boundaries. The distribution (1) is then normalised as:
+is designed to be modular and independent, allowing flexible
+integration of alternative models or control strategies.                                                                                  ξ˜EID (x)
+                                                                                                                      ξEID (x) = R                   .                      (2)
+A. Target Distribution                                                                                                                     ξ˜ (x) dx
+                                                                                                                                         X EID
+
+   We use GPR to construct a continuous map of the stiffness                               The trade-off between exploration and exploitation is con-
+distribution across the palpated surface. The robot end-effector                           trolled by the scalar α ∈ [0, 1]. Lower values bias the system
+positions serve as the input domain, and the estimated elas-                               towards known high-stiffness or high-gradient areas, while
+ticity values form the output. After each regression update,                               higher values encourage sampling in regions of high uncer-
+the mean function µ(x) estimates the stiffness at unobserved                               tainty. In our implementation, α varies over time depending
+locations, while the variance function σ 2 (x) quantifies the                              on the value of the ergodic metric in the following way:
+model uncertainty. As expected with GPR, uncertainty in-                                                               R
+                                                                                                                            e(x, t) dx
+creases with distance from the observed samples. The squared                                                   α(t) = R X              ,               (3)
+exponential kernel ensures smooth, differentiable estimates,                                                             X
+                                                                                                                            e(x, 0) dx
+which are critical for downstream gradient computation.                                    where e(x, t) is the ergodic metric that will be defined in the
+   1) Gaussian Process Regression: is a non-parametric                                     following section in (4). According to (3), at the onset of the
+Bayesian approach for estimating continuous functions from                                 exploration, the trajectory is not ergodic and α(0) = 1. As a
+data, offering both predictions and uncertainty estimates. Un-                             consequence, the EID in (1) is dominated by the variance of
+like parametric models, which assume a fixed functional form,                              the GPR, resulting in a purely exploratory behaviour. Regions
+GPR models a distribution over functions that is updated as                                that have not yet been sampled exhibit higher uncertainty
+new observations are incorporated [20]. A Gaussian Process                                 and are therefore prioritised for exploration. As informative
+(GP) is a collection of random variables such that any finite                              measurements are collected, the ergodic metric progressively
+subset follows a joint Gaussian distribution. Formally, it is                              decreases, leading to a gradual rebalancing between explo-
+written as:                                                                                ration and exploitation.the spatial coverage of the trajectory
+                 f (x) ∼ GP(m(x), k(x, x′ )),                                              increasingly matches the target EID distribution, and the
+where m(x) is the mean function (often assumed zero) and                                   exploration naturally shifts towards exploitation of regions
+k(x, x′ ) is the covariance function, or kernel, which encodes                             associated with higher estimated stiffness and pronounced
+the similarity between inputs. The kernel defines how closely                              spatial gradients, such as the boundaries of stiff inclusions.
+related the outputs are at different input points. One of the                              We want to highlight that the EID is computed on-the-fly and
+most widely used kernels is the squared exponential (SE):                                  does not exploit prior knowledge about the inspected area.
+                                    ∥x − x′ ∥2
+                                              
+                        ′
+               kSE (x, x ) = exp −               ,
+                                        2l2                                                C. Trajectory Planning
+where l is the length scale parameter controlling smoothness                                  The normalised EID ξEID is used as the target distribution
+(in our experiments, l = 2.5 cm is equal to the radius of the                              for the ergodic planner, which computes a trajectory that visits
+indenter), and ∥x − x′ ∥ is the Euclidean distance between                                 each region in proportion to its expected information content.
+inputs. This kernel implies smooth, infinitely differentiable                              The HEDAC algorithm [19] is used to generate the trajectory
+functions, making it ideal for modelling physical quantities                               online.
+such as tissue stiffness.                                                                     1) Ergodic Control: aims to guide a robot trajectory to
+   2) GPR Training: Given a set of training observations                                   match a target spatial distribution, balancing exploration and
+X with corresponding outputs y, GPR computes a posterior                                   exploitation by spending more time in regions of higher
+predictive distribution at new input locations X ∗ . This yields                           interest. It models the coverage density using radial basis
+a predicted mean function µ∗ , representing the estimated                                  functions (RBFs). Given a trajectory z : [0, t] → Ω ⊂ Rn ,
+stiffness at unobserved locations, and an associated covariance                            the normalised coverage density c(x, t) is:
+Σ∗ , which quantifies model uncertainty. As expected, the
+uncertainty increases with distance from the observed samples,                                                                    1 t
+                                                                                                                                    Z
+                                                                                                          c̃(x, t)
+reflecting reduced confidence in sparsely explored regions.                                 c(x, t) = R              , c̃(x, t) =      ϕσ (x − z(τ )) dτ,
+                                                                                                        Ω
+                                                                                                          c̃(x, t)dx              t 0
+
+                 This work is licensed under a Creative Commons Attribution 4.0 License. For more information, see https://creativecommons.org/licenses/by/4.0/
+

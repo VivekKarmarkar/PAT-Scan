@@ -1,0 +1,152 @@
+%% =================================================================
+%% Wei, Mei, Zhao, Xiao, Sun, Zhang, Guo.
+%% "Nondestructively identifying the mechanical behavior of soft
+%%  tissues using surface deformation with an explicit inverse
+%%  approach."
+%% Appl. Math. Modelling 134 (2024) 126--147.
+%%
+%% Reconstruction of page 4 (printed p. 129) as study notes.
+%% Prose: extracted verbatim from the PDF text layer via pdftotext
+%%        (line breaks and joined-word artifacts cleaned up).
+%% Math:  hand-transcribed from the rendered page image — Eqs. (8)–(14)
+%%        including the layered/inclusion TDF definitions, the Boolean
+%%        shear-modulus composition, and the smoothed Heaviside.
+%% Figure 2: placeholder box with caption + visual description.
+%% Note on Eq. (12): the paper renders this single equation in bold
+%%        typeface (a typesetting idiosyncrasy unique to this line).
+%%        Reproduced faithfully via \boldsymbol / \mathbf.
+%% =================================================================
+
+\documentclass[11pt]{article}
+
+\usepackage[margin=1in]{geometry}
+\usepackage{amsmath, amssymb}
+\usepackage{mathrsfs}
+\usepackage{bm}
+\usepackage{fancyhdr}
+
+\pagestyle{fancy}
+\fancyhf{}
+\lhead{\small Y.~Mei et al.}
+\rhead{\small Applied Mathematical Modelling 134 (2024) 126--147}
+\cfoot{\small 129 $\to$ \arabic{page}}
+\renewcommand{\headrulewidth}{0.4pt}
+
+\setcounter{page}{1}
+\setcounter{equation}{7}  % next equation is (8)
+
+\begin{document}
+
+\noindent
+introducing the following topological description function (TDF):
+\begin{equation}
+\begin{cases}
+\phi^i(\mathbf{x}) < 0 & \text{if } \mathbf{x} \in \Omega^i \\
+\phi^i(\mathbf{x}) = 0 & \text{if } \mathbf{x} \in \partial\Omega^i \\
+\phi^i(\mathbf{x}) > 0 & \text{if } \mathbf{x} \in \Omega \setminus \Omega^i
+\end{cases}
+\end{equation}
+
+For the layered structure, $\phi^i$ is the TDF of the $i$-th
+interface and $\Omega^i$ is the region occupied from the curve $C^i$
+and $C^0$. The mathematical expression of TDF for a layered structure
+can be defined as:
+\begin{equation}
+\phi^i(\mathbf{x}) = r(t) - r^i(t)
+\end{equation}
+where $r^i(t)$ is the distance between the curve $C^i$ and $C^0$ at
+any arbitrary point on the domain. To this end, the $m$-th layer of
+the structure ($m > 1$) can be defined by $\phi^{m-1}(\mathbf{x}) > 0$
+and $\phi^{m}(\mathbf{x}) \leq 0$, except for the first layer
+$\phi^{1}(\mathbf{x}) < 0$ and last layer $\phi^{n}(\mathbf{x}) > 0$.
+To this end, A bilayer structure can be expressed by the proposed
+method as shown in Fig.~2. Note that we assume that each layer is
+homogeneous and did not consider spatial variations within a layer.
+
+For the domain with inclusion embedded, $\phi^i$ is the TDF of the
+$i$-th component and $\Omega^i$ is the region occupied by the $i$-th
+component. For an inclusion embedded composite, the mathematical
+expression of TDF is:
+\begin{equation}
+\phi^i(\mathbf{x}) = \sqrt{\bigl(x - x_o^i\bigr)^{2}
+                           + \bigl(y - y_o^i\bigr)^{2}}
+                     - r^i\!\left(\theta^i\right)
+\end{equation}
+where $\theta^i$ is the angle from the point $(x, y)$ to the center
+of the $i$-th component $\left(x_o^i, y_o^i\right)$ in polar
+coordinate system. $r^i(\theta^i)$ is the distance from the point
+with the angle of $\theta^i$ on $\partial\Omega^i$ to the center
+$\left(x_o^i, y_o^i\right)$ as shown in Fig.~3.
+
+With the defined TDF, the spatial variation of the shear modulus of
+a layered composite can be defined based on the Boolean operators
+[31]:
+\begin{equation}
+\mu(\mathbf{x}) = \mu^{0}\bigl(1 - H(\phi^{1}(\mathbf{x}))\bigr)
++ \sum_{i=1}^{n-1}\!\bigl[\mu^{i}\, H(\phi^{i}(\mathbf{x}))
+                           \bigl(1 - H(\phi^{i+1}(\mathbf{x}))\bigr)\bigr]
++ \mu^{n}\, H(\phi^{n}(\mathbf{x}))
+\end{equation}
+where $\mu^{0}$ is the shear modulus of background. $\mu^{n}$ is the
+shear modulus of the last layer. $H(z)$ is the Heaviside function.
+If there is no interface curve $C^i$, $\mu(\mathbf{x}) = \mu^{0}$ is
+a homogeneous domain. However, the TDF definitions of composite with
+embedded inclusions are different, that is:
+\begin{equation}
+\boldsymbol{\mu}\!\left(\boldsymbol{x}\right) =
+\boldsymbol{\mu}^{0} \prod_{i=1}^{n}
+  \mathbf{H}\!\left(\boldsymbol{\phi}^{i}(\boldsymbol{x})\right)
++ \sum_{i=1}^{n}\!\bigl(\boldsymbol{\mu}^{i}
+  \bigl(1 - \mathbf{H}(\boldsymbol{\phi}^{i}(\boldsymbol{x}))\bigr)\bigr)
+\end{equation}
+
+As the Heaviside function is a discontinuous function, we will
+utilize the following function to approximate the Heaviside function
+so that we can evaluate the spatial gradient of the Heaviside
+function:
+\begin{equation}
+H(z) = 0.5 \times \left(1 + \tanh\!\left(\dfrac{z}{\varepsilon}\right)\right)
+\end{equation}
+where $\varepsilon$ is a small constant. With the decrease of
+$\varepsilon$, the approximation of the Heaviside function is closer
+to the corresponding analytical expression (see Fig.~4). However, a
+smaller $\varepsilon$ might lead to an extremely large gradient at
+$z$ approaching to zero. Thus, the small constant $\varepsilon$
+should be carefully chosen.
+
+\subsection*{\textit{Inverse problem}}
+
+\noindent
+After discussing the TDF, the inverse problem can be stated as:
+Given $n_{\text{meas}}$ surface measured displacement fields, find
+the optimal geometric vectors $\mathbf{r}^1, \mathbf{r}^2, \ldots,
+\mathbf{r}^m$ and the shear moduli $\mu^0, \mu^1, \ldots, \mu^m$,
+such that the following objective function is minimized:
+\begin{equation}
+\Pi = \dfrac{1}{2} \sum_{i_{\text{meas}}=1}^{n_{\text{meas}}}
+\int \left|\mathbf{u}_i^{\text{com}} - \mathbf{u}_i^{\text{meas}}\right|^{2}
+\, d\partial\Omega_{i_{\text{meas}}} + \text{Reg}(\mu)
+\end{equation}
+
+% ---------- Figure 2 placeholder ----------
+\vspace{1em}
+\begin{center}
+\fbox{\parbox{0.92\textwidth}{\centering\vspace{1em}
+\textbf{[Figure 2 — placeholder]}\\[0.8em]
+Bilayer structure illustrating the TDF construction. The bottom
+layer $\mu^{0}$ (teal) is bounded below by the reference curve
+$C^{0}$; the top layer $\mu^{1}$ (pink) is bounded above by the
+interface curve $C^{1}$. Six control points
+$\mathbf{P}^{1}_{1}, \mathbf{P}^{1}_{2}, \ldots, \mathbf{P}^{1}_{6}$
+define the B-spline interface $C^{1}$ (orange). Radial distances
+$r^{1}_{1}, r^{1}_{2}, \ldots, r^{1}_{6}$ connect each control point
+back to $C^{0}$, parameterised along $t$.
+\vspace{1em}}}
+\end{center}
+\vspace{0.4em}
+\begin{center}
+\textbf{Fig. 2.} An example of the nonhomogeneous shear modulus
+distribution of a bilayer structure.
+\end{center}
+
+\end{document}

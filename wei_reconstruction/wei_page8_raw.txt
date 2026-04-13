@@ -1,0 +1,53 @@
+Applied Mathematical Modelling 134 (2024) 126–147
+
+Y. Mei et al.
+n
+)
+(
+∂μ ∏
+=
+H ϕi (x)
+∂μ0 i=1
+
+(27)
+
+∂μ
+For the shear modulus μj of the j-th component, ∂μ
+j is given by:
+
+)
+(
+∂μ
+= 1 − H ϕj (x)
+∂μj
+
+(28)
+
+Results
+Case 1: A layered rectangular structure
+In the first numerical example, we analyze a layered rectangular structure, illustrated in Fig. 6. The dimensions of this structure are
+1.0mm*0.2 mm. To discretize the problem domain, we utilize 7200 linear triangular elements. In the forward finite element simu­
+lation, a concentrated force is applied to the top edge, while the bottom edge was restricted the vertical motion and the center point is
+fully fixed. In the inverse problem, our focus lies in utilizing displacement datasets collected from the top edge as inputs for the inverse
+scheme. Acknowledging that relying on a single surface displacement dataset may not produce optimal reconstruction results, we
+change the location of the concentrated force and incorporate multiple surface displacement datasets to solve the inverse problem. The
+target shear modulus distributions for one(the homogenous case), two, and three layers are depicted in Fig. 6(a), (b), and (c),
+respectively. The shear modulus values of each layer in the structure are of a similar order to that of skin tissue [36]. Considering the
+uncertainty regarding the total number of layers, we initially assume a configuration with six layers for the inverse problem, as
+depicted in Fig. 7(a). For the explicit inverse scheme, we utilize 10 control points to interpolate each interface. Thus, the total number
+of optimization variables is 56 including 50 geometric variables and 6 shear moduli.
+From Fig. 7, it can be seen that both the shape of the interfaces between the neighboring layers and the shear modulus values of
+each layer varies and finally reach to the target shear modulus distribution (Sample 1). Note that it takes only 52 iterations for
+convergence. Figs. 8–10 are the reconstructed shear modulus distributions for Samples 1–3 using explicit and implicit inverse ap­
+proaches for the noise free cases, respectively. In the implicit inverse method, the total number of optimization variables is linearly
+proportional to the mesh size. In this case, the total number of optimization variables is 3691, which is equal to the total number of
+nodes. The reconstructed results demonstrate that both inverse methods can yield decent reconstruction with noise free cases. Further,
+the implicit method fails to recover the heterogeneity at the upper corner compared with the results by the explicit inverse method.
+Since the total number of optimization variables is remarkably reduced in the explicit inverse method, the total number of minimi­
+zation iterations is reduced. The total number of minimization iterations for the explicit inverse method is approximately 10 times less
+than that required for the implicit inverse method. Furthermore, the shear modulus reconstruction obtained through the implicit
+
+Fig. 6. The target shear modulus distribution of three samples with different number of layers (Unit: MPa). SM stands for shear modulus.
+133
+
+

@@ -1,0 +1,716 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>PAT-Scan — Developer Salary Estimate</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg-primary: #0f1729;
+    --bg-secondary: #1a2340;
+    --bg-card: rgba(30, 42, 71, 0.7);
+    --accent-teal: #00d4aa;
+    --accent-coral: #ff6b6b;
+    --accent-gold: #ffd93d;
+    --accent-blue: #4ecdc4;
+    --accent-purple: #a78bfa;
+    --text-primary: #e8edf5;
+    --text-secondary: #8892a8;
+    --text-muted: #5a6478;
+    --border: rgba(255,255,255,0.08);
+    --glass: rgba(255,255,255,0.04);
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+    background: var(--bg-primary);
+    color: var(--text-primary);
+    line-height: 1.6;
+    min-height: 100vh;
+  }
+
+  .container {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 2rem 1.5rem;
+  }
+
+  /* Header */
+  .header {
+    text-align: center;
+    padding: 3rem 0 2rem;
+  }
+
+  .header .project-name {
+    font-size: 0.85rem;
+    font-weight: 600;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--accent-teal);
+    margin-bottom: 0.75rem;
+  }
+
+  .header h1 {
+    font-size: clamp(1.5rem, 4vw, 2.2rem);
+    font-weight: 300;
+    color: var(--text-secondary);
+    margin-bottom: 2rem;
+  }
+
+  .hero-salary {
+    font-size: clamp(3rem, 10vw, 5.5rem);
+    font-weight: 900;
+    background: linear-gradient(135deg, var(--accent-teal), var(--accent-blue));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    line-height: 1.1;
+    margin-bottom: 0.5rem;
+  }
+
+  .hero-subtitle {
+    font-size: 1rem;
+    color: var(--text-muted);
+    font-weight: 400;
+  }
+
+  /* Explorer Controls */
+  .explorer {
+    background: var(--bg-card);
+    backdrop-filter: blur(20px);
+    border: 1px solid var(--border);
+    border-radius: 20px;
+    padding: 2rem;
+    margin: 2.5rem 0;
+  }
+
+  .explorer h2 {
+    font-size: 1.1rem;
+    font-weight: 600;
+    margin-bottom: 1.5rem;
+    color: var(--text-primary);
+  }
+
+  .controls {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 1.5rem;
+  }
+
+  .control-group label {
+    display: block;
+    font-size: 0.75rem;
+    font-weight: 600;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    color: var(--text-muted);
+    margin-bottom: 0.6rem;
+  }
+
+  .toggle-group {
+    display: flex;
+    background: var(--bg-primary);
+    border-radius: 12px;
+    padding: 4px;
+    gap: 4px;
+  }
+
+  .toggle-btn {
+    flex: 1;
+    padding: 0.6rem 0.8rem;
+    border: none;
+    border-radius: 10px;
+    background: transparent;
+    color: var(--text-secondary);
+    font-family: inherit;
+    font-size: 0.82rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.3s ease;
+  }
+
+  .toggle-btn.active {
+    background: var(--accent-teal);
+    color: var(--bg-primary);
+    font-weight: 700;
+    box-shadow: 0 4px 15px rgba(0, 212, 170, 0.3);
+  }
+
+  .toggle-btn:hover:not(.active) {
+    background: rgba(255,255,255,0.06);
+    color: var(--text-primary);
+  }
+
+  select {
+    width: 100%;
+    padding: 0.7rem 1rem;
+    background: var(--bg-primary);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    color: var(--text-primary);
+    font-family: inherit;
+    font-size: 0.85rem;
+    cursor: pointer;
+    appearance: none;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%238892a8' stroke-width='2'%3E%3Cpath d='M6 9l6 6 6-6'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 12px center;
+    transition: border-color 0.3s ease;
+  }
+
+  select:focus {
+    outline: none;
+    border-color: var(--accent-teal);
+  }
+
+  /* Salary Display */
+  .salary-display {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 1.5rem;
+    margin: 2.5rem 0;
+  }
+
+  .salary-card {
+    background: var(--bg-card);
+    backdrop-filter: blur(20px);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    padding: 1.5rem;
+    text-align: center;
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .salary-card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 3px;
+    border-radius: 16px 16px 0 0;
+  }
+
+  .salary-card.base::before { background: var(--accent-teal); }
+  .salary-card.bonus::before { background: var(--accent-gold); }
+  .salary-card.equity::before { background: var(--accent-purple); }
+  .salary-card.benefits::before { background: var(--accent-coral); }
+
+  .salary-card:hover {
+    transform: translateY(-4px);
+    border-color: rgba(255,255,255,0.15);
+    box-shadow: 0 12px 40px rgba(0,0,0,0.3);
+  }
+
+  .salary-card .card-label {
+    font-size: 0.72rem;
+    font-weight: 600;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    color: var(--text-muted);
+    margin-bottom: 0.5rem;
+  }
+
+  .salary-card .card-value {
+    font-size: 1.8rem;
+    font-weight: 800;
+    margin-bottom: 0.3rem;
+  }
+
+  .salary-card.base .card-value { color: var(--accent-teal); }
+  .salary-card.bonus .card-value { color: var(--accent-gold); }
+  .salary-card.equity .card-value { color: var(--accent-purple); }
+  .salary-card.benefits .card-value { color: var(--accent-coral); }
+
+  .salary-card .card-pct {
+    font-size: 0.78rem;
+    color: var(--text-secondary);
+  }
+
+  /* Donut Chart */
+  .chart-section {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+    gap: 3rem;
+    margin: 2rem 0;
+    padding: 2rem;
+    background: var(--bg-card);
+    backdrop-filter: blur(20px);
+    border: 1px solid var(--border);
+    border-radius: 20px;
+  }
+
+  .donut-wrapper {
+    position: relative;
+    width: 220px;
+    height: 220px;
+  }
+
+  .donut-wrapper svg {
+    width: 100%;
+    height: 100%;
+    transform: rotate(-90deg);
+  }
+
+  .donut-wrapper .center-label {
+    position: absolute;
+    top: 50%; left: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+  }
+
+  .donut-wrapper .center-label .total-label {
+    font-size: 0.65rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    color: var(--text-muted);
+  }
+
+  .donut-wrapper .center-label .total-value {
+    font-size: 1.4rem;
+    font-weight: 800;
+    color: var(--text-primary);
+  }
+
+  .chart-legend {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+  }
+
+  .legend-item {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+  }
+
+  .legend-dot {
+    width: 12px;
+    height: 12px;
+    border-radius: 4px;
+    flex-shrink: 0;
+  }
+
+  .legend-text {
+    font-size: 0.85rem;
+    color: var(--text-secondary);
+  }
+
+  .legend-value {
+    font-weight: 700;
+    color: var(--text-primary);
+    margin-left: auto;
+    padding-left: 1.5rem;
+  }
+
+  /* Context Cards */
+  .context-cards {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 1rem;
+    margin: 2rem 0;
+  }
+
+  .context-card {
+    background: var(--glass);
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    padding: 1.25rem;
+    transition: all 0.3s ease;
+  }
+
+  .context-card:hover {
+    border-color: rgba(255,255,255,0.12);
+    background: rgba(255,255,255,0.06);
+  }
+
+  .context-card .cc-value {
+    font-size: 1.3rem;
+    font-weight: 800;
+    color: var(--text-primary);
+    margin-bottom: 0.25rem;
+  }
+
+  .context-card .cc-label {
+    font-size: 0.78rem;
+    color: var(--text-muted);
+    line-height: 1.4;
+  }
+
+  /* Methodology */
+  .methodology {
+    margin-top: 2.5rem;
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    overflow: hidden;
+  }
+
+  .methodology summary {
+    padding: 1.25rem 1.5rem;
+    cursor: pointer;
+    font-weight: 600;
+    font-size: 0.9rem;
+    color: var(--text-secondary);
+    background: var(--glass);
+    list-style: none;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    transition: color 0.3s ease;
+  }
+
+  .methodology summary:hover { color: var(--text-primary); }
+
+  .methodology summary::before {
+    content: '+';
+    font-size: 1.2rem;
+    font-weight: 300;
+    color: var(--accent-teal);
+    transition: transform 0.3s ease;
+  }
+
+  .methodology[open] summary::before {
+    content: '-';
+  }
+
+  .methodology .method-content {
+    padding: 1.5rem;
+    font-size: 0.85rem;
+    color: var(--text-secondary);
+    line-height: 1.7;
+    border-top: 1px solid var(--border);
+  }
+
+  .methodology .method-content p {
+    margin-bottom: 0.75rem;
+  }
+
+  .methodology .method-content strong {
+    color: var(--text-primary);
+  }
+
+  /* Footer */
+  .footer {
+    text-align: center;
+    padding: 2rem 0 1rem;
+    font-size: 0.75rem;
+    color: var(--text-muted);
+  }
+
+  /* Animations */
+  @keyframes countUp {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  .animate-in {
+    animation: countUp 0.6s ease forwards;
+    opacity: 0;
+  }
+
+  .animate-in:nth-child(1) { animation-delay: 0.1s; }
+  .animate-in:nth-child(2) { animation-delay: 0.2s; }
+  .animate-in:nth-child(3) { animation-delay: 0.3s; }
+  .animate-in:nth-child(4) { animation-delay: 0.4s; }
+
+  /* Print */
+  @media print {
+    body { background: white; color: #1a1a1a; }
+    .explorer, .methodology { border: 1px solid #ddd; }
+    .salary-card, .context-card, .chart-section { border: 1px solid #ddd; background: #f9f9f9; }
+    .hero-salary { -webkit-text-fill-color: #0a8a6e; color: #0a8a6e; }
+    .toggle-btn.active { background: #0a8a6e; color: white; }
+  }
+
+  @media (max-width: 600px) {
+    .container { padding: 1rem; }
+    .hero-salary { font-size: 3rem; }
+    .controls { grid-template-columns: 1fr; }
+    .salary-display { grid-template-columns: 1fr 1fr; }
+    .chart-section { flex-direction: column; }
+  }
+</style>
+</head>
+<body>
+
+<div class="container">
+
+  <!-- Header -->
+  <header class="header">
+    <div class="project-name">PAT-Scan</div>
+    <h1>What would it cost to hire the developer who built this?</h1>
+    <div class="hero-salary" id="heroSalary">$196,560</div>
+    <div class="hero-subtitle">Recommended annual salary -- Senior, Growth Company, US Average</div>
+  </header>
+
+  <!-- Salary Explorer -->
+  <section class="explorer">
+    <h2>Salary Explorer</h2>
+    <div class="controls">
+      <div class="control-group">
+        <label>Company Tier</label>
+        <div class="toggle-group" id="tierToggle">
+          <button class="toggle-btn" data-tier="startup">Startup</button>
+          <button class="toggle-btn active" data-tier="growth">Growth</button>
+          <button class="toggle-btn" data-tier="enterprise">Enterprise</button>
+        </div>
+      </div>
+      <div class="control-group">
+        <label>Location</label>
+        <select id="locationSelect">
+          <option value="1.20">SF Bay Area / NYC</option>
+          <option value="1.10">Seattle / Boston / LA</option>
+          <option value="1.00">Austin / Denver / Chicago</option>
+          <option value="0.95" selected>Remote (US Average)</option>
+          <option value="0.87">Western Europe</option>
+          <option value="0.55">Eastern Europe / Latin America</option>
+          <option value="0.40">South / Southeast Asia</option>
+        </select>
+      </div>
+      <div class="control-group">
+        <label>Experience Level</label>
+        <div class="toggle-group" id="expToggle">
+          <button class="toggle-btn" data-exp="mid">Mid</button>
+          <button class="toggle-btn active" data-exp="senior">Senior</button>
+          <button class="toggle-btn" data-exp="staff">Staff</button>
+          <button class="toggle-btn" data-exp="lead">Lead</button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Compensation Breakdown -->
+  <div class="salary-display">
+    <div class="salary-card base animate-in">
+      <div class="card-label">Base Salary</div>
+      <div class="card-value" id="baseSalary">$196,560</div>
+      <div class="card-pct" id="basePct">100% of base</div>
+    </div>
+    <div class="salary-card bonus animate-in">
+      <div class="card-label">Annual Bonus</div>
+      <div class="card-value" id="bonusVal">$29,484</div>
+      <div class="card-pct" id="bonusPct">15% of base</div>
+    </div>
+    <div class="salary-card equity animate-in">
+      <div class="card-label">Equity / RSUs</div>
+      <div class="card-value" id="equityVal">$49,140</div>
+      <div class="card-pct" id="equityPct">25% of base</div>
+    </div>
+    <div class="salary-card benefits animate-in">
+      <div class="card-label">Benefits Value</div>
+      <div class="card-value" id="benefitsVal">$49,140</div>
+      <div class="card-pct" id="benefitsPct">25% of base</div>
+    </div>
+  </div>
+
+  <!-- Donut Chart -->
+  <section class="chart-section">
+    <div class="donut-wrapper">
+      <svg viewBox="0 0 120 120">
+        <circle cx="60" cy="60" r="50" fill="none" stroke="rgba(255,255,255,0.04)" stroke-width="16"/>
+        <circle id="seg-base" cx="60" cy="60" r="50" fill="none" stroke="#00d4aa" stroke-width="16"
+          stroke-dasharray="0 314.16" stroke-linecap="butt" style="transition: stroke-dasharray 0.6s ease"/>
+        <circle id="seg-bonus" cx="60" cy="60" r="50" fill="none" stroke="#ffd93d" stroke-width="16"
+          stroke-dasharray="0 314.16" stroke-dashoffset="0" stroke-linecap="butt" style="transition: stroke-dasharray 0.6s ease, stroke-dashoffset 0.6s ease"/>
+        <circle id="seg-equity" cx="60" cy="60" r="50" fill="none" stroke="#a78bfa" stroke-width="16"
+          stroke-dasharray="0 314.16" stroke-dashoffset="0" stroke-linecap="butt" style="transition: stroke-dasharray 0.6s ease, stroke-dashoffset 0.6s ease"/>
+        <circle id="seg-benefits" cx="60" cy="60" r="50" fill="none" stroke="#ff6b6b" stroke-width="16"
+          stroke-dasharray="0 314.16" stroke-dashoffset="0" stroke-linecap="butt" style="transition: stroke-dasharray 0.6s ease, stroke-dashoffset 0.6s ease"/>
+      </svg>
+      <div class="center-label">
+        <div class="total-label">Total Comp</div>
+        <div class="total-value" id="totalComp">$324K</div>
+      </div>
+    </div>
+    <div class="chart-legend">
+      <div class="legend-item">
+        <div class="legend-dot" style="background: #00d4aa"></div>
+        <span class="legend-text">Base Salary</span>
+        <span class="legend-value" id="legendBase">$197K</span>
+      </div>
+      <div class="legend-item">
+        <div class="legend-dot" style="background: #ffd93d"></div>
+        <span class="legend-text">Annual Bonus</span>
+        <span class="legend-value" id="legendBonus">$29K</span>
+      </div>
+      <div class="legend-item">
+        <div class="legend-dot" style="background: #a78bfa"></div>
+        <span class="legend-text">Equity / RSUs</span>
+        <span class="legend-value" id="legendEquity">$49K</span>
+      </div>
+      <div class="legend-item">
+        <div class="legend-dot" style="background: #ff6b6b"></div>
+        <span class="legend-text">Benefits</span>
+        <span class="legend-value" id="legendBenefits">$49K</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- Context Cards -->
+  <div class="context-cards">
+    <div class="context-card">
+      <div class="cc-value">2,411 hrs</div>
+      <div class="cc-label">Total development effort estimated from 29,092 lines of Python across 44 files</div>
+    </div>
+    <div class="context-card">
+      <div class="cc-value">4 Domains</div>
+      <div class="cc-label">ML/AI, Computational Mechanics (FEM), Data Generation, Differentiable Physics</div>
+    </div>
+    <div class="context-card">
+      <div class="cc-value">PyTorch + CUDA</div>
+      <div class="cc-label">Primary stack: Python, PyTorch, GPU-accelerated FEM, PINNs, LaTeX</div>
+    </div>
+    <div class="context-card">
+      <div class="cc-value">75th Percentile</div>
+      <div class="cc-label">Market cross-reference: niche FEM + ML intersection commands above-median pay</div>
+    </div>
+  </div>
+
+  <!-- Methodology -->
+  <details class="methodology">
+    <summary>How these numbers were derived</summary>
+    <div class="method-content">
+      <p><strong>Step 1 -- Contractor Rate to Salary:</strong> The cost estimate identified $135/hr as the recommended contractor rate for this skill set. Converting: $135 x 2,080 hours/year x 0.70 (contractor-to-salary discount) = <strong>$196,560</strong> base salary.</p>
+      <p><strong>Step 2 -- Total Compensation:</strong> Bonus, equity, and benefits percentages vary by company tier. Startup: 10% bonus, 35% equity, 20% benefits. Growth: 15% bonus, 25% equity, 25% benefits. Enterprise: 20% bonus, 35% equity, 30% benefits.</p>
+      <p><strong>Step 3 -- Market Validation:</strong> Cross-referenced against ML Engineer salaries ($162K-$186K avg base, per Indeed/Built In/PayScale 2026 data) and Computational Mechanics Engineer salaries ($153K avg per Glassdoor). The PAT-Scan developer commands a premium due to the rare FEM + ML + differentiable programming intersection. Big Tech ML total comp median is $261K per levels.fyi, with ranges up to $743K+ at Google.</p>
+      <p><strong>Step 4 -- Adjustments:</strong> Geographic multipliers (0.40x-1.20x) and experience scaling (0.75x mid-level to 1.45x lead/architect) applied to the senior US-average baseline.</p>
+      <p>Full cost analysis: <strong>cost_estimate.md</strong> in the project root.</p>
+    </div>
+  </details>
+
+  <footer class="footer">
+    PAT-Scan Salary Estimate -- Generated March 2026 -- For curiosity, not a formal offer
+  </footer>
+
+</div>
+
+<script>
+(function() {
+  // Configuration data
+  const BASE_HOURLY = 135;
+  const HOURS_PER_YEAR = 2080;
+  const CONTRACTOR_DISCOUNT = 0.70;
+  const BASE_SALARY = BASE_HOURLY * HOURS_PER_YEAR * CONTRACTOR_DISCOUNT; // 196,560
+
+  const tiers = {
+    startup:    { bonus: 0.10, equity: 0.35, benefits: 0.20, label: 'Startup' },
+    growth:     { bonus: 0.15, equity: 0.25, benefits: 0.25, label: 'Growth' },
+    enterprise: { bonus: 0.20, equity: 0.35, benefits: 0.30, label: 'Enterprise' }
+  };
+
+  const expMultipliers = {
+    mid:    { mult: 0.75, label: 'Mid-Level (3-5 yrs)' },
+    senior: { mult: 1.00, label: 'Senior (5-8 yrs)' },
+    staff:  { mult: 1.30, label: 'Staff/Principal (8-15 yrs)' },
+    lead:   { mult: 1.45, label: 'Lead/Architect (10+ yrs)' }
+  };
+
+  let currentTier = 'growth';
+  let currentExp = 'senior';
+
+  const fmt = (n) => '$' + Math.round(n).toLocaleString('en-US');
+  const fmtK = (n) => '$' + Math.round(n / 1000) + 'K';
+
+  function update() {
+    const locMult = parseFloat(document.getElementById('locationSelect').value);
+    const expMult = expMultipliers[currentExp].mult;
+    const tier = tiers[currentTier];
+
+    const base = BASE_SALARY * locMult * expMult;
+    const bonus = base * tier.bonus;
+    const equity = base * tier.equity;
+    const benefits = base * tier.benefits;
+    const total = base + bonus + equity + benefits;
+
+    // Update hero
+    animateValue('heroSalary', fmt(base));
+
+    // Update cards
+    animateValue('baseSalary', fmt(base));
+    animateValue('bonusVal', fmt(bonus));
+    animateValue('equityVal', fmt(equity));
+    animateValue('benefitsVal', fmt(benefits));
+
+    document.getElementById('basePct').textContent = '100% of base';
+    document.getElementById('bonusPct').textContent = Math.round(tier.bonus * 100) + '% of base';
+    document.getElementById('equityPct').textContent = Math.round(tier.equity * 100) + '% of base';
+    document.getElementById('benefitsPct').textContent = Math.round(tier.benefits * 100) + '% of base';
+
+    // Update donut chart
+    const circumference = 2 * Math.PI * 50; // ~314.16
+    const parts = [base, bonus, equity, benefits];
+    const ids = ['seg-base', 'seg-bonus', 'seg-equity', 'seg-benefits'];
+    let offset = 0;
+
+    parts.forEach((val, i) => {
+      const pct = val / total;
+      const arc = pct * circumference;
+      const el = document.getElementById(ids[i]);
+      el.setAttribute('stroke-dasharray', arc + ' ' + (circumference - arc));
+      el.setAttribute('stroke-dashoffset', -offset);
+      offset += arc;
+    });
+
+    // Update center label & legend
+    animateValue('totalComp', fmtK(total));
+    animateValue('legendBase', fmtK(base));
+    animateValue('legendBonus', fmtK(bonus));
+    animateValue('legendEquity', fmtK(equity));
+    animateValue('legendBenefits', fmtK(benefits));
+
+    // Update subtitle
+    const loc = document.getElementById('locationSelect');
+    const locLabel = loc.options[loc.selectedIndex].text;
+    document.querySelector('.hero-subtitle').textContent =
+      'Recommended annual salary -- ' + expMultipliers[currentExp].label + ', ' + tier.label + ', ' + locLabel;
+  }
+
+  function animateValue(id, newText) {
+    const el = document.getElementById(id);
+    if (el.textContent !== newText) {
+      el.style.transition = 'opacity 0.15s ease, transform 0.15s ease';
+      el.style.opacity = '0';
+      el.style.transform = 'translateY(6px)';
+      setTimeout(() => {
+        el.textContent = newText;
+        el.style.opacity = '1';
+        el.style.transform = 'translateY(0)';
+      }, 150);
+    }
+  }
+
+  // Tier toggles
+  document.getElementById('tierToggle').addEventListener('click', function(e) {
+    const btn = e.target.closest('.toggle-btn');
+    if (!btn) return;
+    this.querySelectorAll('.toggle-btn').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    currentTier = btn.dataset.tier;
+    update();
+  });
+
+  // Experience toggles
+  document.getElementById('expToggle').addEventListener('click', function(e) {
+    const btn = e.target.closest('.toggle-btn');
+    if (!btn) return;
+    this.querySelectorAll('.toggle-btn').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    currentExp = btn.dataset.exp;
+    update();
+  });
+
+  // Location select
+  document.getElementById('locationSelect').addEventListener('change', update);
+
+  // Initial render
+  setTimeout(update, 100);
+})();
+</script>
+
+</body>
+</html>

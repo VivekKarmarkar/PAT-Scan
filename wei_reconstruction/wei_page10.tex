@@ -1,0 +1,138 @@
+%% =================================================================
+%% Wei, Mei, Zhao, Xiao, Sun, Zhang, Guo.
+%% "Nondestructively identifying the mechanical behavior of soft
+%%  tissues using surface deformation with an explicit inverse
+%%  approach."
+%% Appl. Math. Modelling 134 (2024) 126--147.
+%%
+%% Reconstruction of page 10 (printed p. 135) as study notes.
+%% This page is mirror-structured to page 9: two big figures
+%% (Fig. 9 for Sample 2, Fig. 10 for Sample 3) comparing Explicit
+%% vs Implicit methods with 3, 6, and 9 displacement datasets,
+%% followed by minimal prose.
+%% Prose: extracted verbatim from the PDF text layer via pdftotext.
+%% Math:  none on this page.
+%% Figures 9 & 10: placeholder boxes with captions + visual descriptions.
+%% =================================================================
+
+\documentclass[11pt]{article}
+
+\usepackage[margin=1in]{geometry}
+\usepackage{amsmath, amssymb}
+\usepackage{mathrsfs}
+\usepackage{bm}
+\usepackage{xcolor}
+\usepackage{fancyhdr}
+
+\pagestyle{fancy}
+\fancyhf{}
+\lhead{\small Y.~Mei et al.}
+\rhead{\small Applied Mathematical Modelling 134 (2024) 126--147}
+\cfoot{\small 135 $\to$ \arabic{page}}
+\renewcommand{\headrulewidth}{0.4pt}
+
+\setcounter{page}{1}
+
+\begin{document}
+
+% ---------- Figure 9 placeholder ----------
+\noindent
+\begin{center}
+\fbox{\parbox{0.92\textwidth}{\centering\vspace{1em}
+\textbf{[Figure 9 — placeholder]}\\[0.8em]
+Six-panel side-by-side comparison of the \textbf{Explicit Inverse
+Method} (left column) vs.\ \textbf{Implicit Inverse Method} (right
+column) on \textbf{Sample 2} (the two-layer target from Fig.~6b,
+nominal SM values $\mu^0 \approx 3$\,MPa, $\mu^1 \approx 10$\,MPa),
+using 3, 6, and 9 surface displacement datasets as inputs.\\[0.4em]
+\textbf{Explicit (left column)}: bilayer structure recovered with a
+clean interface. Colorbar ranges:
+(a) 3 fields, SM $\in [1.00, 11.49]$\,MPa;
+(b) 6 fields, SM $\in [1.00, 11.63]$\,MPa;
+(c) 9 fields, SM $\in [1.00, 11.47]$\,MPa.\\[0.3em]
+\textbf{Implicit (right column)}: bilayer structure recovered but
+with a visibly rougher interface between the two layers; more
+artifacts at the top edge. Colorbar ranges:
+(d) 3 fields, SM $\in [1.00, 10.95]$\,MPa;
+(e) 6 fields, SM $\in [1.00, 10.77]$\,MPa;
+(f) 9 fields, SM $\in [1.00, 11.13]$\,MPa.\\[0.3em]
+\textbf{Takeaway}: both methods recover the two-layer structure;
+the explicit method produces a cleaner interface, while the implicit
+method's interface has more small-scale roughness. Slight overshoot
+in the top-layer SM values (colorbar max above the nominal 10\,MPa)
+is visible in all six panels.
+\vspace{1em}}}
+\end{center}
+\vspace{0.3em}
+\begin{center}
+\textbf{Fig. 9.} The reconstructed results with varying 3, 6 and 9
+surface displacement datasets corresponding to Sample 2 (Without
+noise, Unit: MPa).
+\end{center}
+
+\vspace{0.8em}
+
+% ---------- Figure 10 placeholder ----------
+\noindent
+\begin{center}
+\fbox{\parbox{0.92\textwidth}{\centering\vspace{1em}
+\textbf{[Figure 10 — placeholder]}\\[0.8em]
+Six-panel side-by-side comparison of the \textbf{Explicit Inverse
+Method} (left column) vs.\ \textbf{Implicit Inverse Method} (right
+column) on \textbf{Sample 3} (the three-layer target from Fig.~6c:
+blue bottom layer $\mu^0 \approx 3$\,MPa, green middle layer
+$\mu^1 \approx 6$\,MPa, red top layer $\mu^2 \approx 10$\,MPa),
+using 3, 6, and 9 surface displacement datasets as inputs.\\[0.4em]
+\textbf{Explicit (left column)}: three-layer stacked structure
+recovered, with the middle (green) layer visibly distinct from the
+top (red) and bottom (blue) layers. Colorbar ranges:
+(a) 3 fields, SM $\in [1.00, 10.49]$\,MPa;
+(b) 6 fields, SM $\in [1.00, 10.35]$\,MPa;
+(c) 9 fields, SM $\in [1.00, 10.44]$\,MPa.\\[0.3em]
+\textbf{Implicit (right column)}: three-layer structure recovered
+but with fuzzier interfaces between adjacent layers. Colorbar
+ranges:
+(d) 3 fields, SM $\in [1.00, 10.11]$\,MPa;
+(e) 6 fields, SM $\in [1.00, 10.26]$\,MPa;
+(f) 9 fields, SM $\in [1.00, 10.19]$\,MPa.\\[0.3em]
+\textbf{Takeaway}: as layer count increases (1 $\to$ 2 $\to$ 3),
+the quality gap between explicit and implicit widens. Sample 3's
+three-layer structure is harder for the implicit method to resolve
+cleanly than Sample 2's two-layer structure. More displacement
+datasets (3 $\to$ 6 $\to$ 9) improve both methods but do not close
+the gap.
+\vspace{1em}}}
+\end{center}
+\vspace{0.3em}
+\begin{center}
+\textbf{Fig. 10.} The reconstructed results with 3, 6 and 9 surface
+displacement datasets corresponding to Sample 3 (Without noise,
+Unit: MPa).
+\end{center}
+
+\vspace{1em}
+
+% ---------- Continuation prose (from page 9) + 5% noise paragraph ----------
+\noindent
+slightly larger than that for the explicit inverse method (see
+Table~1). Furthermore, it's worth noting that the quality of the
+reconstruction achieved by both inverse methods improved with an
+increase in the total number of measurements. By utilizing 9
+boundary displacement measurements, the average relative error
+could be reduced to less than 10\,\%. However, it should be
+mentioned that each layer was not accurately mapped as the
+homogeneous case when using the implicit inverse method.
+
+Additionally, we increased the noise level to 5\,\% and observed
+that the reconstructed results obtained by the explicit inverse
+method still outperform those obtained by the implicit inverse
+method (see Fig.~14, Fig.~15, Fig.~16). For the explicit inverse
+method, the resulting relative error in the case with 5\,\% noise
+is generally larger than that in the case with 1\,\% noise (see
+Table~1). However, even with a 5\,\% noise level, the relative
+error for the explicit inverse method remains lower than that for
+the implicit inverse method
+
+% [page ends here — continues on page 11]
+
+\end{document}

@@ -1,0 +1,74 @@
+Published as a conference paper at ICLR 2015
+
+
+
+
+otherwise. The first case only happens in the most severe case of sparsity: when a gradient has
+been zero at all timesteps except at the√ current timestep. For less √  sparse cases, the effective stepsize
+will be smaller. When (1 − β1 ) = 1 − β2 we         √ have that | b
+                                                                  m t /         p1 therefore |∆t | < α. In
+                                                                          vbt | <
+more common scenarios, we will have that m     b t / vbt ≈ ±1 since |E[g]/ E[g 2 ]| ≤ 1. The effective
+magnitude of the steps taken in parameter space at each timestep are approximately bounded by
+the stepsize setting α, i.e., |∆t | / α. This can be understood as establishing a trust region around
+the current parameter value, beyond which the current gradient estimate does not provide sufficient
+information. This typically makes it relatively easy to know the right scale of α in advance. For
+many machine learning models, for instance, we often know in advance that good optima are with
+high probability within some set region in parameter space; it is not uncommon, for example, to
+have a prior distribution over the parameters. Since α sets (an upper bound of) the magnitude of
+steps in parameter space, we can often deduce the right order of magnitude of α such that optima
+can be reached from θ0 within√      some number of iterations. With a slight abuse of terminology,
+we will call the ratio mb t / vbt the signal-to-noise ratio (SN R). With a smaller SNR the effective
+stepsize ∆t will be closer to zero. This is a desirable property, since a smaller SNR means that
+there is greater uncertainty about whether the direction of m b t corresponds to the direction of the true
+gradient. For example, the SNR value typically becomes closer to 0 towards an optimum, leading
+to smaller effective steps in parameter space: a form of automatic annealing. The effective stepsize
+∆t is also invariant to the scale of the gradients; rescaling the gradients√ g with factor√  c will scale m
+                                                                                                          bt
+with a factor c and vbt with a factor c2 , which cancel out: (c · m
+                                                                  b t )/( c2 · vbt ) = mb t / vbt .
+
+
+3    I NITIALIZATION BIAS CORRECTION
+
+As explained in section 2, Adam utilizes initialization bias correction terms. We will here derive
+the term for the second moment estimate; the derivation for the first moment estimate is completely
+analogous. Let g be the gradient of the stochastic objective f , and we wish to estimate its second
+raw moment (uncentered variance) using an exponential moving average of the squared gradient,
+with decay rate β2 . Let g1 , ..., gT be the gradients at subsequent timesteps, each a draw from an
+underlying gradient distribution gt ∼ p(gt ). Let us initialize the exponential moving average as
+v0 = 0 (a vector of zeros). First note that the update at timestep t of the exponential moving average
+vt = β2 · vt−1 + (1 − β2 ) · gt2 (where gt2 indicates the elementwise square gt gt ) can be written as
+a function of the gradients at all previous timesteps:
+                                                         t
+                                                         X
+                                       vt = (1 − β2 )          β2t−i · gi2                              (1)
+                                                         i=1
+
+We wish to know how E[vt ], the expected value of the exponential moving average at timestep t,
+relates to the true second moment E[gt2 ], so we can correct for the discrepancy between the two.
+Taking expectations of the left-hand and right-hand sides of eq. (1):
+                                         "            t
+                                                                   #
+                                                    X
+                                                          t−i    2
+                               E[vt ] = E (1 − β2 )     β2 · gi                               (2)
+                                                          i=1
+                                                                t
+                                                                X
+                                       = E[gt2 ] · (1 − β2 )          β2t−i + ζ                         (3)
+                                                                i=1
+                                       = E[gt2 ] · (1 − β2t ) + ζ                                       (4)
+
+where ζ = 0 if the true second moment E[gi2 ] is stationary; otherwise ζ can be kept small since
+the exponential decay rate β1 can (and should) be chosen such that the exponential moving average
+assigns small weights to gradients too far in the past. What is left is the term (1 − β2t ) which is
+caused by initializing the running average with zeros. In algorithm 1 we therefore divide by this
+term to correct the initialization bias.
+In case of sparse gradients, for a reliable estimate of the second moment one needs to average over
+many gradients by chosing a small value of β2 ; however it is exactly this case of small β2 where a
+lack of initialisation bias correction would lead to initial steps that are much larger.
+
+
+                                                     3
+

@@ -1,0 +1,63 @@
+Applied Mathematical Modelling 134 (2024) 126–147
+
+Contents lists available at ScienceDirect
+
+Applied Mathematical Modelling
+journal homepage: www.elsevier.com/locate/apm
+
+Nondestructively identifying the mechanical behavior of soft
+tissues using surface deformation with an explicit
+inverse approach
+Yue Mei a, b , Dongmei Zhao a, b , Changjiang Xiao a, b , Zhi Sun a, b ,
+Weisheng Zhang a, b, * , Xu Guo a, b, *
+a
+
+State Key Laboratory of Structural Analysis for Industrial Equipment, Department of Engineering Mechanics, Dalian University of Technology,
+Dalian 116023, PR China
+b
+International Research Center for Computational Mechanics, Dalian University of Technology, Dalian 116023, PR China
+
+A R T I C L E I N F O
+
+A B S T R A C T
+
+Keywords:
+Inverse problem
+Layered structures
+Inclusion embedded structures
+Surface deformation
+Biological tissue
+
+Identifying the spatial variation of stiffness properties in soft tissues nondestructively, with
+limited surface measurements, poses significant challenges. In this paper, we present a novel
+explicit inverse approach designed to characterize the nonhomogeneous elastic property distri­
+bution of soft tissues using only surface displacement datasets. In contrast to the prevalent im­
+plicit inverse approach, which focuses on optimizing the elastic properties of individual pixels,
+our proposed method optimizes the geometric parameters of deformable and movable compo­
+nents, as well as shear moduli of each component. As a result, the proposed approach requires far
+fewer optimization variables, streamlining the process. Numerical tests conducted in this study
+demonstrate the superiority of the explicit inverse method over the implicit inverse method,
+providing much-improved reconstructed results. In particular for a ring structure, while the
+average relative error of reconstruction using the implicit inverse method can exceed 40 %, the
+explicit inverse method achieves a remarkable average relative error of only 5 %. Given that
+surface displacements are easily measurable, the integration of our proposed explicit inverse
+method with low-cost imaging techniques shows great potential in accurately mapping the elastic
+property distribution of biological tissues.
+
+Introduction
+Biological tissues often display significant heterogeneity. This diversity is evident in various tissues such as skin [1–3], blood vessels
+[4,5], and corneas [6,7], among others, which exhibit multi-layered structures. These layers offer a variety of functionalities, thus
+contributing to the complexity of biological systems. Interestingly, the emergence of cancerous tumors introduces an additional level of
+heterogeneity to these tissues. These tumors typically exhibit greater stiffness compared to their surrounding healthy tissues due to
+pathological alterations [8]. This stark contrast in mechanical properties can serve as a potential indicator of malignancy. It’s also
+worth noting that the local mechanical properties of soft tissues are not static; they fluctuate in response to various factors such as age
+
+* Corresponding authors at: State Key Laboratory of Structural Analysis for Industrial Equipment, Department of Engineering Mechanics, Dalian
+University of Technology, Dalian 116023, PR China
+E-mail addresses: weishengzhang@dlut.edu.cn (W. Zhang), guoxu@dlut.edu.cn (X. Guo).
+https://doi.org/10.1016/j.apm.2024.05.028
+Received 10 October 2023; Received in revised form 21 May 2024; Accepted 22 May 2024
+Available online 31 May 2024
+0307-904X/© 2024 Elsevier Inc. All rights are reserved, including those for text and data mining, AI training, and similar technologies.
+
+

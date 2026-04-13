@@ -1,0 +1,71 @@
+Published as a conference paper at ICLR 2015
+
+
+
+
+large datasets and/or high-dimensional parameter spaces. The method combines the advantages of
+two recently popular optimization methods: the ability of AdaGrad to deal with sparse gradients,
+and the ability of RMSProp to deal with non-stationary objectives. The method is straightforward
+to implement and requires little memory. The experiments confirm the analysis on the rate of con-
+vergence in convex problems. Overall, we found Adam to be robust and well-suited to a wide range
+of non-convex optimization problems in the field machine learning.
+
+9    ACKNOWLEDGMENTS
+This paper would probably not have existed without the support of Google Deepmind. We would
+like to give special thanks to Ivo Danihelka, and Tom Schaul for coining the name Adam. Thanks to
+Kai Fan from Duke University for spotting an error in the original AdaMax derivation. Experiments
+in this work were partly carried out on the Dutch national e-infrastructure with the support of SURF
+Foundation. Diederik Kingma is supported by the Google European Doctorate Fellowship in Deep
+Learning.
+
+R EFERENCES
+Amari, Shun-Ichi. Natural gradient works efficiently in learning. Neural computation, 10(2):251–276, 1998.
+
+Deng, Li, Li, Jinyu, Huang, Jui-Ting, Yao, Kaisheng, Yu, Dong, Seide, Frank, Seltzer, Michael, Zweig, Geoff,
+  He, Xiaodong, Williams, Jason, et al. Recent advances in deep learning for speech research at microsoft.
+  ICASSP 2013, 2013.
+
+Duchi, John, Hazan, Elad, and Singer, Yoram. Adaptive subgradient methods for online learning and stochastic
+  optimization. The Journal of Machine Learning Research, 12:2121–2159, 2011.
+
+Graves, Alex. Generating sequences with recurrent neural networks. arXiv preprint arXiv:1308.0850, 2013.
+
+Graves, Alex, Mohamed, Abdel-rahman, and Hinton, Geoffrey. Speech recognition with deep recurrent neural
+  networks. In Acoustics, Speech and Signal Processing (ICASSP), 2013 IEEE International Conference on,
+  pp. 6645–6649. IEEE, 2013.
+
+Hinton, G.E. and Salakhutdinov, R.R. Reducing the dimensionality of data with neural networks. Science, 313
+  (5786):504–507, 2006.
+
+Hinton, Geoffrey, Deng, Li, Yu, Dong, Dahl, George E, Mohamed, Abdel-rahman, Jaitly, Navdeep, Senior,
+  Andrew, Vanhoucke, Vincent, Nguyen, Patrick, Sainath, Tara N, et al. Deep neural networks for acoustic
+  modeling in speech recognition: The shared views of four research groups. Signal Processing Magazine,
+  IEEE, 29(6):82–97, 2012a.
+
+Hinton, Geoffrey E, Srivastava, Nitish, Krizhevsky, Alex, Sutskever, Ilya, and Salakhutdinov, Ruslan R. Im-
+  proving neural networks by preventing co-adaptation of feature detectors. arXiv preprint arXiv:1207.0580,
+  2012b.
+
+Kingma, Diederik P and Welling, Max. Auto-Encoding Variational Bayes. In The 2nd International Conference
+  on Learning Representations (ICLR), 2013.
+
+Krizhevsky, Alex, Sutskever, Ilya, and Hinton, Geoffrey E. Imagenet classification with deep convolutional
+  neural networks. In Advances in neural information processing systems, pp. 1097–1105, 2012.
+
+Maas, Andrew L, Daly, Raymond E, Pham, Peter T, Huang, Dan, Ng, Andrew Y, and Potts, Christopher.
+  Learning word vectors for sentiment analysis. In Proceedings of the 49th Annual Meeting of the Association
+  for Computational Linguistics: Human Language Technologies-Volume 1, pp. 142–150. Association for
+  Computational Linguistics, 2011.
+
+Moulines, Eric and Bach, Francis R. Non-asymptotic analysis of stochastic approximation algorithms for
+ machine learning. In Advances in Neural Information Processing Systems, pp. 451–459, 2011.
+
+Pascanu, Razvan and Bengio, Yoshua.       Revisiting natural gradient for deep networks.     arXiv preprint
+  arXiv:1301.3584, 2013.
+
+Polyak, Boris T and Juditsky, Anatoli B. Acceleration of stochastic approximation by averaging. SIAM Journal
+  on Control and Optimization, 30(4):838–855, 1992.
+
+
+                                                    10
+

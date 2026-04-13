@@ -1,0 +1,229 @@
+%% =================================================================
+%% Beber, Lamon, Saveriano, Fontanelli, Palopoli.
+%% "Autonomous Robotic Tissue Palpation and Abnormalities
+%%  Characterisation via Ergodic Exploration."
+%% IEEE Robotics and Automation Letters, preprint accepted Feb. 2026.
+%% DOI: 10.1109/LRA.2026.3673907
+%%
+%% Reconstruction of page 4 as study notes.
+%% Equations (4), (5), (6); plus unnumbered HEDAC smoothing equation.
+%% Narrative flows: (continued ergodic control) -> practical impl ->
+%%   D. Traj Exec -> 1) Online Elasticity -> 2) Filter Design ->
+%%   E. Target Dist Update -> F. Search Termination -> IV. Sim Results
+%% =================================================================
+
+\documentclass[11pt]{article}
+
+\usepackage[margin=1in]{geometry}
+\usepackage{amsmath, amssymb}
+\usepackage{mathrsfs}
+\usepackage{bm}
+\usepackage{xcolor}
+\usepackage{fancyhdr}
+\usepackage{url}
+
+\pagestyle{fancy}
+\fancyhf{}
+\lhead{\small L.~Beber et al.}
+\rhead{\small IEEE RA-L Preprint, Accepted Feb.\ 2026}
+\cfoot{\small 4 $\to$ \arabic{page}}
+\renewcommand{\headrulewidth}{0.4pt}
+
+\setcounter{page}{1}
+\setcounter{equation}{3}   % page 3 ended with eq. (3); first numbered eq here is (4)
+\setlength{\parskip}{4pt}
+
+\begin{document}
+
+% ---------- Preprint notice strip ----------
+\begin{center}
+{\footnotesize\itshape
+This article has been accepted for publication in IEEE Robotics and
+Automation Letters. This is the author's version which has not been
+fully edited and content may change prior to final publication.
+Citation information: DOI 10.1109/LRA.2026.3673907\par}
+\end{center}
+
+\vspace{0.4em}
+\hrule
+\vspace{0.6em}
+
+\noindent
+{\footnotesize\scshape 4 \hfill IEEE Robotics and Automation Letters.\ Preprint Version.\ Accepted February, 2026}
+
+\vspace{1.2em}
+
+% ---------- Continuation of C.1 Ergodic Control from page 3 ----------
+\noindent
+where $\varphi_{\sigma}$ is a Gaussian kernel. The coverage error with
+respect to a target distribution $m(x)$ is defined as the spatial
+diffusion of $m(x)$ through the RBF kernel compared with the coverage
+density
+\begin{equation}
+e(x,t) \;=\; (\varphi_{\sigma} * m)(x) \;-\; c(x,t),
+\end{equation}
+To avoid local minima and improve spatial coordination, HEDAC smooths
+this error using a stationary heat equation:
+\[
+\varrho\,\Delta u(x,t) \;=\; \beta\,u(x,t) + \gamma\,a(x,t) - s(x,t),
+\qquad
+\dot{z} \;=\; v_{a}\cdot\frac{\nabla u}{\|\nabla u\|},
+\]
+where $s$ highlights under-sampled regions, and $a$ ensures collision
+avoidance between the agents.
+
+\vspace{0.3em}
+
+\noindent\textit{\hspace{1em}2)~Practical Implementation:} Different
+from [19], this work implemented the non-stationary diffusion
+equation, as was done in [26], for a more locally consistent
+exploration behaviour. This means that $\dot{u} \neq 0$ is defined as:
+\begin{equation}
+\dot{u}(x,\tau) \;=\; \Delta u(x,\tau),
+\end{equation}
+allowing us to control the desired smoothness. In this formulation,
+an initial condition is required: $u(x,0) = s(x,0)$. During the
+experiments, a second-order agent is used to generate the trajectory.
+The trajectory is updated with a frequency $\Delta T$ chosen to ensure
+smooth motion and adequate control loop resolution (typically 100~Hz
+in our implementation, 5 times slower than the low-level controller).
+The planning phase respects constraints on maximum velocity to ensure
+physical plausibility during data collection imposed by the
+second-order dynamics inside the ergodic controller.
+
+\vspace{0.6em}
+
+% ---------- D. Trajectory Execution and Data Collection ----------
+\noindent\textit{D.~Trajectory Execution and Data Collection}
+
+\vspace{0.2em}
+
+\noindent
+While the trajectory is executed, tissue elasticity is estimated
+continuously using an Extended Kalman Filter (EKF). Data are sampled
+at a rate that depends on the robot motion and the indenter geometry.
+Specifically, higher velocities or smaller indenters require denser
+sampling to avoid aliasing effects in the stiffness map.
+
+\vspace{0.3em}
+
+\noindent\textit{\hspace{1em}1)~Online Elasticity and Viscosity
+Estimation:} Accurately estimating the mechanical response of soft
+tissues in real time is a challenging task, as it requires modelling
+the contact interaction between the probe and the tissue surface and
+inferring tissue parameters from force measurements and robot motion.
+In this work, we adopt a viscoelastic contact model to improve the
+fidelity of force prediction during dynamic palpation, while
+subsequent abnormality detection focuses on the estimated elastic
+stiffness To achieve this, we adopt DRM [27], which allows mapping
+the three-dimensional contact mechanics into an equivalent
+two-dimensional representation. Under this framework, the force
+exerted by the tissue during indentation is a nonlinear function of
+penetration depth and velocity:
+\begin{equation}
+F_{\mathrm{TOT}}(d,\dot{d})
+  \;=\; \frac{4}{3}\,\frac{E_{f}}{1-\nu^{2}}\,\sqrt{R\,d}\;d
+     \;+\; \frac{4\,\eta}{1-\nu}\,\sqrt{R\,d}\;\dot{d},
+\end{equation}
+where $d$ is the penetration depth, $\dot{d}$ its derivative
+(velocity), $E_{f}$ is the Young's modulus of the material, $\eta$ is
+the viscosity coefficient, $\nu$ is the Poisson's ratio, and $R$ is
+the radius of the spherical indenter [18]. The first term models
+elastic deformation according to Hertzian contact mechanics, while
+the second term accounts for viscoelastic damping.
+
+\vspace{0.3em}
+
+\noindent\textit{\hspace{1em}2)~Filter Design:} The main challenge
+lies in the fact that $d$ is not directly measurable during robotic
+interaction. Therefore, we use an EKF to estimate the system state,
+which includes both $d$ and $\dot{d}$, as well as the unknown tissue
+parameters. The system is modelled using a discrete-time nonlinear
+state-space representation, as detailed in [18]. The state vector is
+defined as $[d,\,k,\,\lambda,\,\dot{d},\,\dot{k},\,\dot{\lambda},\,
+\ddot{k},\,\ddot{\lambda}]^{\top}$, where $\kappa$ and $\lambda$
+correspond to the local stiffness and damping parameters,
+respectively. The filter assumes as input the measured contact force
+and comprises the effective interaction mass. Process and measurement
+noise are also included to account for model uncertainties and sensor
+imperfections. This filtering approach allows real-time estimation of
+the viscoelastic parameters even during continuous contacts with
+indentation speeds up to 5~mm/s [28], being suitable for dynamic
+exploration tasks.
+
+\vspace{0.6em}
+
+% ---------- E. Target Distribution Update ----------
+\noindent\textit{E.~Target Distribution Update}
+
+\vspace{0.2em}
+
+\noindent
+Once a sufficient number of new samples are acquired, the GPR model
+is updated to refine the target stiffness distribution. Since GPR
+inference has cubic time complexity with respect to the number of
+samples, we avoid updating the model at every time step. Instead,
+updates are performed at a fixed frequency (e.g., 1~Hz), allowing
+batch accumulation of new data while keeping computation time
+bounded.
+
+\vspace{0.6em}
+
+% ---------- F. Search Termination Criterion ----------
+\noindent\textit{F.~Search Termination Criterion}
+
+\vspace{0.2em}
+
+\noindent
+Different from existing approaches that rely on predefined stopping
+conditions [15], or fixed time/step limits [16], we employ an
+information-theoretic stopping criterion on $\alpha$, which is based
+on the ergodic metric. The value of $\alpha$ governs the trade-off
+between exploration and exploitation. Larger values of $\alpha$
+correspond to an early exploration phase and favour earlier
+termination, but may lead to incomplete spatial coverage. Conversely,
+smaller values of $\alpha$ indicate that the exploration has largely
+converged toward the target EID distribution, resulting in extended
+exploitation phases, longer execution times, and only marginal
+refinement of already identified regions. In practice, the stopping
+threshold on $\alpha$ is selected within the exploitation-dominated
+regime, such that further reductions correspond to diminishing
+returns in reconstruction accuracy. This choice is supported by
+empirical observations indicating saturation of the RMSE as $\alpha$
+approaches a plateau, and reflects a practical balance between
+coverage completeness, estimation accuracy, and exploration duration.
+The advantage of using this metric lies in its ability to quantify
+how thoroughly the area has been explored, without relying on prior
+knowledge such as fixed time limits or the number and characteristics
+of stiff regions that need to be found. This criterion is preferable
+to a fixed-time limit, as it adapts the exploration duration to the
+complexity of the stiffness distribution and the desired level of map
+details, avoiding both premature termination and unnecessary probing.
+
+\vspace{0.8em}
+
+% ---------- Section IV ----------
+\begin{center}
+\textsc{IV.\ Simulation Results}
+\end{center}
+
+\noindent\textit{A.~Setup and Baselines}
+
+\vspace{0.2em}
+
+\noindent
+The proposed search algorithm was evaluated on synthetic stiffness
+distributions representative of biological soft tissues.
+
+% ---------- Bottom license strip ----------
+\vfill
+\hrule
+\vspace{0.3em}
+\begin{center}
+{\footnotesize\itshape
+This work is licensed under a Creative Commons Attribution 4.0
+License. For more information, see
+\url{https://creativecommons.org/licenses/by/4.0/}\par}
+\end{center}
+
+\end{document}

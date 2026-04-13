@@ -1,0 +1,19 @@
+Y. Mei et al.                                                                                       Applied Mathematical Modelling 134 (2024) 126–147
+
+
+
+
+Fig. 14. The reconstructed results with varying 3,6 and 9 surface displacement datasets corresponding to Sample 1 (5 % noise is introduced into the
+measured data, Unit: MPa).
+
+
+
+
+Fig. 15. The reconstructed results with varying 3,6 and 9 surface displacement datasets corresponding to Sample 2 (5 % noise is introduced into the
+measured data, Unit: MPa).
+
+
+
+
+                                                                       138
+

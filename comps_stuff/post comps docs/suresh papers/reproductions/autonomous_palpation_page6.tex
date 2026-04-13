@@ -1,0 +1,204 @@
+%% =================================================================
+%% Beber, Lamon, Saveriano, Fontanelli, Palopoli.
+%% "Autonomous Robotic Tissue Palpation and Abnormalities
+%%  Characterisation via Ergodic Exploration."
+%% IEEE Robotics and Automation Letters, preprint accepted Feb. 2026.
+%% DOI: 10.1109/LRA.2026.3673907
+%%
+%% Reconstruction of page 6 as study notes.
+%% Contents: Figure 3 (2x5 grid + 2x1 + 2x1 comparison panels),
+%% continuation of section IV-B, section IV-C (BO comparison),
+%% start of section IV-D (Segmentation, cuts off).
+%% No numbered equations on this page.
+%% =================================================================
+
+\documentclass[11pt]{article}
+
+\usepackage[margin=1in]{geometry}
+\usepackage{amsmath, amssymb}
+\usepackage{mathrsfs}
+\usepackage{bm}
+\usepackage{xcolor}
+\usepackage{fancyhdr}
+\usepackage{url}
+
+\pagestyle{fancy}
+\fancyhf{}
+\lhead{\small L.~Beber et al.}
+\rhead{\small IEEE RA-L Preprint, Accepted Feb.\ 2026}
+\cfoot{\small 6 $\to$ \arabic{page}}
+\renewcommand{\headrulewidth}{0.4pt}
+
+\setcounter{page}{1}
+\setcounter{equation}{6}   % page 5 had no numbered equations; counter still 6
+\setlength{\parskip}{4pt}
+
+\begin{document}
+
+% ---------- Preprint notice strip ----------
+\begin{center}
+{\footnotesize\itshape
+This article has been accepted for publication in IEEE Robotics and
+Automation Letters. This is the author's version which has not been
+fully edited and content may change prior to final publication.
+Citation information: DOI 10.1109/LRA.2026.3673907\par}
+\end{center}
+
+\vspace{0.4em}
+\hrule
+\vspace{0.6em}
+
+\noindent
+{\footnotesize\scshape 6 \hfill IEEE Robotics and Automation Letters.\ Preprint Version.\ Accepted February, 2026}
+
+\vspace{1.2em}
+
+% ---------- Figure 3 placeholder ----------
+\begin{center}
+\fbox{\parbox{0.95\textwidth}{\centering\vspace{1em}
+\textbf{[Figure 3 --- placeholder]}\\[0.8em]
+A wide figure spanning the full page width, composed of three
+sub-figures side by side. \textbf{Sub-figure (a)}
+\emph{``Ergodic exploration with HEDAC (ours)''}: a 2-row $\times$
+5-column mini-grid. The top row is labelled \textit{EID} (the
+target Expected Information Density map) and the bottom row is
+labelled \textit{Estimated Map}. The five columns are time snapshots
+at $t = 14$, $28$, $42$, $56$, $70$~s, showing the progressive
+evolution of both fields as the ergodic controller visits the
+domain. \textbf{Sub-figure (b)} \emph{``BO-EI''}: a single 2-row
+column showing the final EID and estimated map for the standard BO
+baseline. \textbf{Sub-figure (c)} \emph{``BO-EIS''}: same layout for
+the continuous-sampling BO variant. In all panels: a cyan circle
+marks the start of the trajectory, a magenta square marks the end
+of the trajectory, a red trace shows the collected sample points
+along the executed path, and (for (b), (c) only) orange markers
+indicate the discrete locations chosen by the BO acquisition
+function. The overall visual impression in sub-figure (a) is that
+the red trajectory gradually concentrates around the three hot-spot
+centres as $t$ increases, matching the EID evolution.
+\vspace{1em}}}
+\end{center}
+
+\vspace{0.3em}
+
+\begin{center}
+\textbf{Fig. 3.} End-effector tip trajectory during the exploration
+of an elasticity distribution with three stiff regions: comparison
+of different planners. The cyan circle indicates the beginning of
+the trajectory, while the magenta square denotes the end of the
+trajectory. In plots (b) and (c), the orange markers indicate the
+locations selected by BO, whereas the red markers represent the
+sampled points collected along the executed trajectory.
+\end{center}
+
+\vspace{1em}
+
+% ---------- Continuation of IV-B Robustness from page 5 ----------
+\noindent
+time across the three scenarios, regardless of the presence of
+measurement uncertainty. These results demonstrate the robustness of
+the method with respect to both the number of stiff regions to be
+detected and the influence of measurement noise. The RMSE, instead,
+grows under both experimental conditions as the number of stiff
+regions increases. This behaviour may be attributed to uncertainty
+at the boundaries of the stiff regions, which are typically
+under-sampled, and will be examined in greater detail in Sec.~IV-D.
+As expected, we observe an increased RMSE in the second experimental
+condition, attributable to the presence of the noise.
+
+Figure~3(a) shows an example of the evolution of the agent
+trajectory over time, when exploring the map with 3 stiff regions.
+All stiffer regions are successfully detected within 40~s. Over
+time, the ergodic metric $\alpha$ decreases from 0.79 at $t = 14$~s
+to 0.38 at $t = 70$~s, reflecting improved coverage of the target
+distribution. In parallel, the RMSE shows a substantial reduction,
+dropping from 13.75~kPa to 2.85~kPa. Intermediate values reinforce
+this trend: at $t = 28$~s, $\alpha = 0.54$ and
+$\mathrm{RMSE} = 11.19$~kPa; at $t = 42$~s, $\alpha = 0.51$ and
+$\mathrm{RMSE} = 3.7$~kPa; and at $t = 56$~s, $\alpha = 0.43$ and
+$\mathrm{RMSE} = 2.56$~kPa. This consistent evolution confirms that
+as the exploration becomes more ergodic, the accuracy of the
+reconstructed stiffness map improves accordingly.
+
+\vspace{0.6em}
+
+% ---------- C. Comparison with BO Baselines ----------
+\noindent\textit{C.~Comparison with BO Baselines}
+
+\vspace{0.2em}
+
+\noindent
+In this section, we focus on the comparison of the results of our
+ergodic approach with the two variants of BO described in
+Sec.~IV-A. We consider the distribution with 3 stiff regions, which
+has proven to be the most challenging for the ergodic exploration
+(see Fig.~3). The simulation time is the sum of the simulated agent
+motion with a velocity of 1~cm/s and the computation time required
+to determine the next sampling location. Each simulation is
+conducted under two conditions: one assuming noise-free elasticity
+measurements, and another incorporating additive white noise
+$\mathcal{N}(0,\,6.25\,\mathrm{kPa}^{2})$, similar to Sec.~IV-B.
+Fixed lenght of 400, 600, and 800~mm, were used to evaluate the
+performance evolution over time, ensuring a fair comparison
+independently of the method-specific stopping criteria. The average
+results of 100 simulations are listed in Tab.~II.
+
+This comparison highlights that BO-EI consistently underperforms
+compared to the other two methods, yielding the lowest DR and the
+highest RMSE across all tested conditions. Both BO-EIS and the
+ergodic strategy achieve comparable detection rates once sufficient
+exploration has been performed, indicating successful identification
+of the number and location of stiff regions. However, the ergodic
+approach consistently provides lower reconstruction errors,
+resulting in more accurate stiffness maps. At shorter travelled
+distances (500~mm--650~mm), BO-EIS achieves higher detection rates,
+reflecting faster initial identification of stiff regions. This
+behaviour is expected given the exploitative nature of BO-based
+strategies, which prioritise sampling high-uncertainty locations.
+However, in clinical settings, once suspicious regions are
+identified, accurate post-detection refinement becomes critical.
+Therefore, it is more relevant to compare the approaches once
+detection performance is maximised (800~mm, DR $\approx$ 99--100\%),
+and differences between the methods are primarily reflected in
+reconstruction accuracy and execution duration. In this regime, the
+ergodic strategy achieves lower RMSE while requiring substantially
+less execution time than BO-EIS under the same travelled-distance
+budget, both in noise-free and noisy conditions. These results
+indicate that, in the post-detection phase, ergodic exploration
+enables more efficient refinement of stiffness maps, yielding
+improved accuracy per unit motion and reduced execution time under
+equal motion cost. Compared to BO-based approaches, the ergodic
+strategy also exhibits greater robustness to noise, maintaining a
+consistent performance advantage across all evaluated conditions.
+Overall, these findings confirm the benefit of ergodic exploration
+in balancing detection reliability, reconstruction accuracy, and
+execution efficiency once suspicious regions have been identified.
+
+\vspace{0.6em}
+
+% ---------- D. Segmentation ----------
+\noindent\textit{D.~Segmentation}
+
+\vspace{0.2em}
+
+\noindent
+The spatial accuracy of the proposed method was evaluated based on
+its ability to segment stiff regions within the reconstructed
+stiffness maps and compared against the BO. To this end, we designed
+two simulated stiffness distributions: the first one with two
+inclusions, one irregularly shaped (Cluster 1) and one circular
+(Cluster 2), while the second distribution consisted of a single
+donut-shaped inclusion (Cluster 3), as
+
+% ---------- Bottom license strip ----------
+\vfill
+\hrule
+\vspace{0.3em}
+\begin{center}
+{\footnotesize\itshape
+This work is licensed under a Creative Commons Attribution 4.0
+License. For more information, see
+\url{https://creativecommons.org/licenses/by/4.0/}\par}
+\end{center}
+
+\end{document}

@@ -1,0 +1,130 @@
+%% =================================================================
+%% Wei, Mei, Zhao, Xiao, Sun, Zhang, Guo.
+%% "Nondestructively identifying the mechanical behavior of soft
+%%  tissues using surface deformation with an explicit inverse
+%%  approach."
+%% Appl. Math. Modelling 134 (2024) 126--147.
+%%
+%% Reconstruction of page 5 (printed p. 130) as study notes.
+%% Prose: extracted verbatim from the PDF text layer via pdftotext
+%%        (line breaks and bracket-wrapping artifacts cleaned up).
+%% Math:  hand-transcribed from the rendered page image — Eq. (15),
+%%        the TVD (total variation diminishing) regularizer.
+%% Figures 3 & 4: placeholder boxes with captions + visual descriptions.
+%% =================================================================
+
+\documentclass[11pt]{article}
+
+\usepackage[margin=1in]{geometry}
+\usepackage{amsmath, amssymb}
+\usepackage{mathrsfs}
+\usepackage{bm}
+\usepackage{xcolor}
+\usepackage{fancyhdr}
+
+\pagestyle{fancy}
+\fancyhf{}
+\lhead{\small Y.~Mei et al.}
+\rhead{\small Applied Mathematical Modelling 134 (2024) 126--147}
+\cfoot{\small 130 $\to$ \arabic{page}}
+\renewcommand{\headrulewidth}{0.4pt}
+
+\setcounter{page}{1}
+\setcounter{equation}{14}  % next equation is (15)
+
+\begin{document}
+
+% ---------- Figure 3 placeholder ----------
+\noindent
+\begin{center}
+\fbox{\parbox{0.92\textwidth}{\centering\vspace{1em}
+\textbf{[Figure 3 — placeholder]}\\[0.8em]
+Square light-teal domain with background shear modulus $\mu^{0}$,
+containing an irregular pink inclusion region with shear modulus
+$\mu^{1}$ and boundary $\partial\Omega^{1}$. Eight control points
+$\mathbf{P}^{1}_{1}, \mathbf{P}^{1}_{2}, \ldots, \mathbf{P}^{1}_{8}$
+are distributed around the boundary, connected to each other by
+dashed blue segments (the control polygon) and smoothly interpolated
+by an orange closed B-spline curve. Eight radial distances
+$d^{1}_{1}, d^{1}_{2}, \ldots, d^{1}_{8}$ connect the inclusion
+center $(x^{1}_{0}, y^{1}_{0})$ to each control point, illustrating
+the polar parameterization used in Eq.~(7) and Eq.~(10).
+\vspace{1em}}}
+\end{center}
+\vspace{0.3em}
+\begin{center}
+\textbf{Fig. 3.} The nonhomogeneous shear modulus distribution of an
+inclusion embedded composite.
+\end{center}
+
+\vspace{0.8em}
+
+% ---------- Figure 4 placeholder ----------
+\noindent
+\begin{center}
+\fbox{\parbox{0.92\textwidth}{\centering\vspace{1em}
+\textbf{[Figure 4 — placeholder]}\\[0.8em]
+Graph of $H(z) = 0.5 \times (1 + \tanh(z/\varepsilon))$ (the smoothed
+Heaviside from Eq.~(13)) plotted over $z \in [-0.5, 0.5]$, with
+$H(z) \in [0, 1]$ on the vertical axis. Four curves show the effect
+of decreasing $\varepsilon$:\\[0.3em]
+\begin{tabular}{ll}
+\textcolor{red}{$\varepsilon = 0.01$} & sharpest transition (nearly a true step) \\
+\textcolor{green!60!black}{$\varepsilon = 0.05$} & moderate transition \\
+\textcolor{blue}{$\varepsilon = 0.10$} & smoother transition \\
+\textcolor{orange}{$\varepsilon = 0.15$} & smoothest transition
+\end{tabular}\\[0.3em]
+All four curves pass through $(0, 0.5)$. As $\varepsilon \to 0$ the
+approximation converges to the true Heaviside; as $\varepsilon$ grows
+the transition band widens.
+\vspace{1em}}}
+\end{center}
+\vspace{0.3em}
+\begin{center}
+\textbf{Fig. 4.} An approximation of Heaviside function.
+\end{center}
+
+\vspace{1em}
+
+% ---------- Eq. 15 ----------
+\noindent
+\begin{equation}
+\text{Reg}(\mu) = \dfrac{1}{2}\,\alpha \int_{\Omega}
+\sqrt{|\nabla\mu|^{2} + c^{2}}\, d\Omega
+\end{equation}
+
+\vspace{0.3em}
+
+% ---------- Prose after Eq. 15 ----------
+\noindent
+For the layered structure,
+$\mathbf{r}^i = \left[r^i_1(t_1),\, r^i_2(t_2),\, \cdots,\, r^i_n(t_n)\right]$
+is the geometric parameter vector representing the distance between
+the $i$-th interface and $C^0$ at the location $t_k$. For the
+structure with inclusions embedded, the geometric parameter vector
+$\mathbf{r}^i = \left[r^i_1,\, r^i_2,\, \cdots,\, r^i_n\right]
+= \left[x^i_0,\, y^i_0,\, d^i_1,\, \cdots,\, d^i_{n-2}\right]$
+is consisting of the coordinates of the center and distances between
+the control points to the center of $i$-th component. In Eq.~(14),
+the discrepancy between the computed displacement field and measured
+displacement field on partial surface $\partial\Omega_{i_{\text{meas}}}$
+is minimized in $L$-$2$ norm. The computed displacement field is
+obtained by solving a forward problem using the finite element method
+[32]. Due to the influence of noise in measurements, we introduce a
+total variation diminishing regularization (TVD) term (the second
+term in Eq.~(14)), and the specific form is given by Eq.~(15).
+$\alpha$ is the regularization factor which controls the significance
+of the regularization on the objective function. $c$ is a small
+constant to avoid singularities when evaluating the gradient of the
+regularization term with respect to optimization variables. It should
+be noted that there exist alternative forms for the regularization
+term apart from the domain integral forms. Nevertheless, we have
+chosen to adhere to the use of domain integrals due to practical
+considerations. In particular, the explicit inverse solver has been
+developed based on the established framework of the existing
+implicit inverse solver. This continuity in methodology ensures
+consistency and facilitates seamless integration between the two
+solvers [33]. The specific value of the regularization factor is
+chosen based on the smoothness criteria [22].
+
+\end{document}

@@ -1,0 +1,51 @@
+Published as a conference paper at ICLR 2015
+
+
+
+
+From the assumption, kθt − θ∗ k2 ≤ D, kθm − θn k∞ ≤ D∞ , we have:
+                      Xd                                       Xd                2 Xd X t
+             D2           p                α(1 + β1 )G∞                         D∞            β1,t p
+R(T ) ≤                    T vbT,i +          √                    kg1:T,i k2 +                        tb
+                                                                                                        vt,i
+          2α(1 − β1 ) i=1            (1 − β1 ) 1 − β2 (1 − γ)2 i=1              2α i=1 t=1 (1 − β1,t )
+                      Xd                                        Xd
+             D2           p                 α(1 + β1 )G∞
+      ≤                    T vbT,i +           √                    kg1:T,i k2
+          2α(1 − β1 ) i=1             (1 − β1 ) 1 − β2 (1 − γ)2 i=1
+                     √         d    t
+            D∞2
+                G∞ 1 − β2 X X             β1,t √
+          +                                        t
+                   2α         i=1 t=1
+                                       (1 − β1,t )
+
+We can use arithmetic geometric series upper bound for the last term:
+                             t
+                             X                   Xt
+                                    β1,t √               1           √
+                                              t≤                 λt−1 t
+                             t=1
+                                 (1 − β 1,t )    t=1
+                                                     (1 −  β 1 )
+                                                    t
+                                                    X       1
+                                                ≤                   λt−1 t
+                                                    t=1
+                                                        (1 −  β 1 )
+                                                            1
+                                                ≤
+                                                    (1 − β1 )(1 − λ)2
+Therefore, we have the following regret bound:
+                      Xd                                       Xd               Xd         √
+             D2           p                α(1 + β1 )G∞                             D∞2
+                                                                                        G∞ 1 − β2
+R(T ) ≤                    T vbT,i +          √                    kg1:T,i k2 +
+          2α(1 − β1 ) i=1            (1 − β1 ) 1 − β2 (1 − γ)2 i=1              i=1
+                                                                                     2αβ1 (1 − λ)2
+
+
+
+
+                                                 15
+

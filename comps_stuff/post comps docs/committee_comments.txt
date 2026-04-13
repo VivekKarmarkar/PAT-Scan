@@ -1,0 +1,85 @@
+David:
+1) Linearity of F = KU and implications:
+    a) The N* cutoff derivation hypothesis based on the sub-space spanning argument
+    b) The N* cutoff argument is more generally about information
+    c) The forces should be linearly independent because the nodes are orthogonal directions
+    d) The N* cutoff is NOT efficient as you are doing multiple iterations to get the optimal N* which is inefficient compared to using all information in 1 iteration and living with redundancy
+    e) Look at Laura Waller's paper on Refractive Index Tomography and how she deals with the "information problem"
+    f) Ask David what he actually meant??
+2) Nonlinear models for biological samples:
+    a) We start with the simplest model which is linear (Occam Razor's principle)
+    b) Only experimental data will tell us whether nonlinear models are required
+    c) The papers from Katie's lab and the MBT paper with real experiments are proof that linear models work in the real world - we can cite them
+3) 3D samples and plane-strain assumptions (We have already thought of this)
+4) Handling noise (Look at how Sid Mishra's NtD paper does this)
+5) Neuman-to-Dirichilet (NtD) operators to material propery field mapping:
+    a) Sid Mishra paper
+    b) Future work based on Sid Mishra paper
+    c) Framing for our paper
+6) We could think of involving David for the foundational algorithmic papers and Tyler downstream for the application papers (Tyler suggested the Sparsh paper to start with!)
+
+Tyler:
+1) Confusion between PINNs and Standard ML - needs to be clarified while writing a paper
+2) SPARSH paper:
+    a) While writing our paper, we can steal their opener: "Touch comes before sight, before speech" and cite them
+    b) Touch comes before sight, before speech [Higuera et al., 2024]. It is humanity's oldest diagnostic tool — and its most subjective.
+    c) This paper might be relevant for INSTRUMENTATION (when we get there...)
+    d) This paper DOES NOT get at stifness maps so there seems to be a real opportunity to fuse Sparsh with PAT Scan
+3) Irregular sample creation (we answered that during comps)
+4) Random Uniform Force sampling strategy:
+    a) We can incorporate a simple one
+    b) We have also briefly thought about strategies based on Bayesian Experimental Learning paradigms
+5) Clinical deployment:
+    a) Sparsh META AI robot can do PAT Scan
+    b) Sparsh META AI robot runs Claude Code on it
+    c) Claude Code can analyze PAT Scan data, deal with patient data, explore medical databases
+    c) Claude Code is connected to the "Professor Claude" system (cute, animated, orange robot with human-like conversation capabilites)
+    d) The "Professor Claude" system can translate PAT Scan findings into a language that the doctor and patient can understand
+    e) The "Professor Claude" system can also incorporate Doctor's subjective diagnosis and take instruction from Doctor to control the Sparsh robot
+    f) Do a demo of "Professor Claude" system
+    g) Tyler spoke about "Embodied AI" in his Generative AI class and he might be very interested and have excellent input for this paper of the project if it involves Applied AI workflows with the PAT Scan algorithm just slotting in!
+
+Jia:
+1) Benchmarking wrt conventional methods:
+    a) Look at Sid Mishra's NtD paper to see how to do the "conventional methods" part
+    b) We could also try to implement the MBT method and if it gets tricky or takes too long, we could drop it!
+2) Why AI:
+    a) We didn't present the background for AI and PINNs properly during the comps due to time constraints
+    b) For the PhD defense and even for our papers, we should lay out the arguments
+    c) We already have the arguments in the comps report
+    d) Slides:
+        i) Slide 1 -> AI for Science Nobel Prize slide
+        ii) Slide 2 -> PINNs 20K+ citations slide
+        iii) Slide 3 -> Therefore AI methods at least warrant investigation slide
+        iv) Slide 4 -> What are PINNs slide?
+        v) Slide 5 -> Universal Approximation Capabilities slide
+        vi) Slide 6 -> "Observed" Universal Approximation Capabilties slide
+        vii) Slide 7 -> Mesh-based PINNs slide
+        viii) Slide 8 -> UNet Ansatz slide
+        ix) Slide 9 -> ADAM optimizer citations slide
+3) Overparameterized NN:
+    a) Yasaman Bahri paper as evidence for effectiveness of NNs despite them being overparameterized - Show this as slide in PhD defense, include in thesis and papers
+    b) Show ablation study in paper and for PhD defense slides, thesis and paper 
+    
+** Scaffolding to be added to PhD defense slides, thesis and papers
+Scaffolding:
+1) Breaking the subway map slide into two parts with fillers:
+    i) Everything up to the stiffness map "junction" via just the single metro line starting from Palpation (the dashed line with the brain for challenging)
+    ii) Based on the "Inverse Problems Jupyter Book":
+        a) Slides and Thesis for the PhD defense and papers introducing Inverse Problems
+        b) Slides and Thesis for the PhD defense and papers explaining "Why Inverse Problems are Hard?"
+        c) Slides and Thesis for the PhD defense and paper introducing our "NtD Inverse Problem"
+    iii) Everything afterwards:
+        a) All the other subway lines entering the stiffness map "junction"
+        b) All the stuff after the stiffness map "junction"
+2) Building up the AI portion starting with "Why AI?" to "Mesh-based PINNs" in 9 Slides as discussed earlier
+3) Once we go to Sid Mishra's Neural Inverse Operators (NIO) paper, we'll also need scaffolding for Operator Learning:
+    i) Watch the 2nd half of ETH Zurich AI for Science 2024 YouTube Lectures about Operator Learning
+    ii) The Lectures will help with part of the scaffolding and understanding the fundamentals
+    iii) The remaining scaffolding will come from properly doing a deep dive and deriving things from NIO paper by hand
+4) Some background about the history and clinical use of conventional elastography - ultrasound and MR
+5) Slide about our "technology first" approach inspred by MRI's historical development which explains why we aren't taking the YC "talk-to-customers" first approach
+
+Others:
+1) Wolfram summer school focused on "Claude Code scientific computing infrastructure" - the problem is worth exploring for a bit!
+

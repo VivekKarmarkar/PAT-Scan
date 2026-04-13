@@ -1,0 +1,76 @@
+Y. Mei et al.                                                                                                       Applied Mathematical Modelling 134 (2024) 126–147
+
+ [5] N.J.B. Driessen, W. Wilson, C.V.C. Bouten, F.P.T. Baaijens, A computational model for collagen fibre remodelling in the arterial wall, J. Theor. Biol. 226 (1)
+     (2004) 53–64, https://doi.org/10.1016/j.jtbi.2003.08.004.
+ [6] F. Zvietcovich, P. Pongchalee, P. Meemon, J.P. Rolland, K.J. Parker, Reverberant 3D optical coherence elastography maps the elasticity of individual corneal
+     layers, Nat. Commun. 10 (1) (2019) 4895, https://doi.org/10.1038/s41467-019-12803-4.
+ [7] J. Ma, Y. Wang, P. Wei, V. Jhanji, Biomechanics and structure of the cornea: implications and association with corneal disorders, Surv. Ophthalmol. 63 (6)
+     (2018) 851–861, https://doi.org/10.1016/j.survophthal.2018.05.004.
+ [8] S. Goenezen, J. Dord, Z. Sink, P.E. Barbone, J. Jiang, T.J. Hall, A.A. Oberai, Linear and nonlinear elastic modulus imaging: an application to breast cancer
+     diagnosis, IEEE Trans. Med. Imaging 31 (8) (2012) 1628–1637, https://doi.org/10.1109/TMI.2012.2201497.
+ [9] B. Coudrillier, J. Tian, S. Alexander, K.M. Myers, H.A. Quigley, T.D. Nguyen, Biomechanics of the Human Posterior Sclera: age- and Glaucoma-Related Changes
+     Measured Using Inflation Testing, Invest. Ophthalmol. Vis. Sci. 53 (4) (2012) 1714–1728, https://doi.org/10.1167/iovs.11-8009.
+[10] M. Butlin, A.P. Avolio, Age-Related Changes in the Mechanical Properties of Large Arteries, in: B. Derby, R. Akhtar (Eds.), Mechanical Properties of Aging Soft
+     Tissues, Springer International Publishing, Cham, 2015, pp. 37–74, https://doi.org/10.1007/978-3-319-03970-1_3.
+[11] P.G. Agache, C. Monneur, J.L. Leveque, J. De Rigal, Mechanical properties and Young’s modulus of human skin in vivo, Arch. Dermatol. Res. 269 (3) (1980)
+     221–232, https://doi.org/10.1007/BF00406415.
+[12] I.Z. Apostolakis, G.M. Karageorgos, P. Nauleau, S.D. Nandlall, E.E. Konofagou, Adaptive Pulse Wave Imaging: automated Spatial Vessel Wall Inhomogeneity
+     Detection in Phantoms and in-Vivo, IEEE Trans. Med. Imaging 39 (1) (2020) 259–269, https://doi.org/10.1109/TMI.2019.2926141.
+[13] M.R. Bersi, et al., Multimodality Imaging-Based Characterization of Regional Material Properties in a Murine Model of Aortic Dissection, Sci. Rep. 10 (1) (2020)
+     9244, https://doi.org/10.1038/s41598-020-65624-7.
+[14] M. Ambroziak, P. Pietruski, B. Noszczyk, Ł. Paluch, Ultrasonographic elastography in the evaluation of normal and pathological skin - a review, Postepy
+     Dermatol. Alergol. 36 (6) (2019) 667–672, https://doi.org/10.5114/ada.2018.77069.
+[15] C. Pailler-Mattei, S. Bec, H. Zahouani, In vivo measurements of the elastic mechanical properties of human skin by indentation tests, Med. Eng. Phys. 30 (5)
+     (2008) 599–606, https://doi.org/10.1016/j.medengphy.2007.06.011.
+[16] G.Y. Li, et al., Mechanical characterization of functionally graded soft materials with ultrasound elastography, Philos. Trans. R. Soc. Math. Phys. Eng. Sci. 377
+     (2144) (2019) 20180075, https://doi.org/10.1098/rsta.2018.0075.
+[17] G.Y. Li, Y. Zheng, Y.X. Jiang, Z. Zhang, Y. Cao, Guided wave elastography of layered soft tissues, Acta Biomater 84 (2019) 293–304, https://doi.org/10.1016/j.
+     actbio.2018.12.002.
+[18] M. Hajhashemkhani, M. Hematiyan, An inverse method for elastic constants identification of two-layer hyperelastic bodies with suction loading, Proc. Inst.
+     Mech. Eng., Part L (2023), https://doi.org/10.1177/14644207231203294.
+[19] M. Hajhashemkhani, M. Hematiyan, S. Goenezen, Inverse determination of elastic constants of a hyper-elastic member with inclusions using simple
+     displacement/length measurements, J. Strain Anal. Eng. Des. 53 (7) (2018) 529–542, https://doi.org/10.1177/0309324718792452.
+[20] Z. Liu, Y. Sun, J. Deng, D. Zhao, Y. Mei, J. Luo, A Comparative Study of Direct and Iterative Inversion Approaches to Determine the Spatial Shear Modulus
+     Distribution of Elastic Solids, Int. J. Appl. Mech. 11 (10) (2019) 1950097, https://doi.org/10.1142/S1758825119500972.
+[21] Y. Mei, S. Goenezen, Quantifying the anisotropic linear elastic behavior of solids, Int. J. Mech. Sci. 163 (2019) 105131, https://doi.org/10.1016/j.
+     ijmecsci.2019.105131.
+[22] Y. Mei, et al., A comparative study of two constitutive models within an inverse approach to determine the spatial stiffness distribution in soft materials, Int. J.
+     Mech. Sci. 140 (2018) 446–454, https://doi.org/10.1016/j.ijmecsci.2018.03.004.
+[23] D. Zhao, et al., Optical Coherence Elastography of 3D bilayer soft solids using full-field and partial displacement measurements, Med. Nov. Technol. Devices
+     (2022) 100134, https://doi.org/10.1016/j.medntd.2022.100134.
+[24] D.I. Gendin, et al., Repeatability of Linear and Nonlinear Elastic Modulus Maps From Repeat Scans in the Breast, IEEE Trans. Med. Imaging 40 (2) (Feb. 2021)
+     748–757, https://doi.org/10.1109/TMI.2020.3036032.
+[25] Y. Mei, S. Wang, X. Shen, S. Rabke, S. Goenezen, Mechanics Based Tomography: a Preliminary Feasibility Study, Sensors 17 (5) (2017), https://doi.org/
+     10.3390/s17051075.
+[26] Y. Mei, R. Fulmer, V. Raja, S. Wang, S. Goenezen, Estimating the non-homogeneous elastic modulus distribution from surface deformations, Int. J. Solids Struct.
+     83 (2016) 73–80, https://doi.org/10.1016/j.ijsolstr.2016.01.001.
+[27] Y. Mei, Z. Du, D. Zhao, W. Zhang, C. Liu, X. Guo, Moving Morphable Inclusion Approach: an Explicit Framework to Solve Inverse Problem in Elasticity, J. Appl.
+     Mech. 88 (4) (2020), https://doi.org/10.1115/1.4049142.
+[28] D. Liu, J. Du, A Moving Morphable Components Based Shape Reconstruction Framework for Electrical Impedance Tomography, IEEE Trans. Med. Imaging 38
+     (12) (2019) 2937–2948, https://doi.org/10.1109/TMI.2019.2918566.
+[29] D. Liu, D. Gu, D. Smyl, J. Deng, J. Du, Shape Reconstruction Using Boolean Operations in Electrical Impedance Tomography, IEEE Trans. Med. Imaging 39 (9)
+     (2020) 2954–2964, https://doi.org/10.1109/TMI.2020.2983055.
+[30] T.J.R. Hughes, L.P. Franca, M. Balestra, A new finite element formulation for computational fluid dynamics: V. Circumventing the Babuška-Brezzi condition: a
+     stable Petrov-Galerkin formulation of the Stokes problem accommodating equal-order interpolations, Comput. Methods in Appl. Mech.Eng. 59 (1) (1986)
+     85–99, https://doi.org/10.1016/0045-7825(86)90025-3.
+[31] W. Zhang, J. Song, J. Zhou, Z. Du, Y. Zhu, Z. Sun, X. Guo, Topology optimization with multiple materials via moving morphable component (MMC) method, Int.
+     J. Numer. Methods Eng. 133 (11) (2018) 1653–1675, https://doi.org/10.1002/nme.5714.
+[32] J.N. Reddy, Introduction to the Finite Element Method, McGraw-Hill Education, 2019.
+[33] Y. Mei, S. Goenezen, Spatially Weighted Objective Function to Solve the Inverse Elasticity Problem for the Elastic Modulus, in: B. Doyle, K. Miller, A. Wittek,
+     P. Nielsen (Eds.), Computational Biomechanics for Medicine, Springer International Publishing, Cham, 2015, pp. 47–58, https://doi.org/10.1007/978-3-319-
+     15503-6_5.
+[34] A.A. Oberai, N.H. Gokhale, G.R. Feijóo, Solution of inverse problems in elasticity imaging using the adjoint method, Inverse Probl 19 (2) (2003) 297, https://
+     doi.org/10.1088/0266-5611/19/2/304.
+[35] S. Goenezen, P. Barbone, A.A. Oberai, Solution of the nonlinear elasticity imaging inverse problem: the incompressible case, Compute. Method. Appl. M. 200
+     (13–16) (2011) 1406–1420, https://doi.org/10.1016/j.cma.2010.12.018.
+[36] A. Kalra, A. Lowe, A.M. Al-Jumaily, Mechanical behaviour of skin: a review, J. Mater. Sci. Eng. 5 (2016) 1–7, https://doi.org/10.4172/2169-0022.1000254.
+[37] F. Gao, Z. Guo, M. Sakamoto, et al., Fluid-structure Interaction within a Layered Aortic Arch Model, J. Biol. Phys. 32 (2006) 435–454, https://doi.org/10.1007/
+     s10867-006-9027-7.
+[38] S. Goenezen, B.J. Kim, M. Kotecha, P. Luo, M.R. Hematiyan, Mechanics based tomography (MBT): validation using experimental data, J. Mech. Phys. Solids 146
+     (2021) 104187, https://doi.org/10.1016/j.jmps.2020.104187.
+
+
+
+
+                                                                                  147
+

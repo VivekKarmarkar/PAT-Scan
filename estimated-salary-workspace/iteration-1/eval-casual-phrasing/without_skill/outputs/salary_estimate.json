@@ -1,0 +1,51 @@
+{
+  "question": "How much would someone who built this codebase get paid yearly?",
+  "best_estimate": {
+    "most_likely_range": "$150,000 - $210,000",
+    "point_estimate": "$180,000",
+    "context": "Senior ML Research Engineer or Computational Scientist role, 5-7 years experience, mid-to-large tech or defense company, US-based (mixed remote/hybrid). This reflects the rare intersection of ML engineering + computational mechanics + differentiable physics."
+  },
+  "salary_data": {
+    "Role Title": "ML Research Engineer / Computational Scientist",
+    "Required Experience": "3-7 years (given codebase complexity and domain depth)",
+    "By Experience Level": {
+      "Mid-Level (3-5 yr)": {"low": 120000, "median": 155000, "high": 195000},
+      "Senior (5-8 yr)": {"low": 155000, "median": 195000, "high": 260000},
+      "Staff/Principal (8+)": {"low": 200000, "median": 260000, "high": 350000}
+    },
+    "By Company Type": {
+      "Academia / National Lab": {"low": 85000, "median": 115000, "high": 145000},
+      "Startup (seed-Series B)": {"low": 120000, "median": 160000, "high": 210000},
+      "Mid-size Tech / Defense": {"low": 145000, "median": 185000, "high": 240000},
+      "Big Tech (FAANG/equiv)": {"low": 190000, "median": 260000, "high": 380000},
+      "Quant Finance / HFT": {"low": 250000, "median": 350000, "high": 500000}
+    },
+    "By Location": {
+      "Remote / LCOL": {"low": 110000, "median": 145000, "high": 190000},
+      "Mid-tier city (Austin, Denver)": {"low": 135000, "median": 170000, "high": 220000},
+      "SF Bay Area / NYC": {"low": 170000, "median": 220000, "high": 310000}
+    },
+    "Contractor-to-Salary Conversion": {
+      "note": "cost_estimate.md uses $100-175/hr contractor rates",
+      "contractor_low_hr": 100,
+      "contractor_avg_hr": 135,
+      "contractor_high_hr": 175,
+      "billable_hours_per_year": 1880,
+      "salary_equivalent_factor": 0.60,
+      "implied_salary_low": 112800,
+      "implied_salary_avg": 152280,
+      "implied_salary_high": 201600
+    }
+  },
+  "skills_required": {
+    "PyTorch / Deep Learning": "Advanced",
+    "GPU/CUDA Programming": "Intermediate-Advanced",
+    "Finite Element Methods (FEM)": "Advanced",
+    "Differentiable Programming": "Advanced",
+    "Computational Mechanics": "Advanced",
+    "Inverse Problems / PINNs": "Specialized",
+    "Scientific Python (NumPy, SciPy)": "Advanced",
+    "LaTeX / Technical Writing": "Intermediate"
+  },
+  "methodology": "1. Analyzed codebase complexity: 29K lines Python, 44 files, spanning ML/AI, FEM, differentiable physics, and inverse problems. 2. Mapped required skill profile to industry roles (ML Research Engineer, Computational Scientist, Applied Scientist). 3. Cross-referenced contractor rates from cost_estimate.md ($100-175/hr) with standard 0.60x salary conversion factor. 4. Compared against 2025-2026 market data for similar roles by company type, experience level, and location."
+}

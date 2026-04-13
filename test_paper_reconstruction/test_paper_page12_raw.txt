@@ -1,0 +1,88 @@
+Published as a conference paper at ICLR 2015
+
+
+
+
+10     A PPENDIX
+10.1    C ONVERGENCE P ROOF
+
+Definition 10.1. A function f : Rd → R is convex if for all x, y ∈ Rd , for all λ ∈ [0, 1],
+                                λf (x) + (1 − λ)f (y) ≥ f (λx + (1 − λ)y)
+
+Also, notice that a convex function can be lower bounded by a hyperplane at its tangent.
+Lemma 10.2. If a function f : Rd → R is convex, then for all x, y ∈ Rd ,
+                                        f (y) ≥ f (x) + ∇f (x)T (y − x)
+
+The above lemma can be used to upper bound the regret and our proof for the main theorem is
+constructed by substituting the hyperplane with the Adam update rules.
+The following two lemmas are used to support our main theorem. We also use some definitions sim-
+plify our notation, where gt , ∇ft (θt ) and gt,i as the ith element. We define g1:t,i ∈ Rt as a vector
+that contains the ith dimension of the gradients over all iterations till t, g1:t,i = [g1,i , g2,i , · · · , gt,i ]
+Lemma 10.3. Let gt = ∇ft (θt ) and g1:t be defined as above and bounded, kgt k2 ≤ G, kgt k∞ ≤
+G∞ . Then,                               s
+                                     XT      2
+                                            gt,i
+                                                 ≤ 2G∞ kg1:T,i k2
+                                     t=1
+                                             t
+
+Proof. We will prove the inequality using induction over T.
+                                  q
+The base case for T = 1, we have g1,i 2 ≤ 2G kg k .
+                                              ∞ 1,i 2
+
+For the inductive step,
+                                    s                 s            s
+                              T
+                              X          2     T
+                                               X −1        2            2
+                                        gt,i              gt,i         gT,i
+                                             =                 +
+                              t=1
+                                         t     t=1
+                                                           t            T
+                                                                            s
+                                                                                 2
+                                                                                gT,i
+                                            ≤ 2G∞ kg1:T −1,i k2 +
+                                                                                 T
+                                                                                     s
+                                                 q                                        2
+                                                                                         gT,i
+                                            = 2G∞ kg1:T,i k22 − gT2 +
+                                                                                          T
+
+
+                                  g4
+From, kg1:T,i k22 − gT,i
+                     2         T ,i
+                         + 4kg1:T     2 ≥ kg1:T,i k2 − gT,i , we can take square root of both side and
+                                  ,i k2
+                                                   2    2
+
+have,
+                           q                                         2
+                                                                    gT,i
+                              kg1:T,i k22 − gT,i
+                                             2 ≤ kg
+                                                      1:T,i k2 −
+                                                                 2kg1:T,i k2
+                                                                       2
+                                                                      gT,i
+                                                      ≤ kg1:T,i k2 − p
+                                                                    2 T G2∞
+
+                                                  q
+Rearrange the inequality and substitute the                    2 term,
+                                                kg1:T,i k22 − gT,i
+                                                    s
+                              q                          2
+                                                       gT,i
+                            G∞ kg1:T,i k22 − gT2 +           ≤ 2G∞ kg1:T,i k2
+                                                         T
+
+
+
+
+                                                           12
+

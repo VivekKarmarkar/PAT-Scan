@@ -1,0 +1,49 @@
+Y. Mei et al.                                                                                        Applied Mathematical Modelling 134 (2024) 126–147
+
+
+
+
+Fig. 11. The reconstructed results with varying 3,6 and 9 surface displacement datasets corresponding to Sample 1 (1 % noise is introduced into the
+measured data, Unit: MPa).
+
+
+
+Table 1
+Comparison of the average relative error in the shear modulus distribution obtained by implicit inverse and explicit inverse methods for the layered
+structure.
+  Inverse method                                     Explicit inverse method                            Implicit inverse method
+
+  Number of surface displacement datasets            3                 6               9                3                 6                 9
+
+  1 % noise          Sample 1                        0.04 %            0.00 %          0.01 %           0.18 %            0.01 %            0.01 %
+                     Sample 2                        11.56 %           6.40 %          4.53 %           13.20 %           7.44 %            4.69 %
+                     Sample 3                        14.03 %           6.84 %          6.71 %           14.55 %           11.37 %           8.58 %
+  5 % noise          Sample 1                        0.36 %            0.22 %          0.003 %          0.11 %            0.15 %            0.003 %
+                     Sample 2                        15.29 %           11.24 %         8.12 %           24.44 %           11.96 %           8.61 %
+                     Sample 3                        25.00 %           9.20 %          8.14 %           19.03 %           13.61 %           10.58 %
+
+
+
+with a 1 % noise level. Furthermore, we provided the values of the regularization factors for each case depicted in Figs. 8–16 in Table 2.
+
+
+Case 2: A layered ring structure
+
+    In the second numerical example, we focused on a layered ring structure, as illustrated in Fig. 17. To discretize the problem domain,
+we employed 7610 triangular elements. The deformation of the ring structure was induced by applying inner pressures ranging from
+10 mmHg to 50 mmHg, and we were only able to "measure" the displacement on the inner wall. The shear modulus values of the inner
+and outer layers were 0.129 MPa and 0.386 MPa [37], respectively. Our approach for the inverse problem relied on utilizing the
+measured displacement on the inner wall to determine the shear modulus distribution. Initially, we provided an initial guess of the
+shear modulus distribution, as shown in Fig. 18(a), where four layers were predefined. The shear modulus values, from the outermost
+layer to the innermost layer, ranged from 0.01 MPa to 0.04 MPa. During the inverse problem-solving process, we optimized both the
+shape of the interface between neighboring layers and the shear modulus value of each layer. In the initial assumption, the ring
+structure is considered to consist of 4 layers. For the explicit inverse method, each interface is represented by 14 control points, leading
+to a total of 56 optimization variables, which includes 4 shear moduli. On the other hand, the implicit inverse method involves a much
+larger number of optimization variables, specifically 4030 variables in total. Fig. 18 displays the variation of the reconstructed shear
+modulus distribution using the explicit inverse method for the noise free case. Notably, the reconstruction achieved through the
+explicit method closely resembled the ground truth. However, the same cannot be said for the implicit inverse method, where the
+reconstructed shear modulus distribution performed significantly worse than the explicit inverse method even for the noise free data
+(see Fig. 19(d)-(f)).
+
+                                                                           136
+

@@ -1,0 +1,163 @@
+%% =================================================================
+%% Wei, Mei, Zhao, Xiao, Sun, Zhang, Guo.
+%% "Nondestructively identifying the mechanical behavior of soft
+%%  tissues using surface deformation with an explicit inverse
+%%  approach."
+%% Appl. Math. Modelling 134 (2024) 126--147.
+%%
+%% Reconstruction of page 1 (printed p. 126) as study notes.
+%% Prose: extracted verbatim from the PDF text layer via pdftotext
+%%        (soft hyphens and line breaks cleaned up only).
+%% Layout: hand-styled to mirror the Elsevier two-column abstract
+%%        block. No equations on this page.
+%% =================================================================
+
+\documentclass[11pt]{article}
+
+\usepackage[margin=0.85in]{geometry}
+\usepackage{amsmath, amssymb}
+\usepackage{mathrsfs}
+\usepackage{soul}
+\definecolor{hlyellow}{RGB}{255,255,170}
+\definecolor{hlcyan}{RGB}{170,255,255}
+\definecolor{hlgreen}{RGB}{170,255,170}
+\definecolor{hlpink}{RGB}{255,170,170}
+\definecolor{hlorange}{RGB}{255,221,170}
+\usepackage{fancyhdr}
+\usepackage{url}
+
+\pagestyle{fancy}
+\fancyhf{}
+\rhead{\small Applied Mathematical Modelling 134 (2024) 126--147}
+\cfoot{\small \thepage}
+\renewcommand{\headrulewidth}{0.4pt}
+
+\setcounter{page}{126}
+\setlength{\parskip}{6pt}
+\setlength{\parindent}{0pt}
+
+\begin{document}
+
+% ---------- Journal nameplate ----------
+\noindent
+{\footnotesize Contents lists available at ScienceDirect}\\[2pt]
+{\Large\bfseries Applied Mathematical Modelling}\\[2pt]
+{\footnotesize journal homepage: \texttt{www.elsevier.com/locate/apm}}
+
+\vspace{0.8em}
+\hrule
+\vspace{1em}
+
+% ---------- Title ----------
+{\large\bfseries
+Nondestructively identifying the mechanical behavior of soft
+tissues using surface deformation with an explicit inverse
+approach\par}
+
+\vspace{0.8em}
+
+% ---------- Authors ----------
+\noindent
+Yue Mei\textsuperscript{a,b},
+Dongmei Zhao\textsuperscript{a,b},
+Changjiang Xiao\textsuperscript{a,b},
+Zhi Sun\textsuperscript{a,b},
+Weisheng Zhang\textsuperscript{a,b,*},
+Xu Guo\textsuperscript{a,b,*}
+
+\vspace{0.5em}
+
+% ---------- Affiliations ----------
+\noindent
+{\footnotesize
+\textsuperscript{a}\,\emph{State Key Laboratory of Structural Analysis
+for Industrial Equipment, Department of Engineering Mechanics, Dalian
+University of Technology, Dalian 116023, PR China}\\[2pt]
+\textsuperscript{b}\,\emph{International Research Center for
+Computational Mechanics, Dalian University of Technology, Dalian
+116023, PR China}\par}
+
+\vspace{1em}
+\hrule
+\vspace{1em}
+
+% ---------- Article info / Abstract block (two columns) ----------
+\noindent
+\begin{minipage}[t]{0.30\textwidth}
+\textbf{A R T I C L E\ \ I N F O}\\[0.8em]
+\textbf{Keywords:}\\
+Inverse problem\\
+Layered structures\\
+Inclusion embedded structures\\
+Surface deformation\\
+Biological tissue
+\end{minipage}
+\hfill
+\begin{minipage}[t]{0.66\textwidth}
+\textbf{A B S T R A C T}\\[0.8em]
+Identifying the spatial variation of stiffness properties in soft
+tissues nondestructively, with limited surface measurements, poses
+significant challenges. \pdfcomment[icon=Comment,color=yellow]{User input: the part where they introduce the term "explicit inverse approach" in the Wei paper\\\\Claude comments: The term "explicit inverse approach" is introduced in two places on page 1: (1) the paper title itself, and (2) the first sentence of the abstract. The title uses the term without definition; the abstract sentence is the first DEFINITIONAL usage — it pairs the term with its meaning ("designed to characterize the nonhomogeneous elastic property distribution... using only surface displacement datasets"). This excerpt records the abstract sentence as the introduction point because it's the first place a reader encounters the term with enough context to understand what it means.\\\\Note: the raw.txt had soft hyphens (U+00AD) in "distribution" at the column break. These were joined in the excerpt since they are pdftotext layout artifacts, not paper content. Cat-2 highlighting skills should match against the clean version.}\sethlcolor{hlyellow}\hl{In this paper, we present a novel explicit
+inverse approach designed to characterize the nonhomogeneous elastic
+property distribution of soft tissues using only surface displacement
+datasets.} \pdfcomment[icon=Comment,color=orange]{User input: that the idea of "segmentation" is used to reduce problem dimensionality in the Wei paper\\\\Claude comments: PARTIALLY SUPPORTS. The concept is clearly present but the word "segmentation" never appears in the paper (0 occurrences across all 22 pages). What the paper describes IS functionally a segmentation: partition the domain into discrete regions (layers or components), assign one material property per region, and optimize the region boundaries + per-region shear moduli rather than per-pixel/per-node properties. This reduces optimization variables from 3691 (one per mesh node, page 8 line 43) to 56 (geometric + material, page 8 line 38) — a 66x dimensionality reduction.\\\\The "partially" qualifier is important: the user's claim frames the paper's approach as "segmentation," which is a specific term from image processing / computer vision. The paper frames the same idea as "optimizing geometric parameters of deformable and movable components" — a continuum-mechanics / topology-optimization framing. The mathematical operation is the same (partition a domain into labeled regions); the conceptual framing is different. The paper uses B-spline interfaces and level-set TDF functions to define regions — these are topology-optimization tools, not segmentation tools, but the effect on dimensionality is identical to what segmentation achieves.\\\\Additional supporting passage on page 18 (Discussion, line 29): "it optimizes only the geometric parameters and shear moduli of each region, reducing the scale of the optimization problem."}\sethlcolor{hlorange}\hl{In contrast to the prevalent implicit inverse approach,
+which focuses on optimizing the elastic properties of individual
+pixels, our proposed method optimizes the geometric parameters of
+deformable and movable components, as well as shear moduli of each
+component. As a result, the proposed approach requires far fewer
+optimization variables, streamlining the process.} Numerical tests
+conducted in this study demonstrate the superiority of the explicit
+inverse method over the implicit inverse method, providing
+much-improved reconstructed results. In particular for a ring
+structure, while the average relative error of reconstruction using
+the implicit inverse method can exceed 40\,\%, the explicit inverse
+method achieves a remarkable average relative error of only 5\,\%.
+Given that surface displacements are easily measurable, the
+integration of our proposed explicit inverse method with low-cost
+imaging techniques shows great potential in accurately mapping the
+elastic property distribution of biological tissues.
+\end{minipage}
+
+\vspace{1.2em}
+\hrule
+\vspace{0.8em}
+
+% ---------- Introduction ----------
+\section*{Introduction}
+
+\noindent
+Biological tissues often display significant heterogeneity. This
+diversity is evident in various tissues such as skin [1--3], blood
+vessels [4,5], and corneas [6,7], among others, which exhibit
+multi-layered structures. These layers offer a variety of
+functionalities, thus contributing to the complexity of biological
+systems. Interestingly, the emergence of cancerous tumors introduces
+an additional level of heterogeneity to these tissues. These tumors
+typically exhibit greater stiffness compared to their surrounding
+healthy tissues due to pathological alterations [8]. This stark
+contrast in mechanical properties can serve as a potential indicator
+of malignancy. It's also worth noting that the local mechanical
+properties of soft tissues are not static; they fluctuate in response
+to various factors such as age
+
+% ---------- Bottom-of-page footer (corresponding-author block) ----------
+\vfill
+\hrule
+\vspace{0.4em}
+\noindent
+{\footnotesize
+* Corresponding authors at: State Key Laboratory of Structural
+Analysis for Industrial Equipment, Department of Engineering
+Mechanics, Dalian University of Technology, Dalian 116023, PR China.\\[2pt]
+\textit{E-mail addresses:}
+\texttt{weishengzhang@dlut.edu.cn} (W.~Zhang),
+\texttt{guoxu@dlut.edu.cn} (X.~Guo).\\[4pt]
+\url{https://doi.org/10.1016/j.apm.2024.05.028}\\[2pt]
+Received 10 October 2023; Received in revised form 21 May 2024;
+Accepted 22 May 2024\\[2pt]
+Available online 31 May 2024\\[2pt]
+0307-904X/\textcopyright{} 2024 Elsevier Inc. All rights are reserved,
+including those for text and data mining, AI training, and similar
+technologies.\par}
+
+\end{document}

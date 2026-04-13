@@ -1,0 +1,189 @@
+Applied Mathematical Modelling 134 (2024) 126–147
+
+Y. Mei et al.
+
+nodal or elemental shear moduli. If the shear modulus is nodally defined, we can use the same interpolation function with the
+displacement field. In this case, the shear modulus can be expressed as:
+
+μ ≈ μh =
+
+N
+∑
+i=1
+
+Ni μi
+
+(18)
+
+where N is the total number of nodes in the finite element model and Ni is the finite element shape function. μi is the nodal shear
+modulus.
+In the explicit inverse method, since shear modulus distribution is a function of geometric parameters and the shear modulus in
+each region, the gradient of the objective function with respect to the optimization variables can be calculated using the chain rule. To
+this end, we should seek δμ corresponding to a change in any optimization variable from β to β + δβ:
+δμ =
+
+∂μ
+δβ
+∂β
+
+(19)
+
+Thereby, comparing to the implicit inverse method, we need to evaluate the ∂μ/∂β.
+(a) Layered structure
+The evaluation of the gradient of geometric optimization variables in a layered structure with n + 1 layers should be discussed
+
+1
+considering three cases. For the m-th geometric optimization variable rm
+at the first interface C1 , ∂∂μ
+is given by:
+r1
+m
+
+(
+)
+))] ∂H ϕ1 (x) ∂ϕ1 (x)
+∂μ
+2
+0
+1
+−
+H
+ϕ
+=
+−
+μ
++
+μ
+(x)
+∂rm1
+∂rm1
+∂ϕ1 (x)
+(
+1
+
+[
+
+(
+
+(20)
+
+For the m-th geometric optimization variable rmn at the last interface Cn , ∂∂μ
+is given by:
+rn
+m
+
+) ∂H(ϕn (x)) ∂ϕn (x)
+(
+)
+∂μ (
+= − μn− 1 H ϕn− 1 (x) + μn
+∂rmn
+∂ϕn (x)
+∂rmn
+
+(21)
+
+For the m-th geometric optimization variable at the intermediate interface Ci (2 ≤ i ≤ (n − 1)), ∂∂μ
+is given by:
+ri
+m
+
+(
+
+)
+
+(
+(
+)
+))] ∂H ϕi (x) ∂ϕi (x)
+(
+∂μ [
+= − μi− 1 H ϕi− 1 (x) + μi 1 − H ϕi+1 (x)
+∂rmi
+∂rmi
+∂ϕi (x)
+In Eqs. (20–22),
+
+∂H(ϕj (x))
+∂ϕj (x)
+
+(22)
+
+(1 ≤ j ≤ n) can be evaluated by Eq. (13) as the Heaviside function is approximated by a continuous and
+
+j
+differentiable function. ∂ϕ∂r(x)
+can be evaluated by the finite difference method.
+j
+m
+
+∂μ
+For the shear modulus of the background μ0 , ∂μ
+0 is given by:
+
+(
+)
+∂μ
+= 1 − H ϕ1 (x)
+∂μ0
+
+(23)
+
+For the shear modulus of the last layer μn, we have
+
+∂μ
+= H(ϕn (x))
+∂μn
+
+(24)
+
+For the shear modulus of the layer μi(1 ≤ i ≤ (n − 1)), we have
+)(
+(
+))
+(
+∂μ
+= H ϕi (x) 1 − H ϕi+1 (x)
+∂μi
+
+(25)
+
+(b) Domain with inclusion embedded
+j
+
+For each m-th geometric optimization variables of j-th component rm , ∂μj is given by:
+[
+
+n
+∏
+
+(
+)
+∂μ
+= μ0
+H ϕi (x) − μj
+∂rmj
+i=1,i∕
+=j
+
+]
+
+)
+∂H ϕ (x) ∂ϕj (x)
+(
+
+j
+
+∂ϕj (x)
+
+∂rm
+
+(26)
+
+∂rmj
+
+For the shear modulus of the background μ0, we have:
+
+132
+
+

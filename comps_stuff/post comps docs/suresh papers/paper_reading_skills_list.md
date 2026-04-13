@@ -1,0 +1,12 @@
+/sleep-mask-protocol
+/find-paper-by-title
+/paper-metadata
+/find-similar-papers
+/analyze-paper-against-cluster
+/ask-question-about-paper
+/find-evidence-in-paper
+/text-to-highlight-in-paper
+/reproduce-all-pages-basic-tex
+/hl-popup-paper-all
+/voice-session-to-pdf
+/academic-subway

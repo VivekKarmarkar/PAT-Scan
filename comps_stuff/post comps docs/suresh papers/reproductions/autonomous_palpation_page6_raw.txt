@@ -1,0 +1,68 @@
+                           This article has been accepted for publication in IEEE Robotics and Automation Letters. This is the author's version which has not been fully edited and
+                                                     content may change prior to final publication. Citation information: DOI 10.1109/LRA.2026.3673907
+
+6                                                                           IEEE ROBOTICS AND AUTOMATION LETTERS. PREPRINT VERSION. ACCEPTED FEBRUARY, 2026
+
+
+
+                 t = 14s           t = 28s             t = 42s              t = 56s              t = 70s
+ EID
+ Estimated Map
+
+
+
+
+                              (a) Ergodic exploration with HEDAC (ours).                                                          (b) BO-EI.                               (c) BO-EIS
+Fig. 3. End-effector tip trajectory during the exploration of an elasticity distribution with three stiff regions: comparison of different planners. The cyan circle
+indicates the beginning of the trajectory, while the magenta square denotes the end of the trajectory. In plots (b) and (c), the orange markers indicate the
+locations selected by BO, whereas the red markers represent the sampled points collected along the executed trajectory.
+
+
+
+time across the three scenarios, regardless of the presence                                             This comparison highlights that BO-EI consistently under-
+of measurement uncertainty. These results demonstrate the                                            performs compared to the other two methods, yielding the
+robustness of the method with respect to both the number of                                          lowest DR and the highest RMSE across all tested conditions.
+stiff regions to be detected and the influence of measurement                                        Both BO-EIS and the ergodic strategy achieve comparable
+noise. The RMSE, instead, grows under both experimental                                              detection rates once sufficient exploration has been performed,
+conditions as the number of stiff regions increases. This                                            indicating successful identification of the number and location
+behaviour may be attributed to uncertainty at the boundaries                                         of stiff regions. However, the ergodic approach consistently
+of the stiff regions, which are typically under-sampled, and                                         provides lower reconstruction errors, resulting in more accu-
+will be examined in greater detail in Sec. IV-D. As expected,                                        rate stiffness maps. At shorter travelled distances (500 mm–
+we observe an increased RMSE in the second experimental                                              650 mm), BO-EIS achieves higher detection rates, reflecting
+condition, attributable to the presence of the noise.                                                faster initial identification of stiff regions. This behaviour is
+   Figure 3(a) shows an example of the evolution of the                                              expected given the exploitative nature of BO-based strategies,
+agent trajectory over time, when exploring the map with                                              which prioritise sampling high-uncertainty locations. However,
+3 stiff regions. All stiffer regions are successfully detected                                       in clinical settings, once suspicious regions are identified,
+within 40 s. Over time, the ergodic metric α decreases from                                          accurate post-detection refinement becomes critical. There-
+0.79 at t = 14 s to 0.38 at t = 70 s, reflecting improved                                            fore, it is more relevant to compare the approaches once
+coverage of the target distribution. In parallel, the RMSE                                           detection performance is maximised (800 mm, DR ≈ 99–
+shows a substantial reduction, dropping from 13.75 kPa to                                            100%), and differences between the methods are primarily
+2.85 kPa. Intermediate values reinforce this trend: at t = 28 s,                                     reflected in reconstruction accuracy and execution duration.
+α = 0.54 and RMSE = 11.19 kPa; at t = 42 s, α = 0.51                                                 In this regime, the ergodic strategy achieves lower RMSE
+and RMSE = 3.7 kPa; and at t = 56 s, α = 0.43 and                                                    while requiring substantially less execution time than BO-EIS
+RMSE = 2.56 kPa. This consistent evolution confirms that                                             under the same travelled-distance budget, both in noise-free
+as the exploration becomes more ergodic, the accuracy of the                                         and noisy conditions. These results indicate that, in the post-
+reconstructed stiffness map improves accordingly.                                                    detection phase, ergodic exploration enables more efficient
+                                                                                                     refinement of stiffness maps, yielding improved accuracy per
+                                                                                                     unit motion and reduced execution time under equal motion
+C. Comparison with BO Baselines                                                                      cost. Compared to BO-based approaches, the ergodic strat-
+                                                                                                     egy also exhibits greater robustness to noise, maintaining a
+   In this section, we focus on the comparison of the results of                                     consistent performance advantage across all evaluated condi-
+our ergodic approach with the two variants of BO described                                           tions. Overall, these findings confirm the benefit of ergodic
+in Sec. IV-A. We consider the distribution with 3 stiff regions,                                     exploration in balancing detection reliability, reconstruction
+which has proven to be the most challenging for the ergodic                                          accuracy, and execution efficiency once suspicious regions
+exploration (see Fig. 3). The simulation time is the sum of                                          have been identified.
+the simulated agent motion with a velocity of 1 cm/s and
+the computation time required to determine the next sampling
+location. Each simulation is conducted under two conditions:                                         D. Segmentation
+one assuming noise-free elasticity measurements, and another                                            The spatial accuracy of the proposed method was evaluated
+incorporating additive white noise N (0, 6.25 kPa2 ), similar to                                     based on its ability to segment stiff regions within the re-
+Sec. IV-B. Fixed lenght of 400, 600, and 800 mm, were used                                           constructed stiffness maps and compared against the BO. To
+to evaluate the performance evolution over time, ensuring a                                          this end, we designed two simulated stiffness distributions: the
+fair comparison independently of the method-specific stopping                                        first one with two inclusions, one irregularly shaped (Cluster
+criteria. The average results of 100 simulations are listed in                                       1) and one circular (Cluster 2), while the second distribution
+Tab. II.                                                                                             consisted of a single donut-shaped inclusion (Cluster 3), as
+
+
+                           This work is licensed under a Creative Commons Attribution 4.0 License. For more information, see https://creativecommons.org/licenses/by/4.0/
+

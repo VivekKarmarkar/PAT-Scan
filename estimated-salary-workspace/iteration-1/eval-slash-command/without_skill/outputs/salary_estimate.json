@@ -1,0 +1,40 @@
+{
+  "project": "PAT-Scan",
+  "analysis_date": "2026-03-05",
+  "total_development_hours": 2411,
+  "fte_equivalent_years": 1.16,
+  "salary_estimates": {
+    "Low-end": {
+      "hourly_rate_usd": 100,
+      "annual_base_salary_usd": 208000,
+      "annual_total_comp_range_usd": [260000, 291200],
+      "project_cost_usd": 241100
+    },
+    "Average": {
+      "hourly_rate_usd": 135,
+      "annual_base_salary_usd": 280800,
+      "annual_total_comp_range_usd": [351000, 393120],
+      "project_cost_usd": 325485
+    },
+    "High-end": {
+      "hourly_rate_usd": 175,
+      "annual_base_salary_usd": 364000,
+      "annual_total_comp_range_usd": [455000, 509600],
+      "project_cost_usd": 421925
+    }
+  },
+  "recommended": {
+    "base_salary_range_usd": [208000, 364000],
+    "total_comp_range_usd": [260000, 510000],
+    "midpoint_base_usd": 281000,
+    "midpoint_total_comp_usd": 365000
+  },
+  "market_benchmarks_2026": {
+    "ML Engineer (mid)": 145000,
+    "ML Engineer (senior)": 195000,
+    "Computational Scientist": 160000,
+    "Research Engineer (FEM+ML)": 185000,
+    "Staff ML Engineer (FAANG)": 300000
+  },
+  "methodology": "Hourly contractor rates converted to annual salary (x 2,080 hrs/yr). Total compensation includes 1.25-1.40x benefits multiplier for health insurance, retirement, PTO, payroll taxes, and equipment."
+}

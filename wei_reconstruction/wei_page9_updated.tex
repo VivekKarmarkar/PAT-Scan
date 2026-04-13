@@ -1,0 +1,123 @@
+%% =================================================================
+%% Wei, Mei, Zhao, Xiao, Sun, Zhang, Guo.
+%% "Nondestructively identifying the mechanical behavior of soft
+%%  tissues using surface deformation with an explicit inverse
+%%  approach."
+%% Appl. Math. Modelling 134 (2024) 126--147.
+%%
+%% Reconstruction of page 9 (printed p. 134) as study notes.
+%% This page is almost entirely figures (Fig. 7 and Fig. 8), with
+%% minimal connecting prose at the top and bottom.
+%% Prose: extracted verbatim from the PDF text layer via pdftotext.
+%% Math:  none on this page.
+%% Figures 7 & 8: placeholder boxes with captions + visual descriptions.
+%% =================================================================
+
+\documentclass[11pt]{article}
+
+\usepackage[margin=1in]{geometry}
+\usepackage{amsmath, amssymb}
+\usepackage{mathrsfs}
+\usepackage{bm}
+\usepackage{fancyhdr}
+
+\pagestyle{fancy}
+\fancyhf{}
+\lhead{\small Y.~Mei et al.}
+\rhead{\small Applied Mathematical Modelling 134 (2024) 126--147}
+\cfoot{\small 134 $\to$ \arabic{page}}
+\renewcommand{\headrulewidth}{0.4pt}
+
+\setcounter{page}{1}
+
+\begin{document}
+
+% ---------- Figure 7 placeholder ----------
+\noindent
+\begin{center}
+\fbox{\parbox{0.92\textwidth}{\centering\vspace{1em}
+\textbf{[Figure 7 — placeholder]}\\[0.8em]
+Six-panel grid showing the optimization trajectory for the
+explicit inverse scheme on \textbf{Sample 1} (the homogeneous case,
+target $\text{SM} = 3.00$\,MPa), starting from a 6-layer initial
+guess. Each panel is a rectangular shear-modulus distribution
+($1.0$\,mm $\times 0.2$\,mm) with a jet colorbar.\\[0.4em]
+\begin{tabular}{@{}ll@{}}
+\textbf{(a) Initial guess} & uniform blue, SM $= 1.00$\,MPa everywhere \\
+\textbf{(b) Iteration 5} & SM range 1.27--1.95, layered artifacts emerging \\
+\textbf{(c) Iteration 12} & SM range 1.50--3.11, layered structure developed \\
+\textbf{(d) Iteration 24} & SM range 1.63--3.03, approaching target \\
+\textbf{(e) Iteration 48} & SM range 2.97--3.00, nearly converged \\
+\textbf{(f) Iteration 52 (Final)} & uniform red, SM $= 3.00$\,MPa everywhere
+\end{tabular}\\[0.4em]
+The trajectory shows the 6-layer parameterisation collapsing to a
+uniform solution over 52 iterations --- because the target is
+homogeneous, the optimiser correctly drives all six layers to the
+same shear modulus.
+\vspace{1em}}}
+\end{center}
+\vspace{0.3em}
+\begin{center}
+\textbf{Fig. 7.} The optimization process with six layers initially
+utilizing the explicit inverse scheme for Sample 1 (Without noise,
+Unit: MPa).
+\end{center}
+
+\vspace{0.8em}
+
+% ---------- Figure 8 placeholder ----------
+\noindent
+\begin{center}
+\fbox{\parbox{0.92\textwidth}{\centering\vspace{1em}
+\textbf{[Figure 8 — placeholder]}\\[0.8em]
+Six-panel side-by-side comparison of the
+\textbf{Explicit Inverse Method} (left column) vs.\
+\textbf{Implicit Inverse Method} (right column) on Sample 1
+(homogeneous, target SM $= 3.00$\,MPa), with 3, 6, and 9 surface
+displacement datasets as inputs.\\[0.4em]
+\textbf{Explicit (left column)}: all three rows show a perfectly
+uniform shear-modulus field at SM $= 3.00$\,MPa (uniform blue,
+colorbar pinned 3.00--3.00). The explicit parameterisation
+recovers the homogeneous target exactly.\\[0.4em]
+\textbf{Implicit (right column)}: all three rows show tiny spatial
+artifacts around the true value of 3.00\,MPa --- (d) 3 fields: SM
+range 2.9995--3.0001; (e) 6 fields: SM range 2.9992--3.0001;
+(f) 9 fields: SM range 3.0000--3.0002. The color blobs are
+visible even though the numerical error is on the order of
+$10^{-4}$--$10^{-3}$\,MPa.\\[0.4em]
+\textbf{Takeaway}: the explicit method produces a perfectly uniform
+field on the homogeneous case; the implicit method is quantitatively
+accurate but shows residual spatial noise patterns that decrease
+(slightly) as more displacement datasets are incorporated.
+\vspace{1em}}}
+\end{center}
+\vspace{0.3em}
+\begin{center}
+\textbf{Fig. 8.} The reconstructed results with varying 3, 6 and 9
+surface displacement datasets corresponding to Sample 1 (Without
+noise, Unit: MPa).
+\end{center}
+
+\vspace{1em}
+
+% ---------- Continuation prose (from page 8) + noise-test paragraph ----------
+\noindent
+inverse method shows a slight spatial variation, which can be
+enhanced by incorporating more surface datasets.
+
+After adding 1\,\% noise to the surface displacement datasets, we
+observed that the shear modulus distributions were accurately mapped
+for both inverse methods in the homogeneous case (refer to Fig.~11).
+The average relative error for both implicit and explicit inverse
+methods was less than 0.2\,\% (see Table~1). However, when it came
+to Sample 2 and 3 (see Fig.~12, Fig.~13), the interface between
+neighboring layers in the implicit inverse method's results was not
+as clear as the target. As the total number of layers increases, the
+challenges in solving the inverse problems escalate accordingly.
+Consequently, the relative error for Sample 2 and Sample 3 exhibits
+a lower quality compared to Sample 1 (see Table~1). Besides, the
+average relative error for the implicit inverse method was
+
+% [page ends here — continues on page 10]
+
+\end{document}

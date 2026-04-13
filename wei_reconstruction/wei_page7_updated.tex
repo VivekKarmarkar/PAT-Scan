@@ -1,0 +1,148 @@
+%% =================================================================
+%% Wei, Mei, Zhao, Xiao, Sun, Zhang, Guo.
+%% "Nondestructively identifying the mechanical behavior of soft
+%%  tissues using surface deformation with an explicit inverse
+%%  approach."
+%% Appl. Math. Modelling 134 (2024) 126--147.
+%%
+%% Reconstruction of page 7 (printed p. 132) as study notes.
+%% Prose: extracted verbatim from the PDF text layer via pdftotext.
+%% Math:  hand-transcribed from the rendered page image —
+%%        Eqs. (18)–(26), nine equations on a single page.
+%%        All of these are hand-derived gradient expressions that
+%%        autodiff (e.g. PyTorch's loss.backward()) would handle
+%%        automatically with zero manual derivation.
+%% =================================================================
+
+\documentclass[11pt]{article}
+
+\usepackage[margin=0.9in]{geometry}
+\usepackage{amsmath, amssymb}
+\usepackage{mathrsfs}
+\usepackage{bm}
+\usepackage{fancyhdr}
+
+\pagestyle{fancy}
+\fancyhf{}
+\lhead{\small Y.~Mei et al.}
+\rhead{\small Applied Mathematical Modelling 134 (2024) 126--147}
+\cfoot{\small 132 $\to$ \arabic{page}}
+\renewcommand{\headrulewidth}{0.4pt}
+
+\setcounter{page}{1}
+\setcounter{equation}{17}  % next equation is (18)
+
+\begin{document}
+
+\noindent
+nodal or elemental shear moduli. If the shear modulus is nodally
+defined, we can use the same interpolation function with the
+displacement field. In this case, the shear modulus can be expressed
+as:
+\begin{equation}
+\mu \approx \mu^{h} = \sum_{i=1}^{N} N_i\, \mu_i
+\end{equation}
+where $N$ is the total number of nodes in the finite element model
+and $N_i$ is the finite element shape function. $\mu_i$ is the nodal
+shear modulus.
+
+In the explicit inverse method, since shear modulus distribution is a
+function of geometric parameters and the shear modulus in each
+region, the gradient of the objective function with respect to the
+optimization variables can be calculated using the chain rule. To
+this end, we should seek $\delta\mu$ corresponding to a change in any
+optimization variable from $\beta$ to $\beta + \delta\beta$:
+\begin{equation}
+\delta\mu = \frac{\partial\mu}{\partial\beta}\,\delta\beta
+\end{equation}
+Thereby, comparing to the implicit inverse method, we need to
+evaluate the $\partial\mu / \partial\beta$.
+
+\medskip
+\noindent
+\textbf{(a) Layered structure}
+
+\medskip
+\noindent
+The evaluation of the gradient of geometric optimization variables in
+a layered structure with $n + 1$ layers should be discussed
+considering three cases. For the $m$-th geometric optimization
+variable $r^{1}_{m}$ at the first interface $C^{1}$,
+$\frac{\partial\mu}{\partial r^{1}_{m}}$ is given by:
+\begin{equation}
+\frac{\partial\mu}{\partial r^{1}_{m}}
+= \left[-\mu^{0} + \mu^{1}\!\left(1 - H\!\left(\phi^{2}(\mathbf{x})\right)\right)\right]
+  \frac{\partial H\!\left(\phi^{1}(\mathbf{x})\right)}{\partial\phi^{1}(\mathbf{x})}\,
+  \frac{\partial\phi^{1}(\mathbf{x})}{\partial r^{1}_{m}}
+\end{equation}
+
+For the $m$-th geometric optimization variable $r^{n}_{m}$ at the
+last interface $C^{n}$,
+$\frac{\partial\mu}{\partial r^{n}_{m}}$ is given by:
+\begin{equation}
+\frac{\partial\mu}{\partial r^{n}_{m}}
+= \left(-\mu^{n-1}\, H\!\left(\phi^{n-1}(\mathbf{x})\right) + \mu^{n}\right)
+  \frac{\partial H\!\left(\phi^{n}(\mathbf{x})\right)}{\partial\phi^{n}(\mathbf{x})}\,
+  \frac{\partial\phi^{n}(\mathbf{x})}{\partial r^{n}_{m}}
+\end{equation}
+
+For the $m$-th geometric optimization variable at the intermediate
+interface $C^{i}\,(2 \leq i \leq (n-1))$,
+$\frac{\partial\mu}{\partial r^{i}_{m}}$ is given by:
+\begin{equation}
+\frac{\partial\mu}{\partial r^{i}_{m}}
+= \left[-\mu^{i-1}\, H\!\left(\phi^{i-1}(\mathbf{x})\right)
+        + \mu^{i}\!\left(1 - H\!\left(\phi^{i+1}(\mathbf{x})\right)\right)\right]
+  \frac{\partial H\!\left(\phi^{i}(\mathbf{x})\right)}{\partial\phi^{i}(\mathbf{x})}\,
+  \frac{\partial\phi^{i}(\mathbf{x})}{\partial r^{i}_{m}}
+\end{equation}
+
+In Eqs.~(20--22),
+$\frac{\partial H(\phi^{j}(\mathbf{x}))}{\partial\phi^{j}(\mathbf{x})}$
+$(1 \leq j \leq n)$ can be evaluated by Eq.~(13) as the Heaviside
+function is approximated by a continuous and differentiable function.
+$\frac{\partial\phi^{j}(\mathbf{x})}{\partial r^{j}_{m}}$ can be
+evaluated by the finite difference method.
+
+For the shear modulus of the background $\mu^{0}$,
+$\frac{\partial\mu}{\partial\mu^{0}}$ is given by:
+\begin{equation}
+\frac{\partial\mu}{\partial\mu^{0}} = 1 - H\!\left(\phi^{1}(\mathbf{x})\right)
+\end{equation}
+
+For the shear modulus of the last layer $\mu^{n}$, we have
+\begin{equation}
+\frac{\partial\mu}{\partial\mu^{n}} = H(\phi^{n}(\mathbf{x}))
+\end{equation}
+
+For the shear modulus of the layer $\mu^{i}\,(1 \leq i \leq (n-1))$,
+we have
+\begin{equation}
+\frac{\partial\mu}{\partial\mu^{i}}
+= H\!\left(\phi^{i}(\mathbf{x})\right)
+  \left(1 - H\!\left(\phi^{i+1}(\mathbf{x})\right)\right)
+\end{equation}
+
+\medskip
+\noindent
+\textbf{(b) Domain with inclusion embedded}
+
+\medskip
+\noindent
+For each $m$-th geometric optimization variables of $j$-th component
+$r^{j}_{m}$,
+$\frac{\partial\mu}{\partial r^{j}_{m}}$ is given by:
+\begin{equation}
+\frac{\partial\mu}{\partial r^{j}_{m}}
+= \left[\mu^{0}\!\prod_{\substack{i=1 \\ i \neq j}}^{n}
+         H\!\left(\phi^{i}(\mathbf{x})\right)
+  - \mu^{j}\right]
+  \frac{\partial H\!\left(\phi^{j}(\mathbf{x})\right)}{\partial\phi^{j}(\mathbf{x})}\,
+  \frac{\partial\phi^{j}(\mathbf{x})}{\partial r^{j}_{m}}
+\end{equation}
+
+For the shear modulus of the background $\mu^{0}$, we have:
+
+% [page ends here — continues on page 8]
+
+\end{document}

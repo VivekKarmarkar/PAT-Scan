@@ -1,0 +1,51 @@
+Y. Mei et al.                                                                                                  Applied Mathematical Modelling 134 (2024) 126–147
+
+
+
+
+Fig. 27. The target and reconstructed results for varying shapes of inclusion with 3 displacement datasets corresponding to Sample 1 (Without
+noise, Unit: MPa).
+
+
+CRediT authorship contribution statement
+
+    Yue Mei: Writing – review & editing, Writing – original draft, Methodology, Formal analysis, Conceptualization. Dongmei Zhao:
+Writing – review & editing, Writing – original draft, Software, Formal analysis, Data curation. Changjiang Xiao: Writing – original
+draft, Investigation, Formal analysis, Data curation. Zhi Sun: Methodology, Formal analysis, Data curation. Weisheng Zhang: Writing
+– review & editing, Writing – original draft, Supervision, Funding acquisition. Xu Guo: Writing – review & editing, Writing – original
+draft, Supervision, Funding acquisition.
+
+
+Declaration of competing interest
+
+    The authors declare that they have no known competing financial interests or personal relationships that could have appeared to
+influence the work reported in this paper.
+
+Data availability
+
+    Data will be made available on request.
+
+
+
+Acknowledgments
+
+   The authors acknowledge the support from Innovative Research Groups of the National Natural Science Foundation of China
+(11821202), National Natural Science Foundation of China (12002075), Liao Ning Revitalization Talents Program (XLYC1907119),
+Program for Changjiang Scholars, Innovative Research Team in University (PCSIRT) and 111 Project (B14013).
+   We also acknowledge Bo Wang and Jiaqi Hong for their helpful suggestions on the revised manuscript.
+
+
+References
+
+ [1] O. Osanai, M. Ohtsuka, M. Hotta, T. Kitaharai, Y. Takema, A new method for the visualization and quantification of internal skin elasticity by ultrasound
+     imaging, Skin Res. Technol. 17 (3) (2011) 270–277, https://doi.org/10.1111/j.1600-0846.2010.00492.x.
+ [2] Y. Zhao, B. Feng, J. Lee, N. Lu, D.M. Pierce, A multi-layered computational model for wrinkling of human skin predicts aging effects, J. Mech. Behav. Biomed.
+     Mater. 103 (2020) 103552, https://doi.org/10.1016/j.jmbbm.2019.103552.
+ [3] I.L. Kruglikov, P.E. Scherer, Skin aging as a mechanical phenomenon: the main weak links, Nutr. Healthy Aging 4 (4) (2018) 291–307, https://doi.org/10.3233/
+     NHA-170037.
+ [4] G.A. Holzapfel, T.C. Gasser, R.W. Ogden, A New Constitutive Framework for Arterial Wall Mechanics and a Comparative Study of Material Models, J. Elast.
+     Phys. Sci. Solids 61 (1) (2000) 1–48, https://doi.org/10.1023/A:1010835316564.
+
+
+                                                                               146
+

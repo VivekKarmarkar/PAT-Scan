@@ -1,0 +1,512 @@
+\begin{thebibliography}{64}
+\providecommand{\natexlab}[1]{#1}
+\providecommand{\url}[1]{\texttt{#1}}
+\expandafter\ifx\csname urlstyle\endcsname\relax
+  \providecommand{\doi}[1]{doi: #1}\else
+  \providecommand{\doi}{doi: \begingroup \urlstyle{rm}\Url}\fi
+
+\bibitem[Bickley(2021)]{bates2021physical}
+Lynn~S. Bickley.
+\newblock \emph{Bates' Guide to Physical Examination and History Taking}.
+\newblock Wolters Kluwer, Philadelphia, PA, 13 edition, 2021.
+\newblock ISBN 9781975152433.
+
+\bibitem[Ophir et~al.(1991)Ophir, C\'{e}spedes, Ponnekanti, Yazdi, and
+  Li]{Ophir1991}
+J.~Ophir, I.~C\'{e}spedes, H.~Ponnekanti, Y.~Yazdi, and X.~Li.
+\newblock Elastography: A quantitative method for imaging the elasticity of
+  biological tissues.
+\newblock \emph{Ultrasonic Imaging}, 13\penalty0 (2):\penalty0 111--134, 1991.
+\newblock \doi{10.1177/016173469101300201}.
+
+\bibitem[Hounsfield(1973)]{Hounsfield1973}
+G.~N. Hounsfield.
+\newblock Computerized transverse axial scanning (tomography): {P}art 1.
+  description of system.
+\newblock \emph{British Journal of Radiology}, 46\penalty0 (552):\penalty0
+  1016--1022, 1973.
+\newblock \doi{10.1259/0007-1285-46-552-1016}.
+
+\bibitem[Raissi et~al.(2019)Raissi, Perdikaris, and Karniadakis]{Raissi2019}
+M.~Raissi, P.~Perdikaris, and G.~E. Karniadakis.
+\newblock Physics-informed neural networks: A deep learning framework for
+  solving forward and inverse problems involving nonlinear partial differential
+  equations.
+\newblock \emph{Journal of Computational Physics}, 378:\penalty0 686--707,
+  2019.
+\newblock \doi{10.1016/j.jcp.2018.10.045}.
+
+\bibitem[Karniadakis et~al.(2021)Karniadakis, Kevrekidis, Lu, Perdikaris, Wang,
+  and Yang]{Karniadakis2021}
+G.~E. Karniadakis, I.~G. Kevrekidis, L.~Lu, P.~Perdikaris, S.~Wang, and
+  L.~Yang.
+\newblock Physics-informed machine learning.
+\newblock \emph{Nature Reviews Physics}, 3\penalty0 (6):\penalty0 422--440,
+  2021.
+\newblock \doi{10.1038/s42254-021-00314-5}.
+
+\bibitem[Mei et~al.(2017)Mei, Wang, Shen, Rabke, and Goenezen]{Mei2017}
+Y.~Mei, S.~Wang, X.~Shen, S.~Rabke, and S.~Goenezen.
+\newblock Mechanics based tomography: A preliminary feasibility study.
+\newblock \emph{Sensors}, 17\penalty0 (5):\penalty0 1075, 2017.
+\newblock \doi{10.3390/s17051075}.
+
+\bibitem[Ackerman(1998)]{Ackerman1998}
+M.~J. Ackerman.
+\newblock The {Visible Human Project}: A resource for anatomical visualization.
+\newblock \emph{Studies in Health Technology and Informatics}, 52\penalty0 (Pt
+  2):\penalty0 1030--1032, 1998.
+\newblock URL
+  \url{https://www.nlm.nih.gov/research/visible/visible_human.html}.
+
+\bibitem[Chase and Follmer(2019)]{Chase2019}
+E.~D.~Z. Chase and S.~Follmer.
+\newblock Differences in haptic and visual perception of expressive {1DoF}
+  motion.
+\newblock In \emph{ACM Symposium on Applied Perception 2019 (SAP '19)},
+  Barcelona, Spain, 2019.
+\newblock \doi{10.1145/3343036.3343136}.
+
+\bibitem[Levental et~al.(2009)Levental, Yu, Kass, Lakins, Egeblad, Erler, Fong,
+  Csiszar, Giaccia, Weninger, Yamauchi, Gasser, and Weaver]{Levental2009}
+K.~R. Levental, H.~Yu, L.~Kass, J.~N. Lakins, M.~Egeblad, J.~T. Erler, S.~F.
+  Fong, K.~Csiszar, A.~Giaccia, W.~Weninger, M.~Yamauchi, D.~L. Gasser, and
+  V.~M. Weaver.
+\newblock Matrix crosslinking forces tumor progression by enhancing integrin
+  signaling.
+\newblock \emph{Cell}, 139\penalty0 (5):\penalty0 891--906, 2009.
+\newblock \doi{10.1016/j.cell.2009.10.027}.
+
+\bibitem[Schade(1912)]{Schade1912}
+H.~Schade.
+\newblock {Untersuchungen zur Organfunktion des Bindegewebes. 1. Die
+  Elastizit\"{a}tsfunktion des Bindegewebes und die intravitale Messung ihrer
+  St\"{o}rungen}.
+\newblock \emph{Zeitschrift f\"{u}r experimentelle Pathologie und Therapie},
+  11:\penalty0 369--399, 1912.
+
+\bibitem[Kirk and Kvorning(1949)]{Kirk1949}
+E.~Kirk and S.~A. Kvorning.
+\newblock Quantitative measurements of the elastic properties of the skin and
+  subcutaneous tissue in young and old individuals.
+\newblock \emph{Journal of Gerontology}, 4\penalty0 (4):\penalty0 273--284,
+  1949.
+\newblock \doi{10.1093/geronj/4.4.273}.
+
+\bibitem[Sapuntsov et~al.(1979)Sapuntsov, Mitrofanova, and
+  Savchenko]{Sapuntsov1979}
+L.~E. Sapuntsov, S.~I. Mitrofanova, and T.~V. Savchenko.
+\newblock Assessment of rheologic properties of soft tissues of the human limb
+  with normal and disturbed peripheral lymphatic circulation.
+\newblock \emph{Bulletin of Experimental Biology and Medicine}, 88:\penalty0
+  1501--1503, 1979.
+\newblock \doi{10.1007/BF00830374}.
+
+\bibitem[Newman and Rozycki(1998)]{Newman1998}
+P.~G. Newman and G.~S. Rozycki.
+\newblock The history of ultrasound.
+\newblock \emph{Surgical Clinics of North America}, 78\penalty0 (2):\penalty0
+  179--195, 1998.
+\newblock \doi{10.1016/S0039-6109(05)70308-X}.
+
+\bibitem[Donald et~al.(1958)Donald, MacVicar, and Brown]{Donald1958}
+I.~Donald, J.~MacVicar, and T.~G. Brown.
+\newblock Investigation of abdominal masses by pulsed ultrasound.
+\newblock \emph{Lancet}, 1\penalty0 (7032):\penalty0 1188--1195, 1958.
+\newblock \doi{10.1016/S0140-6736(58)91905-6}.
+
+\bibitem[Lerner and Parker(1987)]{Lerner1987}
+R.~M. Lerner and K.~J. Parker.
+\newblock Sonoelasticity images derived from ultrasound signals in mechanically
+  vibrated targets.
+\newblock In \emph{Proceedings, Seventh European Communities Workshop:
+  Ultrasonic Tissue Characterization and Echographic Imaging}, pages 127--129,
+  1987.
+
+\bibitem[Lerner et~al.(1988)Lerner, Parker, Holen, Gramiak, and
+  Waag]{Lerner1988}
+R.~M. Lerner, K.~J. Parker, J.~Holen, R.~Gramiak, and R.~C. Waag.
+\newblock Sono-elasticity: Medical elasticity images derived from ultrasound
+  signals in mechanically vibrated targets.
+\newblock In \emph{Acoustical Imaging}, volume~16, pages 317--327. Springer,
+  Boston, 1988.
+\newblock \doi{10.1007/978-1-4613-0725-9_31}.
+
+\bibitem[Ormachea and Parker(2020)]{Ormachea2020}
+J.~Ormachea and K.~J. Parker.
+\newblock Elastography imaging: the 30 year perspective.
+\newblock \emph{Physics in Medicine \& Biology}, 65\penalty0 (24):\penalty0
+  24TR06, 2020.
+\newblock \doi{10.1088/1361-6560/abca00}.
+
+\bibitem[Muthupillai et~al.(1995)Muthupillai, Lomas, Rossman, Greenleaf,
+  Manduca, and Ehman]{Muthupillai1995}
+R.~Muthupillai, D.~J. Lomas, P.~J. Rossman, J.~F. Greenleaf, A.~Manduca, and
+  R.~L. Ehman.
+\newblock Magnetic resonance elastography by direct visualization of
+  propagating acoustic strain waves.
+\newblock \emph{Science}, 269\penalty0 (5232):\penalty0 1854--1857, 1995.
+\newblock \doi{10.1126/science.7569924}.
+
+\bibitem[Konofagou and Harrigan(2003)]{Konofagou2003}
+E.~E. Konofagou and T.~P. Harrigan.
+\newblock Palpation tomography -- a new technique for modulus estimation in
+  elastography.
+\newblock In \emph{2003 IEEE Ultrasonics Symposium}, pages 652--655, 2003.
+\newblock \doi{10.1109/ULTSYM.2003.1293532}.
+
+\bibitem[Goenezen et~al.(2011)Goenezen, Barbone, and Oberai]{Goenezen2011}
+S.~Goenezen, P.~Barbone, and A.~A. Oberai.
+\newblock Solution of the nonlinear elasticity imaging inverse problem: The
+  incompressible case.
+\newblock \emph{Computer Methods in Applied Mechanics and Engineering},
+  200\penalty0 (13--16):\penalty0 1406--1420, 2011.
+\newblock \doi{10.1016/j.cma.2010.12.018}.
+
+\bibitem[Plessix(2006)]{Plessix2006}
+R.-E. Plessix.
+\newblock A review of the adjoint-state method for computing the gradient of a
+  functional with geophysical applications.
+\newblock \emph{Geophysical Journal International}, 167\penalty0 (2):\penalty0
+  495--503, 2006.
+\newblock \doi{10.1111/j.1365-246X.2006.02978.x}.
+
+\bibitem[Boussinesq(1885)]{Boussinesq1885}
+J.~Boussinesq.
+\newblock \emph{Application des potentiels \`{a} l'\'{e}tude de l'\'{e}quilibre
+  et du mouvement des solides \'{e}lastiques}.
+\newblock Gauthier-Villars, Paris, 1885.
+
+\bibitem[Ronneberger et~al.(2015)Ronneberger, Fischer, and
+  Brox]{Ronneberger2015}
+O.~Ronneberger, P.~Fischer, and T.~Brox.
+\newblock {U-Net}: Convolutional networks for biomedical image segmentation.
+\newblock In \emph{Medical Image Computing and Computer-Assisted Intervention
+  -- MICCAI 2015}, volume 9351 of \emph{Lecture Notes in Computer Science},
+  pages 234--241. Springer, Cham, 2015.
+\newblock \doi{10.1007/978-3-319-24574-4_28}.
+
+\bibitem[Feng et~al.(2022)Feng, Ogren, Daraio, and Bouman]{Feng2022}
+B.~T. Feng, A.~C. Ogren, C.~Daraio, and K.~L. Bouman.
+\newblock Visual vibration tomography: Estimating interior material properties
+  from monocular video.
+\newblock In \emph{Proceedings of the IEEE Conference on Computer Vision and
+  Pattern Recognition (CVPR 2022)}, pages 16231--16240, 2022.
+
+\bibitem[Wadhwa et~al.(2013)Wadhwa, Rubinstein, Durand, and
+  Freeman]{Wadhwa2013}
+N.~Wadhwa, M.~Rubinstein, F.~Durand, and W.~T. Freeman.
+\newblock Phase-based video motion processing.
+\newblock \emph{ACM Transactions on Graphics (SIGGRAPH 2013)}, 32\penalty0
+  (4):\penalty0 Article 80, 2013.
+\newblock \doi{10.1145/2461912.2461966}.
+
+\bibitem[Wang et~al.(2023)Wang, Fu, Du, Gao, Huang, Liu, Chandak, Liu,
+  Van~Katwyk, Deac, Anandkumar, Bergen, Gomes, Ho, Kohli, Lasenby, Leskovec,
+  Liu, Manber, others, and Zitnik]{Wang2023}
+H.~Wang, T.~Fu, Y.~Du, W.~Gao, K.~Huang, Z.~Liu, P.~Chandak, S.~Liu,
+  P.~Van~Katwyk, A.~Deac, A.~Anandkumar, K.~Bergen, C.~P. Gomes, S.~Ho,
+  P.~Kohli, J.~Lasenby, J.~Leskovec, T.-Y. Liu, A.~Manber, others, and
+  M.~Zitnik.
+\newblock Scientific discovery in the age of artificial intelligence.
+\newblock \emph{Nature}, 620\penalty0 (7972):\penalty0 47--60, 2023.
+\newblock \doi{10.1038/s41586-023-06221-2}.
+
+\bibitem[Jumper et~al.(2021)Jumper, Evans, Pritzel, Green, Figurnov,
+  Ronneberger, Tunyasuvunakool, Bates, \v{Z}\'{i}dek, Potapenko, Bridgland,
+  Meyer, Kohl, Ballard, Cowie, Romera-Paredes, Nikolov, Jain, Adler, others,
+  and Hassabis]{Jumper2021}
+J.~Jumper, R.~Evans, A.~Pritzel, T.~Green, M.~Figurnov, O.~Ronneberger,
+  K.~Tunyasuvunakool, R.~Bates, A.~\v{Z}\'{i}dek, A.~Potapenko, A.~Bridgland,
+  C.~Meyer, S.~A.~A. Kohl, A.~J. Ballard, A.~Cowie, B.~Romera-Paredes,
+  S.~Nikolov, R.~Jain, J.~Adler, others, and D.~Hassabis.
+\newblock Highly accurate protein structure prediction with {AlphaFold}.
+\newblock \emph{Nature}, 596\penalty0 (7873):\penalty0 583--589, 2021.
+\newblock \doi{10.1038/s41586-021-03819-2}.
+\newblock 2024 Nobel Prize in Chemistry.
+
+\bibitem[Willard et~al.(2022)Willard, Jia, Xu, Steinbach, and
+  Kumar]{Willard2022}
+J.~Willard, X.~Jia, S.~Xu, M.~Steinbach, and V.~Kumar.
+\newblock Integrating scientific knowledge with machine learning for
+  engineering and environmental systems.
+\newblock \emph{ACM Computing Surveys}, 55\penalty0 (4):\penalty0 Article 66,
+  2022.
+\newblock \doi{10.1145/3514228}.
+
+\bibitem[Cuomo et~al.(2022)Cuomo, Di~Cola, Giampaolo, Rozza, Raissi, and
+  Piccialli]{Cuomo2022}
+S.~Cuomo, V.~S. Di~Cola, F.~Giampaolo, G.~Rozza, M.~Raissi, and F.~Piccialli.
+\newblock Scientific machine learning through physics-informed neural networks:
+  Where we are and what's next.
+\newblock \emph{Journal of Scientific Computing}, 92:\penalty0 88, 2022.
+\newblock \doi{10.1007/s10915-022-01939-z}.
+
+\bibitem[Lu et~al.(2021)Lu, Jin, Pang, Zhang, and Karniadakis]{Lu2021}
+L.~Lu, P.~Jin, G.~Pang, Z.~Zhang, and G.~E. Karniadakis.
+\newblock Learning nonlinear operators via {DeepONet} based on the universal
+  approximation theorem of operators.
+\newblock \emph{Nature Machine Intelligence}, 3\penalty0 (3):\penalty0
+  218--229, 2021.
+\newblock \doi{10.1038/s42256-021-00302-5}.
+
+\bibitem[Li et~al.(2020)Li, Kovachki, Azizzadenesheli, Liu, Bhattacharya,
+  Stuart, and Anandkumar]{Li2020}
+Z.~Li, N.~Kovachki, K.~Azizzadenesheli, B.~Liu, K.~Bhattacharya, A.~Stuart, and
+  A.~Anandkumar.
+\newblock Fourier neural operator for parametric partial differential
+  equations.
+\newblock \emph{arXiv preprint arXiv:2010.08895}, 2020.
+\newblock URL \url{https://arxiv.org/abs/2010.08895}.
+
+\bibitem[Rackauckas et~al.(2020)Rackauckas, Ma, Martensen, Warner, Zubov,
+  Supekar, Skinner, Ramadhan, and Edelman]{Rackauckas2020}
+C.~Rackauckas, Y.~Ma, J.~Martensen, C.~Warner, K.~Zubov, R.~Supekar,
+  D.~Skinner, A.~Ramadhan, and A.~Edelman.
+\newblock Universal differential equations for scientific machine learning.
+\newblock \emph{arXiv preprint arXiv:2001.04385}, 2020.
+\newblock URL \url{https://arxiv.org/abs/2001.04385}.
+
+\bibitem[De~Ryck and Mishra(2022)]{DeRyck2022}
+T.~De~Ryck and S.~Mishra.
+\newblock Error analysis for physics-informed neural networks ({PINNs})
+  approximating {Kolmogorov} {PDEs}.
+\newblock \emph{Advances in Computational Mathematics}, 48:\penalty0 79, 2022.
+\newblock \doi{10.1007/s10444-022-09985-9}.
+
+\bibitem[Mishra and Molinaro(2022)]{Mishra2022}
+S.~Mishra and R.~Molinaro.
+\newblock Estimates on the generalization error of physics informed neural
+  networks ({PINNs}) for approximating a class of inverse problems for {PDEs}.
+\newblock \emph{IMA Journal of Numerical Analysis}, 42\penalty0 (2):\penalty0
+  981--1022, 2022.
+\newblock \doi{10.1093/imanum/drab032}.
+
+\bibitem[Brunton et~al.(2016)Brunton, Proctor, and Kutz]{Brunton2016}
+S.~L. Brunton, J.~L. Proctor, and J.~N. Kutz.
+\newblock Discovering governing equations from data by sparse identification of
+  nonlinear dynamical systems.
+\newblock \emph{Proceedings of the National Academy of Sciences}, 113\penalty0
+  (15):\penalty0 3932--3937, 2016.
+\newblock \doi{10.1073/pnas.1517384113}.
+
+\bibitem[Udrescu and Tegmark(2020)]{Udrescu2020}
+S.-M. Udrescu and M.~Tegmark.
+\newblock {AI Feynman}: A physics-inspired method for symbolic regression.
+\newblock \emph{Science Advances}, 6\penalty0 (16):\penalty0 eaay2631, 2020.
+\newblock \doi{10.1126/sciadv.aay2631}.
+
+\bibitem[Cranmer(2023)]{Cranmer2023}
+M.~Cranmer.
+\newblock Interpretable machine learning for science with {PySR} and
+  {SymbolicRegression.jl}.
+\newblock \emph{arXiv preprint arXiv:2305.01582}, 2023.
+\newblock URL \url{https://arxiv.org/abs/2305.01582}.
+
+\bibitem[Xie et~al.(2022)Xie, Takikawa, Saito, Litany, Yan, Khan, Tombari,
+  Tompkin, Sitzmann, and Sridhar]{Xie2022}
+Y.~Xie, T.~Takikawa, S.~Saito, O.~Litany, S.~Yan, N.~Khan, F.~Tombari,
+  J.~Tompkin, V.~Sitzmann, and S.~Sridhar.
+\newblock Neural fields in visual computing and beyond.
+\newblock \emph{Computer Graphics Forum (Eurographics 2022)}, 41\penalty0
+  (2):\penalty0 405--438, 2022.
+\newblock \doi{10.1111/cgf.14505}.
+
+\bibitem[Zhao et~al.(2025)Zhao, Levis, Connor, Srinivasan, and
+  Bouman]{Bouman2025}
+B.~Zhao, A.~Levis, L.~Connor, P.~P. Srinivasan, and K.~L. Bouman.
+\newblock Revealing the {3D} cosmic web through gravitationally constrained
+  neural fields.
+\newblock In \emph{Proceedings of the International Conference on Learning
+  Representations (ICLR 2025)}, 2025.
+\newblock URL \url{https://arxiv.org/abs/2504.15262}.
+
+\bibitem[Levis et~al.(2022)Levis, Srinivasan, Chael, Ng, and Bouman]{Levis2022}
+A.~Levis, P.~P. Srinivasan, A.~A. Chael, R.~Ng, and K.~L. Bouman.
+\newblock Gravitationally lensed black hole emission tomography.
+\newblock In \emph{Proceedings of the IEEE Conference on Computer Vision and
+  Pattern Recognition (CVPR 2022)}, pages 19821--19831, 2022.
+
+\bibitem[Moseley et~al.(2020)Moseley, Markham, and Nissen-Meyer]{Moseley2020}
+B.~Moseley, A.~Markham, and T.~Nissen-Meyer.
+\newblock Solving the wave equation with physics-informed deep learning.
+\newblock \emph{arXiv preprint arXiv:2006.11894}, 2020.
+\newblock URL \url{https://arxiv.org/abs/2006.11894}.
+
+\bibitem[Moseley et~al.(2023)Moseley, Markham, and Nissen-Meyer]{Moseley2023}
+B.~Moseley, A.~Markham, and T.~Nissen-Meyer.
+\newblock Finite basis physics-informed neural networks ({FBPINNs}): a scalable
+  domain decomposition approach for solving differential equations.
+\newblock \emph{Advances in Computational Mathematics}, 49:\penalty0 62, 2023.
+\newblock \doi{10.1007/s10444-023-10065-9}.
+
+\bibitem[Ragoza and Batmanghelich(2023)]{Ragoza2023}
+M.~Ragoza and K.~Batmanghelich.
+\newblock Physics-informed neural networks for tissue elasticity reconstruction
+  in magnetic resonance elastography.
+\newblock In \emph{Medical Image Computing and Computer Assisted Intervention
+  -- MICCAI 2023}, volume 14229 of \emph{Lecture Notes in Computer Science},
+  pages 333--343. Springer, Cham, 2023.
+\newblock \doi{10.1007/978-3-031-43999-5_32}.
+
+\bibitem[Bustin et~al.(2025)]{ElastoNet2025}
+H.~Bustin et~al.
+\newblock {ElastoNet}: Neural network-based multicomponent {MR} elastography
+  wave inversion with uncertainty quantification.
+\newblock \emph{Medical Image Analysis}, 105:\penalty0 103642, 2025.
+\newblock \doi{10.1016/j.media.2025.103642}.
+
+\bibitem[{FDTDNet authors}(2025)]{FDTDNet2025}
+{FDTDNet authors}.
+\newblock Quantification of tissue stiffness with magnetic resonance
+  elastography and finite difference time domain simulation-based
+  spatiotemporal neural network.
+\newblock \emph{Magnetic Resonance Imaging}, 2025.
+\newblock \doi{10.1016/j.mri.2025.110353}.
+\newblock Also indexed as DOI 10.1002/mrm.30456 in some databases.
+
+\bibitem[Kamali and Laksari(2024)]{Mohammadi2023}
+A.~Kamali and K.~Laksari.
+\newblock Physics-informed {UNets} for discovering hidden elasticity in
+  heterogeneous materials.
+\newblock \emph{Journal of the Mechanical Behavior of Biomedical Materials},
+  150:\penalty0 106228, 2024.
+\newblock \doi{10.1016/j.jmbbm.2023.106228}.
+\newblock Referred to as El-UNet in text.
+
+\bibitem[Chen and Gu(2021)]{Chen2021}
+C.~T. Chen and G.~X. Gu.
+\newblock Learning hidden elasticity with deep neural networks.
+\newblock \emph{Proceedings of the National Academy of Sciences}, 118\penalty0
+  (31):\penalty0 e2102721118, 2021.
+\newblock \doi{10.1073/pnas.2102721118}.
+
+\bibitem[Zhang et~al.(2022)Zhang, Dao, Karniadakis, and Suresh]{Zhang2022}
+E.~Zhang, M.~Dao, G.~E. Karniadakis, and S.~Suresh.
+\newblock Analyses of internal structures and defects in materials using
+  physics-informed neural networks.
+\newblock \emph{Science Advances}, 8\penalty0 (7):\penalty0 eabk0644, 2022.
+\newblock \doi{10.1126/sciadv.abk0644}.
+
+\bibitem[Zhang et~al.(2020)Zhang, Yin, and Karniadakis]{Zhang2020}
+E.~Zhang, M.~Yin, and G.~E. Karniadakis.
+\newblock Physics-informed neural networks for nonhomogeneous material
+  identification in elasticity imaging.
+\newblock \emph{arXiv preprint arXiv:2009.04525}, 2020.
+\newblock URL \url{https://arxiv.org/abs/2009.04525}.
+
+\bibitem[Paszke et~al.(2019)Paszke, Gross, Massa, Lerer, Bradbury, Chanan,
+  Killeen, Lin, Gimelshein, Antiga, Desmaison, K\"{o}pf, Yang, DeVito, Raison,
+  Tejani, Chilamkurthy, Steiner, Fang, Bai, and Chintala]{Paszke2019}
+A.~Paszke, S.~Gross, F.~Massa, A.~Lerer, J.~Bradbury, G.~Chanan, T.~Killeen,
+  Z.~Lin, N.~Gimelshein, L.~Antiga, A.~Desmaison, A.~K\"{o}pf, E.~Yang,
+  Z.~DeVito, M.~Raison, A.~Tejani, S.~Chilamkurthy, B.~Steiner, L.~Fang,
+  J.~Bai, and S.~Chintala.
+\newblock {PyTorch}: An imperative style, high-performance deep learning
+  library.
+\newblock In \emph{Advances in Neural Information Processing Systems (NeurIPS
+  2019)}, pages 8024--8035, 2019.
+
+\bibitem[Wu(2024)]{Wu2024}
+G.~Wu.
+\newblock {JAX-SSO}: Differentiable finite element analysis solver for
+  structural optimization and seamless integration with neural networks.
+\newblock \emph{arXiv preprint arXiv:2407.20026}, 2024.
+\newblock URL \url{https://arxiv.org/abs/2407.20026}.
+
+\bibitem[Xue et~al.(2023)Xue, Liao, Gan, Park, Xie, Liu, and Cao]{Xue2023}
+T.~Xue, S.~Liao, Z.~Gan, C.~Park, X.~Xie, W.~K. Liu, and J.~Cao.
+\newblock {JAX-FEM}: A differentiable {GPU}-accelerated {3D} finite element
+  solver for automatic inverse design and mechanistic data science.
+\newblock \emph{Computer Physics Communications}, 291:\penalty0 108802, 2023.
+\newblock \doi{10.1016/j.cpc.2023.108802}.
+
+\bibitem[Cybenko(1989)]{Cybenko1989}
+G.~Cybenko.
+\newblock Approximation by superpositions of a sigmoidal function.
+\newblock \emph{Mathematics of Control, Signals and Systems}, 2\penalty0
+  (4):\penalty0 303--314, 1989.
+\newblock \doi{10.1007/BF02551274}.
+
+\bibitem[Kingma and Ba(2015)]{Kingma2015}
+D.~P. Kingma and J.~Ba.
+\newblock Adam: A method for stochastic optimization.
+\newblock In \emph{Proceedings of the 3rd International Conference on Learning
+  Representations (ICLR 2015)}, 2015.
+\newblock URL \url{https://arxiv.org/abs/1412.6980}.
+
+\bibitem[Burns and Liu(2023)]{burns2023untrained}
+Zachary Burns and Zhaowei Liu.
+\newblock Untrained, physics-informed neural networks for structured
+  illumination microscopy.
+\newblock \emph{Optics Express}, 31\penalty0 (5):\penalty0 8714--8724, 2023.
+
+\bibitem[Zienkiewicz et~al.(2013)Zienkiewicz, Taylor, and Zhu]{Zienkiewicz2013}
+O.~C. Zienkiewicz, R.~L. Taylor, and J.~Z. Zhu.
+\newblock \emph{The Finite Element Method: Its Basis and Fundamentals}.
+\newblock Elsevier, 7th edition, 2013.
+
+\bibitem[Kaipio and Somersalo(2007)]{Kaipio2007}
+J.~P. Kaipio and E.~Somersalo.
+\newblock Statistical inverse problems: Discretization, model reduction and
+  inverse crimes.
+\newblock \emph{Journal of Computational and Applied Mathematics}, 198\penalty0
+  (2):\penalty0 493--504, 2007.
+\newblock \doi{10.1016/j.cam.2005.09.027}.
+
+\bibitem[Greaves et~al.(2011)Greaves, Greer, Lakes, and Rouxel]{Greaves2011}
+G.~N. Greaves, A.~L. Greer, R.~S. Lakes, and T.~Rouxel.
+\newblock Poisson's ratio and modern materials.
+\newblock \emph{Nature Materials}, 10\penalty0 (11):\penalty0 823--837, 2011.
+\newblock \doi{10.1038/nmat3134}.
+
+\bibitem[He et~al.(2015)He, Zhang, Ren, and Sun]{He2015}
+K.~He, X.~Zhang, S.~Ren, and J.~Sun.
+\newblock Delving deep into rectifiers: Surpassing human-level performance on
+  {ImageNet} classification.
+\newblock In \emph{Proceedings of the IEEE International Conference on Computer
+  Vision (ICCV 2015)}, pages 1026--1034, 2015.
+\newblock \doi{10.1109/ICCV.2015.123}.
+
+\bibitem[He et~al.(2016)He, Zhang, Ren, and Sun]{He2016}
+K.~He, X.~Zhang, S.~Ren, and J.~Sun.
+\newblock Deep residual learning for image recognition.
+\newblock In \emph{Proceedings of the IEEE Conference on Computer Vision and
+  Pattern Recognition (CVPR 2016)}, pages 770--778, 2016.
+\newblock URL \url{https://arxiv.org/abs/1512.03385}.
+
+\bibitem[Rudin et~al.(1992)Rudin, Osher, and Fatemi]{Rudin1992}
+L.~I. Rudin, S.~Osher, and E.~Fatemi.
+\newblock Nonlinear total variation based noise removal algorithms.
+\newblock \emph{Physica D: Nonlinear Phenomena}, 60\penalty0 (1--4):\penalty0
+  259--268, 1992.
+\newblock \doi{10.1016/0167-2789(92)90242-F}.
+
+\bibitem[van~der Walt et~al.(2014)van~der Walt, Sch\"{o}nberger,
+  Nunez-Iglesias, Boulogne, Warner, Yager, Gouillart, Yu, and {the scikit-image
+  contributors}]{vanderWalt2014}
+S.~van~der Walt, J.~L. Sch\"{o}nberger, J.~Nunez-Iglesias, F.~Boulogne, J.~D.
+  Warner, N.~Yager, E.~Gouillart, T.~Yu, and {the scikit-image contributors}.
+\newblock scikit-image: Image processing in {Python}.
+\newblock \emph{PeerJ}, 2:\penalty0 e453, 2014.
+\newblock \doi{10.7717/peerj.453}.
+
+\bibitem[Wang et~al.(2004)Wang, Bovik, Sheikh, and Simoncelli]{Wang2004}
+Z.~Wang, A.~C. Bovik, H.~R. Sheikh, and E.~P. Simoncelli.
+\newblock Image quality assessment: From error visibility to structural
+  similarity.
+\newblock \emph{IEEE Transactions on Image Processing}, 13\penalty0
+  (4):\penalty0 600--612, 2004.
+\newblock \doi{10.1109/TIP.2003.819861}.
+
+\bibitem[Tancik et~al.(2020)Tancik, Srinivasan, Mildenhall, Fridovich-Keil,
+  Raghavan, Singhal, Ramamoorthi, Barron, and Ng]{Tancik2020}
+M.~Tancik, P.~Srinivasan, B.~Mildenhall, S.~Fridovich-Keil, N.~Raghavan,
+  U.~Singhal, R.~Ramamoorthi, J.~Barron, and R.~Ng.
+\newblock Fourier features let networks learn high frequency functions in low
+  dimensional domains.
+\newblock In \emph{Advances in Neural Information Processing Systems (NeurIPS
+  2020)}, 2020.
+\newblock URL \url{https://arxiv.org/abs/2006.10739}.
+
+\end{thebibliography}

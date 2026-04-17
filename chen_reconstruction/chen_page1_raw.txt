@@ -1,0 +1,78 @@
+                                                                             Measurement 264 (2026) 120300
+
+
+                                                                       Contents lists available at ScienceDirect
+
+
+                                                                                  Measurement
+                                                       journal homepage: www.elsevier.com/locate/measurement
+
+
+
+
+A novel tactile tomography system based on mechanical principles for
+internal 3D imaging
+Zhiming Chen a,*,1 , Longxin Qian a,1, Weihao Liang a,1 , Kaibang Zhang a , Zichen Liu a ,
+Fengming Hu b, Chaobin Liu a , Kelan Lu a , Jingcheng Huang c , Haiquan Li d, Jinxiu Wen a ,
+Bingpu Zhou b , Jianyi Luo a,*
+a
+  Research Center of Flexible Sensing Materials and Devices, School of Applied Physics and Materials, Wuyi University, Jiangmen 529020, China
+b
+  Joint Key Laboratory of the Ministry of Education, Institute of Applied Physics and Materials Engineering, University of Macau, Avenida da Universidade, Taipa, Macau
+999078, China
+c
+  WYU-Flexwarm Joint Lab for Flexible Sensing Technologies, Guangzhou CarbonSens Technology Co., Ltd., Guangzhou 511483, China
+d
+  Guangdong Runyu Sensor Co., Ltd., Jiangmen 529020, China
+
+
+
+
+A R T I C L E I N F O                                        A B S T R A C T
+
+Keywords:                                                    Mechanical principle-based imaging technologies, such as contact profilometers, atomic force microscope (AFM),
+Tactile tomography system                                    and AFM-derived imaging modes, have been widely utilized in industrial detection and materials character­
+Internal 3D imaging                                          ization. However, these imaging technologies primarily focus on detecting surface profiles and morphology,
+Tactile softness of materials
+                                                             lacking the capability for internal 3D imaging. Herein, a novel tactile tomography system based on mechanical
+Mechanical principles
+Nondestructive testing
+                                                             principle is proposed to image the internal structure of an object. This tactile tomography system comprises a
+                                                             scanning module, a probe module, and a closed-loop feedback control system, which enables it to recognize the
+                                                             softness of soft matter. Then a novel parameter of “tactile softness of materials” was constructed by simulating
+                                                             human tactile perception of softness. By considering the combined effects of the sample’s size and thickness, and
+                                                             the applied force on the tactile softness of materials, the tactile tomography system achieves internal 3D imaging
+                                                             capability with a maximum detection depth of 6 mm. The scanning resolution of this tactile tomography system
+                                                             is as high as 0.5 mm in both the x and y directions, and 0.1 μm in the z direction. The tactile tomography system
+                                                             has a scanning accuracy exceeding 98.9 %, and an optimal scanning speed and scanning step of 2.4 mm/s & 0.5
+                                                             mm. Successful application in defect detection of encapsulated flexible printed circuit boards (FPCBs) demon­
+                                                             strated the promising potential of the tactile tomography system, marking a significant advancement in internal
+                                                             3D imaging technologies based on mechanical principles.
+
+
+
+
+1. Introduction                                                                                     ultrasonic tomography (U-CT), optical computed tomography (O-CT),
+                                                                                                    and positron emission tomography (PET), has significantly advanced the
+    Imaging technologies play a crucial role in medical imaging, indus­                             fields of medical imaging, industrial detection, and geological detection
+trial detection, materials characterization in physical science, and                                [15–19]. Consequently, internal 3D imaging is of great importance for
+geological detection in earth science [1–4]. Based on imaging principles,                           imaging technologies. However, imaging technologies based on me­
+these imaging technologies can be categorized into optical imaging, X-                              chanical principles still lack the capability for internal 3D imaging.
+ray imaging, ultrasonic imaging, nuclear imaging, magnetic resonance                                    Imaging technologies based on mechanical principles include con­
+imaging (MRI), electron microscope, and mechanical imaging [5–11].                                  tact profilometers and atomic force microscope (AFM), and AFM-
+The primary functions of these imaging technologies include visualizing                             derived imaging modes [20–22]. Contact profilometers are typically
+the surface morphology, profile, or internal structure of the measured                              classified into two categories: stylus profilometers and three-coordinates
+sample [12–14]. Especially the imaging of internal structure–achieved                               measuring machines (CMM). The stylus profilometer excels at detecting
+by technologies such as X-ray computed tomography (X-CT), MRI,                                      surface roughness and morphology of a workpiece, while the CMM is
+
+
+    * Corresponding authors at: 99 Yingbin Avenue, Pengjiang District, Jiangmen City, Guangdong Province, China.
+      E-mail addresses: chenzhiming@wyu.edu.cn (Z. Chen), luojiany@wyu.edu.cn (J. Luo).
+    1
+      These authors contributed equally to this work.
+
+https://doi.org/10.1016/j.measurement.2026.120300
+Received 25 October 2024; Received in revised form 12 December 2025; Accepted 2 January 2026
+Available online 3 January 2026
+0263-2241/© 2026 Elsevier Ltd. All rights are reserved, including those for text and data mining, AI training, and similar technologies.
+

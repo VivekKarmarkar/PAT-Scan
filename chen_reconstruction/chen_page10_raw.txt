@@ -1,0 +1,64 @@
+Z. Chen et al.                                                                                                                           Measurement 264 (2026) 120300
+
+
+
+
+                            (a)                                           (b)
+                                                          AB glues (5,
+                                                          10, 15, 30 HC)
+                                                           ABS
+
+
+                                                                                    AB glue: 5 HC, P= 4 MPa
+                            (c)                                           (d)
+
+
+
+
+                                AB glue: 10 HC, P= 4 MPa                            AB glue: 10 HC, P= 6 MPa
+                            (e)                                           (f)
+
+
+
+
+                                AB glue: 15 HC, P= 4 MPa                            AB glue: 15 HC, P= 8 MPa
+                            (g)                                           (h)
+
+
+
+
+                                  AB glue: 30 HC, P= 4 MPa                          AB glue: 30 HC, P= 13 MPa
+
+Fig. 13. Effect of materials properties on the tactile tomography system. (a) A spherical cap model filled with different Shore hardness AB glue. (b) 3D imaging of the
+spherical cap model with a 5HC soft surface layer scanned by the system under a constant pressure of 4 MPa. (c) 3D imaging of the spherical cap model with a 10 HC
+soft surface layer scanned by the system under a constant pressure of 4 MPa. (d) 3D imaging of the spherical cap model with a 10 HC soft surface layer scanned by the
+system under a constant pressure of 6 MPa. (e) 3D imaging of the spherical cap model with a 15 HC soft surface layer scanned by the system under a constant pressure
+of 4 MPa. (f) 3D imaging of the spherical cap model with a 15 HC soft surface layer scanned by the system under a constant pressure of 8 MPa. (g) 3D imaging of the
+spherical cap model with a 30 HC soft surface layer scanned by the system under a constant pressure of 4 MPa. (h) 3D imaging of the spherical cap model with a 30
+HC soft surface layer scanned by the system under a constant pressure of 13 MPa.
+
+
+
+                 (a)                                         (b)                                            (c)
+                                                AB glue                                       PDMS                                            Ecoflex
+                                                ABS                                           ABS                                             ABS
+
+
+                 (d)                                         (e)                                            (f)
+
+
+
+
+Fig. 14. Effect of materials types on the tactile tomography system. A spherical cap model filled with a soft surface layer of AB glue (a), PDMS (b), and Ecoflex (c),
+respectively. 3D imaging of compression depth distribution when the tactile tomography system scanned the spherical cap model with a soft surface layer of AB glue
+(d), PDMS (e), and Ecoflex (f), respectively.
+
+
+reason for this phenomenon is that the increase in the scanning step will              scanning points make the projection data insufficient, which causes poor
+result in a significant reduction in the number of scanning points, such as            quality of the reconstructed 3D images. Therefore, increasing the scan­
+when the number of scanning points is 1600, 800, and 400 when the                      ning speed is one effective strategy to achieve both high scanning effi­
+scanning step is 0.5, 1.0, and 2.0 mm, respectively. The low number of                 ciency and imaging quality for the tactile tomography system.
+
+
+                                                                                  10
+

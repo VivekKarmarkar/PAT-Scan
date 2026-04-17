@@ -1,0 +1,53 @@
+Z. Chen et al.                                                                                                                           Measurement 264 (2026) 120300
+
+
+
+
+                            (a)                                                   (b)
+
+
+
+                                    Featuring topographic lines model                          Model filled with AB glues
+
+
+                             (c)
+
+
+
+
+Fig. 10. Scanning resolution of the tactile tomography system. (a) A model featuring topographic lines. (b) Topographic lines model filled with a soft surface layer of
+AB glue. (c) 3D imaging of compression depth distribution when the tactile tomography system scanned the topographic lines model with a soft surface layer.
+
+
+
+                   (a)                                                                 (b)
+                                Gauge block
+
+
+                                                                                          20 mm                                     Scanning
+                                                           30 mm                                                                    area
+
+                            9 mm                                                                            20 mm
+                                                    3 mm
+
+                   (c)                                                                 (d)
+
+
+
+
+Fig. 11. Scanning accuracy of the tactile tomography system. (a) A gauge block with a length of 30 mm, a width of 9 mm, and a height of 3 mm. (b) A gauge block
+filled with a soft surface layer of AB glue. (c) 3D imaging of compression depth distribution when the tactile tomography system scanned the gauge block with a soft
+surface layer. (d) Scanning accuracy distribution corresponding to compression depth when the tactile tomography system scanned the gauge block with a soft
+surface layer.
+
+
+compression and deformation to a certain displacement as the probe tip                 matrix, reflecting mechanical interaction differences induced by the
+presses down (Movie S2). When the sample was scanned by the probe                      internal structure. Fig. 9e presents the simulated displacement field of
+tip with 676 scanning points under a constant pressure of 4 MPa, as                    the sample under probe loading. According to the color-code displace­
+shown in Fig. 9d and Movie S3, the “+” shaped region exhibit distinct                  ment vectors, the “+” shaped region has lower displacement magnitudes
+stress responses compared to the surrounding matrix, and the                           than the surrounding matrix, which aligns with the tactile tomography
+displacement value of these regions are less than that of the surrounding              principle that internal structures alter the effective thickness of the soft
+
+
+                                                                                   8
+

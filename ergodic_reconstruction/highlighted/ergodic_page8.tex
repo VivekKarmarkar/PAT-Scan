@@ -1,0 +1,188 @@
+%% =================================================================
+%% Beber et al. IEEE Robotics and Automation Letters, Feb 2026.
+%% Reconstruction of page 8 (printed p. 8).
+%% Contents: Fig. 5 placeholder (estimated stiffness distribution on
+%% silicone phantom, 50 mm square domain, experimental trajectory);
+%% Section VI Conclusion; References [1]--[29].
+%% =================================================================
+
+\documentclass[11pt]{article}
+
+\usepackage[margin=0.85in]{geometry}
+\usepackage{amsmath, amssymb}
+\usepackage{mathrsfs}
+\usepackage{xcolor}
+\usepackage{fancyhdr}
+\usepackage{url}
+
+\pagestyle{fancy}
+\fancyhf{}
+\lhead{\small 8\ \ IEEE RAL, Accepted Feb 2026}
+\rhead{\small }
+\cfoot{\small 8 $\to$ \arabic{page}}
+\renewcommand{\headrulewidth}{0.4pt}
+
+\setcounter{page}{1}
+\setcounter{equation}{5}
+\setlength{\parskip}{6pt}
+\setlength{\parindent}{0pt}
+
+\begin{document}
+
+% ---------- Fig. 5 placeholder ----------
+\begin{center}
+\fbox{\begin{minipage}[c][6cm][c]{0.90\textwidth}
+\centering
+\textbf{Fig. 5.}\ Estimated stiffness distribution from palpation of
+the soft phantom.\\[4pt]
+\textcolor{gray}{\footnotesize
+50 mm $\times$ 50 mm domain in the $(x, y)$ plane. Colour scale:
+estimated elastic modulus ranging from $\approx 102$ kPa (soft
+background) up to $\approx 183$ kPa (stiff DragonSkin-30NV inclusion
+shown in yellow). The end-effector trajectory during the search
+motion is overlaid as a grayscale-gradient path: black marks the
+beginning, white the end. The trajectory concentrates exploration in
+the stiffer region on the left while still covering the rest of the
+map, illustrating the adaptive focus of the EID-driven ergodic
+planner.}
+\end{minipage}}
+\end{center}
+
+\vspace{0.4em}
+
+\textbf{Fig. 5.}\ Estimated stiffness distribution obtained through
+palpation of the soft phantom. The stiffer region is shown in yellow.
+The end-effector trajectory during the search motion is visualised
+using a grayscale gradient, from black (beginning) to white (end). A
+video of the experiment is provided in the Supplemental Materials
+and is also available online at
+\url{https://youtu.be/a3BUSxA7wXY}.
+
+\vspace{0.8em}
+
+% ---------- Section VI ----------
+\section*{VI.\ Conclusion}
+
+This work presents an autonomous robotic palpation framework for
+real-time elastic stiffness mapping of soft tissues. By combining
+force-based viscoelastic parameter estimation with ergodic trajectory
+planning implemented via a heat-equation-driven controller, the
+method enables continuous palpation without embedded tactile sensing.
+Exploration is guided by an EID tailored to stiffness mapping,
+allowing adaptive focus on diagnostically relevant regions.
+Simulation results demonstrate improved stiffness reconstruction
+accuracy, with reliable detection of multiple stiff regions and
+lower RMSE and segmentation errors compared to BO, particularly
+under noisy conditions. Experimental validation with a robotic arm
+and a silicone phantom confirms the robustness of the approach,
+showing consistent detection of stiff inclusions and good agreement
+with ground-truth stiffness maps. Overall, the proposed ergodic
+strategy effectively balances exploration and accurate estimation,
+making it well suited for autonomous palpation as an assistive
+diagnostic tool. Future work will extend the method to
+three-dimensional mapping on non-flat surfaces and evaluate it on
+anatomically realistic phantoms and ex vivo tissues.
+
+% ---------- References ----------
+\section*{References}
+
+\begin{footnotesize}
+\noindent
+[1] R.~Tozzi, C.~K\"ohler, et al., ``Laparoscopic treatment of early
+ovarian cancer: surgical and survival outcomes,'' Gynecologic
+oncology, vol.~93, no.~1, pp.~199--203, 2004.\\[2pt]
+[2] N.~Eisemann, S.~Bunk, et al., ``Nationwide real-world
+implementation of AI for cancer detection in population-based
+mammography screening,'' Nature Medicine 2025 31:3, vol.~31, no.~3,
+pp.~917--924, 1 2025.\\[2pt]
+[3] Q.~Dan, Z.~Xu, et al., ``Diagnostic performance of deep learning
+in ultrasound diagnosis of breast cancer: a systematic review,'' npj
+Precision Oncology 2024 8:1, vol.~8, no.~1, pp.~1--13, 1 2024.\\[2pt]
+[4] A.~Attanasio, B.~Scaglioni, et al., ``Autonomy in Surgical
+Robotics,'' Annual Review of Control, Robotics, and Autonomous
+Systems, vol.~4, 2021.\\[2pt]
+[5] L.~Zhang, Y.~Peng, et al., ``Innovative integration of automated
+breast volume scan and ultrasound elastography for enhanced
+differentiation of benign and malignant breast lesions,'' Scientific
+Reports 2025 15:1, vol.~15, no.~1, pp.~1--8, 5 2025.\\[2pt]
+[6] I.~Sack, ``Magnetic resonance elastography from fundamental
+soft-tissue mechanics to diagnostic imaging,'' Nature Reviews
+Physics, vol.~5, no.~1, 2023.\\[2pt]
+[7] N.~Pacheco, C.~Henry, et al., ``Virtual palpation: A novel method
+to identify the physical properties of tissue for laser surgery,''
+in Hamlyn Symposium on Medical Robotics, 2025.\\[2pt]
+[8] A.L.~Trejos, J.~Jayender, et al., ``Robot-assisted tactile
+sensing for minimally invasive tumor localization,'' International
+Journal of Robotics Research, vol.~28, no.~9, 2009.\\[2pt]
+[9] N.~Enayati, E.~De~Momi, and G.~Ferrigno, ``Haptics in
+robot-assisted surgery: Challenges and benefits,'' IEEE Reviews in
+Biomedical Engineering, vol.~9, 2016.\\[2pt]
+[10] S.~McKinley, A.~Garg, et al., ``An interchangeable surgical
+instrument system with application to supervised automation of
+multilateral tumor resection,'' in IEEE International Conference on
+Automation Science and Engineering, 2016.\\[2pt]
+[11] N.~Zevallos, R.~Arun~Srivatsan, et al., ``A Real-time Augmented
+Reality Surgical System for Overlaying Stiffness Information,'' in
+Robotics: Science and Systems, 2018.\\[2pt]
+[12] A.~Garg, S.~Sen, et al., ``Tumor localization using automated
+palpation with Gaussian Process Adaptive Sampling,'' in IEEE
+International Conference on Automation Science and Engineering,
+2016.\\[2pt]
+[13] E.~Ayvali, R.A.~Srivatsan, et al., ``Using Bayesian optimization
+to guide probing of a flexible environment for simultaneous
+registration and stiffness mapping,'' in Proceedings - IEEE
+International Conference on Robotics and Automation, 2016.\\[2pt]
+[14] H.~Salman, E.~Ayvali, et al., ``Trajectory-Optimized Sensing for
+Active Search of Tissue Abnormalities in Robotic Surgery,'' in
+Proceedings - IEEE International Conference on Robotics and
+Automation, 2018.\\[2pt]
+[15] Y.~Yan and J.~Pan, ``Fast Localization and Segmentation of
+Tissue Abnormalities by Autonomous Robotic Palpation,'' IEEE
+Robotics and Automation Letters, vol.~6, no.~2, pp.~1707--1714,
+4 2021.\\[2pt]
+[16] E.~Ayvali, A.~Ansari, et al., ``Utility-Guided Palpation for
+Locating Tissue Abnormalities,'' IEEE Robotics and Automation
+Letters, vol.~2, no.~2, 2017.\\[2pt]
+[17] K.A.~Nichols and A.M.~Okamura, ``Methods to Segment Hard
+Inclusions in Soft Tissue During Autonomous Robotic Palpation,''
+IEEE Transactions on Robotics, vol.~31, no.~2, 2015.\\[2pt]
+[18] L.~Beber, E.~Lamon, et al., ``Towards Robotised Palpation for
+Cancer Detection through Online Tissue Viscoelastic Characterisation
+with a Collaborative Robotic Arm,'' in IEEE International Conference
+on Intelligent Robots and Systems, 2024, pp.~2380--2386.\\[2pt]
+[19] S.~Ivic, B.~Crnkovic, and I.~Mezic, ``Ergodicity-Based
+Cooperative Multiagent Area Coverage via a Potential Field,'' IEEE
+Transactions on Cybernetics, vol.~47, no.~8, 2017.\\[2pt]
+[20] C.E.~Rasmussen and C.K.~Williams, Gaussian Processes for
+Machine Learning. The MIT Press, 2006.\\[2pt]
+[21] P.~Chalasani, L.~Wang, et al., ``Concurrent nonparametric
+estimation of organ geometry and tissue stiffness using continuous
+adaptive palpation,'' in Proceedings - IEEE International Conference
+on Robotics and Automation, vol.~2016-June, 2016.\\[2pt]
+[22] ---, ``Preliminary evaluation of an online estimation method
+for organ geometry and tissue stiffness,'' IEEE Robotics and
+Automation Letters, vol.~3, no.~3, 2018.\\[2pt]
+[23] G.~Mathew and I.~Mezi, ``Metrics for ergodicity and design of
+ergodic dynamics for multi-agent systems,'' Physica D: Nonlinear
+Phenomena, vol.~240, no.~4-5, pp.~432--442, 2 2011.\\[2pt]
+[24] L.M.~Miller, Y.~Silverman, et al., ``Ergodic Exploration of
+Distributed Information,'' IEEE Transactions on Robotics, vol.~32,
+no.~1, pp.~36--52, 2 2016.\\[2pt]
+[25] L.M.~Miller and T.D.~Murphey, ``Trajectory optimization for
+continuous ergodic exploration,'' in Proceedings of the American
+Control Conference, 2013.\\[2pt]
+[26] C.~Bilaloglu, T.~L\"ow, and S.~Calinon, ``Whole-body ergodic
+exploration with a manipulator using diffusion,'' IEEE Robotics and
+Automation Letters, vol.~8, no.~12, pp.~8581--8587, 2023.\\[2pt]
+[27] V.L.~Popov and M.~He\ss, Method of dimensionality reduction in
+contact mechanics and friction. Springer, 2015.\\[2pt]
+[28] L.~Beber, E.~Lamon, et al., ``Force-based viscosity and
+elasticity measurements for material biomechanical characterisation
+with a collaborative robotic arm,'' IEEE Transactions on
+Instrumentation and Measurement, pp.~1--1, 2025.\\[2pt]
+[29] P.N.~Wells and H.-D.~Liang, ``Medical ultrasound: imaging of
+soft tissue strain and elasticity,'' Journal of the Royal Society
+Interface, vol.~8, no.~64, pp.~1521--1549, 2011.
+\end{footnotesize}
+
+\end{document}

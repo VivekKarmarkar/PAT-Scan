@@ -1,0 +1,132 @@
+%% =================================================================
+%% Chen et al. Measurement 264 (2026) 120300.
+%% Reconstruction of page 5 (printed p. 5).
+%% Contents: Fig. 7 (a-d: hierarchical thickness study with 0.5 mm
+%% step model and compression-depth gradation), plus Sections 2.2
+%% (Probe module) and 2.3 (Closed-loop feedback control system) and
+%% the start of Section 3 / 3.1 (Softness recognition).
+%% No numbered equations on this page.
+%% =================================================================
+
+\documentclass[11pt]{article}
+
+\usepackage[margin=0.85in]{geometry}
+\usepackage{amsmath, amssymb}
+\usepackage{mathrsfs}
+\usepackage{xcolor}
+\usepackage{fancyhdr}
+
+\pagestyle{fancy}
+\fancyhf{}
+\lhead{\small Z.~Chen et al.}
+\rhead{\small Measurement 264 (2026) 120300}
+\cfoot{\small 5 $\to$ \arabic{page}}
+\renewcommand{\headrulewidth}{0.4pt}
+
+\setcounter{page}{1}
+\setlength{\parskip}{6pt}
+\setlength{\parindent}{0pt}
+
+\begin{document}
+
+% ---------- Fig. 7 placeholder ----------
+\begin{center}
+\fbox{\begin{minipage}[c][6.5cm][c]{0.95\textwidth}
+\centering
+\textbf{Fig. 7.}\ Effect of the thickness of the sample on the
+tactile softness of materials.\\[4pt]
+\textcolor{gray}{\footnotesize
+\textbf{(a)} Hierarchical structure model with 9 staircase steps,
+0.5 mm height difference between adjacent stages (total run 5 mm),
+CAD view with the stepped top surface.\\[3pt]
+\textbf{(b)} Hierarchical model filled with a soft surface layer
+of AB glue (photograph), uniform square scanning region outlined.\\[3pt]
+\textbf{(c)} 3D surface plot of compression-depth distribution when
+the tactile tomography system scanned (b); stepped pyramid shape
+with X, Y in mm and Z 0--6 mm on a rainbow color scale.\\[3pt]
+\textbf{(d)} Bar chart: measured height (mm, 0--7 axis) at step
+numbers 1--9; consecutive step-to-step height differences are
+0.494 mm and 0.495 mm, matching the 0.5 mm nominal staircase step.]}
+\end{minipage}}
+\end{center}
+
+\vspace{0.4em}
+
+\textbf{Fig. 7.}\ Effect of the thickness of the sample on the
+tactile softness of materials. (a) Hierarchical structure model
+with the height difference between each adjacent stage of 0.5 mm.
+(b) Hierarchical structure model filled with a soft surface layer
+of AB glue. (c) 3D imaging of compression depth distribution when
+the tactile tomography system scanned the hierarchical structure
+model with a soft surface layer. (d) Height of the compression
+depth distribution.
+
+\vspace{0.8em}
+
+% ---------- Prose continuation (from page 4) ----------
+0.1 $\mu$m, respectively, enabling the tactile tomography system
+to operate with high scanning resolution.
+
+\subsection*{2.2.\ Probe module}
+
+As shown in Figs.~2 and 3, the probe module of the tactile
+tomography system was assembled from a shell structure, a tip, two
+springs, and a carbon fiber beams based pressure sensor [35]. To
+achieve high scanning resolution without penetrating the soft layer
+of the sample, the tip was designed with a diameter of 0.5 mm. The
+springs are positioned behind the tip to transmit the force from
+the tip to the pressure sensor and to restore the tip's position.
+The pressure sensor, which is based on carbon fiber beams, is
+capable of quantitatively measuring force and responds to the force
+exerted by the springs. Consequently, the probe module can
+accurately capture force information when the tip makes contact
+with the sample.
+
+\subsection*{2.3.\ Closed-loop feedback control system}
+
+A programmable logic controller (PLC) (H2U-48MT, Henchman) was
+integrated with the scanning module and the probe module to
+establish a closed-loop feedback control system. The workflow of
+the tactile tomography system is shown in Fig.~4. Firstly, scanning
+paths, scanning speed, and scanning step were programmed. The PLC
+control the X and Y axes to drive the sample to move until the
+target scanning point is right under the tip, and then the rodless
+cylinder of the Z axis drive the probe down. The resistance value
+of the pressure sensor changes when the tip of the probe module
+touches the surface of the sample. This resistance value is
+collected by an ADS1247 acquisition chip, which converts the analog
+signal into a digital signal. The digital signal is then
+transmitted to an STM32F030C8T6 microprocessor, where it is
+identified as the first threshold. Meanwhile, the position
+information of $Z_0$ is read by the grating sensor, and the
+microprocessor sends this position information to the PLC. The
+rodless cylinder then continues to drive the probe downward, while
+the grating sensor reads a series of positional data as the
+resistance value of the pressure sensor reaches specific
+characteristic thresholds. The PLC stops and resets the probe once
+the resistance value of the pressure sensor attains the target
+threshold. The X and Y axes then drive the sample to the next
+scanning point until all preset areas have been scanned. The
+positional information $(x, y, z)$ corresponding to each threshold
+is saved as projection data to reconstruct a 3D image of the
+internal structure of the sample. This projection data is stored
+in a CSV file and displayed in real time through a visual
+interface.
+
+\section*{3.\ Imaging principle of tactile tomography}
+
+\subsection*{3.1.\ Softness recognition of tactile tomography system}
+
+The ability of a material sample to resist the penetration of hard
+objects into its surface is known as hardness, which is an intrinsic
+property of the material. [36]. According to different measurement
+approach and standard, hardness can be subdivided into Rockwell
+hardness, Vickers hardness, Shore hardness, and Brinell hardness.
+Among these hardness measurements, Shore hardness has been widely
+applied to the hardness testing of soft materials, such as
+elastomers, rubber, soft plastics, and foam [37]. Therefore, the
+softness of soft matter can be characterized by Shore hardness,
+which exhibits a negative correlation with softness. The tactile
+tomography system can
+
+\end{document}

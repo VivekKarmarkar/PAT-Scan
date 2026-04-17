@@ -1,0 +1,97 @@
+                     This article has been accepted for publication in IEEE Robotics and Automation Letters. This is the author's version which has not been fully edited and
+                                               content may change prior to final publication. Citation information: DOI 10.1109/LRA.2026.3673907
+
+IEEE ROBOTICS AND AUTOMATION LETTERS. PREPRINT VERSION. ACCEPTED FEBRUARY, 2026                                                                                                          1
+
+
+
+
+              Autonomous Robotic Tissue Palpation and Abnormalities
+                                    Characterisation via Ergodic Exploration
+             Luca Beber1 , Edoardo Lamon1 , Matteo Saveriano2 , Daniele Fontanelli2 , and Luigi Palopoli1
+
+
+
+   Abstract—We propose a novel autonomous robotic palpation                                                 Elasticity Map Ground-Truth Ur3e
+framework for real-time elastic mapping during tissue explo-
+
+
+
+
+                                                                                                                                                    Elastic Modulus (kPa)
+ration using a viscoelastic tissue model. The method com-
+bines force-based parameter estimation using a commercial
+force/torque sensor with an ergodic control strategy driven
+by a tailored Expected Information Density, which explicitly
+biases exploration toward diagnostically relevant regions by
+jointly considering model uncertainty, stiffness magnitude, and
+spatial gradients. An Extended Kalman Filter is employed to
+estimate viscoelastic model parameters online, while Gaussian                                                                                                                   F/T Sensor
+Process Regression provides spatial modelling of the estimated
+elasticity, and a Heat Equation Driven Area Coverage controller
+enables adaptive, continuous trajectory planning. Simulations on
+synthetic stiffness maps demonstrate that the proposed approach
+achieves better reconstruction accuracy, enhanced segmentation
+                                                                                                                                                                            Indenter
+capability, and improved robustness in detecting stiff inclusions
+compared to Bayesian Optimisation-based techniques. Experi-
+mental validation on a silicone phantom with embedded inclu-
+sions emulating pathological tissue regions further corroborates
+the potential of the method for autonomous tissue characterisa-
+tion in diagnostic and screening applications.
+                                                                                               Fig. 1. Experimental setup for the proposed ergodic search: (bottom-left)
+  Index Terms—Medical Robots and Systems; Sensor-based                                         silicone sample; (top-left) ground-truth elasticity map obtained using a grid-
+Control; Force and Tactile Sensing                                                             based approach; (right) the robotic manipulator palpating the silicone sample.
+
+
+                            I. I NTRODUCTION
+                                                                                               with minimal human supervision [4]. To support such needs,
+P    ALPATION is a fundamental clinical procedure that
+     allows physicians, by touch, to assess tissue stiffness,
+texture, and the presence of abnormalities such as tumours
+                                                                                               several technologies have emerged. Imaging-based elastogra-
+                                                                                               phy methods, e.g., ultrasound [5], magnetic resonance [6], or
+                                                                                               laser-based methods [7], estimate tissue stiffness but typically
+or swollen lymph nodes [1]. Its speed and non-invasiveness
+                                                                                               provide relative measures, are costly or slow, and cannot
+make it crucial for early diagnosis, particularly of conditions
+                                                                                               be easily integrated into RMIS. Tactile sensing, in contrast,
+such as breast cancer. However, palpation is inherently subjec-
+                                                                                               offers real-time, quantitative stiffness measurements by cap-
+tive and sensitive to inter-practitioner variability, which may
+                                                                                               turing force and deformation. Previous works have shown its
+compromise diagnostic accuracy and repeatability for small or
+                                                                                               potential to reduce applied forces, shorten procedures, and
+deep-seated lesions. For this reason, physical examinations are
+                                                                                               improve surgical outcomes [8], [9]. Early stiffness mapping
+often complemented or replaced by imaging techniques such
+                                                                                               used uniform probing grids [10], [11], while later methods
+as mammography, the gold standard for early detection [2],
+                                                                                               adopted Bayesian Optimisation (BO) to reduce the number of
+and ultrasound [3].
+                                                                                               probing actions [12]–[14], often coupled with custom tactile
+   Accurate assessment of tissue mechanics is equally critical
+                                                                                               sensors [8], [9], [15], guided by anatomical priors [16] or with
+in robot-assisted minimally invasive surgery (RMIS), where
+                                                                                               ad-hoc refined segmentation strategies [15], [17].
+robots must adapt to variable stiffness for safe navigation and
+manipulation, especially for autonomous systems operating                                         In this work, we propose a method for autonomous robotic
+                                                                                               palpation that enables continuous estimation of elastic tissue
+  Manuscript received: October, 15, 2025; Revised December, 16, 2025;                          stiffness using a viscoelastic contact model, relying solely
+Accepted February, 23, 2026.                                                                   on a commercial force/torque (F/T) sensor. The use of a
+  This paper was recommended for publication by Editor Burgner-Kahrs
+Jessica upon evaluation of the Associate Editor and Reviewers’ comments.                       viscoelastic model allows more accurate representation of
+This research has been funded by the the PNRR project FAIR - Future AI                         tissue dynamics during palpation compared to purely elas-
+Research (PE00000013), by the European Union projects INVERSE (GA                              tic formulations, while abnormality characterisation in this
+no. 101136067) and MAGICIAN (GA no. 101120731) and by the MUR
+Departments of Excellence 2023-27 program (L.232/2016).                                        work focuses on the estimated elastic stiffness. This sensing
+  1 Department of Information Engineering and Computer Science, University
+                                                                                               strategy provides a practical alternative to methods based
+of Trento, Trento, Italy name.surname@unitn.it                                                 on embedded or specialised sensors, which typically require
+  2 , Department of Industrial Engineering, University of Trento, Trento, Italy
+name.surname@unitn.org                                                                         customised hardware integration and lack compatibility with
+  Digital Object Identifier (DOI): see top of this page.                                       standard robotic platforms. In contrast, the use of an off-the-
+
+
+                     This work is licensed under a Creative Commons Attribution 4.0 License. For more information, see https://creativecommons.org/licenses/by/4.0/
+

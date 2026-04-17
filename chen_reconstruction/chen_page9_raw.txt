@@ -1,0 +1,94 @@
+Z. Chen et al.                                                                                                                       Measurement 264 (2026) 120300
+
+
+                           (a)                                  (b)                               (c)
+                        4 mm                              AB glue
+                                                          ABS
+
+
+                           (d)                                  (e)                               (f)
+
+
+
+
+                   Speed & step: 0.6 mm/s & 0.5 mm                    1.2 mm/s & 0.5 mm                  1.8 mm/s & 0.5 mm
+                           (g)                                  (h)                                (i)
+
+
+
+
+                   Speed & step: 2.4 mm/s & 0.5 mm                    2.4 mm/s & 1.0 mm                  2.4 mm/s & 2.0 mm
+
+Fig. 12. Scanning speed and scanning step of the tactile tomography system. (a), (b) and (c) A spherical cap model filled with a soft surface layer of AB glue. 3D
+imaging of compression depth distribution when the tactile tomography system scanned the spherical cap model with a soft surface layer under scanning speeds and
+scanning steps of (d) 0.6 mm/s & 0.5 mm, (e) 1.2 mm/s & 0.5 mm, (f) 1.8 mm/s & 0.5 mm, (g) 2.4 mm/s & 0.5 mm, (h) 2.4 mm/s & 1.0 mm, and (i) 2.4 mm/s & 2.0
+mm, respectively.
+
+
+surface layer, resulting in different distribution of the tactile softness          A gauge block with a length of 30 mm, a width of 9 mm, and a height of
+across the samples. In addition, this simulated result is consistent with           3 mm was filled with a soft surface layer of AB glue to investigate the
+the experimental result (as shown in Fig. 9f), confirming that the tactile          scanning accuracy of the tactile tomography system (Fig. 11a). The
+tomography can effectively translate mechanical interaction differences             scanning area is 20*20 mm2 (Fig. 11b), and the scanning step is 0.5 mm,
+into detectable internal structure maps.                                            resulting in a total number of scanning points of 1600. As shown in
+                                                                                    Fig. 11c, the scanning points corresponding to the surface of the gauge
+                                                                                    block have a relatively uniform compression depth. The compression
+4.2. Scanning resolution of the tactile tomography system
+                                                                                    depth of the scanning points in other regions presents a slight difference
+                                                                                    due to the incomplete smoothing of the bottom, which was prepared by
+   Scanning resolution is the key performance parameter in deter­
+                                                                                    3D printing with ABS. As a result, a scanning accuracy of over 98.9 % is
+mining the detailed quality of scanned imaging. In this article, the x
+                                                                                    distributed throughout the scanning area (Fig. 11d), and the scanning
+stage, y stage, and z stage of the tactile tomography system can achieve a
+                                                                                    area corresponding to the surface of the gauge block shows a high
+minimum step displacement of 10, 10, and 0.1 μm, respectively, which
+                                                                                    scanning accuracy of over 99.3 %, demonstrating that the tactile to­
+ensures the system has a high scanning resolution. To investigate the
+                                                                                    mography system has the ability to scan every point accurately and
+scanning resolution of the tactile tomography system, a model featuring
+                                                                                    stably.
+topographic lines was fabricated by 3D printing. As shown in Fig. 10a,
+these lines have a length of 8 mm and a width of 2 mm in the x and y
+directions, and are interspaced by 2.0, 1.5, 1.0, 0.7, 0.5, and 0.3 mm,
+                                                                                    4.4. Scanning speed and scanning step of the tactile tomography system
+respectively. The model was then filled with a soft surface layer of AB
+glue (Fig. 10b), and scanned by the tactile tomography system under a
+                                                                                        There is a trade-off between the scanning efficiency and imaging
+constant pressure of 4 MPa. The scanning result is shown in Fig. 10c,
+                                                                                    quality for scanning imaging, in which the scanning efficiency is
+where the distances between the topographic lines in the x and y di­
+                                                                                    determined by the scanning speed and scanning step. As shown in
+rections above 0.5 mm can be distinguished, meaning that the tactile
+                                                                                    Fig. 12a, 12b, and 12c, a spherical cap model was filled with a soft
+tomography system possesses a minimum scanning resolution of 0.5 mm
+                                                                                    surface layer of AB glue to investigate the scanning efficiency and im­
+in both the x and y directions. This scanning resolution is typically
+                                                                                    aging quality of the tactile tomography system. The spherical cap model
+limited by the diameter of the tip, which is also 0.5 mm. Therefore, the
+                                                                                    was scanned by the tactile tomography system with scanning speeds and
+scanning resolution in the x and y directions can be improved by
+                                                                                    scanning steps of 0.6 mm/s & 0.5 mm, 1.2 mm/s & 0.5 mm, 1.8 mm/s
+reducing the diameter of the tip. But there is a trade-off between the
+                                                                                    &0.5 mm, 2.4 mm/s & 0.5 mm, 2.4 mm/s & 1.0 mm, and 2.4 mm/s &
+scanning resolution and the diameter of the tip, because a tip with a very
+                                                                                    2.0 mm, respectively. The reconstructed 3D images corresponding to the
+small diameter will pierce the soft surface layer easily. The scanning
+                                                                                    scanning speeds of 0.6, 1.2, 1.8, and 2.4 mm/s are shown in Fig. 12d, e, f,
+resolution in the z direction is unaffected by the diameter of the tip, and
+                                                                                    and g, respectively, and all these 3D images can reproduce the spherical
+mainly depends on the minimum step displacement. Thus, the tactile
+                                                                                    cap model. The curved shape of the 3D images remained highly smooth
+tomography system can achieve a high scanning resolution of 0.1 μm in
+                                                                                    as the scanning speed increased to 2.4 mm/s, demonstrating that the
+the z direction, allowing the tactile tomography system to recognize an
+                                                                                    increase of scanning speed will not greatly degrade the imaging quality.
+object in more detail.
+                                                                                    Fig. 12g, h, and i show the reconstructed 3D images corresponding to the
+                                                                                    scanning speed and scanning step of 2.4 mm/s & 0.5 mm, 2.4 mm/s &
+4.3. Scanning accuracy of the tactile tomography system                             1.0 mm, and 2.4 mm/s & 2.0 mm, respectively. There is a relative
+                                                                                    decrease in the smoothness of the curved shape of the 3D images as the
+    Scanning accuracy is another key performance parameter for the                  scanning step increased, and the 3D image could even not reproduce the
+tactile tomography system, referring to its reliability and repeatability.          spherical cap model well when the scanning step increased to 2 mm. The
+
+                                                                                9
+

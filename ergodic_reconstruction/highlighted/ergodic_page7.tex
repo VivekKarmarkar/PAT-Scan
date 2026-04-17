@@ -1,0 +1,192 @@
+%% =================================================================
+%% Beber et al. IEEE Robotics and Automation Letters, Feb 2026.
+%% Reconstruction of page 7 (printed p. 7).
+%% Contents: Table II placeholder (100-run performance: DR, time, RMSE
+%% across BO-EI / BO-EIS / Ergodic, trajectory lengths 500/650/800 mm,
+%% w/ and w/o noise); Table III placeholder (segmentation
+%% Sens/Spec for three clusters); Fig. 4 placeholder (clustering +
+%% boundary extraction results); Section IV-D continuation (50-run
+%% simulation + sensitivity/specificity defn); Section V Experimental
+%% Results (instrumentation rollcall, silicone-phantom 5-experiment
+%% validation results).
+%% =================================================================
+
+\documentclass[11pt]{article}
+
+\usepackage[margin=0.85in]{geometry}
+\usepackage{amsmath, amssymb}
+\usepackage{mathrsfs}
+\usepackage{xcolor}
+\usepackage{fancyhdr}
+
+\pagestyle{fancy}
+\fancyhf{}
+\lhead{\small Beber et al.: Ergodic Palpation for Tissue Mapping}
+\rhead{\small 7}
+\cfoot{\small 7 $\to$ \arabic{page}}
+\renewcommand{\headrulewidth}{0.4pt}
+
+\setcounter{page}{1}
+\setcounter{equation}{5}
+\setlength{\parskip}{6pt}
+\setlength{\parindent}{0pt}
+
+\begin{document}
+
+% ---------- Table II ----------
+\begin{center}
+\textbf{TABLE II}\\[2pt]
+\textsc{Comparison of performance metrics across 100 runs of Ergodic
+Search and BO, with (w/) and without (w/o) noise. DR is the Detection
+Rate, $t$ the Exploration Time, and RMSE the Root Mean Square Error.}
+\end{center}
+
+\begin{center}
+\footnotesize
+\begin{tabular}{|l|ccc|ccc|ccc|}
+\hline
+Traj.\ Length
+  & \multicolumn{3}{c|}{500 mm}
+  & \multicolumn{3}{c|}{650 mm}
+  & \multicolumn{3}{c|}{800 mm} \\
+\hline
+Method & DR $\uparrow$ & $t\downarrow$ & RMSE$\downarrow$
+       & DR $\uparrow$ & $t\downarrow$ & RMSE$\downarrow$
+       & DR $\uparrow$ & $t\downarrow$ & RMSE$\downarrow$ \\
+\hline
+BO-EI (w/o)   & 39 & 59 & 12.09 & 73 & 88 & 7.98 & 92 & 124 & 5.47 \\
+BO-EIS (w/o)  & 93 & 60 &  4.61 & 99 & 92 & 2.81 & 99 & 124 & 1.87 \\
+Ergodic (w/o) & 78 & 41 &  4.69 & 92 & 62 & 2.74 & 99 &  84 & 1.42 \\
+BO-EI (w/)    & 38 & 60 & 12.10 & 60 & 89 & 7.84 & 91 & 118 & 5.49 \\
+BO-EIS (w/)   & 85 & 63 &  5.54 & 95 & 95 & 3.35 & 99 & 130 & 2.59 \\
+Ergodic (w/)  & 79 & 41 &  5.87 & 98 & 62 & 3.03 & 99 &  84 & 2.16 \\
+\hline
+\end{tabular}
+\end{center}
+
+\vspace{0.6em}
+
+% ---------- Table III ----------
+\begin{center}
+\textbf{TABLE III}\\[2pt]
+\textsc{Average segmentation results across three clusters.}
+\end{center}
+
+\begin{center}
+\footnotesize
+\begin{tabular}{|c|ccc|ccc|ccc|}
+\hline
+ & \multicolumn{3}{c|}{Cluster 1}
+ & \multicolumn{3}{c|}{Cluster 2}
+ & \multicolumn{3}{c|}{Cluster 3} \\
+\hline
+ & BO-EI & BO-EIS & Erg. & BO-EI & BO-EIS & Erg. & BO-EI & BO-EIS & Erg. \\
+\hline
+Sens. & 0.561 & 0.950 & 0.975 & 0.657 & 0.997 & 0.971 & 0.746 & 0.904 & 0.978 \\
+Spec. & 0.654 & 0.993 & 0.993 & 0.655 & 0.998 & 0.997 & 0.829 & 0.953 & 0.992 \\
+\hline
+\end{tabular}
+\end{center}
+
+\vspace{0.8em}
+
+% ---------- Fig. 4 placeholder ----------
+\begin{center}
+\fbox{\begin{minipage}[c][4.5cm][c]{0.80\textwidth}
+\centering
+\textbf{Fig. 4.}\ Clustering and boundary extraction after exploration.\\[4pt]
+\textcolor{gray}{\footnotesize
+Original cluster shapes (in blue) overlaid against estimated shapes
+(in red) for the three segmentation benchmarks. Cluster 1: irregular
+inclusion; Cluster 2: circular inclusion; Cluster 3: donut-shaped
+inclusion. The overlay visualises boundary fidelity relative to
+ground truth.}
+\end{minipage}}
+\end{center}
+
+\vspace{0.4em}
+
+\textbf{Fig. 4.}\ Clustering and boundary extraction results after
+the exploration phase. The original shapes (in blue) are shown
+alongside the estimated ones (in red).
+
+\vspace{0.8em}
+
+% ---------- Section IV-D continuation ----------
+shown in Fig.~4. A total of 50 simulations were conducted under
+identical conditions, incorporating additive white noise
+$\mathcal{N}(0, 6.25\;\mathrm{kPa}^{2})$. Each run was terminated
+after 70 s to ensure consistent comparison across trials. For each
+run, the estimated stiffness map was segmented using the clustering
+and boundary extraction pipeline described earlier. The resulting
+segmented areas were compared with ground truth using two standard
+metrics [15], sensitivity and specificity, defined as:
+\[
+\text{1) Sensitivity} = \frac{\text{TP}}{\text{TP}+\text{FN}},
+\quad
+\text{2) Specificity} = \frac{\text{TN}}{\text{TN}+\text{FP}},
+\]
+where TP, FP, FN, and TN denote the number of pixels of true
+positives, false positives, false negatives, and true negatives,
+respectively. The metrics were computed separately for each of the
+three ground-truth regions, and the final values were averaged
+across the simulations. The results of the segmentation algorithm
+(Tab.~III) demonstrate elevated and consistent specificity across
+all three clusters for the two methods that sample continuously,
+thereby confirming the model effectiveness in correctly excluding
+background regions. Conversely, the ergodic search exhibited
+superior sensitivity compared to both the BO with and without
+sampling when clustering non-uniform shapes (Clusters 1--3). This
+finding indicates that the ergodic search is more adept at
+accurately delineating regions of interest. This is especially
+relevant in medical contexts, where false negatives can lead to
+missed detections of pathological regions. Consequently, achieving
+high sensitivity is imperative to ensure clinically reliable
+performance.
+
+% ---------- Section V ----------
+\section*{V.\ Experimental Results}
+
+\pdfcomment[color=cyan,subject={},open=false,opacity=0.7]{User input: what exactly does their instrumentation measure in the ergodic paper?\\Claude comments: Directly measured: 6-axis contact force/torque (Bota SensOne at 1 kHz) + robot end-effector position (UR3e at 500 Hz). Stiffness, viscosity, penetration depth/velocity, and the stiffness map are all inferred downstream --- EKF over the DRM/Hertzian contact model (Eq.~6) gives per-point $E_f$ and $\eta$; GPR then interpolates to a global $\mu(x)$ surface.}\pdfcomment[color=cyan,subject={},open=false,opacity=0.7]{User input: how exactly does their instrumentation measure force?\\Claude comments: Paper names the commercial unit (Bota SensOne, 6-axis, 1 kHz) but does NOT describe the transduction mechanism --- treats the sensor as a black box. Deliberate architectural choice ('off-the-shelf ensures portability, cost-effectiveness'), explicitly contrasted with 'customised hardware integration'. Sharp architectural contrast with Chen, which uses a custom carbon-fibre piezoresistive sensor and cites its source paper~[35].}\pdfcomment[color=cyan,subject={},open=false,opacity=0.7]{User input: what is the basic description of their instrumentation which includes the force sensor in the ergodic paper?\\Claude comments: The canonical per-component rollcall: UR3e robot (500 Hz) $\to$ Bota SensOne 6-axis F/T sensor (1 kHz) $\to$ 3D-printed spherical indenter (5 mm radius) $\to$ ROS2 Humble middleware. The most complete instrumentation description in the paper; no rival passage comes close.}\pdfcomment[color=cyan,subject={},open=false,opacity=0.7]{User input: what part of the instrumentation does the PALPATION?\\Claude comments: The 3D-printed spherical indenter is the sole physical palpator --- the only component that contacts tissue. UR3e is the CARRIER (positions it), Bota SensOne is the OBSERVER (measures reaction force). Confirmed by Fig.~1 caption's explicit 'Indenter' label (p.~1) and Eq.~6's reliance on 5~mm radius $R$ as the Hertzian geometric parameter (p.~4). The one custom-fabricated element in an otherwise commercial-off-the-shelf instrumentation stack.}\sethlcolor{hlcyan}\hl{The validity of the simulation results in Sec.~IV was assessed in a
+realistic setting by testing the proposed method on a manipulator
+interacting with a physical sample (Fig.~1). An UR3e, position-%
+controlled at 500 Hz, was used to execute the trajectories generated
+by the Ergodic Control. The force at the end-effector was measured
+by a 6-axis F/T sensor, a Bota SensOne, sampling at 1 kHz. A 3D-%
+printed indenter with a spherical tip with 5 mm radius is attached
+to the end-effector. The communication between the robot, the F/T
+sensor, and the algorithms was implemented with ROS2 Humble.} To
+simulate a biological tissue with a mass, we fabricated a silicone
+sample consisting of a soft matrix made from Ecoflex-0030 and a
+stiffer spherical inclusion (radius 1 cm) made from DragonSkin-30NV.
+This configuration increases local stiffness by up to 90\%,
+consistent with values reported in previous studies [15], [29]. The
+ground truth is built with point-wise sampling on a grid with a
+palpation every 2.5 mm in a square of 5 cm $\times$ 5 cm.
+
+\pdfcomment[color=cyan,subject={},open=false,opacity=0.7]{User input: can their instrumentation palpate an object in the ergodic paper?\\Claude comments: Yes --- unambiguously. The UR3e + Bota SensOne + spherical indenter + ROS2 instrumentation successfully palpated a silicone phantom (Ecoflex matrix + DragonSkin-30NV spherical inclusion) in 5-out-of-5 trials from random initial positions. Hit rate 100\%, RMSE 9.76~kPa, sensitivity 0.92, specificity 0.98, with independent grid-based probing as ground truth.}\sethlcolor{hlcyan}\hl{We conducted 5 experiments on the physical setup, each starting from
+a different random initial position. In all cases, the algorithm
+successfully identified the location of the spherical intrusion,
+demonstrating consistent target localisation. The reconstruction
+accuracy (RMSE $= 9.76 \pm 2.97$ kPa) shows good agreement with the
+reference stiffness distribution obtained from grid-based probing
+used as ground truth. The method also achieved good classification
+performance, with an average sensitivity of 0.92, and specificity of
+0.98.} Compared to simulation results, the experimental metrics
+confirm the high sensitivity and specificity, which are particularly
+important for avoiding false negatives in medical applications.
+Despite the experimental RMSE values being marginally higher than
+those observed in simulation, the measurement uncertainty is still
+below the 5\% (average absolute error $8.00 \pm 2.7$ kPa) and the
+clustering performance appears largely unaffected. This difference
+can be attributed to several factors, including the non-ideal
+behaviour of real materials, noise in force measurements, slight
+deviations from the assumed contact model, and uncertainties in
+ground-truth stiffness calibration. Despite these challenges, the
+observed trends are consistent with the simulation, confirming the
+robustness of the method in real-world conditions. As shown in
+Fig.~5, the trajectory of the end-effector adapts to the underlying
+stiffness distribution: it concentrates more exploration in the
+stiffer region on the left while still covering the rest of the map.
+
+\end{document}

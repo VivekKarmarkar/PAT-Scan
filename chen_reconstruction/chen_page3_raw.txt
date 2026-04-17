@@ -1,0 +1,18 @@
+Z. Chen et al.                                                                                                                          Measurement 264 (2026) 120300
+
+
+
+
+                                                   Fig. 4. Flow chart of the closed-loop feedback control system.
+
+
+
+
+Fig. 5. Softness recognition of the tactile tomography system. (a) AB glues with Shore hardnesses of 3, 7.5, 12.5, 17.5, 25, 30, 35, 50, and 60 HC. (b) Shore hardness
+tester (LX-C). (c) Compression depth distribution when the tactile tomography system scanned the AB glue samples with different Shore hardnesses (scanned by the
+tactile tomography system). (d) Relation between compression depth and Shore hardness.
+
+
+
+                                                                                  3
+

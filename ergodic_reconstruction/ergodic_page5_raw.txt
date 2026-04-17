@@ -1,0 +1,104 @@
+                               This article has been accepted for publication in IEEE Robotics and Automation Letters. This is the author's version which has not been fully edited and
+                                                         content may change prior to final publication. Citation information: DOI 10.1109/LRA.2026.3673907
+
+BEBER et al.: ERGODIC PALPATION FOR TISSUE MAPPING                                                                                                                                        5
+
+
+
+                    1 Stiff Area               2 Stiff Areas             3 Stiff Areas
+           45                                                                                                                          TABLE I
+                                                                                               180       P ERFORMANCE METRICS ACROSS 50 RUNS WITH NOISE - FREE ELASTICITY
+                                                                                                          MEASUREMENTS ( W / O ) AND WITH WHITE NOISE N (0, 6.25 kPa2 ) ( W /).
+           30
+ x2 [mm]
+
+
+
+                                                                                               150
+                                                                                                         NR IS THE NUMBER OF STIFF REGIONS , DR THE DETECTION RATE , L THE
+                                                                                               120         LENGHT OF THE TRAJECTORY, AND RMSE IS THE ROOT MEAN SQUARE
+           15
+                                                                                                                                        ERROR .
+                                                                                               90
+            0
+                0    15   30       45     0      15   30       45    0     15   30       45                      NR       DR (%) ↑          l [mm]       Time [s] ↓        RMSE [kPa] ↓
+                     x1 [mm]                     x1 [mm]                   x1 [mm]
+                                                                                                                                        w/o Measurement Noise
+Fig. 2. Synthetic elasticity distributions for simulated scenarios, from 1 to 3                                  1           100%             664             70                  0.37
+stiffer regions. The colour scale refers to the elastic modulus (in kPa).                                        2           100%             660             69                  0.97
+                                                                                                                 3           99%              665             70                  1.96
+                                                                                                                                         w/ Measurement Noise
+They were generated as mixtures of Gaussian components                                                           1           100%             633             66                  1.57
+with varying locations, covariances, and amplitudes, modelling                                                   2           99%              630             65                  2.17
+                                                                                                                 3           97%              580             60                  3.14
+localised stiff inclusions (over 100 kPa in pathological areas)
+in a softer background (few kilopascal in healthy regions) [29],
+similarly to related research [15]–[17]. Three scenarios in a
+                                                                                                         due to indentation and viscoelastic estimation time. To ensure a
+square domain (with side 45 mm) were considered: (i) a single
+                                                                                                         fair comparison with the proposed ergodic planner, we adapted
+stiff region, (ii) two stiff regions, and (iii) three distinct stiff
+                                                                                                         BO to perform continuous palpation, which characterises our
+areas, whose distributions are illustrated in Fig. 2. These re-
+                                                                                                         ergodic search. This prevents BO from penalising non-sampled
+gions were first densely sampled with a grid-based approach to
+                                                                                                         regions during motion. Specifically, additional samples are
+generate the ground truth, used to compute the estimation and
+                                                                                                         collected every 2.5 mm (half the indenter radius) along the
+segmentation errors. The simulation environment was imple-
+                                                                                                         path between BO-selected targets, enabling BO to exploit
+mented in Python, with GPR and BO components built using
+                                                                                                         intermediate data, similarly to the ergodic approach (variant
+the PyTorch framework, thus ensuring efficient GPU-based
+                                                                                                         termed BO-EIS).
+inference and optimisation during online execution. All simu-
+                                                                                                            To assess the spatial accuracy of the reconstructed stiffness
+lations and experiments were executed on a mini PC equipped
+                                                                                                         maps, we applied a segmentation pipeline to identify distinct
+with an Intel i7-13700HX CPU (24 cores), 64 GB RAM, and
+                                                                                                         stiff regions. Based on the elasticity estimates in Sec. IV-B
+an NVIDIA RTX 4070 GPU with 8 GB of memory. The
+                                                                                                         and IV-C, KMeans clustering (SciPy) was used to separate
+proposed framework runs in real time, with HEDAC trajectory
+                                                                                                         stiffer regions from the surrounding soft tissue. Unlike fixed
+updates and EKF-based viscoelastic estimation both requiring
+                                                                                                         thresholding approaches [12], this method does not require
+less than 1 ms per control loop iteration at 100 Hz. GPR
+                                                                                                         manual parameter tuning and adapts to the distribution of
+updates are performed asynchronously at a lower frequency
+                                                                                                         estimated stiffness values. The number of detected regions
+(1 Hz), with a maximum observed update time of 105 ms.
+                                                                                                         was obtained by counting connected components in the stiff
+Elasticity samples were collected at a frequency of 4 Hz and
+                                                                                                         cluster. In Sec. IV-D, the segmented regions are converted into
+a maximum velocity of 1 cm/s. In this configuration, the
+                                                                                                         polygonal boundaries using Shapely and compared against
+maximum distance between two consecutive sampled points
+                                                                                                         ground truth using standard segmentation metrics.
+equals half of the indenter radius, which is set here to 2.5 mm.
+These simulations were conducted to evaluate the performance
+of the proposed ergodic search strategy (Sec. IV-B) across the                                           B. Robustness of Ergodic Exploration
+three distribution scenarios.                                                                               In this section, the performance of the ergodic controller
+   We compared ergodic search with two variants of Bayesian                                              is tested with different numbers of stiffer regions. To assess
+Optimisation (BO), which is the standard baseline for robotic                                            the robustness of the algorithm, for each map, the simulation
+palpation (Sec. IV-C). BO models an expensive-to-evaluate                                                is executed 50 times with a random starting position, while
+objective function f (x) using a Gaussian Process (GP) and se-                                           three performance metrics were considered: 1. the detection
+lects sampling locations by maximising an acquisition function                                           rate (DR), i.e., the percentage of trials in which the algorithm
+that balances exploration and exploitation. Given data D =                                               correctly estimates the number and position of the stiff regions
+          n
+(xi , yi )i=1 , the GP provides a posterior predictive distribution                                      present in the ground truth (higher is better); 2. the elapsed
+f (x) ∼ N (µ(x), σ 2 (x)). As an acquisition function, the                                               time (lower is better); 3. the root mean square error (RMSE,
+Expected Improvement (EI) [15], [16] is employed, aEI (x) =                                              lower is better). For completeness, we report also the trajec-
+(fmin − µ(x))Φ(z) + σ(x)ϕ(z), where fmin is the minimum                                                  tory length l. Each exploration terminates when the ergodic
+                                 −µ(x)
+observed value and z = fminσ(x)        . This variant is denoted                                         metric α reaches 0.4 (set experimentally). Two experimental
+BO-EI. However, the standard point-to-point implementation                                               conditions were examined: one involved noise-free elasticity
+of BO has limitations for robotic palpation. Due to safety                                               measurements and another incorporated noisy measurements
+constraints, especially in medical settings, the robot must                                              N (0, 6.25 kPa2 ), where the variance equals the noise of the
+follow smooth and predictable trajectories and cannot move                                               elasticity estimation in the worst case. The results of the
+rapidly between distant sampling points as typically generated                                           study are reported in Tab. I. Overall, the algorithm exhib-
+by the BO. Moreover, each probing action can take up to 5 s                                              ited comparable performance in terms of DR and execution
+
+
+                               This work is licensed under a Creative Commons Attribution 4.0 License. For more information, see https://creativecommons.org/licenses/by/4.0/
+

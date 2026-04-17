@@ -1,0 +1,134 @@
+%% =================================================================
+%% Chen et al. Measurement 264 (2026) 120300.
+%% Reconstruction of page 4 (printed p. 4).
+%% Contents: Fig. 6 (a-d: frame model size study) and intro
+%% continuation (AFM limits, MBT positioning paragraph, self-proposal,
+%% Section 2 start, Section 2.1 Scanning module).
+%% No numbered equations on this page.
+%% =================================================================
+
+\documentclass[11pt]{article}
+
+\usepackage[margin=0.85in]{geometry}
+\usepackage{amsmath, amssymb}
+\usepackage{mathrsfs}
+\usepackage{xcolor}
+\usepackage{fancyhdr}
+
+\pagestyle{fancy}
+\fancyhf{}
+\lhead{\small Z.~Chen et al.}
+\rhead{\small Measurement 264 (2026) 120300}
+\cfoot{\small 4 $\to$ \arabic{page}}
+\renewcommand{\headrulewidth}{0.4pt}
+
+\setcounter{page}{1}
+\setlength{\parskip}{6pt}
+\setlength{\parindent}{0pt}
+
+\begin{document}
+
+% ---------- Fig. 6 placeholder ----------
+\begin{center}
+\fbox{\begin{minipage}[c][7cm][c]{0.95\textwidth}
+\centering
+\textbf{Fig. 6.}\ Effect of the size of the sample on the tactile
+softness of materials.\\[4pt]
+\textcolor{gray}{\footnotesize
+\textbf{(a)} Frame model with a depth of 6 mm and different length
+\& width (3D printed ABS grid).\\[3pt]
+\textbf{(b)} Frame model filled with a soft surface layer of AB
+glue. Labeled scanning area 8$\times$8 mm, with decreasing lengths
+8.0, 6.4, 5.1, 4.0, 3.2 mm marked along each axis.\\[3pt]
+\textbf{(c)} 3D imaging of compression depth distribution when the
+tactile tomography system scanned the frame model with a soft
+surface layer. X, Y in mm; Z 0--6 mm (color bar).\\[3pt]
+\textbf{(d)} Top view of (c), showing that the central cells of
+the grid have the largest compression depth and that depth decreases
+as cell size shrinks.]}
+\end{minipage}}
+\end{center}
+
+\vspace{0.4em}
+
+\textbf{Fig. 6.}\ Effect of the size of the sample on the tactile
+softness of materials. (a) Frame model with a depth of 6 mm and
+different length \& width. (b) Frame model filled with a soft
+surface layer of AB glue. (c) 3D imaging of compression depth
+distribution when the tactile tomography system scanned the frame
+model with a soft surface layer. (d) Top view of the 3D imaging of
+compression depth distribution when the tactile tomography system
+scanned the frame model with a soft surface layer.
+
+\vspace{0.8em}
+
+% ---------- Prose continuation ----------
+analysis to the outermost surface or near-surface layers. Moreover,
+they cannot handle thick samples ($> 1\,\mu$m) or soft-encapsulated
+materials (such as flexible electronics with soft coatings), as
+probe-sample interactions are too weak to penetrate without damaging
+the surface.
+
+Recent advancements in mechanical principle-based tomography have
+begun to address the gap in internal imaging, with Mechanics Based
+Tomography (MBT) emerging as a promising approach [32--34]. MBT
+leverages solid mechanics equations and surface displacement
+measurements to reconstruct internal material property distributions
+through an optimization framework with regularization to handle
+ill-posed inverse problems. Experimental validations on composite
+silicone samples have demonstrated MBT's ability to visualize
+subsurface inclusions by resolving stiffness contrasts, highlighting
+its potential for non-destructive testing of soft materials [34].
+Unlike X-CT or ultrasonic methods, mechanical principle-based
+tomography avoids ionizing radiation or high-energy waves, making
+it suitable for delicate samples. In addition, mechanical
+principle-based tomography can map mechanical properties (such as
+stiffness or elastic modulus), providing functional information
+beyond structural imaging. However, existing mechanical tomography
+methods face challenges with low reconstruction accuracy and
+reliability, as displacement measurement noise and position
+deviations of the force can both lead to a significant deterioration
+in the quality of internal structure reconstruction.
+
+In this study, we propose a novel tactile tomography system based
+on mechanical principles, featuring internal 3D imaging
+capabilities. The tactile tomography system is constructed from a
+scanning module, a probe module, and a closed-loop feedback control
+system, enabling it to sense force and control the movement of the
+probe tip. This tactile tomography system can further recognize the
+softness of soft matter. To simulate human tactile perception of
+softness, a novel parameter of ``tactile softness of materials'' is
+proposed. The tactile tomography system can achieve the function of
+internal 3D imaging with a maximum detection depth of 6 mm by the
+combined effects of the sample's size, thickness, and the applied
+force. The performance of the tactile tomography system is
+characterized by its scanning resolution, scanning accuracy, and the
+trade-off between scanning efficiency and imaging quality. Finally,
+the promising potential of the tactile tomography system is
+illustrated through its application in defect detection of
+encapsulated FPCBs.
+
+\section*{2.\ System design and instrumentation}
+
+The configuration of the tactile tomography system is shown in
+Fig.~1, and the photograph of the developed tactile tomography
+system is presented in Fig.~2. The tactile tomography system
+consists of a scanning module, a probe module, and a closed-loop
+feedback control system.
+
+\subsection*{2.1.\ Scanning module}
+
+The mechanical design of the scanning module and probe module is
+shown in Fig.~3. This design incorporates two linear actuators
+(MBDLN25SE, Panasonic) and two servo motors (MSMF022L1U2M, Panasonic)
+that together form an XY stage, allowing for precise adjustments of
+the measurement position on the sample. A rodless cylinder
+(CDHD-4D52AAP1) is utilized to drive the probe module, applying
+pressure to the sample in the vertical direction, and a grating
+sensor (RXF1188508-01) measures the depth of the applied pressure.
+The movement speeds of the XY stage and Z stage can be adjusted
+from 0.1 to 500 mm/min and from 0.1 to 400 mm/min, respectively.
+The XY stage and Z stage achieve a limit resolution of step
+displacement of 10 $\mu$m and
+
+\end{document}

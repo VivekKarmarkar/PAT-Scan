@@ -1,0 +1,69 @@
+Z. Chen et al.                                                                                                                         Measurement 264 (2026) 120300
+
+
+
+                     (a)                                                  (b)
+
+
+
+
+                              Applied force: 0.5 MPa                                  Applied force: 1.5 MPa
+                     (c)                                                  (d)
+
+
+
+
+                              Applied force: 2.5 MPa                                  Applied force: 4.0 MPa
+Fig. 8. Effect of the applied force on the tactile softness of materials. 3D imaging of compression depth distribution when the tactile tomography system scanned the
+hierarchical structure model with a soft surface layer under a pressure of (a) 0.5, (b) 1.5, (c) 2.5, and (d) 4 MPa, respectively.
+
+
+recognize softness by applying a constant force through a tip pressing                materials, taking into consideration factors such as sample size, sample
+against the soft material. This capability is attributed to the closed-loop           thickness, and the applied force. As shown in Fig. 6a, a frame model was
+feedback control system. As shown in Figs 5a, a series of two-component               fabricated by 3D printing with acrylonitrile butadiene styrene (ABS).
+epoxy adhesives (AB glues) with Shore hardnesses of 3, 7.5, 12.5, 17.5,               The AB glue samples were filled in the frame model to form a series of
+25, 30, 35, 50, and 60 HC were prepared with a size of 15*15 mm2 and a                samples with different sizes and the same thickness of 6 mm, in which
+thickness of 6 mm, and their hardness values were measured by a Shore                 the length and width were decreased from 8.0 mm to 3.2 mm (8.0, 6.4,
+hardness tester (LX-C) (Fig. 5b). The tactile tomography system pressed               5.1, 4.0, and 3.2 mm, respectively) (Fig. 6b). Subsequently, the samples
+each AB glue sample with a constant pressure of 2.5 MPa. The scanning                 were scanned by the tactile tomography system under a constant pres­
+point for each AB glue is 12, within a scanning area of 12*12 mm2. The                sure of 4 MPa. Fig. 6c presents that the sample with a length & width of
+scanning results are shown in Fig. 5c, where the AB glues with different              8 mm & 8 mm possesses the largest compression depth, and the
+Shore hardnesses exhibit different compression depths. The average                    compression depth decreases with decreasing length or width of the
+compression depth decreases as the Shore hardness of the AB glues in­                 sample. The compression depth of the central area of each sample are
+creases (as shown in Fig. 5d), demonstrating a negative correlation. This             larger than that of the edge area (Fig. 6d). These results demonstrate that
+indicates that the softness of soft materials can be characterized by the             the tactile tomography system can effectively simulate human haptic
+compression depth. Therefore, based on the tactile tomography system,                 perception, allowing for the differentiation of tactile softness distribu­
+the relationship between the softness and compression depth can be                    tion in materials when the size of the soft matter is less than 12 mm.
+defined as                                                                                In addition, a hierarchical structure model was fabricated by 3D
+                                                                                      printing with ABS, and the height difference between each adjacent
+                 Δd Δd*S
+Softness =         =                                                        (1)       stage is about 0.5 mm (as shown in Fig. 7a). Then the AB glue was filled
+                 P   F
+                                                                                      in the hierarchical structure model to form a soft surface layer with
+where Δd is the compression depth, F is the force when the tip pressing               different thickness (Fig. 7b). The image reconstructed by the projection
+the sample, and S is the contact area between the tip and the sample.                 data from the tactile tomography system scanning this sample with a
+                                                                                      constant pressure of 4 MPa is shown in Fig. 7c, the compression depth of
+                                                                                      the samples with different thickness surface layers exhibits clear
+3.2. Tactile softness of materials
+                                                                                      gradation. The compression depth difference between each adjacent
+                                                                                      thickness is also about 0.5 mm (Fig. 7d), which consistent with the
+    The size and thickness of the sample must be taken into account
+                                                                                      height difference of each adjacent stage. Significantly, by combining the
+when testing Shore hardness. The contact position of the specimen
+                                                                                      compression depth and its corresponding location information (x and y),
+should be at least 12 mm from the edge (for Shore A, B, C, and D), and
+                                                                                      Fig. 7c also shows the internal hierarchical structure of the sample,
+the thickness must not be less than 6 mm. Consequently, the compres­
+                                                                                      indicating that the tactile tomography system can obtain the internal
+sion depth will vary if the size and thickness of the sample are less than
+                                                                                      structure information of the sample with a soft surface layer based on
+12 mm and 6 mm, respectively. Similar to tactile softness [38], which is
+                                                                                      tactile softness of materials.
+perceived through the mechanoreceptors in human skin, the tactile
+                                                                                          The object that is buried deep cannot be sensed by the fingers unless
+softness of materials is proposed for use in a tactile tomography system
+                                                                                      a large force is applied. Similarly, the tactile tomography system is
+to simulate human haptic perception to recognize the softness of soft
+
+                                                                                  6
+

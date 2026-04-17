@@ -1,0 +1,88 @@
+%% =================================================================
+%% Chen et al. Measurement 264 (2026) 120300.
+%% Reconstruction of page 3 (printed p. 3).
+%% Contents: Fig. 4 (closed-loop feedback flow chart + Z0...Zn probe
+%% descent sequence), Fig. 5 (a-d: AB glue hardness samples, Shore
+%% hardness tester, compression-depth map, compression-depth vs
+%% Shore-hardness fit). One embedded equation in Fig. 5 caption
+%% ($Y = 6.23 - 1.62\,X^1 + 1.15\,X^2$, $R^2 = 0.99596$).
+%% No numbered equations on this page.
+%% =================================================================
+
+\documentclass[11pt]{article}
+
+\usepackage[margin=0.85in]{geometry}
+\usepackage{amsmath, amssymb}
+\usepackage{mathrsfs}
+\usepackage{xcolor}
+\usepackage{fancyhdr}
+
+\pagestyle{fancy}
+\fancyhf{}
+\lhead{\small Z.~Chen et al.}
+\rhead{\small Measurement 264 (2026) 120300}
+\cfoot{\small 3 $\to$ \arabic{page}}
+\renewcommand{\headrulewidth}{0.4pt}
+
+\setcounter{page}{1}
+\setlength{\parskip}{6pt}
+\setlength{\parindent}{0pt}
+
+\begin{document}
+
+% ---------- Fig. 4 placeholder ----------
+\begin{center}
+\fbox{\begin{minipage}[c][6cm][c]{0.95\textwidth}
+\centering
+\textbf{Fig. 4. Flow chart of the closed-loop feedback control system.}\\[6pt]
+\textcolor{gray}{\footnotesize
+[main flow on the left: Planning scan path $\to$ PLC $\to$ ``The X
+and Y axes move'' $\to$ ``Z-axis descent'' $\to$ decision diamond
+``The pressure sensor reaches the first threshold'' (NO loops back
+to Z-axis descent, YES feeds the grating-sensor position reader) $\to$
+``The pressure sensor reaches the second threshold'' $\to$ \dots
+$\to$ ``The pressure sensor reaches the final threshold'' $\to$
+``Z-axis stops and resets.'' A left-hand feedback loop
+($(Z_0, Z_1, \ldots, Z_n)$) carries position data from the grating
+sensor back up into the PLC. On the right, a visual strip shows the
+probe descending through layers of a stratified soft sample at
+successive depths $Z_0$, $Z_1$, $\ldots$, $Z_n$.]}
+\end{minipage}}
+\end{center}
+
+\vspace{0.8em}
+
+% ---------- Fig. 5 placeholder ----------
+\begin{center}
+\fbox{\begin{minipage}[c][7cm][c]{0.95\textwidth}
+\centering
+\textbf{Fig. 5.} Softness recognition of the tactile tomography
+system.\\[4pt]
+\textcolor{gray}{\footnotesize
+\textbf{(a)} 3 $\times$ 3 grid of nine AB glue samples, labeled with
+Shore hardnesses 3, 7.5, 12.5, 17.5, 25, 30, 35, 50, and 60 HC.\\[3pt]
+\textbf{(b)} Shore hardness tester (LX-C), photograph of the
+bench-top analog dial instrument with inset views of LX-A, LX-C, and
+LX-D indenter tips.\\[3pt]
+\textbf{(c)} Compression depth distribution over the 3$\times$3 AB
+glue grid as scanned by the tactile tomography system. X, Y in mm;
+Z color scale 0 (dark blue) to 6 mm (dark red), showing compression
+depth decreasing as Shore hardness increases.\\[3pt]
+\textbf{(d)} Relation between compression depth and Shore hardness.
+Measurement points (black squares) with a quadratic fit (red curve):
+$Y = 6.23 - 1.62\,X^{1} + 1.15\,X^{2}$,\ $R^{2} = 0.99596$.
+Compression depth axis: 0--7 mm; Shore hardness axis: 0--70 HC.]}
+\end{minipage}}
+\end{center}
+
+\vspace{0.4em}
+
+\textbf{Fig. 5.}\ Softness recognition of the tactile tomography
+system. (a) AB glues with Shore hardnesses of 3, 7.5, 12.5, 17.5,
+25, 30, 35, 50, and 60 HC. (b) Shore hardness tester (LX-C).
+(c) Compression depth distribution when the tactile tomography
+system scanned the AB glue samples with different Shore hardnesses
+(scanned by the tactile tomography system). (d) Relation between
+compression depth and Shore hardness.
+
+\end{document}

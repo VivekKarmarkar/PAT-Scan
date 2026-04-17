@@ -1,0 +1,112 @@
+Z. Chen et al.                                                                                                                             Measurement 264 (2026) 120300
+
+
+                                                        50mm                                                          50mm
+                      (a)                                                             (b)
+
+                                                                                                                          20mm
+
+
+
+
+                                                                                                50mm
+                                      50mm
+
+
+
+
+                      (c)                                                             (d)
+
+
+
+
+                      (e)                                                             (f)
+
+
+                                                                                                0
+                                                                                                1
+                                                                                            Z (mm)
+
+
+
+
+                                .0
+                           2
+                                 .5
+                               1 0
+                                                                                                 2
+                                   .
+                                1 5                                                              3
+                        Z(mm)
+
+
+
+
+                                     .
+                                 0 0
+                                      .
+                                  0
+                                                                        20                                                                        30
+                                                                                                     30
+
+                                                                                                                                           20
+                                                                                                          X ( 20                              )
+                                                 10                                                          mm                             mm
+                                                                                                                                          Y(
+                                                                      m)
+
+
+
+
+                                             X                                                                   )                   10
+                                                                    (m
+
+
+
+
+                                                 (m            10                                                    10
+                                                   m)
+                                                                    Y
+
+
+
+
+                                                                                                                                 0
+                                                                                                                             0
+                                                        20
+
+
+
+
+Fig. 9. Theoretical validity of the tactile tomography. (a) Symbol “+” model. (b) Symbol “+” model filled with AB glues. (c) Simulation results of the mechanical
+process of the probe pressing the sample. (d) Simulation results of the sample scanned by the probe tip with 676 scanning points. (e) Simulated displacement field of
+the sample under probe loading. (f) Experimental result of the sample scanned by the tactile tomography system.
+
+
+unable to obtain the information of the sample with a thicker soft surface            sample in the X-Y plane with a preset scanning step and speed. During
+layer if the applied force is small. As shown in Fig. 8a, only the top two            scanning, the Z-axis rodless cylinder applies a series of increasing
+stages can be reconstructed and distinguished as the tactile tomography               pressures to the sample through the probe. As the probe interacts with
+system pressed the sample with a pressure of 0.5 MPa. As the applied                  the sample, the pressure sensor detects force changes, and the grating
+force increases, the deeper stage can be reconstructed and distinguished,             sensor records the corresponding compression depth (Δd) at each X-Y
+such as the top 4 stages for the pressure of 1.5 MPa (Fig. 8b), the top 6             position. This compression depth, combined with the applied force (F)
+stages for the pressure of 2.5 MPa (Fig. 8c), and all stage for the pressure          and the contact area (S) between the tip and the sample, defines the
+of 4 MPa (Fig. 8d). Therefore, the tactile tomography system can detect               tactile softness (Softness = Δd*S/F), which characterizes the material's
+and reconstruct the sample layer-by-layer by setting a series of threshold            softness at that location. By collecting the projection data of positional
+corresponding to increasing pressures. For example, nine thresholds of                information (x, y, z) corresponding to each pressure threshold, the sys­
+0, 1, 2, 3, 4, 5, 6, and 7 that corresponding to the pressures of 0.5, 0.75,          tem reconstructs layer-by-layer 3D images of the internal structure.
+1.10, 1.50, 1.85, 2.50, 4.00, and 5.00 MPa were set, and the recon­
+structed images can be displayed layer-by-layer in the host computer (as              4. Results and discussion
+shown in Movie S1). These results proved that this imaging system
+based on the detection of tactile softness of materials can image an ob­              4.1. Theoretical validity of the tactile tomography
+ject by tomography. Moreover, Fig. 8d also shows the maximum depth
+of 6 mm, indicating that the tactile tomography system can identify an                    To demonstrate the theoretical validity of the tactile tomography, we
+object buried 6 mm below the surface. The tomography methodology                      performed finite element analysis (FEA) to simulate the mechanical
+employed in this tactile tomography system is based on mechanical                     interaction between the probe tip and samples with internal features. As
+principles and the novel parameter of “tactile softness of materials”,                shown in Fig. 9a, a model with a feature of a symbol “+” was fabricated
+which simulates human haptic perception by integrating the effects of                 by 3D printing, and this model was then filled with a soft surface layer of
+sample size, thickness, and applied force. The system utilizes a closed-              AB glue (Fig. 9b). A 3D FEA model was built to simulate the mechanical
+loop feedback control system to drive the probe module to scan the                    process of the probe pressing the sample (Fig. 9c), the sample undergoes
+
+
+                                                                                  7
+

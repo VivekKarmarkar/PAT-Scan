@@ -1,0 +1,125 @@
+%% =================================================================
+%% Chen et al. Measurement 264 (2026) 120300.
+%% Reconstruction of page 7 (printed p. 7).
+%% Contents: Fig. 9 (a-f: symbol "+" FEA-validation model, FEA
+%% simulation of probe pressing, 676-point scan, simulated
+%% displacement field, experimental scan result). Prose covers the
+%% tail of Section 3.2 (layer-by-layer reconstruction via force
+%% thresholds) and Section 4 + 4.1 start.
+%% =================================================================
+
+\documentclass[11pt]{article}
+
+\usepackage[margin=0.85in]{geometry}
+\usepackage{amsmath, amssymb}
+\usepackage{mathrsfs}
+\usepackage{xcolor}
+\usepackage{fancyhdr}
+
+\pagestyle{fancy}
+\fancyhf{}
+\lhead{\small Z.~Chen et al.}
+\rhead{\small Measurement 264 (2026) 120300}
+\cfoot{\small 7 $\to$ \arabic{page}}
+\renewcommand{\headrulewidth}{0.4pt}
+
+\setcounter{page}{1}
+\setcounter{equation}{1}
+\setlength{\parskip}{6pt}
+\setlength{\parindent}{0pt}
+
+\begin{document}
+
+% ---------- Fig. 9 placeholder ----------
+\begin{center}
+\fbox{\begin{minipage}[c][9cm][c]{0.95\textwidth}
+\centering
+\textbf{Fig. 9.}\ Theoretical validity of the tactile tomography.\\[4pt]
+\textcolor{gray}{\footnotesize
+\textbf{(a)} Symbol ``\,$+$\,'' model: CAD drawing of a 50 mm $\times$
+50 mm substrate with a raised plus-sign feature at the center.\\[3pt]
+\textbf{(b)} Symbol ``\,$+$\,'' model filled with AB glues:
+photograph showing the glue-covered sample, 50 mm $\times$ 50 mm,
+20 mm glue depth marked.\\[3pt]
+\textbf{(c)} Simulation results of the mechanical process of the
+probe pressing the sample: meshed FEA view with the probe tip (small
+yellow sphere) contacting the red sample block.\\[3pt]
+\textbf{(d)} Simulation results of the sample scanned by the probe
+tip with 676 scanning points: rainbow-colored contour in the
+central square region, red-to-yellow elsewhere.\\[3pt]
+\textbf{(e)} Simulated displacement field of the sample under probe
+loading: rendered 3D surface plot showing the plus-sign structure
+emerging via displacement contrast.\\[3pt]
+\textbf{(f)} Experimental result of the sample scanned by the
+tactile tomography system: cleanly resolved plus-sign with
+step-like vertical extrusion on a red substrate (rainbow Z scale).]}
+\end{minipage}}
+\end{center}
+
+\vspace{0.4em}
+
+\textbf{Fig. 9.}\ Theoretical validity of the tactile tomography.
+(a) Symbol ``+'' model. (b) Symbol ``+'' model filled with AB glues.
+(c) Simulation results of the mechanical process of the probe
+pressing the sample. (d) Simulation results of the sample scanned
+by the probe tip with 676 scanning points. (e) Simulated
+displacement field of the sample under probe loading. (f)
+Experimental result of the sample scanned by the tactile tomography
+system.
+
+\vspace{0.8em}
+
+% ---------- Prose ----------
+unable to obtain the information of the sample with a thicker soft
+surface layer if the applied force is small. \pdfcomment[icon=Comment,color=cyan]{User input: How is the image of a single layer reconstructed in the Chen paper?\textbackslash \textbackslash Claude comments: A SINGLE LAYER in Chen's tomography corresponds to ONE pressure threshold. The image of that layer is reconstructed by the following sequence: \textbackslash \textbackslash \textbackslash \textbackslash  (1) Fix a pressure threshold \$T\$ (e.g., 0.5 MPa for the     shallowest layer, or 4 MPa for the deepest). (2) At each \$(x, y)\$ scanning point, the probe descends under     closed-loop feedback control until the pressure sensor     reading equals \$T\$; the Z-axis grating sensor records the     compression depth \$z\$ at that moment. This is the per-point     mechanism described in Section 2.3 (page 5). (3) The XY stage advances to the next \$(x, y)\$ and step 2     repeats until all preset scanning points have been covered. (4) The set of \$(x, y, z)\$ tuples collected at threshold \$T\$ —     one tuple per scanning point — IS the image of that layer.     Fig. 8a shows this for \$T = 0.5\$ MPa; Fig. 8d shows it for     \$T = 4\$ MPa. \textbackslash \textbackslash \textbackslash \textbackslash  The page-7 excerpt above is the clearest statement of "one threshold \$\textbackslash to\$ one layer." It uses Fig. 8a-d as a direct visual demonstration: four applied pressures, four single-layer images, showing how deeper stages of the hierarchical model become visible as the threshold increases. The nine-thresholds example (pressures 0.5, 0.75, 1.10, 1.50, 1.85, 2.50, 4.00, 5.00 MPa) is the operational form of the full layer-by-layer 3D tomography: nine per-threshold scans, each producing one layer's image, which Movie S1 shows being displayed sequentially. \textbackslash \textbackslash \textbackslash \textbackslash  An alternative excerpt would be the Section 2.3 workflow paragraph (page 5), which describes the per-point descent-to- threshold mechanism in more mechanical detail. I picked the page-7 passage because it explicitly connects the pressure threshold to a layer — the conceptual bridge the user's question ("how is a SINGLE LAYER reconstructed") hinges on — and because Fig. 8a-d concretely show what each single-layer image looks like. Page 5 describes HOW the mechanism works at each scanning point; page 7 is where Chen explains that doing step 2 across all \$(x, y)\$ at one threshold gives you one layer's image. \textbackslash \textbackslash \textbackslash \textbackslash  Note: in Chen's framing, the "image of a single layer" is NOT a 2D top-down slice at fixed \$z\$. It is a 3D surface of \$z\$ values (the interface at which pressure \$= T\$), covering all \$(x, y)\$ in the scanning grid. Fig. 8a-d render these surfaces as rainbow-colored 3D plots. Stacking these per-threshold surfaces across increasing \$T\$ values produces the full layered-tomography reconstruction.}\pdfcomment[icon=Comment,color=yellow]{User input: the complementary evidence: the page-7 Fig. 8 paragraph showing the layer-to-volume demonstration (nine thresholds example) \textbackslash \textbackslash Claude comments: This is the LAYER \$\textbackslash to\$ VOLUME demonstration — the second rung of the POINT \$\textbackslash to\$ LAYER \$\textbackslash to\$ VOLUME ladder, made operational with a concrete nine-threshold recipe. Three reasons to highlight it alongside the two earlier text-to-highlight entries: \textbackslash \textbackslash \textbackslash \textbackslash  (1) ENTRY 1 (page 5 workflow, Section 2.3) highlights the     per-scanning-point MECHANISM ("drive the sample to the next     scanning point until all preset areas have been scanned...     saved as projection data to reconstruct a 3D image").     \$\textbackslash to\$ POINT-level and POINT\$\textbackslash to\$LAYER step in operational     terms. \textbackslash \textbackslash \textbackslash \textbackslash  (2) ENTRY 2 (page 7 methodology summary) highlights the FULL     LADDER IN ONE SENTENCE ("By collecting the projection data     of positional information (x, y, z) corresponding to each     pressure threshold, the system reconstructs layer-by-layer     3D images of the internal structure").     \$\textbackslash to\$ all three levels stated once, compact. \textbackslash \textbackslash \textbackslash \textbackslash  (3) THIS ENTRY (page 7 Fig. 8 discussion) highlights the     LAYER\$\textbackslash to\$VOLUME DEMONSTRATION with a concrete numerical     example: nine pressure thresholds producing nine layers     that together reconstruct the 3D volume, with Movie S1 as     the visual proof.     \$\textbackslash to\$ the layer-to-volume step made tangible and countable. \textbackslash \textbackslash \textbackslash \textbackslash  Together the three highlights form a complete trace: mechanism (page 5) \$\textbackslash to\$ ladder summary (page 7 methodology summary) \$\textbackslash to\$ ladder demonstration (page 7 Fig. 8 paragraph). A reader hovering on the three highlighted passages in sequence sees Chen's local-to-global assembly at three zoom levels. \textbackslash \textbackslash \textbackslash \textbackslash  Alternative that I did NOT add: a text-to-highlight entry for the page-7 methodology-summary passage focused specifically on the POINT part ("compression depth at each X-Y position... at that location"). That passage is already doing double duty via find-evidence entry 4 (local-estimate) and entry 5 (ladder evidence); a third citation in text-to-highlight would be redundant. }\sethlcolor{hlcyan}\hl{As shown in Fig.~8a,
+only the top two stages can be reconstructed and distinguished as
+the tactile tomography system pressed the sample with a pressure of
+0.5 MPa. As the applied force increases, the deeper stage can be
+reconstructed and distinguished, such as the top 4 stages for the
+pressure of 1.5 MPa (Fig.~8b), the top 6 stages for the pressure of
+2.5 MPa (Fig.~8c), and all stage for the pressure of 4 MPa
+(Fig.~8d). Therefore, the tactile tomography system can detect and
+reconstruct the sample layer-by-layer by setting a series of
+threshold corresponding to increasing pressures. For example, nine
+thresholds of 0, 1, 2, 3, 4, 5, 6, and 7 that corresponding to the
+pressures of 0.5, 0.75, 1.10, 1.50, 1.85, 2.50, 4.00, and 5.00 MPa
+were set, and the reconstructed images can be displayed
+layer-by-layer in the host computer (as shown in Movie~S1).} These
+results proved that this imaging system based on the detection of
+tactile softness of materials can image an object by tomography.
+Moreover, Fig.~8d also shows the maximum depth of 6 mm, indicating
+that the tactile tomography system can identify an object buried
+6 mm below the surface. The tomography methodology employed in this
+tactile tomography system is based on mechanical principles and the
+novel parameter of ``tactile softness of materials,'' which
+simulates human haptic perception by integrating the effects of
+sample size, thickness, and applied force. The system utilizes a
+closed-loop feedback control system to drive the probe module to
+scan the sample in the X-Y plane with a preset scanning step and
+speed. During scanning, the Z-axis rodless cylinder applies a
+series of increasing pressures to the sample through the probe. \pdfcomment[icon=Comment,color=green]{User input: Chen's method of computing softness is a local-estimate.\textbackslash \textbackslash Claude comments: SUPPORTS — unambiguous verbatim support, in the authors' own words, on three concurrent dimensions: \textbackslash \textbackslash \textbackslash \textbackslash  (1) SPATIAL LOCALITY: "the grating sensor records the     corresponding compression depth (\$\textbackslash Delta d\$) at each X-Y     position" — one measurement per (x, y) sampling point, not     a global field. The paper uses "at each X-Y position" to     describe the measurement locale. \textbackslash \textbackslash \textbackslash \textbackslash  (2) POINT-WISE DEFINITION OF SOFTNESS: "defines the tactile     softness (Softness = \$\textbackslash Delta d \textbackslash cdot S / F\$), which     characterizes the material's softness AT THAT LOCATION" —     verbatim "at that location" (lowercase-exact in the PDF at     line 94 of page 7 raw). This is Chen explicitly calling     softness a per-location quantity. The locality is not     inferred — the authors state it. \textbackslash \textbackslash \textbackslash \textbackslash  (3) EXPLICIT STITCHING CLAUSE: "By collecting the projection     data of positional information (x, y, z) corresponding to     each pressure threshold, the system reconstructs     layer-by-layer 3D images of the internal structure." — the     3D "global" map is built by collecting many per-point     readings, not solved from a global inverse problem. This is     the local-to-global stitching step that distinguishes     Chen's approach from MBT's PDE-inverse approach (already     recorded in entries 1 and 2 of this journal, and in     ask-question entry 2). \textbackslash \textbackslash \textbackslash \textbackslash  The word "local" does not appear in Chen's paper. But the concepts — per-point measurement, per-location softness value, aggregation-into-global-via-collection — are all stated verbatim. The user's claim "local-estimate" is the natural technical label for exactly what Chen describes. \textbackslash \textbackslash \textbackslash \textbackslash  Alternative excerpt: page 6 Eq. (1) defines Softness \$= \textbackslash Delta d / P = \textbackslash Delta d \textbackslash cdot S / F\$, which is also a per-point formula. I picked the page-7 passage instead because it is the only place in the paper where locality is named explicitly ("at each X-Y position", "at that location") AND the stitching step is stated adjacently — this single paragraph captures the entire local-to-global pipeline in one place. \textbackslash \textbackslash \textbackslash \textbackslash  No contradicting passage. Nowhere in the paper does softness appear as anything other than a per-point scalar.}\pdfcomment[icon=Comment,color=green]{User input: CONCLUSIVE EVIDENCE that they START AT POINTWISE ESTIMATES and move out from there in the Chen paper -> POINT2LAYER -> LAYER2VOLUME\textbackslash \textbackslash Claude comments: SUPPORTS — conclusive, in the authors' own words, in a single contiguous paragraph. The excerpt contains all three levels of the local-to-global ladder stated explicitly and in sequence: \textbackslash \textbackslash \textbackslash \textbackslash  LEVEL 1 — POINTWISE ESTIMATE ("START AT POINTWISE ESTIMATES"): \textbackslash \textbackslash \textbackslash \textbackslash    "the grating sensor records the corresponding compression    depth (\$\textbackslash Delta d\$) at each X-Y position. This compression    depth, combined with the applied force (\$F\$) and the contact    area (\$S\$) between the tip and the sample, defines the    tactile softness (Softness \$= \textbackslash Delta d \textbackslash cdot S / F\$), which    characterizes the material's softness at that location." \textbackslash \textbackslash \textbackslash \textbackslash    \$\textbackslash to\$ per-(x,y) softness value, named "at that location."   This IS the pointwise estimate — one scalar per scanning   point, computed from a local contact measurement. \textbackslash \textbackslash \textbackslash \textbackslash  LEVEL 2 — POINT \$\textbackslash to\$ LAYER ("POINT2LAYER"): \textbackslash \textbackslash \textbackslash \textbackslash    "By collecting the projection data of positional information    \$(x, y, z)\$ corresponding to each pressure threshold..." \textbackslash \textbackslash \textbackslash \textbackslash    \$\textbackslash to\$ for a FIXED pressure threshold, collect the \$(x, y, z)\$   tuples across all scanning points. The set of tuples at one   threshold IS one layer. (Fig. 8a--d on the same page visualize   this directly: Fig. 8a = layer at 0.5 MPa, Fig. 8d = layer at   4 MPa.) Note the verbatim "each pressure threshold" — one   threshold, one layer. \textbackslash \textbackslash \textbackslash \textbackslash  LEVEL 3 — LAYER \$\textbackslash to\$ VOLUME ("LAYER2VOLUME"): \textbackslash \textbackslash \textbackslash \textbackslash    "...the system reconstructs layer-by-layer 3D images of the    internal structure." \textbackslash \textbackslash \textbackslash \textbackslash    \$\textbackslash to\$ stacking layers across multiple pressure thresholds   produces the full 3D volumetric image. "Layer-by-layer 3D   images" is the verbatim phrase for the layer-to-volume   assembly. The earlier page-7 paragraph (Fig. 8 discussion)   explicitly demonstrates this with nine thresholds (0.5, 0.75,   1.10, 1.50, 1.85, 2.50, 4.00, 5.00 MPa) producing nine layers   that together reconstruct the full 3D volume. \textbackslash \textbackslash \textbackslash \textbackslash  NO CONTRADICTING PASSAGE exists. The paper never describes a top-down, volume-first, or layer-first procedure. The volume is always assembled from layers, and each layer is always assembled from per-point readings. The ladder is strict and one-directional: point \$\textbackslash to\$ layer \$\textbackslash to\$ volume. \textbackslash \textbackslash \textbackslash \textbackslash  COMPLEMENTARY EVIDENCE in neighboring passages: \textbackslash \textbackslash \textbackslash \textbackslash    - Page 5 (Section 2.3, find-evidence entry 1 + text-to-     highlight entry 1): the per-scanning-point MECHANISM ("drive     the sample to the next scanning point until all preset areas     have been scanned. The positional information (x, y, z)     corresponding to each threshold is saved as projection dat... [truncated in sticky; see journal for full]}\pdfcomment[icon=Comment,color=yellow]{User input: that shows a global map is stitched together from local estimates \textbackslash \textbackslash Claude comments: The user's cue has three ingredients — "global map," "stitched together," and "local estimates" — and this single sentence maps each to explicit text in the paper: \textbackslash \textbackslash \textbackslash \textbackslash    "local estimates"   \$\textbackslash to\$ "positional information (x, y, z)                              corresponding to each pressure threshold"   "stitched together" \$\textbackslash to\$ "By collecting the projection data"   "global map"        \$\textbackslash to\$ "layer-by-layer 3D images of the                              internal structure" \textbackslash \textbackslash \textbackslash \textbackslash  This is the one-sentence version of the stitching pipeline. Page 5 (text-to-highlight entry 1 of this journal) has the step-by-step workflow version — "drive the sample to the next scanning point until all preset areas have been scanned... saved as projection data to reconstruct a 3D image of the internal structure of the sample." The page 7 sentence compresses the same idea into a single declarative statement suitable for a single highlight. I picked page 7 because the user's request emphasized the GLOBAL MAP half of the stitching ("shows a global map is stitched together") and the page 7 sentence names "layer-by-layer 3D images of the internal structure" as the output explicitly, whereas page 5 names only "a 3D image" more generically. \textbackslash \textbackslash \textbackslash \textbackslash  The page 5 and page 7 highlights complement each other: page 5 is the workflow, page 7 is the summary. Both live in the text-to-highlight journal; they're not duplicates. }\sethlcolor{hlgreen}\hl{As
+the probe interacts with the sample, the pressure sensor detects
+force changes, and the grating sensor records the corresponding
+compression depth ($\Delta d$) at each X-Y position. This
+compression depth, combined with the applied force ($F$) and the
+contact area ($S$) between the tip and the sample, defines the
+tactile softness (Softness = $\Delta d \cdot S / F$), which
+characterizes the material's softness at that location. By
+collecting the projection data of positional information
+$(x, y, z)$ corresponding to each pressure threshold, the system
+reconstructs layer-by-layer 3D images of the internal structure.}
+
+\section*{4.\ Results and discussion}
+
+\subsection*{4.1.\ Theoretical validity of the tactile tomography}
+
+To demonstrate the theoretical validity of the tactile tomography,
+we performed finite element analysis (FEA) to simulate the
+mechanical interaction between the probe tip and samples with
+internal features. As shown in Fig.~9a, a model with a feature of a
+symbol ``$+$'' was fabricated by 3D printing, and this model was
+then filled with a soft surface layer of AB glue (Fig.~9b). A 3D
+FEA model was built to simulate the mechanical process of the probe
+pressing the sample (Fig.~9c), the sample undergoes
+
+\end{document}

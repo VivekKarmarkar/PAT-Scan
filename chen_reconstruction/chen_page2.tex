@@ -1,0 +1,116 @@
+%% =================================================================
+%% Chen et al. Measurement 264 (2026) 120300.
+%% Reconstruction of page 2 (printed p. 2).
+%% Contents: Fig. 1 (schematic), Fig. 2 (photo), Fig. 3 (mechanical
+%% design), plus continuation of the Introduction prose (AFM paragraph).
+%% No equations on this page.
+%% =================================================================
+
+\documentclass[11pt]{article}
+
+\usepackage[margin=0.85in]{geometry}
+\usepackage{amsmath, amssymb}
+\usepackage{mathrsfs}
+\usepackage{xcolor}
+\usepackage{fancyhdr}
+
+\pagestyle{fancy}
+\fancyhf{}
+\lhead{\small Z.~Chen et al.}
+\rhead{\small Measurement 264 (2026) 120300}
+\cfoot{\small 2 $\to$ \arabic{page}}
+\renewcommand{\headrulewidth}{0.4pt}
+
+\setcounter{page}{1}
+\setlength{\parskip}{6pt}
+\setlength{\parindent}{0pt}
+
+\begin{document}
+
+% ---------- Fig. 1 placeholder ----------
+\begin{center}
+\fbox{\begin{minipage}[c][3.2cm][c]{0.85\textwidth}
+\centering
+\textbf{Fig. 1. Schematic diagram of the tactile tomography system.}\\[6pt]
+\textcolor{gray}{\footnotesize
+[block diagram: Computer $\leftrightarrow$ XYZ-axes position signals
+$\leftrightarrow$ Scanner mode; a Programmable Logic Controller
+(PLC) drives the Z stage (with grating ruler, probe, pressure
+sensor above the sample) via Z-axes driving signals and receives
+Z-axes position signals; PLC also drives the XY stage via XY-axes
+driving signals; a Data collection and processing cell sits between
+the PLC, the Z stage, and the sample]}
+\end{minipage}}
+\end{center}
+
+\vspace{0.8em}
+
+% ---------- Fig. 2 placeholder ----------
+\begin{center}
+\fbox{\begin{minipage}[c][3.5cm][c]{0.85\textwidth}
+\centering
+\textbf{Fig. 2. Photograph of the overall tactile tomography system.}\\[6pt]
+\textcolor{gray}{\footnotesize
+[photograph with callouts: Computer (monitor + desktop on the left),
+Data collection and processing cell, Z-stage, X-stage, Y-stage, Probe,
+Grating sensor, PLC (cabinet at the bottom)]}
+\end{minipage}}
+\end{center}
+
+\vspace{0.8em}
+
+% ---------- Introduction prose (continuation from page 1) ----------
+more adept at obtaining 3D surface morphology, offering advantages
+such as high precision, good repeatability, and ease of operation
+[23,24]. However, as both are restricted to surface profiling, they
+cannot penetrate beneath the surface or resolve internal structures,
+limiting their application to external feature analysis.
+
+AFM equipped with a micro-cantilever is highly sensitive to weak
+force. One end of the micro-cantilever is fitted with a tip. Surface
+imaging of AFM relies on the interactive forces between the tip and
+the sample, and it can operate in three basic modes: contact mode,
+non-contact mode, and tapping mode [25]. The interactive forces may
+include Van Der Walls forces, electrostatic forces, or magnetic
+forces, which cause the micro-cantilever to deform or vibrate. This
+deformation or vibration can be used to infer the surface morphology
+and physical properties of the sample. Currently, AFM can provide
+detailed information about surface morphology, roughness, height,
+thickness, and phase diagrams with a high resolution of 5 nm [26].
+Consequently, AFM has been widely utilized in materials science,
+surface science, biomedicine, and other fields. In addition, AFM has
+developed several derivative modes, including kelvin probe force
+microscopy (KPFM), piezoresponse force microscopy (PFM), peak force
+quantitative nano-mechanics mapping (PF-QNM), conducting atomic
+force microscopy (C-AFM), and lateral force microscopy (LFM)
+[27--31]. Beyond detecting surface morphology, these derived imaging
+modes offer unique functionalities. For instance, KPFM can measure
+work function and surface potential [27], PFM can provide
+information about electric domains [28], and PF-QNM can yield data
+on Young's modulus, adhesive force, and maximum deformation [29].
+Although these AFM-derived imaging modes contribute to the abundant
+functions of the mechanical principle-based imaging technologies
+[30,31], they suffer from critical limitations for internal imaging.
+They rely on surface interactions with a penetration depth of less
+than 100 nm, limiting
+
+\vspace{0.8em}
+
+% ---------- Fig. 3 placeholder ----------
+\begin{center}
+\fbox{\begin{minipage}[c][3.3cm][c]{0.85\textwidth}
+\centering
+\textbf{Fig. 3. Mechanical design of the scanning module and probe module.}\\[6pt]
+\textcolor{gray}{\footnotesize
+[CAD rendering: on the left, a cross-shaped XY sliding table with
+labels ``X-axes linear sliding table module,'' ``Y-axes linear
+sliding table module,'' and ``Sample'' on the central platform;
+above the cross, a vertical ``Z-axes rodless cylinder'' with a
+``Grating sensor'' and ``Probe'' mounted to its underside. On the
+right, an enlarged detail of the probe: a narrow tube of total
+length $\approx 150$~mm, tip diameter $0.5$~mm, terminating in a
+``Pressure sensor'' module]}
+\end{minipage}}
+\end{center}
+
+\end{document}

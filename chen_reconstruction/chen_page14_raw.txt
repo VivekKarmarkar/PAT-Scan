@@ -1,0 +1,40 @@
+Z. Chen et al.                                                                                                                                              Measurement 264 (2026) 120300
+
+     IEEE Trans. Ind. Electron. 67 (2020) 637–646, https://doi.org/10.1109/                        [31] Robert G. Cain, S. Biggs, NeilW. Page, Force calibration in lateral force microscopy,
+     tie.2019.2912788.                                                                                  J. Colloid Interface Sci. 227 (2000) 55-65. DOI: 10.1006/jcis.2000.6840.
+[21] G. Binnig, C.F. Quate, Ch. Gerber, Atomic force microscope, Phys. Rev. Lett. 56               [32] Y. Mei, S. Wang, X. Shen, S. Rabke, S. Goenezen, Mechanics based tomography: a
+     (2002) 930–933, https://doi.org/10.1103/physrevlett.56.930.                                        preliminary feasibility study, Sensors 17 (2017) 1075, https://doi.org/10.3390/
+[22] X. Chang, S. Hallais, S. Roux, K. Danas, Model reduction techniques for                            s17051075.
+     quantitative nano-mechanical AFM mode, Meas. Sci. Technol. 32 (2021) 075406,                  [33] L.G. Olson, R.D. Throne, E.I. Rusnak, J.P. Gannon, Force-based stiffness mapping
+     https://doi.org/10.1088/1361-6501/abf023.                                                          for early detectionof breast cancer, Inverse Prob. Sci. Eng. 29 (2021) 2239–2273,
+[23] D.-H. Lee, 3-Dimensional profile distortion measured by stylus type surface                        https://doi.org/10.1080/17415977.2021.1912036.
+     profilometer, Measurement 46 (2013) 803–814, https://doi.org/10.1016/j.                       [34] S. Goenezen, B.J. Kim, M. Kotecha, P. Luo, M.R. Hematiyan, Mechanics based
+     measurement.2012.09.022.                                                                           tomography (MBT): validation using experimental data, J. Mech. Phys. Solids 146
+[24] Y. Ma, L. Ma, Y. Zheng, The measurement techniques for angular 3-D pinholes                        (2021) 104187, https://doi.org/10.1016/j.jmps.2020.104187.
+     based on capacitive probe, Measurement 97 (2017) 145–148, https://doi.org/                    [35] J. Hu, Z. Chen, K. Lao, H. Liang, X. Huang, Z. Li, J. Huang, X. Hu, B. Liang, D. Ye,
+     10.1016/j.measurement.2016.10.052.                                                                 J. Wen, J. Luo, Cascade amplification effect for mechanical stimuli sensors by
+[25] Nielsl. pedersen,, Design of cantilever probes for atomic force microscopy (AFM),                  designing the current path through carbon fiber beams, IEEE Sens. J. 21 (2021)
+     Eng. Optim. 32 (2000) 373–392, https://doi.org/10.1080/03052150008941305.                          17410–17418, https://doi.org/10.1109/jsen.2021.3083674.
+[26] L. Yang, Y. Wang, X. Wang, S. Shafique, F. Zheng, L. Huang, X. Liu, J. Zhang,                 [36] K. Li, D. Xue, Hardness of materials: studies at levels from atoms to crystals, Chin.
+     Y. Zhu, C. Xiao, Z. Hu, Identification the role of grain boundaries in polycrystalline             Sci. Bull. 54 (2009) 131–136, https://doi.org/10.1007/s11434-008-0550-8.
+     photovoltaics via advanced atomic force microscope, Small 20 (2024) 930–933,                  [37] T. Vieira, J. Lundberg, O. Eriksson, Evaluation of uncertainty on Shore hardness
+     https://doi.org/10.1002/smll.202304362.                                                            measurements of tyre treads and implications to tyre/road noise measurements
+[27] W. Melitz, J. Shen, AndrewC. Kummel, S. Lee, Kelvin probe force microscopy and                     with the Close Proximity method, Measurement 162 (2020) 107882, https://doi.
+     its application, Surface Science Reports. 66 (2011) 1-27. DOI: 10.1016/j.                          org/10.1016/j.measurement.2020.107882.
+     surfrep.2010.10.001.                                                                          [38] C. Dhong, R. Miller, Nicholas B. Root, S. Gupta, Laure V. Kayser, Cody W.
+[28] A. Gruverman, M. Alexe, D. Meier, Piezoresponse force microscopy and                               Carpenter, Kenneth J. Loh, Vilayanur S. Ramachandran, Darren J. Lipomi, Role of
+     nanoferroic phenomena, Nat. Commun. 10 (2019) 930–933, https://doi.org/                            indentation depth and contact area on human perception of softness for haptic
+     10.1038/s41467-019-09650-8.                                                                        interfaces, Sci. Adv. 5 (2019) 938. DOI: 10.1126/sciadv.aaw8845.
+[29] Sithara S. Nair, C. Wang, KennethJ. Wynne, AFM Peakforce QNM mode for                         [39] Y. Dong, X. Min, W. Kim, A 3-D-printed integrated PCB-based electrochemical
+     measurement of nanosurface mechanical properties of Pt-cured silicones, Progress                   sensor system, IEEE Sens. J. 18 (2018) 2959–2966, https://doi.org/10.1109/
+     in Organic Coatings. 126 (2019) 119-128. DOI: 10.1016/j.porgcoat.2018.10.008.                      jsen.2018.2801459.
+[30] J. Planès, F. Houzé, P. Chrétien, O. Schneegans, Conducting probe atomic force             [40] T. Koshi, A. Takei, T. Nobeshima, S. Kanazawa, K. Nomura, S. Uemura,
+     microscopy applied to organic conducting blends, Appl. Phys. Lett. 79 (2001)                       Stretchability dependency on stiffness of soft elastomer encapsulation for
+     2993–2995, https://doi.org/10.1063/1.1413717.                                                      polyimide-supported copper serpentine interconnects, Flexible Printed Electron. 9
+                                                                                                        (2024) 015009, https://doi.org/10.1088/2058-8585/ad2778.
+
+
+
+
+                                                                                              14
+

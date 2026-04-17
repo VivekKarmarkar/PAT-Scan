@@ -1,0 +1,168 @@
+%% =================================================================
+%% Beber et al. IEEE Robotics and Automation Letters, Feb 2026.
+%% Reconstruction of page 3 (printed p. 3).
+%% Contents: continuation of Section III Methodology opening;
+%% Section III-A Target Distribution (GPR + GPR training);
+%% Section III-B Expected Information Density for Elasticity Maps
+%% (Eqs. 1-3); start of Section III-C Trajectory Planning (Eq. 4 defn).
+%% =================================================================
+
+\documentclass[11pt]{article}
+
+\usepackage[margin=0.85in]{geometry}
+\usepackage{amsmath, amssymb}
+\usepackage{mathrsfs}
+\usepackage{xcolor}
+\usepackage{fancyhdr}
+
+\pagestyle{fancy}
+\fancyhf{}
+\lhead{\small Beber et al.: Ergodic Palpation for Tissue Mapping}
+\rhead{\small 3}
+\cfoot{\small 3 $\to$ \arabic{page}}
+\renewcommand{\headrulewidth}{0.4pt}
+
+\setcounter{page}{1}
+\setcounter{equation}{0}
+\setlength{\parskip}{6pt}
+\setlength{\parindent}{0pt}
+
+\begin{document}
+
+% ---------- Continuation of Section III opening ----------
+spatial gradients. Although viscoelastic modelling supports robust
+estimation, lesion search and characterisation in this work are
+driven solely by elasticity. Our framework is structured as a
+closed-loop search algorithm comprising four main components:
+A.~a target distribution over tissue stiffness, which is updated at
+every iteration; B.~an Expected Information Density (EID) map to
+prioritise sampling locations; C.~a trajectory planner using ergodic
+control, guided by the EID; D.~a data acquisition executed during
+trajectory execution, which enables updates in the target
+distribution. These steps are executed cyclically, updating the
+target distribution (E.) until a predefined stopping criterion is
+met (F.). Each component is designed to be modular and independent,
+allowing flexible integration of alternative models or control
+strategies.
+
+\subsection*{A.\ Target Distribution}
+
+\pdfcomment[color=green,subject={},open=false,opacity=0.7]{User input: that global maps are assembled by stitching together local estimates in the ergodic exploration paper\\Claude comments: EVIDENTIAL RELATIONSHIP: supports. GPR IS the stitching mechanism. 'Robot end-effector positions' = discrete local sampling sites; mean function $\mu(x)$ = stitched global stiffness map. The architectural pattern matches Chen's POINT$\to$MAP ladder precisely --- with GPR interpolation replacing direct ($x, y, z$)-tuple tabulation. Same local-estimates-to-global-map signature in both papers.}\sethlcolor{hlgreen}\hl{We use GPR to construct a continuous map of the stiffness
+distribution across the palpated surface. The robot end-effector
+positions serve as the input domain, and the estimated elasticity
+values form the output. After each regression update, the mean
+function $\mu(x)$ estimates the stiffness at unobserved locations,
+while the variance function $\sigma^{2}(x)$ quantifies the model
+uncertainty. As expected with GPR, uncertainty increases with
+distance from the observed samples.} The squared exponential kernel
+ensures smooth, differentiable estimates, which are critical for
+downstream gradient computation.
+
+\textbf{1) Gaussian Process Regression:} is a non-parametric Bayesian
+approach for estimating continuous functions from data, offering
+both predictions and uncertainty estimates. Unlike parametric
+models, which assume a fixed functional form, GPR models a
+distribution over functions that is updated as new observations are
+incorporated [20]. A Gaussian Process (GP) is a collection of random
+variables such that any finite subset follows a joint Gaussian
+distribution. Formally, it is written as:
+\[
+  f(x) \sim \mathcal{GP}(m(x),\, k(x, x')),
+\]
+where $m(x)$ is the mean function (often assumed zero) and
+$k(x, x')$ is the covariance function, or kernel, which encodes the
+similarity between inputs. The kernel defines how closely related
+the outputs are at different input points. One of the most widely
+used kernels is the squared exponential (SE):
+\[
+  k_{\mathrm{SE}}(x, x') =
+  \exp\!\left(-\frac{\|x - x'\|^{2}}{2 l^{2}}\right),
+\]
+where $l$ is the length scale parameter controlling smoothness
+(in our experiments, $l = 2.5$ cm is equal to the radius of the
+indenter), and $\|x - x'\|$ is the Euclidean distance between
+inputs. This kernel implies smooth, infinitely differentiable
+functions, making it ideal for modelling physical quantities such
+as tissue stiffness.
+
+\textbf{2) GPR Training:} Given a set of training observations $X$
+with corresponding outputs $y$, GPR computes a posterior predictive
+distribution at new input locations $X^{*}$. This yields a predicted
+mean function $\mu^{*}$, representing the estimated stiffness at
+unobserved locations, and an associated covariance $\Sigma^{*}$,
+which quantifies model uncertainty. As expected, the uncertainty
+increases with distance from the observed samples, reflecting
+reduced confidence in sparsely explored regions.
+
+\subsection*{B.\ Expected Information Density for Elasticity Maps}
+
+To prioritise regions for further palpation, we define an EID
+function $\xi_{\mathrm{EID}}(x)$ that balances two objectives:
+exploration of uncertain areas, and exploitation of predicted
+high-stiffness regions and refinement near region boundaries.
+Formally, we define
+\begin{equation}
+\tilde{\xi}_{\mathrm{EID}}(x) =
+(1 - \alpha)\,\frac{g(x)}{\int_{\mathcal{X}} g(x)}
++ \frac{\mu(x)}{\int_{\mathcal{X}} \mu(x)}
++ \alpha\,\frac{\sigma(x)}{\int_{\mathcal{X}} \sigma(x)}
+\end{equation}
+the un-normalised distribution, where
+$g(x) = \|\nabla \mu(x)\|$ is the gradient norm of the predicted
+elasticity, highlighting boundaries. The distribution (1) is then
+normalised as:
+\begin{equation}
+\xi_{\mathrm{EID}}(x) =
+\frac{\tilde{\xi}_{\mathrm{EID}}(x)}%
+{\int_{\mathcal{X}} \tilde{\xi}_{\mathrm{EID}}(x)\, dx}.
+\end{equation}
+The trade-off between exploration and exploitation is controlled by
+the scalar $\alpha \in [0, 1]$. Lower values bias the system towards
+known high-stiffness or high-gradient areas, while higher values
+encourage sampling in regions of high uncertainty. In our
+implementation, $\alpha$ varies over time depending on the value of
+the ergodic metric in the following way:
+\begin{equation}
+\alpha(t) =
+\frac{\int_{\mathcal{X}} e(x, t)\, dx}%
+{\int_{\mathcal{X}} e(x, 0)\, dx},
+\end{equation}
+where $e(x, t)$ is the ergodic metric that will be defined in the
+following section in (4). According to (3), at the onset of the
+exploration, the trajectory is not ergodic and $\alpha(0) = 1$. As a
+consequence, the EID in (1) is dominated by the variance of the GPR,
+resulting in a purely exploratory behaviour. Regions that have not
+yet been sampled exhibit higher uncertainty and are therefore
+prioritised for exploration. As informative measurements are
+collected, the ergodic metric progressively decreases, leading to a
+gradual rebalancing between exploration and exploitation. The
+spatial coverage of the trajectory increasingly matches the target
+EID distribution, and the exploration naturally shifts towards
+exploitation of regions associated with higher estimated stiffness
+and pronounced spatial gradients, such as the boundaries of stiff
+inclusions. We want to highlight that the EID is computed on-the-fly
+and does not exploit prior knowledge about the inspected area.
+
+\subsection*{C.\ Trajectory Planning}
+
+The normalised EID $\xi_{\mathrm{EID}}$ is used as the target
+distribution for the ergodic planner, which computes a trajectory
+that visits each region in proportion to its expected information
+content. The HEDAC algorithm [19] is used to generate the trajectory
+online.
+
+\textbf{1) Ergodic Control:} aims to guide a robot trajectory to
+match a target spatial distribution, balancing exploration and
+exploitation by spending more time in regions of higher interest. It
+models the coverage density using radial basis functions (RBFs).
+Given a trajectory
+$z: [0, t] \to \Omega \subset \mathbb{R}^{n}$,
+the normalised coverage density $c(x, t)$ is:
+\[
+c(x, t) = \frac{\tilde{c}(x, t)}{\int_{\Omega} \tilde{c}(x, t)\,dx},
+\qquad
+\tilde{c}(x, t) = \frac{1}{t}\int_{0}^{t}
+\phi_{\sigma}(x - z(\tau))\,d\tau,
+\]
+
+\end{document}

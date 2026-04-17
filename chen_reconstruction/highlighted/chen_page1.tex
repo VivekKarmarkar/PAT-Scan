@@ -1,0 +1,185 @@
+%% =================================================================
+%% Chen, Qian, Liang, Zhang, Liu, Hu, Liu, Lu, Huang, Li, Wen, Zhou, Luo.
+%% "A novel tactile tomography system based on mechanical principles
+%%  for internal 3D imaging."
+%% Measurement 264 (2026) 120300.
+%%
+%% Reconstruction of page 1 (printed p. 1) as study notes.
+%% Prose: extracted verbatim from the PDF text layer via pdftotext
+%%        (soft hyphens and line breaks cleaned up only).
+%% Layout: hand-styled to mirror the Elsevier two-column abstract
+%%        block. No equations on this page.
+%% =================================================================
+
+\documentclass[11pt]{article}
+
+\usepackage[margin=0.85in]{geometry}
+\usepackage{amsmath, amssymb}
+\usepackage{mathrsfs}
+\usepackage{fancyhdr}
+\usepackage{url}
+
+\pagestyle{fancy}
+\fancyhf{}
+\rhead{\small Measurement 264 (2026) 120300}
+\cfoot{\small 1 $\to$ \arabic{page}}
+\renewcommand{\headrulewidth}{0.4pt}
+
+\setcounter{page}{1}
+\setlength{\parskip}{6pt}
+\setlength{\parindent}{0pt}
+
+\begin{document}
+
+% ---------- Journal nameplate ----------
+\noindent
+{\footnotesize Contents lists available at ScienceDirect}\\[2pt]
+{\Large\bfseries Measurement}\\[2pt]
+{\footnotesize journal homepage: \texttt{www.elsevier.com/locate/measurement}}
+
+\vspace{0.8em}
+\hrule
+\vspace{1em}
+
+% ---------- Title ----------
+{\large\bfseries
+A novel tactile tomography system based on mechanical principles
+for internal 3D imaging\par}
+
+\vspace{0.8em}
+
+% ---------- Authors ----------
+\noindent
+Zhiming Chen\textsuperscript{a,*,1},
+Longxin Qian\textsuperscript{a,1},
+Weihao Liang\textsuperscript{a,1},
+Kaibang Zhang\textsuperscript{a},
+Zichen Liu\textsuperscript{a},
+Fengming Hu\textsuperscript{b},
+Chaobin Liu\textsuperscript{a},
+Kelan Lu\textsuperscript{a},
+Jingcheng Huang\textsuperscript{c},
+Haiquan Li\textsuperscript{d},
+Jinxiu Wen\textsuperscript{a},
+Bingpu Zhou\textsuperscript{b},
+Jianyi Luo\textsuperscript{a,*}
+
+\vspace{0.5em}
+
+% ---------- Affiliations ----------
+\noindent
+{\footnotesize
+\textsuperscript{a}\,\emph{Research Center of Flexible Sensing
+Materials and Devices, School of Applied Physics and Materials,
+Wuyi University, Jiangmen 529020, China}\\[2pt]
+\textsuperscript{b}\,\emph{Joint Key Laboratory of the Ministry of
+Education, Institute of Applied Physics and Materials Engineering,
+University of Macau, Avenida da Universidade, Taipa, Macau
+999078, China}\\[2pt]
+\textsuperscript{c}\,\emph{WYU-Flexwarm Joint Lab for Flexible
+Sensing Technologies, Guangzhou CarbonSens Technology Co., Ltd.,
+Guangzhou 511483, China}\\[2pt]
+\textsuperscript{d}\,\emph{Guangdong Runyu Sensor Co., Ltd.,
+Jiangmen 529020, China}\par}
+
+\vspace{1em}
+\hrule
+\vspace{1em}
+
+% ---------- Article info / Abstract block (two columns) ----------
+\noindent
+\begin{minipage}[t]{0.28\textwidth}
+\textbf{A R T I C L E\ \ I N F O}\\[0.8em]
+\textbf{Keywords:}\\
+Tactile tomography system\\
+Internal 3D imaging\\
+Tactile softness of materials\\
+Mechanical principles\\
+Nondestructive testing
+\end{minipage}
+\hfill
+\begin{minipage}[t]{0.68\textwidth}
+\textbf{A B S T R A C T}\\[0.8em]
+Mechanical principle-based imaging technologies, such as contact
+profilometers, atomic force microscope (AFM), and AFM-derived
+imaging modes, have been widely utilized in industrial detection
+and materials characterization. However, these imaging technologies
+primarily focus on detecting surface profiles and morphology,
+lacking the capability for internal 3D imaging. Herein, a novel
+tactile tomography system based on mechanical principle is proposed
+to image the internal structure of an object. This tactile
+tomography system comprises a scanning module, a probe module,
+and a closed-loop feedback control system, which enables it to
+recognize the softness of soft matter. Then a novel parameter of
+``tactile softness of materials'' was constructed by simulating
+human tactile perception of softness. By considering the combined
+effects of the sample's size and thickness, and the applied force
+on the tactile softness of materials, the tactile tomography system
+achieves internal 3D imaging capability with a maximum detection
+depth of 6 mm. The scanning resolution of this tactile tomography
+system is as high as 0.5 mm in both the $x$ and $y$ directions,
+and 0.1 $\mu$m in the $z$ direction. The tactile tomography system
+has a scanning accuracy exceeding 98.9\,\%, and an optimal scanning
+speed and scanning step of 2.4 mm/s \& 0.5 mm. Successful
+application in defect detection of encapsulated flexible printed
+circuit boards (FPCBs) demonstrated the promising potential of the
+tactile tomography system, marking a significant advancement in
+internal 3D imaging technologies based on mechanical principles.
+\end{minipage}
+
+\vspace{1.2em}
+\hrule
+\vspace{0.8em}
+
+% ---------- Introduction ----------
+\section*{1.\ Introduction}
+
+\noindent
+Imaging technologies play a crucial role in medical imaging,
+industrial detection, materials characterization in physical
+science, and geological detection in earth science [1--4]. Based
+on imaging principles, these imaging technologies can be
+categorized into optical imaging, X-ray imaging, ultrasonic
+imaging, nuclear imaging, magnetic resonance imaging (MRI),
+electron microscope, and mechanical imaging [5--11]. The primary
+functions of these imaging technologies include visualizing the
+surface morphology, profile, or internal structure of the measured
+sample [12--14]. Especially the imaging of internal structure --
+achieved by technologies such as X-ray computed tomography (X-CT),
+MRI, ultrasonic tomography (U-CT), optical computed tomography
+(O-CT), and positron emission tomography (PET), has significantly
+advanced the fields of medical imaging, industrial detection, and
+geological detection [15--19]. Consequently, internal 3D imaging
+is of great importance for imaging technologies. However, imaging
+technologies based on mechanical principles still lack the
+capability for internal 3D imaging.
+
+Imaging technologies based on mechanical principles include
+contact profilometers and atomic force microscope (AFM), and
+AFM-derived imaging modes [20--22]. Contact profilometers are
+typically classified into two categories: stylus profilometers
+and three-coordinates measuring machines (CMM). The stylus
+profilometer excels at detecting surface roughness and morphology
+of a workpiece, while the CMM is
+
+% ---------- Bottom-of-page footer (corresponding-author block) ----------
+\vfill
+\hrule
+\vspace{0.4em}
+\noindent
+{\footnotesize
+* Corresponding authors at: 99 Yingbin Avenue, Pengjiang District,
+Jiangmen City, Guangdong Province, China.\\[2pt]
+\textit{E-mail addresses:}
+\texttt{chenzhiming@wyu.edu.cn} (Z.~Chen),
+\texttt{luojiany@wyu.edu.cn} (J.~Luo).\\[2pt]
+\textsuperscript{1} These authors contributed equally to this work.\\[4pt]
+\url{https://doi.org/10.1016/j.measurement.2026.120300}\\[2pt]
+\pdfcomment[icon=Comment,color=orange]{User input: This work came after Fall 2025.\textbackslash \textbackslash Claude comments: PARTIALLY\_SUPPORTS. \textbackslash \textbackslash \textbackslash \textbackslash  The claim "this work came after Fall 2025" admits two readings, and the excerpt supports one reading while contradicting the other: \textbackslash \textbackslash \textbackslash \textbackslash  (A) If "came" means "was published / accepted / made available":     SUPPORTS the claim. The revised manuscript was submitted on     12 December 2025 (late Fall 2025, technically still within     Vivek's stated Fall-2025 window but near its end), accepted     2 January 2026, and appeared online 3 January 2026. Both the     journal volume header ("Measurement 264 (2026) 120300") and     the DOI stub (".2026.120300") confirm the paper is a 2026     publication. The accepted / published-online dates sit     firmly AFTER Fall 2025 by any standard academic-calendar     reading. \textbackslash \textbackslash \textbackslash \textbackslash  (B) If "came" means "the research itself was carried out /     originally submitted": CONTRADICTS the claim. The original     submission date "Received 25 October 2024" is more than a     year BEFORE Fall 2025 — meaning the underlying research and     first manuscript predate Vivek's Fall-2025 literature-review     window substantially. The authors were working on this     system throughout 2024 and early-to-mid 2025. \textbackslash \textbackslash \textbackslash \textbackslash  OPERATIONAL IMPLICATION for the PAT-Scan lit review: per reading (A), the Chen paper is genuinely a post-Fall-2025 addition that a Fall-2025-closed review could not have caught — same structural reason the Ergodic Exploration paper (IEEE RAL, accepted Feb 2026) was absent. Per reading (B), the UNDERLYING WORK existed during the review window, but only in a form (preprint / under-review manuscript) that Vivek's broad review wouldn't have had access to via standard search indices. Either way, the legitimacy of the paper being "missed" by the Fall-2025 review is preserved — the lit review wasn't negligent, the paper just wasn't findable by publication date. \textbackslash \textbackslash \textbackslash \textbackslash  No contradicting passage elsewhere in the paper. The metadata block is the canonical record of submission/acceptance dates.}\sethlcolor{hlorange}\hl{Received 25 October 2024; Received in revised form 12 December
+2025; Accepted 2 January 2026\\[2pt]
+Available online 3 January 2026}\\[2pt]
+0263-2241/\textcopyright{} 2026 Elsevier Ltd. All rights are
+reserved, including those for text and data mining, AI training,
+and similar technologies.\par}
+
+\end{document}

@@ -1,0 +1,105 @@
+                              This article has been accepted for publication in IEEE Robotics and Automation Letters. This is the author's version which has not been fully edited and
+                                                        content may change prior to final publication. Citation information: DOI 10.1109/LRA.2026.3673907
+
+8                                                                              IEEE ROBOTICS AND AUTOMATION LETTERS. PREPRINT VERSION. ACCEPTED FEBRUARY, 2026
+
+
+
+                                 Estimated Elastic modulus
+                     50
+                                                                                                               [6] I. Sack, “Magnetic resonance elastography from fundamental soft-tissue
+                                                                                183                                mechanics to diagnostic imaging,” Nature Reviews Physics, vol. 5, no. 1,
+                                                                                                                   2023.
+                                                                                174                            [7] N. Pacheco, C. Henry, et al., “Virtual palpation: A novel method to
+                     40
+                                                                                                                   identify the physical properties of tissue for laser surgery,” in Hamlyn
+
+
+
+
+                                                                                      Elastic modulus (GPa)
+                                                                                165
+                                                                                                                   Symposium on Medical Robotics, 2025.
+                     30                                                         156                            [8] A. L. Trejos, J. Jayender, et al., “Robot-assisted tactile sensing for min-
+            y (mm)
+
+
+
+
+                                                                                147                                imally invasive tumor localization,” International Journal of Robotics
+                                                                                                                   Research, vol. 28, no. 9, 2009.
+                     20                                                         138                            [9] N. Enayati, E. De Momi, and G. Ferrigno, “Haptics in robot-assisted
+                                                                                129                                surgery: Challenges and benefits,” IEEE Reviews in Biomedical Engi-
+                                                                                                                   neering, vol. 9, 2016.
+                     10                                                         120                           [10] S. McKinley, A. Garg, et al., “An interchangeable surgical instrument
+                                                                                111                                system with application to supervised automation of multilateral tumor
+                                                                                                                   resection,” in IEEE International Conference on Automation Science and
+                      0                                                         102
+                                                                                                                   Engineering, 2016.
+                          0      10       20    30            40       50
+                                                                                                              [11] N. Zevallos, R. Arun Srivatsan, et al., “A Real-time Augmented Reality
+                                           x (mm)
+                                                                                                                   Surgical System for Overlaying Stiffness Information,” in Robotics:
+                                                                                                                   Science and Systems, 2018.
+Fig. 5. Estimated stiffness distribution obtained through palpation of the soft                               [12] A. Garg, S. Sen, et al., “Tumor localization using automated palpation
+phantom. The stiffer region is shown in yellow. The end-effector trajectory                                        with Gaussian Process Adaptive Sampling,” in IEEE International
+during the search motion is visualised using a grayscale gradient, from                                            Conference on Automation Science and Engineering, 2016.
+black (beginning) to white (end). A video of the experiment is provided in                                    [13] E. Ayvali, R. A. Srivatsan, et al., “Using Bayesian optimization to
+the Supplemental Materials and is also available online at https://youtu.be/                                       guide probing of a flexible environment for simultaneous registration
+a3BUSxA7wXY.                                                                                                       and stiffness mapping,” in Proceedings - IEEE International Conference
+                                                                                                                   on Robotics and Automation, 2016.
+                                                                                                              [14] H. Salman, E. Ayvali, et al., “Trajectory-Optimized Sensing for Active
+                                      VI. C ONCLUSION                                                              Search of Tissue Abnormalities in Robotic Surgery,” in Proceedings -
+                                                                                                                   IEEE International Conference on Robotics and Automation, 2018.
+   This work presents an autonomous robotic palpation frame-                                                  [15] Y. Yan and J. Pan, “Fast Localization and Segmentation of Tissue
+work for real-time elastic stiffness mapping of soft tissues.                                                      Abnormalities by Autonomous Robotic Palpation,” IEEE Robotics and
+                                                                                                                   Automation Letters, vol. 6, no. 2, pp. 1707–1714, 4 2021.
+By combining force-based viscoelastic parameter estimation                                                    [16] E. Ayvali, A. Ansari, et al., “Utility-Guided Palpation for Locating
+with ergodic trajectory planning implemented via a heat-                                                           Tissue Abnormalities,” IEEE Robotics and Automation Letters, vol. 2,
+equation-driven controller, the method enables continuous pal-                                                     no. 2, 2017.
+                                                                                                              [17] K. A. Nichols and A. M. Okamura, “Methods to Segment Hard In-
+pation without embedded tactile sensing. Exploration is guided                                                     clusions in Soft Tissue During Autonomous Robotic Palpation,” IEEE
+by an EID tailored to stiffness mapping, allowing adaptive                                                         Transactions on Robotics, vol. 31, no. 2, 2015.
+focus on diagnostically relevant regions. Simulation results                                                  [18] L. Beber, E. Lamon, et al., “Towards Robotised Palpation for Cancer
+                                                                                                                   Detection through Online Tissue Viscoelastic Characterisation with
+demonstrate improved stiffness reconstruction accuracy, with                                                       a Collaborative Robotic Arm,” in IEEE International Conference on
+reliable detection of multiple stiff regions and lower RMSE                                                        Intelligent Robots and Systems, 2024, pp. 2380–2386.
+and segmentation errors compared to BO, particularly under                                                    [19] S. Ivic, B. Crnkovic, and I. Mezic, “Ergodicity-Based Cooperative
+                                                                                                                   Multiagent Area Coverage via a Potential Field,” IEEE Transactions
+noisy conditions. Experimental validation with a robotic arm                                                       on Cybernetics, vol. 47, no. 8, 2017.
+and a silicone phantom confirms the robustness of the ap-                                                     [20] C. E. Rasmussen and C. K. Williams, Gaussian Processes for Machine
+proach, showing consistent detection of stiff inclusions and                                                       Learning. The MIT Press, 2006.
+                                                                                                              [21] P. Chalasani, L. Wang, et al., “Concurrent nonparametric estimation of
+good agreement with ground-truth stiffness maps. Overall, the                                                      organ geometry and tissue stiffness using continuous adaptive palpa-
+proposed ergodic strategy effectively balances exploration and                                                     tion,” in Proceedings - IEEE International Conference on Robotics and
+accurate estimation, making it well suited for autonomous                                                          Automation, vol. 2016-June, 2016.
+                                                                                                              [22] ——, “Preliminary evaluation of an online estimation method for organ
+palpation as an assistive diagnostic tool. Future work will                                                        geometry and tissue stiffness,” IEEE Robotics and Automation Letters,
+extend the method to three-dimensional mapping on non-flat                                                         vol. 3, no. 3, 2018.
+surfaces and evaluate it on anatomically realistic phantoms and                                               [23] G. Mathew and I. Mezi, “Metrics for ergodicity and design of ergodic
+                                                                                                                   dynamics for multi-agent systems,” Physica D: Nonlinear Phenomena,
+ex vivo tissues.                                                                                                   vol. 240, no. 4-5, pp. 432–442, 2 2011.
+                                                                                                              [24] L. M. Miller, Y. Silverman, et al., “Ergodic Exploration of Distributed
+                                                                                                                   Information,” IEEE Transactions on Robotics, vol. 32, no. 1, pp. 36–52,
+                                         R EFERENCES                                                               2 2016.
+                                                                                                              [25] L. M. Miller and T. D. Murphey, “Trajectory optimization for continuous
+    [1] R. Tozzi, C. Köhler, et al., “Laparoscopic treatment of early ovarian                                     ergodic exploration,” in Proceedings of the American Control Confer-
+        cancer: surgical and survival outcomes,” Gynecologic oncology, vol. 93,                                    ence, 2013.
+        no. 1, pp. 199–203, 2004.                                                                             [26] C. Bilaloglu, T. Löw, and S. Calinon, “Whole-body ergodic exploration
+    [2] N. Eisemann, S. Bunk, et al., “Nationwide real-world implementation of                                     with a manipulator using diffusion,” IEEE Robotics and Automation
+        AI for cancer detection in population-based mammography screening,”                                        Letters, vol. 8, no. 12, pp. 8581–8587, 2023.
+        Nature Medicine 2025 31:3, vol. 31, no. 3, pp. 917–924, 1 2025.                                       [27] V. L. Popov and M. Heß, Method of dimensionality reduction in contact
+    [3] Q. Dan, Z. Xu, et al., “Diagnostic performance of deep learning in                                         mechanics and friction. Springer, 2015.
+        ultrasound diagnosis of breast cancer: a systematic review,” npj Precision                            [28] L. Beber, E. Lamon, et al., “Force-based viscosity and elasticity
+        Oncology 2024 8:1, vol. 8, no. 1, pp. 1–13, 1 2024.                                                        measurements for material biomechanical characterisation with a col-
+    [4] A. Attanasio, B. Scaglioni, et al., “Autonomy in Surgical Robotics,”                                       laborative robotic arm,” IEEE Transactions on Instrumentation and
+        Annual Review of Control, Robotics, and Autonomous Systems, vol. 4,                                        Measurement, pp. 1–1, 2025.
+        2021.                                                                                                 [29] P. N. Wells and H.-D. Liang, “Medical ultrasound: imaging of soft tissue
+    [5] L. Zhang, Y. Peng, et al., “Innovative integration of automated breast                                     strain and elasticity,” Journal of the Royal Society Interface, vol. 8,
+        volume scan and ultrasound elastography for enhanced differentiation                                       no. 64, pp. 1521–1549, 2011.
+        of benign and malignant breast lesions,” Scientific Reports 2025 15:1,
+        vol. 15, no. 1, pp. 1–8, 5 2025.
+
+
+                              This work is licensed under a Creative Commons Attribution 4.0 License. For more information, see https://creativecommons.org/licenses/by/4.0/
+

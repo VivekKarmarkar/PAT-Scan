@@ -1,0 +1,90 @@
+Z. Chen et al.                                                                                                                                Measurement 264 (2026) 120300
+
+
+polymeric materials typically used for encapsulation. In stark contrast,            Acknowledgment
+the proposed tactile tomography system, which relies on mechanical
+sensing rather than acoustic wave propagation, is not susceptible to such              This work was financially supported by Innovation and Strong
+limitations. Its imaging efficacy is inherently based on the local me­              School Engineering Fund of Guangdong Province (2025KCXTD047),
+chanical interaction (tactile softness) between the probe and the sample,           Guangdong Engineering Technology Research Center (2021J020),
+which effectively bypasses the interfering effects of the encapsulation             Natural    Science    Foundation    of   Guangdong     Province
+layer. This key advantage allows the tactile tomography system to                   (2021A1515011935), National Natural Science Foundation of China
+provide superior imaging performance for soft-encapsulated structures,              (12004285), Hong Kong and Macau Joint Research and Development
+highlighting its unique potential for nondestructive testing in applica­            Fund of Wuyi University (2019WGALH17).
+tions where traditional ultrasonic methods may fail. To demonstrate the
+non-destructiveness of the tactile tomography system, a targeted fatigue            Appendix A. Supplementary material
+test was conducted on the encapsulated FPCB sample. A fixed point on
+the encapsulated FPCB was continuously scanned 300 times using the                     Supplementary data to this article can be found online at https://doi.
+tactile tomography system under the test conditions of an applied                   org/10.1016/j.measurement.2026.120300.
+pressure of 4 MPa, a scanning speed and scanning step of 0.6 mm/s &
+0.5 mm. Under 300 cycles of constant-pressure cyclic compression, the               Data availability
+compression depth of the probe tip at the test point remained stable
+(Fig. 16a), indicating that no stress distortion occurred in the interaction            Data will be made available on request.
+between the probe and the encapsulated FPCB during repeated loading,
+and thus the FPCB did not suffer cumulative mechanical damage.                      References
+Fig. 16b shows the microscope image of the test point of the encapsu­
+lated FPCB before scanning. After 300 cycles of scanning, the post-                  [1] M.W. Vannier, E.V. Staab, L.P. Clarke, Matching clinical and biological needs with
+                                                                                         emerging imaging technologies, Proc. IEEE 91 (2003) 1562–1573, https://doi.org/
+scanning image is shown in Fig. 16c, only an almost indiscernible
+                                                                                         10.1109/jproc.2003.817866.
+indentation mark was left on the surface of AB glue encapsulation layer,             [2] Y. Zhou, M. Yuan, J. Zhang, G. Ding, S. Qin, Review of vision-based defect
+it neither cracked nor was punctured, and the underlying FPCB                            detection research and its perspectives for printed circuit board, J. Manuf. Syst. 70
+                                                                                         (2023) 557–578, https://doi.org/10.1016/j.jmsy.2023.08.019.
+remained intact with no visible deformation (Fig. 16d). These results
+                                                                                     [3] C. Cao, Michael F. Toney, T.-K. Sham, R. Harder, Paul R. Shearing, X. Xiao, J.
+fully demonstrate that the tactile tomography system does not exacer­                    Wang, Emerging X-ray imaging technologies for energy materials, Mater. Today.
+bate initial or cumulative damage to the encapsulated FPCB.                              34 (2020) 132-147. DOI: 10.1016/j.mattod.2019.08.011.
+                                                                                     [4] V. Cnudde, M.N. Boone, High-resolution X-ray computed tomography in
+                                                                                         geosciences: a review of the current technology and applications, Earth Sci. Rev.
+5. Conclusion                                                                            123 (2013) 1–17, https://doi.org/10.1016/j.earscirev.2013.04.003.
+                                                                                     [5] R. Richards-Kortum, C. Lorenzoni, Vanderlei S. Bagnato, K. Schmeler, Optical
+                                                                                         imaging for screening and early cancer diagnosis in low-resource settings, Nat. Rev.
+    In this work, a novel tactile tomography system based on mechanical                  Bioeng.. 2 (2023) 25–43. DOI: 10.1038/s44222-023-00135-4.
+principles with internal 3D imaging capabilities was developed. This                 [6] A. Sakdinawat, D. Attwood, Nanoscale X-ray imaging, Nat. Photonics 4 (2010)
+tactile tomography system can recognize the softness of AB glues with                    840–848, https://doi.org/10.1038/nphoton.2010.267.
+                                                                                     [7] S.L. Bridal, J.-M. Correas, A. Saied, P. Laugier, Milestones on the road to higher
+Shore hardnesses of 3, 7.5, 12.5, 17.5, 25, 30, 35, 50, and 60 HC. For
+                                                                                         resolution, quantitative, and functional ultrasonic imaging, Proc. IEEE 91 (2003)
+samples with dimensions less than 12 mm in size and 6 mm in thickness,                   1543–1561, https://doi.org/10.1109/jproc.2003.817879.
+a novel parameter of “tactile softness of materials” was introduced,                 [8] ElisabethG.E. de Vries, L. Ruijter, MarjolijnN.L. Hooge, RudiA. Dierckx, SjoerdG.
+enabling the tactile tomography system to perform internal 3D imaging                    Elias, SjoukjeF. Oosting, Integrating molecular nuclear imaging in clinical research
+                                                                                         to improve anticancer therapy, Nat. Rev. Clin. Oncol. 16 (2019) 241-255. DOI:
+with a maximum detection depth of 6 mm. The tactile tomography                           10.1038/s41571-018-0123-y.
+system features a high scanning resolution of 0.5 mm in both the x and y             [9] T. Lee, LiliX. Cai, VictorS. Lelyveld, A. Hai, A. Jasanoff, Molecular-level functional
+directions, and 0.1 μm in the z direction. The tactile tomography system                 magnetic resonance imaging of dopaminergic signaling, Science 344 (2014) 533-
+                                                                                         535. DOI: 10.1126/science.1249380.
+possesses a scanning accuracy of over 98.9 %, and an optimal scanning               [10] D.E. Newbury, D.B. Williams, The electron microscope: the materials
+speed and scanning step of 2.4 mm/s & 0.5 mm. This system is capable of                  characterization tool of the millennium, Acta Mater. 48 (2000) 323–346, https://
+imaging the internal structure and identifying defects in encapsulated                   doi.org/10.1016/s1359-6454(99)00302-x.
+                                                                                    [11] A. Viljoen, M. Mathelié-Guinlet, A. Ray, N. Strohmeyer, Y. Oh, P. Hinterdorfer,
+FPCBs, demonstrating significant potential for nondestructive testing of                 DanielJ. Müller, D. Alsteens, YvesF. Dufrêne, Force spectroscopy of single cells
+flexible wearable devices.                                                               using atomic force microscopy, Nature Reviews Methods Primers. 1 (2021) 533-
+                                                                                         535. DOI: 10.1038/s43586-021-00062-x.
+                                                                                    [12] S. Roath, D. Newell, A. Polliack, E. Alexander, P.-S. Lin, Scanning electron
+CRediT authorship contribution statement                                                 microscopy and the surface morphology of human lymphocytes, Nature 273 (1978)
+                                                                                         15–18, https://doi.org/10.1038/273015a0.
+    Zhiming Chen: Writing – review & editing, Visualization, Method­                [13] Y. Wang, F. Xie, S. Ma, L. Dong, Review of surface profile measurement techniques
+                                                                                         based on optical interferometry, Opt. Lasers Eng. 93 (2017) 164–170, https://doi.
+ology, Investigation. Longxin Qian: Writing – original draft, Software,                  org/10.1016/j.optlaseng.2017.02.004.
+Data curation. Weihao Liang: Writing – original draft, Formal analysis,             [14] J. Dimastromatteo, T. Brentnall, Kimberly A. Kelly, Imaging in pancreatic disease,
+Conceptualization. Kaibang Zhang: Software, Data curation. Zichen                        Nat. Rev. Gastroenterol. Hepatol. 14 (2017) 97-109. DOI: 10.1038/
+                                                                                         nrgastro.2016.144.
+Liu: Investigation, Data curation. Fengming Hu: Investigation, Data                 [15] E. Maire, P.J. Withers, Quantitative X-ray tomography, Int. Mater. Rev. 59 (2014)
+curation. Chaobin Liu: Investigation, Data curation. Kelan Lu: Inves­                    1–43, https://doi.org/10.1179/1743280413y.0000000023.
+tigation, Data curation. Jingcheng Huang: Investigation. Haiquan Li:                [16] Katharine E. Thomas, A. Fotaki, RenéM. Botnar, Vanessa M. Ferreira, Imaging
+                                                                                         Methods: Magnetic Resonance Imaging, Circulation: Cardiovascular Imaging. 16
+Methodology. Jinxiu Wen: Visualization, Methodology, Investigation.                      (2023). DOI: 10.1161/circimaging.122.014068.
+Bingpu Zhou: Methodology, Investigation. Jianyi Luo: Writing – re­                  [17] N. Li, L. Wang, J. Jia, Y. Yang, A novel method for the image quality improvement
+view & editing, Supervision, Investigation, Conceptualization.                           of ultrasonic tomography, IEEE Trans. Instrum. Meas. 70 (2021) 1–10, https://doi.
+                                                                                         org/10.1109/tim.2020.3016411.
+                                                                                    [18] J. Kim, W. Brown, JasonR. Maher, H. Levinson, A. Wax, Functional optical
+                                                                                         coherence tomography: principles and progress, Physics in Medicine and Biology.
+Declaration of competing interest                                                        60 (2015) R211-R237. DOI: 10.1088/0031-9155/60/10/r211.
+                                                                                    [19] J. Rong, A. Haider, TroelsE. Jeppesen, L. Josephson, StevenH. Liang,
+    The authors declare that they have no known competing financial                      Radiochemistry for positron emission tomography, Nat. Commun. 14 (2023)
+                                                                                         17200-17206. DOI: 10.1038/s41467-023-36377-4.
+interests or personal relationships that could have appeared to influence           [20] K. Shin, D. Kim, H. Park, M. Sim, H. Jang, J. Sohn, S. Cha, J. Jang, Artificial tactile
+the work reported in this paper.                                                         sensor with pin-type module for depth profile and surface topography detection,
+
+
+                                                                               13
+

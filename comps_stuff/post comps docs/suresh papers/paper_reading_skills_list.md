@@ -2,6 +2,7 @@
 /find-paper-by-title
 /paper-metadata
 /find-similar-papers
+/find-paper-by-similar-authors
 /analyze-paper-against-cluster
 /ask-question-about-paper
 /find-evidence-in-paper

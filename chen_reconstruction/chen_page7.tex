@@ -1,0 +1,125 @@
+%% =================================================================
+%% Chen et al. Measurement 264 (2026) 120300.
+%% Reconstruction of page 7 (printed p. 7).
+%% Contents: Fig. 9 (a-f: symbol "+" FEA-validation model, FEA
+%% simulation of probe pressing, 676-point scan, simulated
+%% displacement field, experimental scan result). Prose covers the
+%% tail of Section 3.2 (layer-by-layer reconstruction via force
+%% thresholds) and Section 4 + 4.1 start.
+%% =================================================================
+
+\documentclass[11pt]{article}
+
+\usepackage[margin=0.85in]{geometry}
+\usepackage{amsmath, amssymb}
+\usepackage{mathrsfs}
+\usepackage{xcolor}
+\usepackage{fancyhdr}
+
+\pagestyle{fancy}
+\fancyhf{}
+\lhead{\small Z.~Chen et al.}
+\rhead{\small Measurement 264 (2026) 120300}
+\cfoot{\small 7 $\to$ \arabic{page}}
+\renewcommand{\headrulewidth}{0.4pt}
+
+\setcounter{page}{1}
+\setcounter{equation}{1}
+\setlength{\parskip}{6pt}
+\setlength{\parindent}{0pt}
+
+\begin{document}
+
+% ---------- Fig. 9 placeholder ----------
+\begin{center}
+\fbox{\begin{minipage}[c][9cm][c]{0.95\textwidth}
+\centering
+\textbf{Fig. 9.}\ Theoretical validity of the tactile tomography.\\[4pt]
+\textcolor{gray}{\footnotesize
+\textbf{(a)} Symbol ``\,$+$\,'' model: CAD drawing of a 50 mm $\times$
+50 mm substrate with a raised plus-sign feature at the center.\\[3pt]
+\textbf{(b)} Symbol ``\,$+$\,'' model filled with AB glues:
+photograph showing the glue-covered sample, 50 mm $\times$ 50 mm,
+20 mm glue depth marked.\\[3pt]
+\textbf{(c)} Simulation results of the mechanical process of the
+probe pressing the sample: meshed FEA view with the probe tip (small
+yellow sphere) contacting the red sample block.\\[3pt]
+\textbf{(d)} Simulation results of the sample scanned by the probe
+tip with 676 scanning points: rainbow-colored contour in the
+central square region, red-to-yellow elsewhere.\\[3pt]
+\textbf{(e)} Simulated displacement field of the sample under probe
+loading: rendered 3D surface plot showing the plus-sign structure
+emerging via displacement contrast.\\[3pt]
+\textbf{(f)} Experimental result of the sample scanned by the
+tactile tomography system: cleanly resolved plus-sign with
+step-like vertical extrusion on a red substrate (rainbow Z scale).]}
+\end{minipage}}
+\end{center}
+
+\vspace{0.4em}
+
+\textbf{Fig. 9.}\ Theoretical validity of the tactile tomography.
+(a) Symbol ``+'' model. (b) Symbol ``+'' model filled with AB glues.
+(c) Simulation results of the mechanical process of the probe
+pressing the sample. (d) Simulation results of the sample scanned
+by the probe tip with 676 scanning points. (e) Simulated
+displacement field of the sample under probe loading. (f)
+Experimental result of the sample scanned by the tactile tomography
+system.
+
+\vspace{0.8em}
+
+% ---------- Prose ----------
+unable to obtain the information of the sample with a thicker soft
+surface layer if the applied force is small. As shown in Fig.~8a,
+only the top two stages can be reconstructed and distinguished as
+the tactile tomography system pressed the sample with a pressure of
+0.5 MPa. As the applied force increases, the deeper stage can be
+reconstructed and distinguished, such as the top 4 stages for the
+pressure of 1.5 MPa (Fig.~8b), the top 6 stages for the pressure of
+2.5 MPa (Fig.~8c), and all stage for the pressure of 4 MPa
+(Fig.~8d). Therefore, the tactile tomography system can detect and
+reconstruct the sample layer-by-layer by setting a series of
+threshold corresponding to increasing pressures. For example, nine
+thresholds of 0, 1, 2, 3, 4, 5, 6, and 7 that corresponding to the
+pressures of 0.5, 0.75, 1.10, 1.50, 1.85, 2.50, 4.00, and 5.00 MPa
+were set, and the reconstructed images can be displayed
+layer-by-layer in the host computer (as shown in Movie~S1). These
+results proved that this imaging system based on the detection of
+tactile softness of materials can image an object by tomography.
+Moreover, Fig.~8d also shows the maximum depth of 6 mm, indicating
+that the tactile tomography system can identify an object buried
+6 mm below the surface. The tomography methodology employed in this
+tactile tomography system is based on mechanical principles and the
+novel parameter of ``tactile softness of materials,'' which
+simulates human haptic perception by integrating the effects of
+sample size, thickness, and applied force. The system utilizes a
+closed-loop feedback control system to drive the probe module to
+scan the sample in the X-Y plane with a preset scanning step and
+speed. During scanning, the Z-axis rodless cylinder applies a
+series of increasing pressures to the sample through the probe. As
+the probe interacts with the sample, the pressure sensor detects
+force changes, and the grating sensor records the corresponding
+compression depth ($\Delta d$) at each X-Y position. This
+compression depth, combined with the applied force ($F$) and the
+contact area ($S$) between the tip and the sample, defines the
+tactile softness (Softness = $\Delta d \cdot S / F$), which
+characterizes the material's softness at that location. By
+collecting the projection data of positional information
+$(x, y, z)$ corresponding to each pressure threshold, the system
+reconstructs layer-by-layer 3D images of the internal structure.
+
+\section*{4.\ Results and discussion}
+
+\subsection*{4.1.\ Theoretical validity of the tactile tomography}
+
+To demonstrate the theoretical validity of the tactile tomography,
+we performed finite element analysis (FEA) to simulate the
+mechanical interaction between the probe tip and samples with
+internal features. As shown in Fig.~9a, a model with a feature of a
+symbol ``$+$'' was fabricated by 3D printing, and this model was
+then filled with a soft surface layer of AB glue (Fig.~9b). A 3D
+FEA model was built to simulate the mechanical process of the probe
+pressing the sample (Fig.~9c), the sample undergoes
+
+\end{document}

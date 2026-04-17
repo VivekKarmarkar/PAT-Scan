@@ -1,0 +1,57 @@
+Z. Chen et al.                                                                                                                            Measurement 264 (2026) 120300
+
+
+
+
+                   (a)                                                            (b)
+                                           6 mm
+
+
+
+
+                                           Frame model                                                  Scanning area
+
+                   (c)                                                            (d)
+
+
+
+
+Fig. 6. Effect of the size of the sample on the tactile softness of materials. (a) Frame model with a depth of 6 mm and different length & width. (b) Frame model filled
+with a soft surface layer of AB glue. (c) 3D imaging of compression depth distribution when the tactile tomography system scanned the frame model with a soft
+surface layer. (d) Top view of the 3D imaging of compression depth distribution when the tactile tomography system scanned the frame model with a soft sur­
+face layer.
+
+
+analysis to the outermost surface or near-surface layers. Moreover, they               “tactile softness of materials” is proposed. The tactile tomography sys­
+cannot handle thick samples (>1 μm) or soft-encapsulated materials                     tem can achieve the function of internal 3D imaging with a maximum
+(such as flexible electronics with soft coatings), as probe-sample in­                 detection depth of 6 mm by the combined effects of the sample's size,
+teractions are too weak to penetrate without damaging the surface.                     thickness, and the applied force. The performance of the tactile to­
+    Recent advancements in mechanical principle-based tomography                       mography system is characterized by its scanning resolution, scanning
+have begun to address the gap in internal imaging, with Mechanics                      accuracy, and the trade-off between scanning efficiency and imaging
+Based Tomography (MBT) emerging as a promising approach [32–34].                       quality. Finally, the promising potential of the tactile tomography sys­
+MBT leverages solid mechanics equations and surface displacement                       tem is illustrated through its application in defect detection of encap­
+measurements to reconstruct internal material property distributions                   sulated FPCBs.
+through an optimization framework with regularization to handle ill-
+posed inverse problems. Experimental validations on composite sili­                    2. System design and instrumentation
+cone samples have demonstrated MBT’s ability to visualize subsurface
+inclusions by resolving stiffness contrasts, highlighting its potential for               The configuration of the tactile tomography system is shown in
+non-destructive testing of soft materials [34]. Unlike X-CT or ultrasonic              Fig. 1, and the photograph of the developed tactile tomography system is
+methods, mechanical principle-based tomography avoids ionizing ra­                     presented in Fig. 2. The tactile tomography system consists of a scanning
+diation or high-energy waves, making it suitable for delicate samples. In              module, a probe module, and a closed-loop feedback control system.
+addition, mechanical principle-based tomography can map mechanical
+properties (such as stiffness or elastic modulus), providing functional                2.1. Scanning module
+information beyond structural imaging. However, existing mechanical
+tomography methods face challenges with low reconstruction accuracy                       The mechanical design of the scanning module and probe module is
+and reliability, as displacement measurement noise and position de­                    shown in Fig. 3. This design incorporates two linear actuators
+viations of the force can both lead to a significant deterioration in the              (MBDLN25SE, Panasonic) and two servo motors (MSMF022L1U2M,
+quality of internal structure reconstruction.                                          Panasonic) that together form an XY stage, allowing for precise adjust­
+    In this study, we propose a novel tactile tomography system based on               ments of the measurement position on the sample. A rodless cylinder
+mechanical principles, featuring internal 3D imaging capabilities. The                 (CDHD-4D52AAP1) is utilized to drive the probe module, applying
+tactile tomography system is constructed from a scanning module, a                     pressure to the sample in the vertical direction, and a grating sensor
+probe module, and a closed-loop feedback control system, enabling it to                (RXF1188508-01) measures the depth of the applied pressure. The
+sense force and control the movement of the probe tip. This tactile to­                movement speeds of the XY stage and Z stage can be adjusted from 0.1 to
+mography system can further recognize the softness of soft matter. To                  500 mm/min and from 0.1 to 400 mm/min, respectively. The XY stage
+simulate human tactile perception of softness, a novel parameter of                    and Z stage achieve a limit resolution of step displacement of 10 μm and
+
+                                                                                   4
+

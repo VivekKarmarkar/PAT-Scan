@@ -1,0 +1,56 @@
+Z. Chen et al.                                                                                                                             Measurement 264 (2026) 120300
+
+
+
+          (a)                                                                           (b)
+
+
+
+                                                                 15 mm
+          (c)                                                                           (d)
+                           28 mm
+
+                 10 mm
+
+
+                                                            7.5 mm                                                                 7.5 mm
+          (e)                                                                           (f)
+
+
+
+
+         (g)                                                                            (h)
+
+
+
+
+Fig. 15. Nondestructive testing of encapsulated flexible printed circuit board. (a) A flexible printed circuit board. (b) A flexible printed circuit board encapsulated
+with a soft surface layer. (c) Scanning area of the encapsulated flexible printed circuit board. (d) Scanning area of the encapsulated flexible printed circuit board with
+three defects. (e) 3D imaging of compression depth distribution when the tactile tomography system scanned the encapsulated flexible printed circuit board. (f) 3D
+imaging of compression depth distribution when the tactile tomography system scanned the encapsulated flexible printed circuit board with three defects. (g) Ul­
+trasonic C-scan image of the encapsulated flexible printed circuit board. (h) Ultrasonic C-scan image of the encapsulated flexible printed circuit board with
+three defects.
+
+
+4.5. Effect of materials properties and materials types on the tactile                  detect and reconstruct the complete internal structure of the samples.
+tomography system                                                                       Significantly, the topographical profile of the spherical cap model can be
+                                                                                        completely reconstructed and maintain excellent imaging quality when
+    The property of the surface layer materials, especially hardness, can               the probe pressure is increased for the samples with harder AB glue layer
+have an impact on the imaging quality of the tactile tomography system.                 (P = 6 MPa for 10 HC (Fig. 13d), P = 8 MPa for 15 HC (Fig. 13f), and P =
+As shown in Fig. 13a, the soft surface layer of AB glue was prepared with               13 MPa for 30 HC (Fig. 13h)). Although the increase of hardness of the
+different Shore hardness values of 5, 10, 15, and 30 HC, respectively.                  surface layer, the tactile tomography system can still maintain a good
+When the samples were scanned by the tactile tomography system with a                   imaging quality by increasing the probe pressure. The tactile tomogra­
+scanning speed and scanning step of 2.4 mm/s & 0.5 mm under a con­                      phy system can adapt to the change in the mechanical properties of AB
+stant pressure of 4 MPa (Fig. 13b, c, e, and g), the area where the                     glue with different Shore hardness by adjusting the probe pressure.
+topographical profile of the spherical cap model can be reconstructed                   Therefore, the tactile tomography system demonstrates excellent
+gradually decreased from the bottom to the top as Shore hardness of the                 adaptability to the surface layer materials with different Shore hardness.
+soft surface layer increased. Even only the top part of the spherical cap                   In addition to the AB glue, the other two commonly used soft ma­
+model can be reconstructed when the Shore hardness of the soft surface                  terials, PDMS and Ecoflex, were also used as the surface layer to further
+layer is 30 HC (Fig. 13g). The reason is that the increase in hardness of               investigate the versatility of the tactile tomography system in charac­
+the surface layer will reduce the compression depth of the probe tip                    terizing samples with different materials composition. As shown in
+when the samples are scanned by the tactile tomography system under                     Fig. 14a, b, and c, the spherical cap model filled with a soft surface layer
+the same constant pressure, resulting in the inability of this system to                of AB glue, PDMS, and Ecoflex, respectively. These samples were
+
+
+                                                                                   11
+

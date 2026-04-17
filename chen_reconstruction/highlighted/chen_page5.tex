@@ -1,0 +1,132 @@
+%% =================================================================
+%% Chen et al. Measurement 264 (2026) 120300.
+%% Reconstruction of page 5 (printed p. 5).
+%% Contents: Fig. 7 (a-d: hierarchical thickness study with 0.5 mm
+%% step model and compression-depth gradation), plus Sections 2.2
+%% (Probe module) and 2.3 (Closed-loop feedback control system) and
+%% the start of Section 3 / 3.1 (Softness recognition).
+%% No numbered equations on this page.
+%% =================================================================
+
+\documentclass[11pt]{article}
+
+\usepackage[margin=0.85in]{geometry}
+\usepackage{amsmath, amssymb}
+\usepackage{mathrsfs}
+\usepackage{xcolor}
+\usepackage{fancyhdr}
+
+\pagestyle{fancy}
+\fancyhf{}
+\lhead{\small Z.~Chen et al.}
+\rhead{\small Measurement 264 (2026) 120300}
+\cfoot{\small 5 $\to$ \arabic{page}}
+\renewcommand{\headrulewidth}{0.4pt}
+
+\setcounter{page}{1}
+\setlength{\parskip}{6pt}
+\setlength{\parindent}{0pt}
+
+\begin{document}
+
+% ---------- Fig. 7 placeholder ----------
+\begin{center}
+\fbox{\begin{minipage}[c][6.5cm][c]{0.95\textwidth}
+\centering
+\textbf{Fig. 7.}\ Effect of the thickness of the sample on the
+tactile softness of materials.\\[4pt]
+\textcolor{gray}{\footnotesize
+\textbf{(a)} Hierarchical structure model with 9 staircase steps,
+0.5 mm height difference between adjacent stages (total run 5 mm),
+CAD view with the stepped top surface.\\[3pt]
+\textbf{(b)} Hierarchical model filled with a soft surface layer
+of AB glue (photograph), uniform square scanning region outlined.\\[3pt]
+\textbf{(c)} 3D surface plot of compression-depth distribution when
+the tactile tomography system scanned (b); stepped pyramid shape
+with X, Y in mm and Z 0--6 mm on a rainbow color scale.\\[3pt]
+\textbf{(d)} Bar chart: measured height (mm, 0--7 axis) at step
+numbers 1--9; consecutive step-to-step height differences are
+0.494 mm and 0.495 mm, matching the 0.5 mm nominal staircase step.]}
+\end{minipage}}
+\end{center}
+
+\vspace{0.4em}
+
+\textbf{Fig. 7.}\ Effect of the thickness of the sample on the
+tactile softness of materials. (a) Hierarchical structure model
+with the height difference between each adjacent stage of 0.5 mm.
+(b) Hierarchical structure model filled with a soft surface layer
+of AB glue. (c) 3D imaging of compression depth distribution when
+the tactile tomography system scanned the hierarchical structure
+model with a soft surface layer. (d) Height of the compression
+depth distribution.
+
+\vspace{0.8em}
+
+% ---------- Prose continuation (from page 4) ----------
+0.1 $\mu$m, respectively, enabling the tactile tomography system
+to operate with high scanning resolution.
+
+\subsection*{2.2.\ Probe module}
+
+\pdfcomment[icon=Comment,color=cyan]{User input: Does the Chen paper allude to the CORE source instrumentation paper in the prose?\textbackslash \textbackslash Claude comments: YES — exactly once, as a single parenthetical citation in the opening sentence of Section 2.2 (page 5). That is the only allusion to the core source instrumentation paper in the entire 14-page body text. A grep of the raw.txt files confirms "[35]" appears in only two places: once here in the body, and once on page 14 in the reference list. \textbackslash \textbackslash \textbackslash \textbackslash  WHAT THIS MEANS OPERATIONALLY: \textbackslash \textbackslash \textbackslash \textbackslash  (1) THE SENSOR IS CHEN'S OWN GROUP'S PRIOR WORK, not a     third-party part. Reference [35]'s author list — J. Hu, Z.     Chen, K. Lao, H. Liang, X. Huang, Z. Li, J. Huang, X. Hu,     B. Liang, D. Ye, J. Wen, J. Luo — has heavy overlap with     the Chen paper's own author list (Z. Chen, J. Wen, J. Luo     appear in both; same Wuyi University research center, same     Guangdong province funding). So the "core source     instrumentation paper" is a self-citation to the same     lab's 2021 IEEE Sensors paper that originally developed     the carbon-fiber-beam pressure sensor. \textbackslash \textbackslash \textbackslash \textbackslash  (2) THE ALLUSION IS MINIMAL — a single "[35]" token, no     accompanying descriptive phrase (not "as described in     [35]", not "see [35] for details", just "[35]"). The     reader is expected to recognize that the pressure sensor's     design, characterization, and calibration are all deferred     to that one cited paper. There is no discussion in Chen     (this paper) of what makes the sensor design a "cascade     amplification effect" or why carbon-fiber-beam current-path     geometry matters — those details live only in [35]. \textbackslash \textbackslash \textbackslash \textbackslash  (3) THIS EXPLAINS THE SILENCE ON CALIBRATION (ask-question     entry 5): the Chen paper is NOT an instrumentation paper     for the pressure sensor — it's an instrumentation paper     for the whole scanning system that HAPPENS to use the     group's earlier pressure sensor. Calibration of the sensor     itself is an already-solved problem per [35], so Chen     correctly doesn't re-derive or re-validate it. The same     pattern appears elsewhere in the paper: Shore hardness     measurement procedure [37], softness-perception physiology     [38], encapsulation-layer-stiffness characterization [40]     are all delegated via citation. \textbackslash \textbackslash \textbackslash \textbackslash  IMPORTANT CLARIFICATION OF "ALLUDE":   - If "allude" means "cites at least once in the body" \$\textbackslash to\$     YES (this sentence on page 5).   - If "allude" means "discusses substantively in the prose"     (e.g., summarizes the sensor's working principle, reports     its calibration curve, compares it to alternatives) \$\textbackslash to\$     NO — the paper never describes reference [3... [truncated in sticky; see journal for full]}\sethlcolor{hlcyan}\hl{As shown in Figs.~2 and 3, the probe module of the tactile
+tomography system was assembled from a shell structure, a tip, two
+springs, and a carbon fiber beams based pressure sensor [35].} To
+achieve high scanning resolution without penetrating the soft layer
+of the sample, the tip was designed with a diameter of 0.5 mm. The
+springs are positioned behind the tip to transmit the force from
+the tip to the pressure sensor and to restore the tip's position.
+\pdfcomment[icon=Comment,color=cyan]{User input: How does their Force sensor know the value of the force?\textbackslash \textbackslash Claude comments: PARTIAL ANSWER. \textbackslash \textbackslash \textbackslash \textbackslash  The paper answers HOW the sensor transduces force into a machine-readable value, but does NOT answer HOW that raw value is mapped to force in SI units (i.e., the calibration from resistance-in-ohms to force-in-newtons or pressure-in-MPa). This is the companion question to ask-question entry 5 (null on calibration procedure). \textbackslash \textbackslash \textbackslash \textbackslash  WHAT THE EXCERPT TELLS YOU (the transduction chain, verbatim): \textbackslash \textbackslash \textbackslash \textbackslash  (1) PHYSICAL TRANSDUCTION: the pressure sensor is "based on     carbon fiber beams" and "responds to the force exerted by     the springs." The carbon-fiber-beam design [ref 35, Hu et     al. 2021, IEEE Sens. J.] is piezoresistive — applied force     bends the carbon-fiber beams, which changes their electrical     resistance. The springs between tip and sensor transmit the     normal force from the tip onto the beam array. \textbackslash \textbackslash \textbackslash \textbackslash  (2) SIGNAL ACQUISITION: "The resistance value of the pressure     sensor changes when the tip of the probe module touches the     surface of the sample. This resistance value is collected by     an ADS1247 acquisition chip, which converts the analog signal     into a digital signal." The ADS1247 is a 24-bit     delta-sigma ADC commonly used with resistive sensors (TI     part, typically bridge-excited). The raw resistance becomes     a digital count. \textbackslash \textbackslash \textbackslash \textbackslash  (3) THRESHOLD COMPARISON: "The digital signal is then transmitted     to an STM32F030C8T6 microprocessor, where it is identified     as the first threshold." The MCU compares the digitized     reading against a pre-set threshold (set in software) to     decide whether the probe has hit the target force; no     conversion to SI force units is described. \textbackslash \textbackslash \textbackslash \textbackslash  WHAT THE EXCERPT DOES NOT TELL YOU: \textbackslash \textbackslash \textbackslash \textbackslash    - The piezoresistive gain coefficient (how many ohms per     newton, or per MPa).   - Whether the raw resistance is zero-corrected, temperature-     compensated, or hysteresis-corrected.   - The procedure that maps the set-threshold integer (used by     the STM32 firmware) to the pressure values reported in     Results (0.5, 1.5, 2.5, 4, 6, 8, 13 MPa).   - Whether the "pressure" values quoted throughout Results are     MEASURED by this sensor or COMMANDED to the rodless     cylinder's pneumatic regulator (these are two very different     things — commanded set-point vs. sensor-read actual force). \textbackslash \textbackslash \textbackslash \textbackslash  So the honest answer to "how does their force sensor KNOW the value of the force?" is: \textbackslash \textbackslash \textbackslash \textbackslash    - It SENSES force via carbon-fiber-beam piezoresistance     (documented in this excerpt).   - It ACQUIRES the sensed ... [truncated in sticky; see journal for full]}\sethlcolor{hlcyan}\hl{The pressure sensor, which is based on carbon fiber beams, is
+capable of quantitatively measuring force and responds to the force
+exerted by the springs. Consequently, the probe module can
+accurately capture force information when the tip makes contact
+with the sample.}
+
+\subsection*{2.3.\ Closed-loop feedback control system}
+
+A programmable logic controller (PLC) (H2U-48MT, Henchman) was
+integrated with the scanning module and the probe module to
+establish a closed-loop feedback control system. The workflow of
+the tactile tomography system is shown in Fig.~4. Firstly, scanning
+paths, scanning speed, and scanning step were programmed. The PLC
+control the X and Y axes to drive the sample to move until the
+target scanning point is right under the tip, and then the rodless
+cylinder of the Z axis drive the probe down. \sethlcolor{hlcyan}\hl{The resistance value
+of the pressure sensor changes when the tip of the probe module
+touches the surface of the sample. This resistance value is
+collected by an ADS1247 acquisition chip, which converts the analog
+signal into a digital signal. The digital signal is then
+transmitted to an STM32F030C8T6 microprocessor, where it is
+identified as the first threshold.} Meanwhile, the position
+information of $Z_0$ is read by the grating sensor, and the
+microprocessor sends this position information to the PLC. The
+rodless cylinder then continues to drive the probe downward, while
+the grating sensor reads a series of positional data as the
+resistance value of the pressure sensor reaches specific
+characteristic thresholds. The PLC stops and resets the probe once
+the resistance value of the pressure sensor attains the target
+threshold. \pdfcomment[icon=Comment,color=yellow]{User input: where they talk about stitching together local estimates to create a global map \textbackslash \textbackslash Claude comments: This is the canonical workflow statement of Chen's local-to-global stitching: scan one point → record (x, y, z) threshold data → advance to next point → repeat until the whole preset area is covered → aggregate all per-point (x, y, z) tuples into projection data → reconstruct a 3D image. That is literally "stitch local estimates into a global map." \textbackslash \textbackslash \textbackslash \textbackslash  The three ingredients in the user's cue map 1:1 to the excerpt:   - "local estimates" = "positional information (x, y, z) corresponding to                         each threshold" (one tuple per scanning point)   - "stitching" = "saved as projection data" + "drive the sample to the                   next scanning point until all preset areas have been                   scanned" (sequential accumulation across the grid)   - "global map" = "reconstruct a 3D image of the internal structure of                    the sample" \textbackslash \textbackslash \textbackslash \textbackslash  ALTERNATIVE PASSAGE CONSIDERED: Page 6, Section 3.2, has a more literal "combining" sentence: "Significantly, by combining the compression depth and its corresponding location information (x and y), Fig. 7c also shows the internal hierarchical structure of the sample, indicating that the tactile tomography system can obtain the internal structure information of the sample with a soft surface layer based on tactile softness of materials." This is a demonstration-scoped statement (tied to Fig. 7c) rather than the general workflow. I picked the page 5 passage because it is the methodological definition, not a per-experiment instance — so it carries the general claim the user was pointing at. \textbackslash \textbackslash \textbackslash \textbackslash  Additional relevant context (not excerpted): page 10 discusses the TRADE-OFF in this stitching workflow — "The low number of scanning points make the projection data insufficient, which causes poor quality of the reconstructed 3D images. Therefore, increasing the scanning speed is one effective strategy to achieve both high scanning efficiency and imaging quality." This confirms that the "stitch local to global" architecture is exactly what bottlenecks the method (sparse point sampling → poor 3D reconstruction), which is coherent with the methodological-class critique you recorded in the cluster-analysis verdict. }\sethlcolor{hlyellow}\hl{The X and Y axes then drive the sample to the next
+scanning point until all preset areas have been scanned. The
+positional information $(x, y, z)$ corresponding to each threshold
+is saved as projection data to reconstruct a 3D image of the
+internal structure of the sample. This projection data is stored
+in a CSV file and displayed in real time through a visual
+interface.}
+
+\section*{3.\ Imaging principle of tactile tomography}
+
+\subsection*{3.1.\ Softness recognition of tactile tomography system}
+
+The ability of a material sample to resist the penetration of hard
+objects into its surface is known as hardness, which is an intrinsic
+property of the material. [36]. According to different measurement
+approach and standard, hardness can be subdivided into Rockwell
+hardness, Vickers hardness, Shore hardness, and Brinell hardness.
+Among these hardness measurements, Shore hardness has been widely
+applied to the hardness testing of soft materials, such as
+elastomers, rubber, soft plastics, and foam [37]. Therefore, the
+softness of soft matter can be characterized by Shore hardness,
+which exhibits a negative correlation with softness. The tactile
+tomography system can
+
+\end{document}

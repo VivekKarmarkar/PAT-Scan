@@ -1,0 +1,74 @@
+                 This article has been accepted for publication in IEEE Robotics and Automation Letters. This is the author's version which has not been fully edited and
+                                           content may change prior to final publication. Citation information: DOI 10.1109/LRA.2026.3673907
+
+2                                                                 IEEE ROBOTICS AND AUTOMATION LETTERS. PREPRINT VERSION. ACCEPTED FEBRUARY, 2026
+
+
+
+shelf F/T sensor ensures portability, cost-effectiveness, and                              Improvement has been used as an acquisition function to
+broader applicability of the proposed framework. We couple                                 improve stiffness estimation [13], and later extended with a
+a force-based contact model implemented via the Dimen-                                     utility-guided approach [16] that incorporates prior beliefs and
+sionality Reduction Method (DRM) [18] with an ergodic                                      penalises excessive motion. Chalasani et al. proposed a method
+exploration strategy to efficiently construct stiffness maps,                              that employs GPR to estimate tissue stiffness, which is then
+where the robot explores the environment in proportion to the                              used as a prior to fit a second GPR model for reconstructing
+Expected Information Density (EID). To plan trajectories, we                               the tissue surface geometry [21]. In a follow-up study, they
+employ the Heat Equation Driven Area Coverage (HEDAC)                                      extended this approach to support online stiffness mapping
+algorithm [19], a real-time ergodic controller that balances                               during surgery [22]. A critical limitation of BO is that explo-
+exploration and exploitation at 100 Hz. This replaces earlier                              ration and exploitation are handled sequentially through the
+ergodic control methods, like Spectral Multiscale Coverage                                 choice of the acquisition function. As a result, BO may focus
+(SMC), which was limited to 4 Hz as reported in [16]. The                                  excessively on promising regions, thereby overlooking smaller
+proposed framework is evaluated in simulation and real-world                               or subtler areas that could yield informative measurements.
+experiments, including validation on a silicone sample with a
+stiff inclusion (Fig. 1), demonstrating robust performance and,                            B. Ergodic Exploration
+in some cases, superior detection and boundary delineation
+compared to BO. To summarise, the main contributions of                                       Ergodic control has emerged as a compelling alternative to
+this paper are:                                                                            BO for tasks that involve spatially distributed information,
+   • The design of an EID tailored to autonomous stiffness
+                                                                                           where exploration must account for system dynamics. Un-
+      mapping, which explicitly combines uncertainty, stiffness                            like point-wise optimisation strategies, which select discrete
+      magnitude, and spatial gradients to guide ergodic explo-                             sampling locations, ergodic control generates trajectories that
+      ration toward diagnostically relevant regions;                                       allocate time across the environment proportionally to the EID,
+   • A closed-loop combination between online force-based
+                                                                                           making it well suited for continuous spatial estimation tasks.
+      viscoelastic parameter estimation and ergodic trajectory                             Mathew and Mezić [23] introduced the Spectral Multiscale
+      planning, where stiffness estimates continuously reshape                             Coverage (SMC) framework, using Fourier-based metrics to
+      the information objective driving exploration;                                       quantify how well a trajectory covers a given spatial distri-
+   • A real-time implementation of ergodic palpation using
+                                                                                           bution. Miller et al. [24] demonstrated the use of ergodic
+      HEDAC, enabling continuous exploration–exploitation                                  control for information-guided exploration, integrating the
+      trade-offs at 100 Hz with continuous motion;                                         Linear Quadratic Regulator (LQR) formulation of SMC [25].
+   • A convergence-based stopping criterion derived from the
+                                                                                           However, the high computational cost of optimisation limited
+      ergodic metric.                                                                      real-time adaptation. Ayvali et al. [16] presented the first
+                                                                                           application of ergodic control to palpation tasks using SMC,
+                                                                                           concluding that BO achieved superior performance, particu-
+                      II. R ELATED W ORK
+                                                                                           larly when prior information was available. Conversely, our
+   Typically, search algorithms rely on three key components:                              results indicate the opposite trend, highlighting the potential of
+(i) a model of the underlying distribution, (ii) a strategy to                             ergodic control for robotic palpation. The main reason is that
+select the next sampling location, and (iii) a mechanism to                                SMC often prioritises global exploration and can suffer from
+store and update the collected data. Although Gaussian Process                             over-sampling already explored regions, while its reliance on
+Regression (GPR) [20] is widely adopted to model spatially                                 spectral transforms poses challenges for real-time deployment.
+varying physical properties (ii), such as tissue stiffness, the                            To address these limitations, Ivic et al. [19] proposed HEDAC,
+choice of sampling strategy (i) and planning (iii) remains an                              which leverages radial basis functions and a potential field
+active area of research.                                                                   derived from a stationary heat equation to compute smooth lo-
+                                                                                           cal trajectories. This method improves scalability and enables
+A. Bayesian Optimisation for Palpation                                                     real-time implementation, avoiding the computational burden
+   Several studies have employed BO to guide robotic palpa-                                of Fourier analysis.
+tion to reduce the number of probing actions while maximising
+information gain. For example, Garg et al. [12] investigated                                                              III. M ETHODOLOGY
+how different acquisition functions affect the estimated stiff-                               In this work, we combine online force-based parameter esti-
+ness map, showing how their choice influences both peak                                    mation using a viscoelastic tissue model with real-time ergodic
+detection and regional estimation. Yan et al. [15] highlighted a                           control implemented via HEDAC, enabling continuous robotic
+key limitation of BO: while it excels at locating stiffness peaks,                         palpation without tactile sensors and without sacrificing spatial
+it struggles to delineate their boundaries accurately. To address                          coverage or responsiveness. While ergodic control and online
+this, they proposed a two-step approach combining BO-based                                 viscoelastic estimation have been previously investigated, we
+search and boundary refinement using a radial strategy orig-                               show that effective ergodic palpation critically depends on the
+inating from the centroid of the estimated region. However,                                definition of the target distribution guiding exploration. We
+this strategy requires a reliable estimation of the centroid,                              therefore propose an EID tailored to stiffness mapping and
+which may not be guaranteed after exploration, and may be                                  lesion detection, which balances exploration and exploitation
+less adaptive to irregular or non-convex boundaries. Expected                              by jointly considering uncertainty, stiffness magnitude, and
+
+
+                 This work is licensed under a Creative Commons Attribution 4.0 License. For more information, see https://creativecommons.org/licenses/by/4.0/
+

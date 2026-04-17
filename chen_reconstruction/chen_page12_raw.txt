@@ -1,0 +1,85 @@
+Z. Chen et al.                                                                                                                           Measurement 264 (2026) 120300
+
+
+                            (a)
+                                          0.3
+
+
+
+
+                             Depth (mm)
+                                          0.2
+
+
+
+
+                                          0.1
+
+
+                                                                              Applied pressure: 4 MPa
+                                          0.0
+                                                    0          50           100          150          200          250           300
+
+                             (b)                                                     Cycles
+
+                                                Before cycles scanning
+
+
+
+
+                                                FPCB with encapsulated layer
+                             (c)
+                                                After 300 cycles scanning                                                 Indentation
+
+
+
+
+                                                FPCB with encapsulated layer
+                             (d)
+                                                After 300 cycles scanning
+
+
+
+
+                                                FPCB without encapsulated layer
+Fig. 16. Fatigue testing of encapsulated flexible printed circuit board. (a) Compression depth of the probe tip at the test point of the encapsulated FPCB under 300
+cycles of scanning. (b) Microscope image of the test point of the encapsulated FPCB before scanning (c) Microscope image of the test point of the encapsulated FPCB
+after 300 cycles scanning (d) Microscope image of the test point of the FPCB after 300 cycles scanning.
+
+
+scanned by the tactile tomography system with a scanning speed and                       encapsulated FPCBs sample without any defect was scanned by the
+scanning step of 2.4 mm/s & 0.5 mm under a constant pressure of 4 MPa.                   tactile tomography system with a scanning speed and scanning step of
+Fig. 14d, e, and f presents the reconstructed 3D images corresponding to                 0.6 mm/s & 0.5 mm under an effective scanning range of 28*10 mm2
+the soft surface layer of AB glue, PDMS, and Ecoflex, respectively. All                  (Fig. 15c). The reconstructed 3D image is shown in Fig. 15e, in which the
+these 3D images successfully reconstructed the topographical profile of                  layout of the copper lines was completely reproduced, demonstrating
+the spherical cap model beneath the soft surface layer of AB glue, PDMS,                 that the tactile tomography system can detect and image the internal
+and Ecoflex, indicating that the tactile tomography system has excellent                 structure of flexible wearable devices without peeling off the encapsu­
+universality for different materials.                                                    lated layer. To investigate the defect detection of the encapsulated FPCB,
+                                                                                         three defects of open the copper lines on the FPCB were made (as shown
+                                                                                         in Fig. 15d). These defects can be found easily on the reconstructed 3D
+4.6. Application in nondestructive testing of encapsulated flexible printed
+                                                                                         image in Fig. 15f, meaning that the tactile tomography system possesses
+circuit boards (FPCBs)
+                                                                                         the capability for defect detection in encapsulated FPCBs. For compar­
+                                                                                         ison, ultrasonic imaging (Ultrasonic detection system, Feli 650) was also
+    Defect Detection of encapsulated flexible printed circuit boards
+                                                                                         employed to inspect the same encapsulated FPCB sample, the corre­
+(FPCBs) is one of the most promising applications for the tactile to­
+mography system. FPCBs as a popular substrate has been widely used in                    sponding ultrasonic C-scan images are presented in Fig. 15g and h. In
+                                                                                         Fig. 15g, the ultrasonic image of the intact encapsulated FPCB shows a
+flexible wearable devices [39]. In practice, flexible wearable devices are
+usually encapsulated with a soft layer to protect them from the outside                  relatively blurred circuit pattern, and in Fig. 15h, when defects exist, the
+                                                                                         ultrasonic image fails to clearly delineate the defects. This is because
+environment without sacrificing their flexibility [40]. However, the
+current research mainly focuses on the defect detection of FPCBs                         ultrasonic imaging is susceptible to the influence of the encapsulation
+                                                                                         layer. The acoustic properties of the encapsulation material differ from
+without packaging. Therefore, nondestructive testing of encapsulated
+FPCBs is still a challenge. As shown in Fig. 15a, an FPCB sample con­                    those of the FPCB, causing scattering and attenuation of ultrasonic
+                                                                                         waves, which degrades the imaging quality and makes it difficult to
+sisting of PI and copper lines was purchased, and it was then encapsu­
+lated with a soft layer of AB glue, which was dyed black to prevent                      accurately identify internal defects. This limitation arises from the
+                                                                                         acoustic impedance mismatch and the wave-damping nature of the soft
+detection by the human eye and optical microscope (Fig. 15b). The
+
+                                                                                    12
+

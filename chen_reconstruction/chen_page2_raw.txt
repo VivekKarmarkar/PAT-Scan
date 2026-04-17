@@ -1,0 +1,65 @@
+Z. Chen et al.                                                                                                                      Measurement 264 (2026) 120300
+
+
+
+
+                                                     Fig. 1. Schematic diagram of the tactile tomography system.
+
+
+                                                                                      their application to external feature analysis. AFM equipped with a
+                                                                     Data             micro-cantilever is highly sensitive to weak force. One end of the micro-
+                                                                collection and        cantilever is fitted with a tip. Surface imaging of AFM relies on the
+                                                                processing cell
+                                                                                      interactive forces between the tip and the sample, and it can operate in
+                                       Z-stage
+                                                                                      three basic modes: contact mode, non-contact mode, and tapping mode
+                                                                                      [25]. The interactive forces may include Van Der Walls forces, electro­
+                                                                                      static forces, or magnetic forces, which cause the micro-cantilever to
+                                      X-stage                                         deform or vibrate. This deformation or vibration can be used to infer the
+                                                                                      surface morphology and physical properties of the sample. Currently,
+                                                                                      AFM can provide detailed information about surface morphology,
+        Computer
+                                                                                      roughness, height, thickness, and phase diagrams with a high resolution
+                                     Y-stage                                          of 5 nm [26]. Consequently, AFM has been widely utilized in materials
+                                                                  Probe
+                                                                                      science, surface science, biomedicine, and other fields. In addition, AFM
+                                                                                      has developed several derivative modes, including kelvin probe force
+                                                                  Grating
+                                                                  sensor
+                                                                                      microscopy (KPFM), piezoresponse force microscopy (PFM), peak force
+                                                                                      quantitative nano-mechanics mapping (PF-QNM), conducting atomic
+                                                                                      force microscopy (C-AFM), and lateral force microscopy (LFM) [27–31].
+                                                   PLC                                Beyond detecting surface morphology, these derived imaging modes
+                                                                                      offer unique functionalities. For instance, KPFM can measure work
+          Fig. 2. Photograph of the overall tactile tomography system.                function and surface potential [27], PFM can provide information about
+                                                                                      electric domains [28], and PF-QNM can yield data on Young’s modulus,
+more adept at obtaining 3D surface morphology, offering advantages                    adhesive force, and maximum deformation [29]. Although these AFM-
+such as high precision, good repeatability, and ease of operation                     derived imaging modes contribute to the abundant functions of the
+[23,24]. However, as both are restricted to surface profiling, they cannot            mechanical principle-based imaging technologies [30,31], they suffer
+penetrate beneath the surface or resolve internal structures, limiting                from critical limitations for internal imaging. They rely on surface in­
+                                                                                      teractions with a penetration depth of less than 100 nm, limiting
+
+                                                     Z-axes rodless                        Grating sensor
+                                                        cylinder
+                                                                                                             .....
+
+
+
+
+                                                  Probe
+                                                                                                                      Pressure sensor
+                               X-axes linear
+                           sliding table module
+
+
+                                                  Sample                                                           150 mm
+                               Y-axes linear
+                               sliding table
+                                  module
+                                                                                                      0.5 mm
+
+
+                                                 Fig. 3. Mechanical design of the scanning module and probe module.
+
+                                                                                  2
+

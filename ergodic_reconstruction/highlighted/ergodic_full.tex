@@ -1,0 +1,1186 @@
+\documentclass[11pt]{article}
+
+\usepackage[margin=1in]{geometry}
+\usepackage{amsmath, amssymb}
+\usepackage{mathrsfs}
+\usepackage{bm}
+\usepackage{xcolor}
+\usepackage{fancyhdr}
+\usepackage{booktabs}
+\usepackage{multirow}
+\usepackage{array}
+\usepackage{url}
+\usepackage{soul}
+\usepackage{pdfcomment}
+\definecolor{hlyellow}{RGB}{255,255,170}
+\definecolor{hlcyan}{RGB}{170,255,255}
+\definecolor{hlgreen}{RGB}{170,255,170}
+\definecolor{hlpink}{RGB}{255,170,170}
+\definecolor{hlorange}{RGB}{255,221,170}
+
+\pagestyle{plain}
+
+
+\begin{document}
+
+% =========== Page 1: ergodic_page1.tex ===========
+\setcounter{equation}{0}
+
+% ---------- IEEE acceptance banner ----------
+\begin{center}
+\footnotesize
+\pdfcomment[color=green,subject={},open=false,opacity=0.7]{User input: that paper was PUBLISHED after Fall 2025 in ergodic exploration paper\\Claude comments: EVIDENTIAL RELATIONSHIP: supports. DOI embeds 2026; masthead states ACCEPTED FEBRUARY, 2026. Fall 2025 ended by mid-December 2025; Feb 2026 is $\sim$2 months after.}\sethlcolor{hlgreen}\hl{This article has been accepted for publication in IEEE Robotics and
+Automation Letters. This is the author's version which has not been
+fully edited and content may change prior to final publication.
+Citation information: DOI 10.1109/LRA.2026.3673907}
+
+\vspace{0.3em}
+\textbf{\sethlcolor{hlgreen}\hl{IEEE ROBOTICS AND AUTOMATION LETTERS. PREPRINT VERSION.
+ACCEPTED FEBRUARY, 2026}}
+\end{center}
+
+\vspace{1em}
+
+% ---------- Title block ----------
+\begin{center}
+{\Large\bfseries Autonomous Robotic Tissue Palpation and Abnormalities
+Characterisation via Ergodic Exploration}
+
+\vspace{0.8em}
+
+{\normalsize Luca Beber$^{1}$, Edoardo Lamon$^{1}$,
+Matteo Saveriano$^{2}$, Daniele Fontanelli$^{2}$, and
+Luigi Palopoli$^{1}$}
+\end{center}
+
+\vspace{0.8em}
+
+% ---------- Abstract ----------
+\noindent\textbf{Abstract}---We propose a novel autonomous robotic
+palpation framework for real-time elastic mapping during tissue
+exploration using a viscoelastic tissue model. The method combines
+force-based parameter estimation using a commercial force/torque
+sensor with an ergodic control strategy driven by a tailored Expected
+Information Density, which explicitly biases exploration toward
+diagnostically relevant regions by jointly considering model
+uncertainty, stiffness magnitude, and spatial gradients. An Extended
+Kalman Filter is employed to estimate viscoelastic model parameters
+online, while Gaussian Process Regression provides spatial modelling
+of the estimated elasticity, and a Heat Equation Driven Area Coverage
+controller enables adaptive, continuous trajectory planning.
+Simulations on synthetic stiffness maps demonstrate that the proposed
+approach achieves better reconstruction accuracy, enhanced
+segmentation capability, and improved robustness in detecting stiff
+inclusions compared to Bayesian Optimisation-based techniques.
+Experimental validation on a silicone phantom with embedded inclusions
+emulating pathological tissue regions further corroborates the
+potential of the method for autonomous tissue characterisation in
+diagnostic and screening applications.
+
+\vspace{0.6em}
+
+\noindent\textbf{Index Terms}---Medical Robots and Systems;
+Sensor-based Control; Force and Tactile Sensing.
+
+\vspace{0.8em}
+
+% ---------- Fig. 1 placeholder ----------
+\begin{center}
+\fbox{\begin{minipage}[c][6cm][c]{0.90\textwidth}
+\centering
+\textbf{Fig. 1.}\ Experimental setup for the proposed ergodic search.\\[4pt]
+\textcolor{gray}{\footnotesize
+\textbf{(bottom-left)} silicone sample (Ecoflex-0030 matrix with a
+DragonSkin-30NV spherical inclusion);\\
+\textbf{(top-left)} ground-truth elasticity map (Elastic Modulus in kPa)
+obtained using a grid-based approach;\\
+\textbf{(right)} the UR3e robotic manipulator palpating the silicone
+sample. Labelled components: F/T Sensor (Bota SensOne, between flange
+and indenter) and Indenter (3D-printed spherical tip, 5 mm radius).}
+\end{minipage}}
+\end{center}
+
+\vspace{0.4em}
+
+\textbf{Fig. 1.}\ Experimental setup for the proposed ergodic search:
+(bottom-left) silicone sample; (top-left) ground-truth elasticity map
+obtained using a grid-based approach; (right) the robotic manipulator
+palpating the silicone sample.
+
+\vspace{1em}
+
+% ---------- Section I ----------
+\section*{I.\ Introduction}
+
+\textbf{P}ALPATION is a fundamental clinical procedure that allows
+physicians, by touch, to assess tissue stiffness, texture, and the
+presence of abnormalities such as tumours or swollen lymph nodes [1].
+Its speed and non-invasiveness make it crucial for early diagnosis,
+particularly of conditions such as breast cancer. However, palpation
+is inherently subjective and sensitive to inter-practitioner
+variability, which may compromise diagnostic accuracy and
+repeatability for small or deep-seated lesions. For this reason,
+physical examinations are often complemented or replaced by imaging
+techniques such as mammography, the gold standard for early detection
+[2], and ultrasound [3].
+
+Accurate assessment of tissue mechanics is equally critical in
+robot-assisted minimally invasive surgery (RMIS), where robots must
+adapt to variable stiffness for safe navigation and manipulation,
+especially for autonomous systems operating with minimal human
+supervision [4]. To support such needs, several technologies have
+emerged. Imaging-based elastography methods, e.g., ultrasound [5],
+magnetic resonance [6], or laser-based methods [7], estimate tissue
+stiffness but typically provide relative measures, are costly or slow,
+and cannot be easily integrated into RMIS. Tactile sensing, in
+contrast, offers real-time, quantitative stiffness measurements by
+capturing force and deformation. Previous works have shown its
+potential to reduce applied forces, shorten procedures, and improve
+surgical outcomes [8], [9]. Early stiffness mapping used uniform
+probing grids [10], [11], while later methods adopted Bayesian
+Optimisation (BO) to reduce the number of probing actions [12]--[14],
+often coupled with custom tactile sensors [8], [9], [15], guided by
+anatomical priors [16] or with ad-hoc refined segmentation strategies
+[15], [17].
+
+In this work, we propose a method for autonomous robotic palpation
+that enables continuous estimation of elastic tissue stiffness using
+a viscoelastic contact model, relying solely on a commercial
+force/torque (F/T) sensor. The use of a viscoelastic model allows
+more accurate representation of tissue dynamics during palpation
+compared to purely elastic formulations, while abnormality
+characterisation in this work focuses on the estimated elastic
+stiffness. \pdfcomment[color=orange,subject={},open=false,opacity=0.7]{User input: that the Ergodic exploration paper has instrumentation that is designed for EASY ADOPTION meaning that people bad at experiments can use it and so can people just use it at home - that the barrier for adoption is LOW\\Claude comments: EVIDENTIAL RELATIONSHIP: partially\_supports. Low-barrier thesis strongly supported (off-the-shelf, portability, cost-effectiveness, broader applicability, standard-platform compatibility). But 'home use' and 'non-experts' are NOT claimed by the paper; target audience is robotics/RMIS research community.}\sethlcolor{hlorange}\hl{This sensing strategy provides a practical alternative to
+methods based on embedded or specialised sensors, which typically
+require customised hardware integration and lack compatibility with
+standard robotic platforms. In contrast, the use of an off-the-}
+
+\vspace{1em}
+
+% ---------- Footer: submission + affiliations ----------
+\noindent\rule{0.4\textwidth}{0.4pt}\\[4pt]
+{\footnotesize
+Manuscript received: October, 15, 2025; Revised December, 16, 2025;
+Accepted February, 23, 2026.\\[2pt]
+This paper was recommended for publication by Editor Burgner-Kahrs
+Jessica upon evaluation of the Associate Editor and Reviewers'
+comments. This research has been funded by the the PNRR project
+FAIR - Future AI Research (PE00000013), by the European Union
+projects INVERSE (GA no.~101136067) and MAGICIAN (GA no.~101120731)
+and by the MUR Departments of Excellence 2023-27 program
+(L.232/2016).\\[2pt]
+$^{1}$ Department of Information Engineering and Computer Science,
+University of Trento, Trento, Italy. \texttt{name.surname@unitn.it}\\[2pt]
+$^{2}$ Department of Industrial Engineering, University of Trento,
+Trento, Italy. \texttt{name.surname@unitn.org}\\[2pt]
+Digital Object Identifier (DOI): see top of this page.\\[6pt]
+This work is licensed under a Creative Commons Attribution 4.0
+License. For more information, see
+\texttt{https://creativecommons.org/licenses/by/4.0/}
+}
+
+\newpage
+
+% =========== Page 2: ergodic_page2.tex ===========
+\setcounter{equation}{0}
+
+% ---------- Continuation of Section I Introduction ----------
+\sethlcolor{hlorange}\hl{shelf F/T sensor ensures portability, cost-effectiveness, and broader
+applicability of the proposed framework.} We couple a force-based
+contact model implemented via the Dimensionality Reduction Method
+(DRM) [18] with an ergodic exploration strategy to efficiently
+construct stiffness maps, where the robot explores the environment
+in proportion to the Expected Information Density (EID). To plan
+trajectories, we employ the Heat Equation Driven Area Coverage
+(HEDAC) algorithm [19], a real-time ergodic controller that balances
+exploration and exploitation at 100 Hz. This replaces earlier ergodic
+control methods, like Spectral Multiscale Coverage (SMC), which was
+limited to 4 Hz as reported in [16]. The proposed framework is
+evaluated in simulation and real-world experiments, including
+validation on a silicone sample with a stiff inclusion (Fig.~1),
+demonstrating robust performance and, in some cases, superior
+detection and boundary delineation compared to BO.
+
+To summarise, the main contributions of this paper are:
+\begin{itemize}
+\item The design of an EID tailored to autonomous stiffness mapping,
+  which explicitly combines uncertainty, stiffness magnitude, and
+  spatial gradients to guide ergodic exploration toward diagnostically
+  relevant regions;
+\item \pdfcomment[color=yellow,subject={},open=false,opacity=0.7]{User input: that the ergodic exploration paper is an example of adaptive sampling\\Claude comments: Cleanest statement of the paper's adaptive-sampling architecture. The phrase 'stiffness estimates continuously reshape the information objective driving exploration' is the feedback-loop signature of adaptive sampling: the sampling policy is continuously updated based on what has been learned, rather than fixed in advance. Alternatives: page 1 abstract (trajectory-focused), page 8 conclusion (mechanism implicit), page 3 Eq. 3 $\alpha(t)$ (mathematical but not prose). The page-2 bullet wins on being both self-contained and mechanism-explicit.}\sethlcolor{hlyellow}\hl{A closed-loop combination between online force-based
+  viscoelastic parameter estimation and ergodic trajectory planning,
+  where stiffness estimates continuously reshape the information
+  objective driving exploration;}
+\item A real-time implementation of ergodic palpation using HEDAC,
+  enabling continuous exploration--exploitation trade-offs at 100 Hz
+  with continuous motion;
+\item A convergence-based stopping criterion derived from the
+  ergodic metric.
+\end{itemize}
+
+% ---------- Section II ----------
+\section*{II.\ Related Work}
+
+Typically, search algorithms rely on three key components: (i) a
+model of the underlying distribution, (ii) a strategy to select the
+next sampling location, and (iii) a mechanism to store and update the
+collected data. Although Gaussian Process Regression (GPR) [20] is
+widely adopted to model spatially varying physical properties (ii),
+such as tissue stiffness, the choice of sampling strategy (i) and
+planning (iii) remains an active area of research.
+
+\subsection*{A.\ Bayesian Optimisation for Palpation}
+
+Several studies have employed BO to guide robotic palpation to reduce
+the number of probing actions while maximising information gain. For
+example, Garg et al.\ [12] investigated how different acquisition
+functions affect the estimated stiffness map, showing how their
+choice influences both peak detection and regional estimation. Yan
+et al.\ [15] highlighted a key limitation of BO: while it excels at
+locating stiffness peaks, it struggles to delineate their boundaries
+accurately. To address this, they proposed a two-step approach
+combining BO-based search and boundary refinement using a radial
+strategy originating from the centroid of the estimated region.
+However, this strategy requires a reliable estimation of the
+centroid, which may not be guaranteed after exploration, and may be
+less adaptive to irregular or non-convex boundaries. Expected
+Improvement has been used as an acquisition function to improve
+stiffness estimation [13], and later extended with a utility-guided
+approach [16] that incorporates prior beliefs and penalises excessive
+motion. Chalasani et al.\ proposed a method that employs GPR to
+estimate tissue stiffness, which is then used as a prior to fit a
+second GPR model for reconstructing the tissue surface geometry [21].
+In a follow-up study, they extended this approach to support online
+stiffness mapping during surgery [22]. A critical limitation of BO
+is that exploration and exploitation are handled sequentially through
+the choice of the acquisition function. As a result, BO may focus
+excessively on promising regions, thereby overlooking smaller or
+subtler areas that could yield informative measurements.
+
+\subsection*{B.\ Ergodic Exploration}
+
+Ergodic control has emerged as a compelling alternative to BO for
+tasks that involve spatially distributed information, where
+exploration must account for system dynamics. Unlike point-wise
+optimisation strategies, which select discrete sampling locations,
+ergodic control generates trajectories that allocate time across the
+environment proportionally to the EID, making it well suited for
+continuous spatial estimation tasks. Mathew and Mezi\'c [23]
+introduced the Spectral Multiscale Coverage (SMC) framework, using
+Fourier-based metrics to quantify how well a trajectory covers a
+given spatial distribution. Miller et al.\ [24] demonstrated the use
+of ergodic control for information-guided exploration, integrating
+the Linear Quadratic Regulator (LQR) formulation of SMC [25].
+However, the high computational cost of optimisation limited
+real-time adaptation. Ayvali et al.\ [16] presented the first
+application of ergodic control to palpation tasks using SMC,
+concluding that BO achieved superior performance, particularly when
+prior information was available. Conversely, our results indicate
+the opposite trend, highlighting the potential of ergodic control
+for robotic palpation. The main reason is that SMC often prioritises
+global exploration and can suffer from over-sampling already explored
+regions, while its reliance on spectral transforms poses challenges
+for real-time deployment. To address these limitations, Ivic et al.\
+[19] proposed HEDAC, which leverages radial basis functions and a
+potential field derived from a stationary heat equation to compute
+smooth local trajectories. This method improves scalability and
+enables real-time implementation, avoiding the computational burden
+of Fourier analysis.
+
+% ---------- Section III opening ----------
+\section*{III.\ Methodology}
+
+In this work, we combine online force-based parameter estimation
+using a viscoelastic tissue model with real-time ergodic control
+implemented via HEDAC, enabling continuous robotic palpation without
+tactile sensors and without sacrificing spatial coverage or
+responsiveness. While ergodic control and online viscoelastic
+estimation have been previously investigated, we show that effective
+ergodic palpation critically depends on the definition of the target
+distribution guiding exploration. We therefore propose an EID
+tailored to stiffness mapping and lesion detection, which balances
+exploration and exploitation by jointly considering uncertainty,
+stiffness magnitude, and
+
+\newpage
+
+% =========== Page 3: ergodic_page3.tex ===========
+\setcounter{equation}{0}
+
+% ---------- Continuation of Section III opening ----------
+spatial gradients. Although viscoelastic modelling supports robust
+estimation, lesion search and characterisation in this work are
+driven solely by elasticity. Our framework is structured as a
+closed-loop search algorithm comprising four main components:
+A.~a target distribution over tissue stiffness, which is updated at
+every iteration; B.~an Expected Information Density (EID) map to
+prioritise sampling locations; C.~a trajectory planner using ergodic
+control, guided by the EID; D.~a data acquisition executed during
+trajectory execution, which enables updates in the target
+distribution. These steps are executed cyclically, updating the
+target distribution (E.) until a predefined stopping criterion is
+met (F.). Each component is designed to be modular and independent,
+allowing flexible integration of alternative models or control
+strategies.
+
+\subsection*{A.\ Target Distribution}
+
+\pdfcomment[color=green,subject={},open=false,opacity=0.7]{User input: that global maps are assembled by stitching together local estimates in the ergodic exploration paper\\Claude comments: EVIDENTIAL RELATIONSHIP: supports. GPR IS the stitching mechanism. 'Robot end-effector positions' = discrete local sampling sites; mean function $\mu(x)$ = stitched global stiffness map. The architectural pattern matches Chen's POINT$\to$MAP ladder precisely --- with GPR interpolation replacing direct ($x, y, z$)-tuple tabulation. Same local-estimates-to-global-map signature in both papers.}\sethlcolor{hlgreen}\hl{We use GPR to construct a continuous map of the stiffness
+distribution across the palpated surface. The robot end-effector
+positions serve as the input domain, and the estimated elasticity
+values form the output. After each regression update, the mean
+function $\mu(x)$ estimates the stiffness at unobserved locations,
+while the variance function $\sigma^{2}(x)$ quantifies the model
+uncertainty. As expected with GPR, uncertainty increases with
+distance from the observed samples.} The squared exponential kernel
+ensures smooth, differentiable estimates, which are critical for
+downstream gradient computation.
+
+\textbf{1) Gaussian Process Regression:} is a non-parametric Bayesian
+approach for estimating continuous functions from data, offering
+both predictions and uncertainty estimates. Unlike parametric
+models, which assume a fixed functional form, GPR models a
+distribution over functions that is updated as new observations are
+incorporated [20]. A Gaussian Process (GP) is a collection of random
+variables such that any finite subset follows a joint Gaussian
+distribution. Formally, it is written as:
+\[
+  f(x) \sim \mathcal{GP}(m(x),\, k(x, x')),
+\]
+where $m(x)$ is the mean function (often assumed zero) and
+$k(x, x')$ is the covariance function, or kernel, which encodes the
+similarity between inputs. The kernel defines how closely related
+the outputs are at different input points. One of the most widely
+used kernels is the squared exponential (SE):
+\[
+  k_{\mathrm{SE}}(x, x') =
+  \exp\!\left(-\frac{\|x - x'\|^{2}}{2 l^{2}}\right),
+\]
+where $l$ is the length scale parameter controlling smoothness
+(in our experiments, $l = 2.5$ cm is equal to the radius of the
+indenter), and $\|x - x'\|$ is the Euclidean distance between
+inputs. This kernel implies smooth, infinitely differentiable
+functions, making it ideal for modelling physical quantities such
+as tissue stiffness.
+
+\textbf{2) GPR Training:} Given a set of training observations $X$
+with corresponding outputs $y$, GPR computes a posterior predictive
+distribution at new input locations $X^{*}$. This yields a predicted
+mean function $\mu^{*}$, representing the estimated stiffness at
+unobserved locations, and an associated covariance $\Sigma^{*}$,
+which quantifies model uncertainty. As expected, the uncertainty
+increases with distance from the observed samples, reflecting
+reduced confidence in sparsely explored regions.
+
+\subsection*{B.\ Expected Information Density for Elasticity Maps}
+
+To prioritise regions for further palpation, we define an EID
+function $\xi_{\mathrm{EID}}(x)$ that balances two objectives:
+exploration of uncertain areas, and exploitation of predicted
+high-stiffness regions and refinement near region boundaries.
+Formally, we define
+\begin{equation}
+\tilde{\xi}_{\mathrm{EID}}(x) =
+(1 - \alpha)\,\frac{g(x)}{\int_{\mathcal{X}} g(x)}
++ \frac{\mu(x)}{\int_{\mathcal{X}} \mu(x)}
++ \alpha\,\frac{\sigma(x)}{\int_{\mathcal{X}} \sigma(x)}
+\end{equation}
+the un-normalised distribution, where
+$g(x) = \|\nabla \mu(x)\|$ is the gradient norm of the predicted
+elasticity, highlighting boundaries. The distribution (1) is then
+normalised as:
+\begin{equation}
+\xi_{\mathrm{EID}}(x) =
+\frac{\tilde{\xi}_{\mathrm{EID}}(x)}%
+{\int_{\mathcal{X}} \tilde{\xi}_{\mathrm{EID}}(x)\, dx}.
+\end{equation}
+The trade-off between exploration and exploitation is controlled by
+the scalar $\alpha \in [0, 1]$. Lower values bias the system towards
+known high-stiffness or high-gradient areas, while higher values
+encourage sampling in regions of high uncertainty. In our
+implementation, $\alpha$ varies over time depending on the value of
+the ergodic metric in the following way:
+\begin{equation}
+\alpha(t) =
+\frac{\int_{\mathcal{X}} e(x, t)\, dx}%
+{\int_{\mathcal{X}} e(x, 0)\, dx},
+\end{equation}
+where $e(x, t)$ is the ergodic metric that will be defined in the
+following section in (4). According to (3), at the onset of the
+exploration, the trajectory is not ergodic and $\alpha(0) = 1$. As a
+consequence, the EID in (1) is dominated by the variance of the GPR,
+resulting in a purely exploratory behaviour. Regions that have not
+yet been sampled exhibit higher uncertainty and are therefore
+prioritised for exploration. As informative measurements are
+collected, the ergodic metric progressively decreases, leading to a
+gradual rebalancing between exploration and exploitation. The
+spatial coverage of the trajectory increasingly matches the target
+EID distribution, and the exploration naturally shifts towards
+exploitation of regions associated with higher estimated stiffness
+and pronounced spatial gradients, such as the boundaries of stiff
+inclusions. We want to highlight that the EID is computed on-the-fly
+and does not exploit prior knowledge about the inspected area.
+
+\subsection*{C.\ Trajectory Planning}
+
+The normalised EID $\xi_{\mathrm{EID}}$ is used as the target
+distribution for the ergodic planner, which computes a trajectory
+that visits each region in proportion to its expected information
+content. The HEDAC algorithm [19] is used to generate the trajectory
+online.
+
+\textbf{1) Ergodic Control:} aims to guide a robot trajectory to
+match a target spatial distribution, balancing exploration and
+exploitation by spending more time in regions of higher interest. It
+models the coverage density using radial basis functions (RBFs).
+Given a trajectory
+$z: [0, t] \to \Omega \subset \mathbb{R}^{n}$,
+the normalised coverage density $c(x, t)$ is:
+\[
+c(x, t) = \frac{\tilde{c}(x, t)}{\int_{\Omega} \tilde{c}(x, t)\,dx},
+\qquad
+\tilde{c}(x, t) = \frac{1}{t}\int_{0}^{t}
+\phi_{\sigma}(x - z(\tau))\,d\tau,
+\]
+
+\newpage
+
+% =========== Page 4: ergodic_page4.tex ===========
+\setcounter{equation}{3}
+
+% ---------- Continuation of Section III-C ergodic control defn ----------
+where $\phi_{\sigma}$ is a Gaussian kernel. The coverage error with
+respect to a target distribution $m(x)$ is defined as the spatial
+diffusion of $m(x)$ through the RBF kernel compared with the coverage
+density
+\begin{equation}
+e(x, t) = (\phi_{\sigma} * m)(x) - c(x, t),
+\end{equation}
+To avoid local minima and improve spatial coordination, HEDAC
+smooths this error using a stationary heat equation:
+\[
+\varrho\, \Delta u(x, t) = \beta\, u(x, t) + \gamma\, a(x, t) - s(x, t),
+\qquad
+\dot{z} = v_{a} \cdot \frac{\nabla u}{\|\nabla u\|},
+\]
+where $s$ highlights under-sampled regions, and $a$ ensures
+collision avoidance between the agents.
+
+\textbf{2) Practical Implementation:} Different from [19], this work
+implemented the non-stationary diffusion equation, as was done in
+[26], for a more locally consistent exploration behaviour. This means
+that $\dot{u} \ne 0$ is defined as:
+\begin{equation}
+\dot{u}(x, \tau) = \Delta u(x, \tau),
+\end{equation}
+allowing us to control the desired smoothness. In this formulation,
+an initial condition is required: $u(x, 0) = s(x, 0)$. During the
+experiments, a second-order agent is used to generate the trajectory.
+The trajectory is updated with a frequency $\Delta T$ chosen to
+ensure smooth motion and adequate control loop resolution (typically
+100 Hz in our implementation, 5 times slower than the low-level
+controller). The planning phase respects constraints on maximum
+velocity to ensure physical plausibility during data collection
+imposed by the second-order dynamics inside the ergodic controller.
+
+% ---------- Section III-D ----------
+\subsection*{D.\ Trajectory Execution and Data Collection}
+
+While the trajectory is executed, tissue elasticity is estimated
+continuously using an Extended Kalman Filter (EKF). Data are sampled
+at a rate that depends on the robot motion and the indenter geometry.
+Specifically, higher velocities or smaller indenters require denser
+sampling to avoid aliasing effects in the stiffness map.
+
+\textbf{1) Online Elasticity and Viscosity Estimation:} Accurately
+estimating the mechanical response of soft tissues in real time is a
+challenging task, as it requires modelling the contact interaction
+between the probe and the tissue surface and inferring tissue
+parameters from force measurements and robot motion. In this work,
+we adopt a viscoelastic contact model to improve the fidelity of
+force prediction during dynamic palpation, while subsequent
+abnormality detection focuses on the estimated elastic stiffness.
+To achieve this, we adopt DRM [27], which allows mapping the
+three-dimensional contact mechanics into an equivalent
+two-dimensional representation. \pdfcomment[color=green,subject={},open=false,opacity=0.7]{User input: that the quantities inferred from the measurements use a mathematical model that ONLY ACCOUNTS FOR THE LOCAL PHYSICS in the ergodic paper\\Claude comments: EVIDENTIAL RELATIONSHIP: supports. Hertzian contact mechanics + viscoelastic damping = purely local physics. Eq.~6 takes only local point-contact variables ($d, \dot{d}, E_f, \eta, \nu, R$) --- no bulk PDE, no global FEM solve, no neighbour coupling. The Hertzian half-space assumption is the definitive local-physics fingerprint. Contrast with MBT which solves a global elastic PDE.}\pdfcomment[color=green,subject={},open=false,opacity=0.7]{User input: that the inference model treats forces as NORMAL, i.e. no TANGENTIAL component\\Claude comments: EVIDENTIAL RELATIONSHIP: supports. $F_{TOT}$ is a scalar (not vector) --- no normal/tangential decomposition. All inputs ($d, \dot{d}, R, E_f, \eta, \nu$) are rotationally symmetric about the contact normal. No friction coefficient $\mu$ or shear modulus $G$ appears. The EKF state has no tangential kinematic variables. Hertzian contact mechanics is the canonical frictionless-normal-load theory.}\sethlcolor{hlgreen}\hl{Under this framework, the force
+exerted by the tissue during indentation is a nonlinear function of
+penetration depth and velocity:}
+\begin{equation}
+F_{\mathrm{TOT}}(d, \dot{d}) =
+\frac{4}{3}\, \frac{E_{f}}{1 - \nu^{2}}\, \sqrt{R\, d}\, d
++ \frac{4}{1 - \nu}\, \eta\, \sqrt{R\, d}\, \dot{d},
+\end{equation}
+\sethlcolor{hlgreen}\hl{where $d$ is the penetration depth, $\dot{d}$ its derivative
+(velocity), $E_{f}$ is the Young's modulus of the material, $\eta$
+is the viscosity coefficient, $\nu$ is the Poisson's ratio, and $R$
+is the radius of the spherical indenter [18]. The first term models
+elastic deformation according to Hertzian contact mechanics, while
+the second term accounts for viscoelastic damping.}
+
+\textbf{2) Filter Design:} \pdfcomment[color=cyan,subject={},open=false,opacity=0.7]{User input: what was inferred from a given SINGLE force measurement?\\Claude comments: A single force sample drives one Bayesian update of an 8-dim EKF state: penetration depth $d$, velocity $\dot{d}$, local stiffness $k$, local damping $\lambda$, and their time derivatives. The contact-mechanics model (Eq.~6) relates $F$ to $(d, \dot{d}, E_f, \eta, \nu, R)$ --- the EKF inverts it online. $d$ itself is not directly measured; only $F$ is.}\sethlcolor{hlcyan}\hl{The main challenge lies in the fact that
+$d$ is not directly measurable during robotic interaction. Therefore,
+we use an EKF to estimate the system state, which includes both $d$
+and $\dot{d}$, as well as the unknown tissue parameters. The system
+is modelled using a discrete-time nonlinear state-space
+representation, as detailed in [18]. The state vector is defined as}
+\[
+[\,d,\ k,\ \lambda,\ \dot{d},\ \dot{k},\ \dot{\lambda},\ \ddot{k},\
+\ddot{\lambda}\,]^{\top},
+\]
+\sethlcolor{hlcyan}\hl{where $\kappa$ and $\lambda$ correspond to the local stiffness and
+damping parameters, respectively. The filter assumes as input the
+measured contact force and comprises the effective interaction mass.
+Process and measurement noise are also included to account for model
+uncertainties and sensor imperfections. This filtering approach
+allows real-time estimation of the viscoelastic parameters even
+during continuous contacts with indentation speeds up to 5 mm/s
+[28], being suitable for dynamic exploration tasks.}
+
+% ---------- Section III-E ----------
+\subsection*{E.\ Target Distribution Update}
+
+Once a sufficient number of new samples are acquired, the GPR model
+is updated to refine the target stiffness distribution. Since GPR
+inference has cubic time complexity with respect to the number of
+samples, we avoid updating the model at every time step. Instead,
+updates are performed at a fixed frequency (e.g., 1 Hz), allowing
+batch accumulation of new data while keeping computation time
+bounded.
+
+% ---------- Section III-F ----------
+\subsection*{F.\ Search Termination Criterion}
+
+Different from existing approaches that rely on predefined stopping
+conditions [15], or fixed time/step limits [16], we employ an
+information-theoretic stopping criterion on $\alpha$, which is based
+on the ergodic metric. The value of $\alpha$ governs the trade-off
+between exploration and exploitation. Larger values of $\alpha$
+correspond to an early exploration phase and favour earlier
+termination, but may lead to incomplete spatial coverage. Conversely,
+smaller values of $\alpha$ indicate that the exploration has largely
+converged toward the target EID distribution, resulting in extended
+exploitation phases, longer execution times, and only marginal
+refinement of already identified regions. In practice, the stopping
+threshold on $\alpha$ is selected within the exploitation-dominated
+regime, such that further reductions correspond to diminishing
+returns in reconstruction accuracy. This choice is supported by
+empirical observations indicating saturation of the RMSE as $\alpha$
+approaches a plateau, and reflects a practical balance between
+coverage completeness, estimation accuracy, and exploration duration.
+The advantage of using this metric lies in its ability to quantify
+how thoroughly the area has been explored, without relying on prior
+knowledge such as fixed time limits or the number and characteristics
+of stiff regions that need to be found. This criterion is preferable
+to a fixed-time limit, as it adapts the exploration duration to the
+complexity of the stiffness distribution and the desired level of map
+details, avoiding both premature termination and unnecessary probing.
+
+% ---------- Section IV ----------
+\section*{IV.\ Simulation Results}
+
+\subsection*{A.\ Setup and Baselines}
+
+The proposed search algorithm was evaluated on synthetic stiffness
+distributions representative of biological soft tissues.
+
+\newpage
+
+% =========== Page 5: ergodic_page5.tex ===========
+\setcounter{equation}{5}
+
+% ---------- Fig. 2 placeholder ----------
+\begin{center}
+\fbox{\begin{minipage}[c][6cm][c]{0.95\textwidth}
+\centering
+\textbf{Fig. 2.}\ Synthetic elasticity distributions for simulated
+scenarios, from 1 to 3 stiffer regions.\\[4pt]
+\textcolor{gray}{\footnotesize
+Three 45 mm $\times$ 45 mm square domains arranged side by side.
+Left panel: a single stiff region; middle panel: two stiff regions;
+right panel: three stiff regions. Axes $x_{1}, x_{2}$ in mm,
+spanning 0--45. Colour scale: elastic modulus in kPa, ranging from
+near-zero (soft background) up to approximately 180 kPa at the
+stiff-inclusion peaks. Inclusions modelled as mixtures of Gaussian
+components; background is near-uniform low stiffness.}
+\end{minipage}}
+\end{center}
+
+\vspace{0.4em}
+
+\textbf{Fig. 2.}\ Synthetic elasticity distributions for simulated
+scenarios, from 1 to 3 stiffer regions. The colour scale refers to
+the elastic modulus (in kPa).
+
+\vspace{0.8em}
+
+% ---------- Table I placeholder ----------
+\begin{center}
+\textbf{TABLE I}\\[2pt]
+\textsc{Performance Metrics across 50 Runs with Noise-Free Elasticity
+Measurements (w/o) and with White Noise $\mathcal{N}(0, 6.25\;
+\mathrm{kPa}^{2})$ (w/). N\textsubscript{R} is the Number of Stiff
+Regions, DR the Detection Rate, $l$ the Length of the Trajectory, and
+RMSE is the Root Mean Square Error.}
+\end{center}
+
+\begin{center}
+\footnotesize
+\begin{tabular}{|c|c|c|c|c|}
+\hline
+$N_{R}$ & DR (\%) $\uparrow$ & $l$ [mm] & Time [s] $\downarrow$ &
+RMSE [kPa] $\downarrow$ \\
+\hline
+\multicolumn{5}{|c|}{\textit{w/o Measurement Noise}} \\
+\hline
+1 & 100\% & 664 & 70 & 0.37 \\
+2 & 100\% & 660 & 69 & 0.97 \\
+3 & 99\%  & 665 & 70 & 1.96 \\
+\hline
+\multicolumn{5}{|c|}{\textit{w/ Measurement Noise}} \\
+\hline
+1 & 100\% & 633 & 66 & 1.57 \\
+2 & 99\%  & 630 & 65 & 2.17 \\
+3 & 97\%  & 580 & 60 & 3.14 \\
+\hline
+\end{tabular}
+\end{center}
+
+\vspace{0.8em}
+
+% ---------- Prose continuation of Section IV-A ----------
+They were generated as mixtures of Gaussian components with varying
+locations, covariances, and amplitudes, modelling localised stiff
+inclusions (over 100 kPa in pathological areas) in a softer
+background (few kilopascal in healthy regions) [29], similarly to
+related research [15]--[17]. Three scenarios in a square domain
+(with side 45 mm) were considered: (i) a single stiff region,
+(ii) two stiff regions, and (iii) three distinct stiff areas, whose
+distributions are illustrated in Fig.~2. These regions were first
+densely sampled with a grid-based approach to generate the ground
+truth, used to compute the estimation and segmentation errors. The
+simulation environment was implemented in Python, with GPR and BO
+components built using the PyTorch framework, thus ensuring
+efficient GPU-based inference and optimisation during online
+execution. All simulations and experiments were executed on a mini
+PC equipped with an Intel i7-13700HX CPU (24 cores), 64 GB RAM, and
+an NVIDIA RTX 4070 GPU with 8 GB of memory. The proposed framework
+runs in real time, with HEDAC trajectory updates and EKF-based
+viscoelastic estimation both requiring less than 1 ms per control
+loop iteration at 100 Hz. GPR updates are performed asynchronously
+at a lower frequency (1 Hz), with a maximum observed update time of
+105 ms. Elasticity samples were collected at a frequency of 4 Hz and
+a maximum velocity of 1 cm/s. In this configuration, the maximum
+distance between two consecutive sampled points equals half of the
+indenter radius, which is set here to 2.5 mm. These simulations were
+conducted to evaluate the performance of the proposed ergodic search
+strategy (Sec.~IV-B) across the three distribution scenarios.
+
+We compared ergodic search with two variants of Bayesian Optimisation
+(BO), which is the standard baseline for robotic palpation
+(Sec.~IV-C). BO models an expensive-to-evaluate objective function
+$f(x)$ using a Gaussian Process (GP) and selects sampling locations
+by maximising an acquisition function that balances exploration and
+exploitation. Given data
+$\mathcal{D} = (x_{i}, y_{i})_{i=1}^{n}$,
+the GP provides a posterior predictive distribution
+$f(x) \sim \mathcal{N}(\mu(x), \sigma^{2}(x))$. As an acquisition
+function, the Expected Improvement (EI) [15], [16] is employed,
+\[
+a_{\mathrm{EI}}(x) =
+(f_{\min} - \mu(x))\,\Phi(z) + \sigma(x)\,\phi(z),
+\]
+where $f_{\min}$ is the minimum observed value and
+$z = \frac{f_{\min} - \mu(x)}{\sigma(x)}$. This variant is denoted
+BO-EI. However, the standard point-to-point implementation of BO has
+limitations for robotic palpation. Due to safety constraints,
+especially in medical settings, the robot must follow smooth and
+predictable trajectories and cannot move rapidly between distant
+sampling points as typically generated by the BO. Moreover, each
+probing action can take up to 5 s due to indentation and viscoelastic
+estimation time. To ensure a fair comparison with the proposed
+ergodic planner, we adapted BO to perform continuous palpation, which
+characterises our ergodic search. This prevents BO from penalising
+non-sampled regions during motion. Specifically, additional samples
+are collected every 2.5 mm (half the indenter radius) along the path
+between BO-selected targets, enabling BO to exploit intermediate
+data, similarly to the ergodic approach (variant termed BO-EIS).
+
+To assess the spatial accuracy of the reconstructed stiffness maps,
+we applied a segmentation pipeline to identify distinct stiff
+regions. Based on the elasticity estimates in Sec.~IV-B and IV-C,
+KMeans clustering (SciPy) was used to separate stiffer regions from
+the surrounding soft tissue. Unlike fixed thresholding approaches
+[12], this method does not require manual parameter tuning and
+adapts to the distribution of estimated stiffness values. The number
+of detected regions was obtained by counting connected components in
+the stiff cluster. In Sec.~IV-D, the segmented regions are converted
+into polygonal boundaries using Shapely and compared against ground
+truth using standard segmentation metrics.
+
+% ---------- Section IV-B ----------
+\subsection*{B.\ Robustness of Ergodic Exploration}
+
+In this section, the performance of the ergodic controller is tested
+with different numbers of stiffer regions. To assess the robustness
+of the algorithm, for each map, the simulation is executed 50 times
+with a random starting position, while three performance metrics
+were considered: 1. the detection rate (DR), i.e., the percentage of
+trials in which the algorithm correctly estimates the number and
+position of the stiff regions present in the ground truth (higher is
+better); 2. the elapsed time (lower is better); 3. the root mean
+square error (RMSE, lower is better). For completeness, we report
+also the trajectory length $l$. Each exploration terminates when the
+ergodic metric $\alpha$ reaches 0.4 (set experimentally). Two
+experimental conditions were examined: one involved noise-free
+elasticity measurements and another incorporated noisy measurements
+$\mathcal{N}(0, 6.25\;\mathrm{kPa}^{2})$, where the variance equals
+the noise of the elasticity estimation in the worst case. The
+results of the study are reported in Tab.~I. Overall, the algorithm
+exhibited comparable performance in terms of DR and execution
+
+\newpage
+
+% =========== Page 6: ergodic_page6.tex ===========
+\setcounter{equation}{5}
+
+% ---------- Fig. 3 placeholder ----------
+\begin{center}
+\fbox{\begin{minipage}[c][8cm][c]{0.95\textwidth}
+\centering
+\textbf{Fig. 3.}\ End-effector tip trajectory during exploration of an
+elasticity distribution with three stiff regions: planner comparison.\\[4pt]
+\textcolor{gray}{\footnotesize
+Five time snapshots in columns: $t = 14$ s, 28 s, 42 s, 56 s, 70 s.\\
+Two rows: (top) Expected Information Density (EID) map; (bottom)
+Estimated stiffness map.\\[3pt]
+\textbf{(a)} Ergodic exploration with HEDAC (ours). The trajectory
+smoothly covers the domain in proportion to EID; the cyan circle
+marks trajectory start and the magenta square marks trajectory end.\\[2pt]
+\textbf{(b)} BO-EI. Orange markers indicate BO-selected sampling
+locations; red markers indicate points sampled along the path
+between them.\\[2pt]
+\textbf{(c)} BO-EIS. Same marker convention as (b); continuous
+sampling augments BO's discrete selections.}
+\end{minipage}}
+\end{center}
+
+\vspace{0.4em}
+
+\textbf{Fig. 3.}\ End-effector tip trajectory during the exploration
+of an elasticity distribution with three stiff regions: comparison of
+different planners. The cyan circle indicates the beginning of the
+trajectory, while the magenta square denotes the end of the
+trajectory. In plots (b) and (c), the orange markers indicate the
+locations selected by BO, whereas the red markers represent the
+sampled points collected along the executed trajectory.
+
+\vspace{0.8em}
+
+% ---------- Section IV-B continuation ----------
+time across the three scenarios, regardless of the presence of
+measurement uncertainty. These results demonstrate the robustness of
+the method with respect to both the number of stiff regions to be
+detected and the influence of measurement noise. The RMSE, instead,
+grows under both experimental conditions as the number of stiff
+regions increases. This behaviour may be attributed to uncertainty
+at the boundaries of the stiff regions, which are typically
+under-sampled, and will be examined in greater detail in Sec.~IV-D.
+As expected, we observe an increased RMSE in the second experimental
+condition, attributable to the presence of the noise.
+
+Figure~3(a) shows an example of the evolution of the agent trajectory
+over time, when exploring the map with 3 stiff regions. All stiffer
+regions are successfully detected within 40 s. Over time, the
+ergodic metric $\alpha$ decreases from 0.79 at $t = 14$ s to 0.38 at
+$t = 70$ s, reflecting improved coverage of the target distribution.
+In parallel, the RMSE shows a substantial reduction, dropping from
+13.75 kPa to 2.85 kPa. Intermediate values reinforce this trend: at
+$t = 28$ s, $\alpha = 0.54$ and RMSE $= 11.19$ kPa; at $t = 42$ s,
+$\alpha = 0.51$ and RMSE $= 3.7$ kPa; and at $t = 56$ s,
+$\alpha = 0.43$ and RMSE $= 2.56$ kPa. This consistent evolution
+confirms that as the exploration becomes more ergodic, the accuracy
+of the reconstructed stiffness map improves accordingly.
+
+% ---------- Section IV-C ----------
+\subsection*{C.\ Comparison with BO Baselines}
+
+In this section, we focus on the comparison of the results of our
+ergodic approach with the two variants of BO described in Sec.~IV-A.
+We consider the distribution with 3 stiff regions, which has proven
+to be the most challenging for the ergodic exploration (see Fig.~3).
+The simulation time is the sum of the simulated agent motion with a
+velocity of 1 cm/s and the computation time required to determine
+the next sampling location. Each simulation is conducted under two
+conditions: one assuming noise-free elasticity measurements, and
+another incorporating additive white noise
+$\mathcal{N}(0, 6.25\;\mathrm{kPa}^{2})$, similar to Sec.~IV-B. Fixed
+lenght of 400, 600, and 800 mm, were used to evaluate the performance
+evolution over time, ensuring a fair comparison independently of the
+method-specific stopping criteria. The average results of 100
+simulations are listed in Tab.~II.
+
+This comparison highlights that BO-EI consistently underperforms
+compared to the other two methods, yielding the lowest DR and the
+highest RMSE across all tested conditions. Both BO-EIS and the
+ergodic strategy achieve comparable detection rates once sufficient
+exploration has been performed, indicating successful identification
+of the number and location of stiff regions. However, the ergodic
+approach consistently provides lower reconstruction errors,
+resulting in more accurate stiffness maps. At shorter travelled
+distances (500 mm--650 mm), BO-EIS achieves higher detection rates,
+reflecting faster initial identification of stiff regions. This
+behaviour is expected given the exploitative nature of BO-based
+strategies, which prioritise sampling high-uncertainty locations.
+However, in clinical settings, once suspicious regions are
+identified, accurate post-detection refinement becomes critical.
+Therefore, it is more relevant to compare the approaches once
+detection performance is maximised (800 mm, DR $\approx 99$--100\%),
+and differences between the methods are primarily reflected in
+reconstruction accuracy and execution duration. In this regime, the
+ergodic strategy achieves lower RMSE while requiring substantially
+less execution time than BO-EIS under the same travelled-distance
+budget, both in noise-free and noisy conditions. These results
+indicate that, in the post-detection phase, ergodic exploration
+enables more efficient refinement of stiffness maps, yielding
+improved accuracy per unit motion and reduced execution time under
+equal motion cost. Compared to BO-based approaches, the ergodic
+strategy also exhibits greater robustness to noise, maintaining a
+consistent performance advantage across all evaluated conditions.
+Overall, these findings confirm the benefit of ergodic exploration
+in balancing detection reliability, reconstruction accuracy, and
+execution efficiency once suspicious regions have been identified.
+
+% ---------- Section IV-D ----------
+\subsection*{D.\ Segmentation}
+
+The spatial accuracy of the proposed method was evaluated based on
+its ability to segment stiff regions within the reconstructed
+stiffness maps and compared against the BO. To this end, we designed
+two simulated stiffness distributions: the first one with two
+inclusions, one irregularly shaped (Cluster 1) and one circular
+(Cluster 2), while the second distribution consisted of a single
+donut-shaped inclusion (Cluster 3), as
+
+\newpage
+
+% =========== Page 7: ergodic_page7.tex ===========
+\setcounter{equation}{5}
+
+% ---------- Table II ----------
+\begin{center}
+\textbf{TABLE II}\\[2pt]
+\textsc{Comparison of performance metrics across 100 runs of Ergodic
+Search and BO, with (w/) and without (w/o) noise. DR is the Detection
+Rate, $t$ the Exploration Time, and RMSE the Root Mean Square Error.}
+\end{center}
+
+\begin{center}
+\footnotesize
+\begin{tabular}{|l|ccc|ccc|ccc|}
+\hline
+Traj.\ Length
+  & \multicolumn{3}{c|}{500 mm}
+  & \multicolumn{3}{c|}{650 mm}
+  & \multicolumn{3}{c|}{800 mm} \\
+\hline
+Method & DR $\uparrow$ & $t\downarrow$ & RMSE$\downarrow$
+       & DR $\uparrow$ & $t\downarrow$ & RMSE$\downarrow$
+       & DR $\uparrow$ & $t\downarrow$ & RMSE$\downarrow$ \\
+\hline
+BO-EI (w/o)   & 39 & 59 & 12.09 & 73 & 88 & 7.98 & 92 & 124 & 5.47 \\
+BO-EIS (w/o)  & 93 & 60 &  4.61 & 99 & 92 & 2.81 & 99 & 124 & 1.87 \\
+Ergodic (w/o) & 78 & 41 &  4.69 & 92 & 62 & 2.74 & 99 &  84 & 1.42 \\
+BO-EI (w/)    & 38 & 60 & 12.10 & 60 & 89 & 7.84 & 91 & 118 & 5.49 \\
+BO-EIS (w/)   & 85 & 63 &  5.54 & 95 & 95 & 3.35 & 99 & 130 & 2.59 \\
+Ergodic (w/)  & 79 & 41 &  5.87 & 98 & 62 & 3.03 & 99 &  84 & 2.16 \\
+\hline
+\end{tabular}
+\end{center}
+
+\vspace{0.6em}
+
+% ---------- Table III ----------
+\begin{center}
+\textbf{TABLE III}\\[2pt]
+\textsc{Average segmentation results across three clusters.}
+\end{center}
+
+\begin{center}
+\footnotesize
+\begin{tabular}{|c|ccc|ccc|ccc|}
+\hline
+ & \multicolumn{3}{c|}{Cluster 1}
+ & \multicolumn{3}{c|}{Cluster 2}
+ & \multicolumn{3}{c|}{Cluster 3} \\
+\hline
+ & BO-EI & BO-EIS & Erg. & BO-EI & BO-EIS & Erg. & BO-EI & BO-EIS & Erg. \\
+\hline
+Sens. & 0.561 & 0.950 & 0.975 & 0.657 & 0.997 & 0.971 & 0.746 & 0.904 & 0.978 \\
+Spec. & 0.654 & 0.993 & 0.993 & 0.655 & 0.998 & 0.997 & 0.829 & 0.953 & 0.992 \\
+\hline
+\end{tabular}
+\end{center}
+
+\vspace{0.8em}
+
+% ---------- Fig. 4 placeholder ----------
+\begin{center}
+\fbox{\begin{minipage}[c][4.5cm][c]{0.80\textwidth}
+\centering
+\textbf{Fig. 4.}\ Clustering and boundary extraction after exploration.\\[4pt]
+\textcolor{gray}{\footnotesize
+Original cluster shapes (in blue) overlaid against estimated shapes
+(in red) for the three segmentation benchmarks. Cluster 1: irregular
+inclusion; Cluster 2: circular inclusion; Cluster 3: donut-shaped
+inclusion. The overlay visualises boundary fidelity relative to
+ground truth.}
+\end{minipage}}
+\end{center}
+
+\vspace{0.4em}
+
+\textbf{Fig. 4.}\ Clustering and boundary extraction results after
+the exploration phase. The original shapes (in blue) are shown
+alongside the estimated ones (in red).
+
+\vspace{0.8em}
+
+% ---------- Section IV-D continuation ----------
+shown in Fig.~4. A total of 50 simulations were conducted under
+identical conditions, incorporating additive white noise
+$\mathcal{N}(0, 6.25\;\mathrm{kPa}^{2})$. Each run was terminated
+after 70 s to ensure consistent comparison across trials. For each
+run, the estimated stiffness map was segmented using the clustering
+and boundary extraction pipeline described earlier. The resulting
+segmented areas were compared with ground truth using two standard
+metrics [15], sensitivity and specificity, defined as:
+\[
+\text{1) Sensitivity} = \frac{\text{TP}}{\text{TP}+\text{FN}},
+\quad
+\text{2) Specificity} = \frac{\text{TN}}{\text{TN}+\text{FP}},
+\]
+where TP, FP, FN, and TN denote the number of pixels of true
+positives, false positives, false negatives, and true negatives,
+respectively. The metrics were computed separately for each of the
+three ground-truth regions, and the final values were averaged
+across the simulations. The results of the segmentation algorithm
+(Tab.~III) demonstrate elevated and consistent specificity across
+all three clusters for the two methods that sample continuously,
+thereby confirming the model effectiveness in correctly excluding
+background regions. Conversely, the ergodic search exhibited
+superior sensitivity compared to both the BO with and without
+sampling when clustering non-uniform shapes (Clusters 1--3). This
+finding indicates that the ergodic search is more adept at
+accurately delineating regions of interest. This is especially
+relevant in medical contexts, where false negatives can lead to
+missed detections of pathological regions. Consequently, achieving
+high sensitivity is imperative to ensure clinically reliable
+performance.
+
+% ---------- Section V ----------
+\section*{V.\ Experimental Results}
+
+\pdfcomment[color=cyan,subject={},open=false,opacity=0.7]{User input: what exactly does their instrumentation measure in the ergodic paper?\\Claude comments: Directly measured: 6-axis contact force/torque (Bota SensOne at 1 kHz) + robot end-effector position (UR3e at 500 Hz). Stiffness, viscosity, penetration depth/velocity, and the stiffness map are all inferred downstream --- EKF over the DRM/Hertzian contact model (Eq.~6) gives per-point $E_f$ and $\eta$; GPR then interpolates to a global $\mu(x)$ surface.}\pdfcomment[color=cyan,subject={},open=false,opacity=0.7]{User input: how exactly does their instrumentation measure force?\\Claude comments: Paper names the commercial unit (Bota SensOne, 6-axis, 1 kHz) but does NOT describe the transduction mechanism --- treats the sensor as a black box. Deliberate architectural choice ('off-the-shelf ensures portability, cost-effectiveness'), explicitly contrasted with 'customised hardware integration'. Sharp architectural contrast with Chen, which uses a custom carbon-fibre piezoresistive sensor and cites its source paper~[35].}\pdfcomment[color=cyan,subject={},open=false,opacity=0.7]{User input: what is the basic description of their instrumentation which includes the force sensor in the ergodic paper?\\Claude comments: The canonical per-component rollcall: UR3e robot (500 Hz) $\to$ Bota SensOne 6-axis F/T sensor (1 kHz) $\to$ 3D-printed spherical indenter (5 mm radius) $\to$ ROS2 Humble middleware. The most complete instrumentation description in the paper; no rival passage comes close.}\pdfcomment[color=cyan,subject={},open=false,opacity=0.7]{User input: what part of the instrumentation does the PALPATION?\\Claude comments: The 3D-printed spherical indenter is the sole physical palpator --- the only component that contacts tissue. UR3e is the CARRIER (positions it), Bota SensOne is the OBSERVER (measures reaction force). Confirmed by Fig.~1 caption's explicit 'Indenter' label (p.~1) and Eq.~6's reliance on 5~mm radius $R$ as the Hertzian geometric parameter (p.~4). The one custom-fabricated element in an otherwise commercial-off-the-shelf instrumentation stack.}\sethlcolor{hlcyan}\hl{The validity of the simulation results in Sec.~IV was assessed in a
+realistic setting by testing the proposed method on a manipulator
+interacting with a physical sample (Fig.~1). An UR3e, position-%
+controlled at 500 Hz, was used to execute the trajectories generated
+by the Ergodic Control. The force at the end-effector was measured
+by a 6-axis F/T sensor, a Bota SensOne, sampling at 1 kHz. A 3D-%
+printed indenter with a spherical tip with 5 mm radius is attached
+to the end-effector. The communication between the robot, the F/T
+sensor, and the algorithms was implemented with ROS2 Humble.} To
+simulate a biological tissue with a mass, we fabricated a silicone
+sample consisting of a soft matrix made from Ecoflex-0030 and a
+stiffer spherical inclusion (radius 1 cm) made from DragonSkin-30NV.
+This configuration increases local stiffness by up to 90\%,
+consistent with values reported in previous studies [15], [29]. The
+ground truth is built with point-wise sampling on a grid with a
+palpation every 2.5 mm in a square of 5 cm $\times$ 5 cm.
+
+\pdfcomment[color=cyan,subject={},open=false,opacity=0.7]{User input: can their instrumentation palpate an object in the ergodic paper?\\Claude comments: Yes --- unambiguously. The UR3e + Bota SensOne + spherical indenter + ROS2 instrumentation successfully palpated a silicone phantom (Ecoflex matrix + DragonSkin-30NV spherical inclusion) in 5-out-of-5 trials from random initial positions. Hit rate 100\%, RMSE 9.76~kPa, sensitivity 0.92, specificity 0.98, with independent grid-based probing as ground truth.}\sethlcolor{hlcyan}\hl{We conducted 5 experiments on the physical setup, each starting from
+a different random initial position. In all cases, the algorithm
+successfully identified the location of the spherical intrusion,
+demonstrating consistent target localisation. The reconstruction
+accuracy (RMSE $= 9.76 \pm 2.97$ kPa) shows good agreement with the
+reference stiffness distribution obtained from grid-based probing
+used as ground truth. The method also achieved good classification
+performance, with an average sensitivity of 0.92, and specificity of
+0.98.} Compared to simulation results, the experimental metrics
+confirm the high sensitivity and specificity, which are particularly
+important for avoiding false negatives in medical applications.
+Despite the experimental RMSE values being marginally higher than
+those observed in simulation, the measurement uncertainty is still
+below the 5\% (average absolute error $8.00 \pm 2.7$ kPa) and the
+clustering performance appears largely unaffected. This difference
+can be attributed to several factors, including the non-ideal
+behaviour of real materials, noise in force measurements, slight
+deviations from the assumed contact model, and uncertainties in
+ground-truth stiffness calibration. Despite these challenges, the
+observed trends are consistent with the simulation, confirming the
+robustness of the method in real-world conditions. As shown in
+Fig.~5, the trajectory of the end-effector adapts to the underlying
+stiffness distribution: it concentrates more exploration in the
+stiffer region on the left while still covering the rest of the map.
+
+\newpage
+
+% =========== Page 8: ergodic_page8.tex ===========
+\setcounter{equation}{5}
+
+% ---------- Fig. 5 placeholder ----------
+\begin{center}
+\fbox{\begin{minipage}[c][6cm][c]{0.90\textwidth}
+\centering
+\textbf{Fig. 5.}\ Estimated stiffness distribution from palpation of
+the soft phantom.\\[4pt]
+\textcolor{gray}{\footnotesize
+50 mm $\times$ 50 mm domain in the $(x, y)$ plane. Colour scale:
+estimated elastic modulus ranging from $\approx 102$ kPa (soft
+background) up to $\approx 183$ kPa (stiff DragonSkin-30NV inclusion
+shown in yellow). The end-effector trajectory during the search
+motion is overlaid as a grayscale-gradient path: black marks the
+beginning, white the end. The trajectory concentrates exploration in
+the stiffer region on the left while still covering the rest of the
+map, illustrating the adaptive focus of the EID-driven ergodic
+planner.}
+\end{minipage}}
+\end{center}
+
+\vspace{0.4em}
+
+\textbf{Fig. 5.}\ Estimated stiffness distribution obtained through
+palpation of the soft phantom. The stiffer region is shown in yellow.
+The end-effector trajectory during the search motion is visualised
+using a grayscale gradient, from black (beginning) to white (end). A
+video of the experiment is provided in the Supplemental Materials
+and is also available online at
+\url{https://youtu.be/a3BUSxA7wXY}.
+
+\vspace{0.8em}
+
+% ---------- Section VI ----------
+\section*{VI.\ Conclusion}
+
+This work presents an autonomous robotic palpation framework for
+real-time elastic stiffness mapping of soft tissues. By combining
+force-based viscoelastic parameter estimation with ergodic trajectory
+planning implemented via a heat-equation-driven controller, the
+method enables continuous palpation without embedded tactile sensing.
+Exploration is guided by an EID tailored to stiffness mapping,
+allowing adaptive focus on diagnostically relevant regions.
+Simulation results demonstrate improved stiffness reconstruction
+accuracy, with reliable detection of multiple stiff regions and
+lower RMSE and segmentation errors compared to BO, particularly
+under noisy conditions. Experimental validation with a robotic arm
+and a silicone phantom confirms the robustness of the approach,
+showing consistent detection of stiff inclusions and good agreement
+with ground-truth stiffness maps. Overall, the proposed ergodic
+strategy effectively balances exploration and accurate estimation,
+making it well suited for autonomous palpation as an assistive
+diagnostic tool. Future work will extend the method to
+three-dimensional mapping on non-flat surfaces and evaluate it on
+anatomically realistic phantoms and ex vivo tissues.
+
+% ---------- References ----------
+\section*{References}
+
+\begin{footnotesize}
+\noindent
+[1] R.~Tozzi, C.~K\"ohler, et al., ``Laparoscopic treatment of early
+ovarian cancer: surgical and survival outcomes,'' Gynecologic
+oncology, vol.~93, no.~1, pp.~199--203, 2004.\\[2pt]
+[2] N.~Eisemann, S.~Bunk, et al., ``Nationwide real-world
+implementation of AI for cancer detection in population-based
+mammography screening,'' Nature Medicine 2025 31:3, vol.~31, no.~3,
+pp.~917--924, 1 2025.\\[2pt]
+[3] Q.~Dan, Z.~Xu, et al., ``Diagnostic performance of deep learning
+in ultrasound diagnosis of breast cancer: a systematic review,'' npj
+Precision Oncology 2024 8:1, vol.~8, no.~1, pp.~1--13, 1 2024.\\[2pt]
+[4] A.~Attanasio, B.~Scaglioni, et al., ``Autonomy in Surgical
+Robotics,'' Annual Review of Control, Robotics, and Autonomous
+Systems, vol.~4, 2021.\\[2pt]
+[5] L.~Zhang, Y.~Peng, et al., ``Innovative integration of automated
+breast volume scan and ultrasound elastography for enhanced
+differentiation of benign and malignant breast lesions,'' Scientific
+Reports 2025 15:1, vol.~15, no.~1, pp.~1--8, 5 2025.\\[2pt]
+[6] I.~Sack, ``Magnetic resonance elastography from fundamental
+soft-tissue mechanics to diagnostic imaging,'' Nature Reviews
+Physics, vol.~5, no.~1, 2023.\\[2pt]
+[7] N.~Pacheco, C.~Henry, et al., ``Virtual palpation: A novel method
+to identify the physical properties of tissue for laser surgery,''
+in Hamlyn Symposium on Medical Robotics, 2025.\\[2pt]
+[8] A.L.~Trejos, J.~Jayender, et al., ``Robot-assisted tactile
+sensing for minimally invasive tumor localization,'' International
+Journal of Robotics Research, vol.~28, no.~9, 2009.\\[2pt]
+[9] N.~Enayati, E.~De~Momi, and G.~Ferrigno, ``Haptics in
+robot-assisted surgery: Challenges and benefits,'' IEEE Reviews in
+Biomedical Engineering, vol.~9, 2016.\\[2pt]
+[10] S.~McKinley, A.~Garg, et al., ``An interchangeable surgical
+instrument system with application to supervised automation of
+multilateral tumor resection,'' in IEEE International Conference on
+Automation Science and Engineering, 2016.\\[2pt]
+[11] N.~Zevallos, R.~Arun~Srivatsan, et al., ``A Real-time Augmented
+Reality Surgical System for Overlaying Stiffness Information,'' in
+Robotics: Science and Systems, 2018.\\[2pt]
+[12] A.~Garg, S.~Sen, et al., ``Tumor localization using automated
+palpation with Gaussian Process Adaptive Sampling,'' in IEEE
+International Conference on Automation Science and Engineering,
+2016.\\[2pt]
+[13] E.~Ayvali, R.A.~Srivatsan, et al., ``Using Bayesian optimization
+to guide probing of a flexible environment for simultaneous
+registration and stiffness mapping,'' in Proceedings - IEEE
+International Conference on Robotics and Automation, 2016.\\[2pt]
+[14] H.~Salman, E.~Ayvali, et al., ``Trajectory-Optimized Sensing for
+Active Search of Tissue Abnormalities in Robotic Surgery,'' in
+Proceedings - IEEE International Conference on Robotics and
+Automation, 2018.\\[2pt]
+[15] Y.~Yan and J.~Pan, ``Fast Localization and Segmentation of
+Tissue Abnormalities by Autonomous Robotic Palpation,'' IEEE
+Robotics and Automation Letters, vol.~6, no.~2, pp.~1707--1714,
+4 2021.\\[2pt]
+[16] E.~Ayvali, A.~Ansari, et al., ``Utility-Guided Palpation for
+Locating Tissue Abnormalities,'' IEEE Robotics and Automation
+Letters, vol.~2, no.~2, 2017.\\[2pt]
+[17] K.A.~Nichols and A.M.~Okamura, ``Methods to Segment Hard
+Inclusions in Soft Tissue During Autonomous Robotic Palpation,''
+IEEE Transactions on Robotics, vol.~31, no.~2, 2015.\\[2pt]
+[18] L.~Beber, E.~Lamon, et al., ``Towards Robotised Palpation for
+Cancer Detection through Online Tissue Viscoelastic Characterisation
+with a Collaborative Robotic Arm,'' in IEEE International Conference
+on Intelligent Robots and Systems, 2024, pp.~2380--2386.\\[2pt]
+[19] S.~Ivic, B.~Crnkovic, and I.~Mezic, ``Ergodicity-Based
+Cooperative Multiagent Area Coverage via a Potential Field,'' IEEE
+Transactions on Cybernetics, vol.~47, no.~8, 2017.\\[2pt]
+[20] C.E.~Rasmussen and C.K.~Williams, Gaussian Processes for
+Machine Learning. The MIT Press, 2006.\\[2pt]
+[21] P.~Chalasani, L.~Wang, et al., ``Concurrent nonparametric
+estimation of organ geometry and tissue stiffness using continuous
+adaptive palpation,'' in Proceedings - IEEE International Conference
+on Robotics and Automation, vol.~2016-June, 2016.\\[2pt]
+[22] ---, ``Preliminary evaluation of an online estimation method
+for organ geometry and tissue stiffness,'' IEEE Robotics and
+Automation Letters, vol.~3, no.~3, 2018.\\[2pt]
+[23] G.~Mathew and I.~Mezi, ``Metrics for ergodicity and design of
+ergodic dynamics for multi-agent systems,'' Physica D: Nonlinear
+Phenomena, vol.~240, no.~4-5, pp.~432--442, 2 2011.\\[2pt]
+[24] L.M.~Miller, Y.~Silverman, et al., ``Ergodic Exploration of
+Distributed Information,'' IEEE Transactions on Robotics, vol.~32,
+no.~1, pp.~36--52, 2 2016.\\[2pt]
+[25] L.M.~Miller and T.D.~Murphey, ``Trajectory optimization for
+continuous ergodic exploration,'' in Proceedings of the American
+Control Conference, 2013.\\[2pt]
+[26] C.~Bilaloglu, T.~L\"ow, and S.~Calinon, ``Whole-body ergodic
+exploration with a manipulator using diffusion,'' IEEE Robotics and
+Automation Letters, vol.~8, no.~12, pp.~8581--8587, 2023.\\[2pt]
+[27] V.L.~Popov and M.~He\ss, Method of dimensionality reduction in
+contact mechanics and friction. Springer, 2015.\\[2pt]
+[28] L.~Beber, E.~Lamon, et al., ``Force-based viscosity and
+elasticity measurements for material biomechanical characterisation
+with a collaborative robotic arm,'' IEEE Transactions on
+Instrumentation and Measurement, pp.~1--1, 2025.\\[2pt]
+[29] P.N.~Wells and H.-D.~Liang, ``Medical ultrasound: imaging of
+soft tissue strain and elasticity,'' Journal of the Royal Society
+Interface, vol.~8, no.~64, pp.~1521--1549, 2011.
+\end{footnotesize}
+
+\end{document}

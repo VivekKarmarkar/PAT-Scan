@@ -1,0 +1,1493 @@
+\documentclass[11pt]{article}
+
+\usepackage[margin=1in]{geometry}
+\usepackage{amsmath, amssymb}
+\usepackage{mathrsfs}
+\usepackage{xcolor}
+\usepackage{soul}
+\usepackage{pdfcomment}
+\definecolor{hlyellow}{RGB}{255,255,170}
+\definecolor{hlcyan}{RGB}{170,255,255}
+\definecolor{hlgreen}{RGB}{170,255,170}
+\definecolor{hlpink}{RGB}{255,170,170}
+\definecolor{hlorange}{RGB}{255,221,170}
+\sethlcolor{hlyellow}
+
+\usepackage{bm}
+\usepackage{xcolor}
+\usepackage{fancyhdr}
+\usepackage{booktabs}
+\usepackage{multirow}
+\usepackage{array}
+\usepackage{url}
+
+\pagestyle{plain}
+
+
+\begin{document}
+
+% =========== Page 1: chen_page1.tex ===========
+
+% ---------- Journal nameplate ----------
+\noindent
+{\footnotesize Contents lists available at ScienceDirect}\\[2pt]
+{\Large\bfseries Measurement}\\[2pt]
+{\footnotesize journal homepage: \texttt{www.elsevier.com/locate/measurement}}
+
+\vspace{0.8em}
+\hrule
+\vspace{1em}
+
+% ---------- Title ----------
+{\large\bfseries
+A novel tactile tomography system based on mechanical principles
+for internal 3D imaging\par}
+
+\vspace{0.8em}
+
+% ---------- Authors ----------
+\noindent
+Zhiming Chen\textsuperscript{a,*,1},
+Longxin Qian\textsuperscript{a,1},
+Weihao Liang\textsuperscript{a,1},
+Kaibang Zhang\textsuperscript{a},
+Zichen Liu\textsuperscript{a},
+Fengming Hu\textsuperscript{b},
+Chaobin Liu\textsuperscript{a},
+Kelan Lu\textsuperscript{a},
+Jingcheng Huang\textsuperscript{c},
+Haiquan Li\textsuperscript{d},
+Jinxiu Wen\textsuperscript{a},
+Bingpu Zhou\textsuperscript{b},
+Jianyi Luo\textsuperscript{a,*}
+
+\vspace{0.5em}
+
+% ---------- Affiliations ----------
+\noindent
+{\footnotesize
+\textsuperscript{a}\,\emph{Research Center of Flexible Sensing
+Materials and Devices, School of Applied Physics and Materials,
+Wuyi University, Jiangmen 529020, China}\\[2pt]
+\textsuperscript{b}\,\emph{Joint Key Laboratory of the Ministry of
+Education, Institute of Applied Physics and Materials Engineering,
+University of Macau, Avenida da Universidade, Taipa, Macau
+999078, China}\\[2pt]
+\textsuperscript{c}\,\emph{WYU-Flexwarm Joint Lab for Flexible
+Sensing Technologies, Guangzhou CarbonSens Technology Co., Ltd.,
+Guangzhou 511483, China}\\[2pt]
+\textsuperscript{d}\,\emph{Guangdong Runyu Sensor Co., Ltd.,
+Jiangmen 529020, China}\par}
+
+\vspace{1em}
+\hrule
+\vspace{1em}
+
+% ---------- Article info / Abstract block (two columns) ----------
+\noindent
+\begin{minipage}[t]{0.28\textwidth}
+\textbf{A R T I C L E\ \ I N F O}\\[0.8em]
+\textbf{Keywords:}\\
+Tactile tomography system\\
+Internal 3D imaging\\
+Tactile softness of materials\\
+Mechanical principles\\
+Nondestructive testing
+\end{minipage}
+\hfill
+\begin{minipage}[t]{0.68\textwidth}
+\textbf{A B S T R A C T}\\[0.8em]
+Mechanical principle-based imaging technologies, such as contact
+profilometers, atomic force microscope (AFM), and AFM-derived
+imaging modes, have been widely utilized in industrial detection
+and materials characterization. However, these imaging technologies
+primarily focus on detecting surface profiles and morphology,
+lacking the capability for internal 3D imaging. Herein, a novel
+tactile tomography system based on mechanical principle is proposed
+to image the internal structure of an object. This tactile
+tomography system comprises a scanning module, a probe module,
+and a closed-loop feedback control system, which enables it to
+recognize the softness of soft matter. Then a novel parameter of
+``tactile softness of materials'' was constructed by simulating
+human tactile perception of softness. By considering the combined
+effects of the sample's size and thickness, and the applied force
+on the tactile softness of materials, the tactile tomography system
+achieves internal 3D imaging capability with a maximum detection
+depth of 6 mm. The scanning resolution of this tactile tomography
+system is as high as 0.5 mm in both the $x$ and $y$ directions,
+and 0.1 $\mu$m in the $z$ direction. The tactile tomography system
+has a scanning accuracy exceeding 98.9\,\%, and an optimal scanning
+speed and scanning step of 2.4 mm/s \& 0.5 mm. Successful
+application in defect detection of encapsulated flexible printed
+circuit boards (FPCBs) demonstrated the promising potential of the
+tactile tomography system, marking a significant advancement in
+internal 3D imaging technologies based on mechanical principles.
+\end{minipage}
+
+\vspace{1.2em}
+\hrule
+\vspace{0.8em}
+
+% ---------- Introduction ----------
+\section*{1.\ Introduction}
+
+\noindent
+Imaging technologies play a crucial role in medical imaging,
+industrial detection, materials characterization in physical
+science, and geological detection in earth science [1--4]. Based
+on imaging principles, these imaging technologies can be
+categorized into optical imaging, X-ray imaging, ultrasonic
+imaging, nuclear imaging, magnetic resonance imaging (MRI),
+electron microscope, and mechanical imaging [5--11]. The primary
+functions of these imaging technologies include visualizing the
+surface morphology, profile, or internal structure of the measured
+sample [12--14]. Especially the imaging of internal structure --
+achieved by technologies such as X-ray computed tomography (X-CT),
+MRI, ultrasonic tomography (U-CT), optical computed tomography
+(O-CT), and positron emission tomography (PET), has significantly
+advanced the fields of medical imaging, industrial detection, and
+geological detection [15--19]. Consequently, internal 3D imaging
+is of great importance for imaging technologies. However, imaging
+technologies based on mechanical principles still lack the
+capability for internal 3D imaging.
+
+Imaging technologies based on mechanical principles include
+contact profilometers and atomic force microscope (AFM), and
+AFM-derived imaging modes [20--22]. Contact profilometers are
+typically classified into two categories: stylus profilometers
+and three-coordinates measuring machines (CMM). The stylus
+profilometer excels at detecting surface roughness and morphology
+of a workpiece, while the CMM is
+
+% ---------- Bottom-of-page footer (corresponding-author block) ----------
+\vfill
+\hrule
+\vspace{0.4em}
+\noindent
+{\footnotesize
+* Corresponding authors at: 99 Yingbin Avenue, Pengjiang District,
+Jiangmen City, Guangdong Province, China.\\[2pt]
+\textit{E-mail addresses:}
+\texttt{chenzhiming@wyu.edu.cn} (Z.~Chen),
+\texttt{luojiany@wyu.edu.cn} (J.~Luo).\\[2pt]
+\textsuperscript{1} These authors contributed equally to this work.\\[4pt]
+\url{https://doi.org/10.1016/j.measurement.2026.120300}\\[2pt]
+\pdfcomment[icon=Comment,color=orange]{User input: This work came after Fall 2025.\textbackslash \textbackslash Claude comments: PARTIALLY\_SUPPORTS. \textbackslash \textbackslash \textbackslash \textbackslash  The claim "this work came after Fall 2025" admits two readings, and the excerpt supports one reading while contradicting the other: \textbackslash \textbackslash \textbackslash \textbackslash  (A) If "came" means "was published / accepted / made available":     SUPPORTS the claim. The revised manuscript was submitted on     12 December 2025 (late Fall 2025, technically still within     Vivek's stated Fall-2025 window but near its end), accepted     2 January 2026, and appeared online 3 January 2026. Both the     journal volume header ("Measurement 264 (2026) 120300") and     the DOI stub (".2026.120300") confirm the paper is a 2026     publication. The accepted / published-online dates sit     firmly AFTER Fall 2025 by any standard academic-calendar     reading. \textbackslash \textbackslash \textbackslash \textbackslash  (B) If "came" means "the research itself was carried out /     originally submitted": CONTRADICTS the claim. The original     submission date "Received 25 October 2024" is more than a     year BEFORE Fall 2025 — meaning the underlying research and     first manuscript predate Vivek's Fall-2025 literature-review     window substantially. The authors were working on this     system throughout 2024 and early-to-mid 2025. \textbackslash \textbackslash \textbackslash \textbackslash  OPERATIONAL IMPLICATION for the PAT-Scan lit review: per reading (A), the Chen paper is genuinely a post-Fall-2025 addition that a Fall-2025-closed review could not have caught — same structural reason the Ergodic Exploration paper (IEEE RAL, accepted Feb 2026) was absent. Per reading (B), the UNDERLYING WORK existed during the review window, but only in a form (preprint / under-review manuscript) that Vivek's broad review wouldn't have had access to via standard search indices. Either way, the legitimacy of the paper being "missed" by the Fall-2025 review is preserved — the lit review wasn't negligent, the paper just wasn't findable by publication date. \textbackslash \textbackslash \textbackslash \textbackslash  No contradicting passage elsewhere in the paper. The metadata block is the canonical record of submission/acceptance dates.}\sethlcolor{hlorange}\hl{Received 25 October 2024; Received in revised form 12 December
+2025; Accepted 2 January 2026\\[2pt]
+Available online 3 January 2026}\\[2pt]
+0263-2241/\textcopyright{} 2026 Elsevier Ltd. All rights are
+reserved, including those for text and data mining, AI training,
+and similar technologies.\par}
+
+\newpage
+
+% =========== Page 2: chen_page2.tex ===========
+
+% ---------- Fig. 1 placeholder ----------
+\begin{center}
+\fbox{\begin{minipage}[c][3.2cm][c]{0.85\textwidth}
+\centering
+\textbf{Fig. 1. Schematic diagram of the tactile tomography system.}\\[6pt]
+\textcolor{gray}{\footnotesize
+[block diagram: Computer $\leftrightarrow$ XYZ-axes position signals
+$\leftrightarrow$ Scanner mode; a Programmable Logic Controller
+(PLC) drives the Z stage (with grating ruler, probe, pressure
+sensor above the sample) via Z-axes driving signals and receives
+Z-axes position signals; PLC also drives the XY stage via XY-axes
+driving signals; a Data collection and processing cell sits between
+the PLC, the Z stage, and the sample]}
+\end{minipage}}
+\end{center}
+
+\vspace{0.8em}
+
+% ---------- Fig. 2 placeholder ----------
+\begin{center}
+\fbox{\begin{minipage}[c][3.5cm][c]{0.85\textwidth}
+\centering
+\textbf{Fig. 2. Photograph of the overall tactile tomography system.}\\[6pt]
+\textcolor{gray}{\footnotesize
+[photograph with callouts: Computer (monitor + desktop on the left),
+Data collection and processing cell, Z-stage, X-stage, Y-stage, Probe,
+Grating sensor, PLC (cabinet at the bottom)]}
+\end{minipage}}
+\end{center}
+
+\vspace{0.8em}
+
+% ---------- Introduction prose (continuation from page 1) ----------
+more adept at obtaining 3D surface morphology, offering advantages
+such as high precision, good repeatability, and ease of operation
+[23,24]. However, as both are restricted to surface profiling, they
+cannot penetrate beneath the surface or resolve internal structures,
+limiting their application to external feature analysis.
+
+AFM equipped with a micro-cantilever is highly sensitive to weak
+force. One end of the micro-cantilever is fitted with a tip. Surface
+imaging of AFM relies on the interactive forces between the tip and
+the sample, and it can operate in three basic modes: contact mode,
+non-contact mode, and tapping mode [25]. The interactive forces may
+include Van Der Walls forces, electrostatic forces, or magnetic
+forces, which cause the micro-cantilever to deform or vibrate. This
+deformation or vibration can be used to infer the surface morphology
+and physical properties of the sample. Currently, AFM can provide
+detailed information about surface morphology, roughness, height,
+thickness, and phase diagrams with a high resolution of 5 nm [26].
+Consequently, AFM has been widely utilized in materials science,
+surface science, biomedicine, and other fields. In addition, AFM has
+developed several derivative modes, including kelvin probe force
+microscopy (KPFM), piezoresponse force microscopy (PFM), peak force
+quantitative nano-mechanics mapping (PF-QNM), conducting atomic
+force microscopy (C-AFM), and lateral force microscopy (LFM)
+[27--31]. Beyond detecting surface morphology, these derived imaging
+modes offer unique functionalities. For instance, KPFM can measure
+work function and surface potential [27], PFM can provide
+information about electric domains [28], and PF-QNM can yield data
+on Young's modulus, adhesive force, and maximum deformation [29].
+Although these AFM-derived imaging modes contribute to the abundant
+functions of the mechanical principle-based imaging technologies
+[30,31], they suffer from critical limitations for internal imaging.
+They rely on surface interactions with a penetration depth of less
+than 100 nm, limiting
+
+\vspace{0.8em}
+
+% ---------- Fig. 3 placeholder ----------
+\begin{center}
+\fbox{\begin{minipage}[c][3.3cm][c]{0.85\textwidth}
+\centering
+\textbf{Fig. 3. Mechanical design of the scanning module and probe module.}\\[6pt]
+\textcolor{gray}{\footnotesize
+[CAD rendering: on the left, a cross-shaped XY sliding table with
+labels ``X-axes linear sliding table module,'' ``Y-axes linear
+sliding table module,'' and ``Sample'' on the central platform;
+above the cross, a vertical ``Z-axes rodless cylinder'' with a
+``Grating sensor'' and ``Probe'' mounted to its underside. On the
+right, an enlarged detail of the probe: a narrow tube of total
+length $\approx 150$~mm, tip diameter $0.5$~mm, terminating in a
+``Pressure sensor'' module]}
+\end{minipage}}
+\end{center}
+
+\newpage
+
+% =========== Page 3: chen_page3.tex ===========
+
+% ---------- Fig. 4 placeholder ----------
+\begin{center}
+\fbox{\begin{minipage}[c][6cm][c]{0.95\textwidth}
+\centering
+\textbf{Fig. 4. Flow chart of the closed-loop feedback control system.}\\[6pt]
+\textcolor{gray}{\footnotesize
+[main flow on the left: Planning scan path $\to$ PLC $\to$ ``The X
+and Y axes move'' $\to$ ``Z-axis descent'' $\to$ decision diamond
+``The pressure sensor reaches the first threshold'' (NO loops back
+to Z-axis descent, YES feeds the grating-sensor position reader) $\to$
+``The pressure sensor reaches the second threshold'' $\to$ \dots
+$\to$ ``The pressure sensor reaches the final threshold'' $\to$
+``Z-axis stops and resets.'' A left-hand feedback loop
+($(Z_0, Z_1, \ldots, Z_n)$) carries position data from the grating
+sensor back up into the PLC. On the right, a visual strip shows the
+probe descending through layers of a stratified soft sample at
+successive depths $Z_0$, $Z_1$, $\ldots$, $Z_n$.]}
+\end{minipage}}
+\end{center}
+
+\vspace{0.8em}
+
+% ---------- Fig. 5 placeholder ----------
+\begin{center}
+\fbox{\begin{minipage}[c][7cm][c]{0.95\textwidth}
+\centering
+\textbf{Fig. 5.} Softness recognition of the tactile tomography
+system.\\[4pt]
+\textcolor{gray}{\footnotesize
+\textbf{(a)} 3 $\times$ 3 grid of nine AB glue samples, labeled with
+Shore hardnesses 3, 7.5, 12.5, 17.5, 25, 30, 35, 50, and 60 HC.\\[3pt]
+\textbf{(b)} Shore hardness tester (LX-C), photograph of the
+bench-top analog dial instrument with inset views of LX-A, LX-C, and
+LX-D indenter tips.\\[3pt]
+\textbf{(c)} Compression depth distribution over the 3$\times$3 AB
+glue grid as scanned by the tactile tomography system. X, Y in mm;
+Z color scale 0 (dark blue) to 6 mm (dark red), showing compression
+depth decreasing as Shore hardness increases.\\[3pt]
+\textbf{(d)} Relation between compression depth and Shore hardness.
+Measurement points (black squares) with a quadratic fit (red curve):
+$Y = 6.23 - 1.62\,X^{1} + 1.15\,X^{2}$,\ $R^{2} = 0.99596$.
+Compression depth axis: 0--7 mm; Shore hardness axis: 0--70 HC.]}
+\end{minipage}}
+\end{center}
+
+\vspace{0.4em}
+
+\textbf{Fig. 5.}\ Softness recognition of the tactile tomography
+system. (a) AB glues with Shore hardnesses of 3, 7.5, 12.5, 17.5,
+25, 30, 35, 50, and 60 HC. (b) Shore hardness tester (LX-C).
+(c) Compression depth distribution when the tactile tomography
+system scanned the AB glue samples with different Shore hardnesses
+(scanned by the tactile tomography system). (d) Relation between
+compression depth and Shore hardness.
+
+\newpage
+
+% =========== Page 4: chen_page4.tex ===========
+
+% ---------- Fig. 6 placeholder ----------
+\begin{center}
+\fbox{\begin{minipage}[c][7cm][c]{0.95\textwidth}
+\centering
+\textbf{Fig. 6.}\ Effect of the size of the sample on the tactile
+softness of materials.\\[4pt]
+\textcolor{gray}{\footnotesize
+\textbf{(a)} Frame model with a depth of 6 mm and different length
+\& width (3D printed ABS grid).\\[3pt]
+\textbf{(b)} Frame model filled with a soft surface layer of AB
+glue. Labeled scanning area 8$\times$8 mm, with decreasing lengths
+8.0, 6.4, 5.1, 4.0, 3.2 mm marked along each axis.\\[3pt]
+\textbf{(c)} 3D imaging of compression depth distribution when the
+tactile tomography system scanned the frame model with a soft
+surface layer. X, Y in mm; Z 0--6 mm (color bar).\\[3pt]
+\textbf{(d)} Top view of (c), showing that the central cells of
+the grid have the largest compression depth and that depth decreases
+as cell size shrinks.]}
+\end{minipage}}
+\end{center}
+
+\vspace{0.4em}
+
+\textbf{Fig. 6.}\ Effect of the size of the sample on the tactile
+softness of materials. (a) Frame model with a depth of 6 mm and
+different length \& width. (b) Frame model filled with a soft
+surface layer of AB glue. (c) 3D imaging of compression depth
+distribution when the tactile tomography system scanned the frame
+model with a soft surface layer. (d) Top view of the 3D imaging of
+compression depth distribution when the tactile tomography system
+scanned the frame model with a soft surface layer.
+
+\vspace{0.8em}
+
+% ---------- Prose continuation ----------
+analysis to the outermost surface or near-surface layers. Moreover,
+they cannot handle thick samples ($> 1\,\mu$m) or soft-encapsulated
+materials (such as flexible electronics with soft coatings), as
+probe-sample interactions are too weak to penetrate without damaging
+the surface.
+
+\pdfcomment[icon=Comment,color=green]{User input: The authors explicitly name MBT (Mechanics Based Tomography) as the global-inversion alternative and position their own work against it — they deliberately chose the local-probing route because they view MBT's displacement-measurement noise as a reliability problem.\textbackslash \textbackslash Claude comments: SUPPORTS — all three sub-claims are directly confirmed by a single contiguous passage in the Introduction: \textbackslash \textbackslash \textbackslash \textbackslash  (1) "MBT as the global-inversion alternative": explicit naming with full     acronym expansion on first reference, plus a methodological description     that identifies it as global-inversion — "leverages solid mechanics     equations and surface displacement measurements to reconstruct internal     material property distributions through an optimization framework with     regularization to handle ill-posed inverse problems." Citations [32-34]     point to the Goenezen/Texas A\&M MBT papers (ref [34] is explicitly     "Mechanics based tomography (MBT): validation using experimental data"     per page 14 of the PDF). \textbackslash \textbackslash \textbackslash \textbackslash  (2) "They position their own work against it": the passage pivots with     "However, existing mechanical tomography methods face challenges..." —     a direct contrast setup — and then the "In this study, we propose..."     sentence on the next paragraph launches their alternative. The rhetorical     structure is literally "MBT does X, but MBT has problem Y, therefore we     propose Z." \textbackslash \textbackslash \textbackslash \textbackslash  (3) "Displacement-measurement noise as the reliability problem": the     contrast sentence names two specific causes — "displacement measurement     noise and position deviations of the force" — and attributes them to     "low reconstruction accuracy and reliability" and "significant     deterioration in the quality of internal structure reconstruction."     This is verbatim the reliability framing you attributed to them. \textbackslash \textbackslash \textbackslash \textbackslash  No contradicting passage found. The paper is consistent with the claim throughout — MBT is the only named global-inversion method, and Chen's scanning-instrument approach is explicitly their local-probing alternative.}\pdfcomment[icon=Comment,color=green]{User input: Chen cites the MBT paper seriously.\textbackslash \textbackslash Claude comments: SUPPORTS — Chen engages with MBT as serious prior art along four measurable dimensions: \textbackslash \textbackslash \textbackslash \textbackslash  (1) BREADTH OF CITATION: "[32-34]" is a triple citation, not a throwaway     single reference. The three references (page 14 of the PDF) are:       [32] Mei, Wang, Shen, Rabke, Goenezen — "Mechanics based tomography:            a preliminary feasibility study" (Sensors, 2017) — the foundational            MBT paper from the Texas A\&M group.       [33] Olson, Throne, Rusnak, Gannon — "Force-based stiffness mapping for            early detection of breast cancer" (Inverse Prob. Sci. Eng., 2021)            — independent MBT-adjacent work from the Rose-Hulman group.       [34] Goenezen, Kim, Kotecha, Luo, Hematiyan — "Mechanics based            tomography (MBT): validation using experimental data"            (J. Mech. Phys. Solids, 2021) — the MBT experimental validation            paper, cited AGAIN in the body text ("Experimental validations on            composite silicone samples... [34]") to anchor a specific claim.     This is multi-group, multi-paper engagement — not a token name-drop. \textbackslash \textbackslash \textbackslash \textbackslash  (2) METHODOLOGICAL ACCURACY: Chen's one-sentence summary of MBT — "leverages     solid mechanics equations and surface displacement measurements to     reconstruct internal material property distributions through an     optimization framework with regularization to handle ill-posed inverse     problems" — is a correct and compact description of the MBT approach.     Authors who cite without reading usually get this wrong. \textbackslash \textbackslash \textbackslash \textbackslash  (3) POSITIVE FRAMING LANGUAGE: "emerging as a promising approach",     "demonstrated MBT's ability to visualize subsurface inclusions by     resolving stiffness contrasts", "highlighting its potential for     non-destructive testing of soft materials". These are sincere     endorsements, not faint praise. \textbackslash \textbackslash \textbackslash \textbackslash  (4) ACKNOWLEDGMENT OF MBT'S COMPARATIVE ADVANTAGES: "Unlike X-CT or     ultrasonic methods, mechanical principle-based tomography avoids     ionizing radiation or high-energy waves, making it suitable for delicate     samples. In addition, mechanical principle-based tomography can map     mechanical properties (such as stiffness or elastic modulus), providing     functional information beyond structural imaging." Chen makes MBT's     case FOR it, explaining why it's a meaningful contribution to the field,     before pivoting to the critique. \textbackslash \textbackslash \textbackslash \textbackslash  The critique that follows (entry 1: "displacement measurement noise and position deviations") is therefore a substantive m... [truncated in sticky; see journal for full]}\sethlcolor{hlgreen}\hl{Recent advancements in mechanical principle-based tomography have
+begun to address the gap in internal imaging, with Mechanics Based
+Tomography (MBT) emerging as a promising approach [32--34]. MBT
+leverages solid mechanics equations and surface displacement
+measurements to reconstruct internal material property distributions
+through an optimization framework with regularization to handle
+ill-posed inverse problems. Experimental validations on composite
+silicone samples have demonstrated MBT's ability to visualize
+subsurface inclusions by resolving stiffness contrasts, highlighting
+its potential for non-destructive testing of soft materials [34].
+Unlike X-CT or ultrasonic methods, mechanical principle-based
+tomography avoids ionizing radiation or high-energy waves, making
+it suitable for delicate samples. In addition, mechanical
+principle-based tomography can map mechanical properties (such as
+stiffness or elastic modulus), providing functional information
+beyond structural imaging. However, existing mechanical tomography
+methods face challenges with low reconstruction accuracy and
+reliability, as displacement measurement noise and position
+deviations of the force can both lead to a significant deterioration
+in the quality of internal structure reconstruction.}
+
+\pdfcomment[icon=Comment,color=cyan]{User input: What does the Chen paper do?\textbackslash \textbackslash Claude comments: This is the authors' own one-paragraph self-description of the paper's contribution, placed where every Elsevier-style paper places it: in the Introduction, immediately after the prior-art critique pivot, and immediately before Section 2 begins. \textbackslash \textbackslash \textbackslash \textbackslash  The paragraph covers four distinct things the paper does, in order: \textbackslash \textbackslash \textbackslash \textbackslash  (1) BUILDS a novel tactile tomography system (the hardware     contribution): scanning module + probe module + closed-loop     feedback control system. This is an engineered instrument,     not just an algorithm. \textbackslash \textbackslash \textbackslash \textbackslash  (2) INTRODUCES a new measurable parameter: "tactile softness of     materials," defined on page 6 as Softness = \$\textbackslash Delta d \textbackslash cdot S / F\$     (equation 1). This simulates human haptic perception by     combining compression depth, contact area, and applied force. \textbackslash \textbackslash \textbackslash \textbackslash  (3) DEMONSTRATES internal 3D imaging via mechanical probing: up     to 6 mm detection depth by sweeping the applied force across     thresholds (layer-by-layer reconstruction). \textbackslash \textbackslash \textbackslash \textbackslash  (4) APPLIES the system to a downstream use case: defect detection     in encapsulated flexible printed circuit boards (FPCBs) — the     hero application in Fig. 15. \textbackslash \textbackslash \textbackslash \textbackslash  This page-4 passage is the prospective "we propose" framing. An alternative candidate is the Conclusion's retrospective "we developed" framing (page 13, Section 5, "In this work, a novel tactile tomography system based on mechanical principles with internal 3D imaging capabilities was developed..."), which adds the specific Shore-hardness range (3--60 HC) and the 0.5 mm xy-resolution / 0.1 \$\textbackslash mu\$m z-resolution / 98.9\textbackslash \% accuracy numbers. The Conclusion is more specific; this Introduction passage is more self-contained and frames the contribution. \textbackslash \textbackslash \textbackslash \textbackslash  For a "what does the paper do?" question, the Introduction passage is the better answer because it states the contribution without presupposing the experimental results.}\sethlcolor{hlcyan}\hl{In this study, we propose a novel tactile tomography system based
+on mechanical principles, featuring internal 3D imaging
+capabilities. The tactile tomography system is constructed from a
+scanning module, a probe module, and a closed-loop feedback control
+system, enabling it to sense force and control the movement of the
+probe tip. This tactile tomography system can further recognize the
+softness of soft matter. To simulate human tactile perception of
+softness, a novel parameter of ``tactile softness of materials'' is
+proposed. The tactile tomography system can achieve the function of
+internal 3D imaging with a maximum detection depth of 6 mm by the
+combined effects of the sample's size, thickness, and the applied
+force. The performance of the tactile tomography system is
+characterized by its scanning resolution, scanning accuracy, and the
+trade-off between scanning efficiency and imaging quality. Finally,
+the promising potential of the tactile tomography system is
+illustrated through its application in defect detection of
+encapsulated FPCBs.}
+
+\section*{2.\ System design and instrumentation}
+
+The configuration of the tactile tomography system is shown in
+Fig.~1, and the photograph of the developed tactile tomography
+system is presented in Fig.~2. The tactile tomography system
+consists of a scanning module, a probe module, and a closed-loop
+feedback control system.
+
+\subsection*{2.1.\ Scanning module}
+
+The mechanical design of the scanning module and probe module is
+shown in Fig.~3. This design incorporates two linear actuators
+(MBDLN25SE, Panasonic) and two servo motors (MSMF022L1U2M, Panasonic)
+that together form an XY stage, allowing for precise adjustments of
+the measurement position on the sample. A rodless cylinder
+(CDHD-4D52AAP1) is utilized to drive the probe module, applying
+pressure to the sample in the vertical direction, and a grating
+sensor (RXF1188508-01) measures the depth of the applied pressure.
+The movement speeds of the XY stage and Z stage can be adjusted
+from 0.1 to 500 mm/min and from 0.1 to 400 mm/min, respectively.
+The XY stage and Z stage achieve a limit resolution of step
+displacement of 10 $\mu$m and
+
+\newpage
+
+% =========== Page 5: chen_page5.tex ===========
+
+% ---------- Fig. 7 placeholder ----------
+\begin{center}
+\fbox{\begin{minipage}[c][6.5cm][c]{0.95\textwidth}
+\centering
+\textbf{Fig. 7.}\ Effect of the thickness of the sample on the
+tactile softness of materials.\\[4pt]
+\textcolor{gray}{\footnotesize
+\textbf{(a)} Hierarchical structure model with 9 staircase steps,
+0.5 mm height difference between adjacent stages (total run 5 mm),
+CAD view with the stepped top surface.\\[3pt]
+\textbf{(b)} Hierarchical model filled with a soft surface layer
+of AB glue (photograph), uniform square scanning region outlined.\\[3pt]
+\textbf{(c)} 3D surface plot of compression-depth distribution when
+the tactile tomography system scanned (b); stepped pyramid shape
+with X, Y in mm and Z 0--6 mm on a rainbow color scale.\\[3pt]
+\textbf{(d)} Bar chart: measured height (mm, 0--7 axis) at step
+numbers 1--9; consecutive step-to-step height differences are
+0.494 mm and 0.495 mm, matching the 0.5 mm nominal staircase step.]}
+\end{minipage}}
+\end{center}
+
+\vspace{0.4em}
+
+\textbf{Fig. 7.}\ Effect of the thickness of the sample on the
+tactile softness of materials. (a) Hierarchical structure model
+with the height difference between each adjacent stage of 0.5 mm.
+(b) Hierarchical structure model filled with a soft surface layer
+of AB glue. (c) 3D imaging of compression depth distribution when
+the tactile tomography system scanned the hierarchical structure
+model with a soft surface layer. (d) Height of the compression
+depth distribution.
+
+\vspace{0.8em}
+
+% ---------- Prose continuation (from page 4) ----------
+0.1 $\mu$m, respectively, enabling the tactile tomography system
+to operate with high scanning resolution.
+
+\subsection*{2.2.\ Probe module}
+
+\pdfcomment[icon=Comment,color=cyan]{User input: Does the Chen paper allude to the CORE source instrumentation paper in the prose?\textbackslash \textbackslash Claude comments: YES — exactly once, as a single parenthetical citation in the opening sentence of Section 2.2 (page 5). That is the only allusion to the core source instrumentation paper in the entire 14-page body text. A grep of the raw.txt files confirms "[35]" appears in only two places: once here in the body, and once on page 14 in the reference list. \textbackslash \textbackslash \textbackslash \textbackslash  WHAT THIS MEANS OPERATIONALLY: \textbackslash \textbackslash \textbackslash \textbackslash  (1) THE SENSOR IS CHEN'S OWN GROUP'S PRIOR WORK, not a     third-party part. Reference [35]'s author list — J. Hu, Z.     Chen, K. Lao, H. Liang, X. Huang, Z. Li, J. Huang, X. Hu,     B. Liang, D. Ye, J. Wen, J. Luo — has heavy overlap with     the Chen paper's own author list (Z. Chen, J. Wen, J. Luo     appear in both; same Wuyi University research center, same     Guangdong province funding). So the "core source     instrumentation paper" is a self-citation to the same     lab's 2021 IEEE Sensors paper that originally developed     the carbon-fiber-beam pressure sensor. \textbackslash \textbackslash \textbackslash \textbackslash  (2) THE ALLUSION IS MINIMAL — a single "[35]" token, no     accompanying descriptive phrase (not "as described in     [35]", not "see [35] for details", just "[35]"). The     reader is expected to recognize that the pressure sensor's     design, characterization, and calibration are all deferred     to that one cited paper. There is no discussion in Chen     (this paper) of what makes the sensor design a "cascade     amplification effect" or why carbon-fiber-beam current-path     geometry matters — those details live only in [35]. \textbackslash \textbackslash \textbackslash \textbackslash  (3) THIS EXPLAINS THE SILENCE ON CALIBRATION (ask-question     entry 5): the Chen paper is NOT an instrumentation paper     for the pressure sensor — it's an instrumentation paper     for the whole scanning system that HAPPENS to use the     group's earlier pressure sensor. Calibration of the sensor     itself is an already-solved problem per [35], so Chen     correctly doesn't re-derive or re-validate it. The same     pattern appears elsewhere in the paper: Shore hardness     measurement procedure [37], softness-perception physiology     [38], encapsulation-layer-stiffness characterization [40]     are all delegated via citation. \textbackslash \textbackslash \textbackslash \textbackslash  IMPORTANT CLARIFICATION OF "ALLUDE":   - If "allude" means "cites at least once in the body" \$\textbackslash to\$     YES (this sentence on page 5).   - If "allude" means "discusses substantively in the prose"     (e.g., summarizes the sensor's working principle, reports     its calibration curve, compares it to alternatives) \$\textbackslash to\$     NO — the paper never describes reference [3... [truncated in sticky; see journal for full]}\sethlcolor{hlcyan}\hl{As shown in Figs.~2 and 3, the probe module of the tactile
+tomography system was assembled from a shell structure, a tip, two
+springs, and a carbon fiber beams based pressure sensor [35].} To
+achieve high scanning resolution without penetrating the soft layer
+of the sample, the tip was designed with a diameter of 0.5 mm. The
+springs are positioned behind the tip to transmit the force from
+the tip to the pressure sensor and to restore the tip's position.
+\pdfcomment[icon=Comment,color=cyan]{User input: How does their Force sensor know the value of the force?\textbackslash \textbackslash Claude comments: PARTIAL ANSWER. \textbackslash \textbackslash \textbackslash \textbackslash  The paper answers HOW the sensor transduces force into a machine-readable value, but does NOT answer HOW that raw value is mapped to force in SI units (i.e., the calibration from resistance-in-ohms to force-in-newtons or pressure-in-MPa). This is the companion question to ask-question entry 5 (null on calibration procedure). \textbackslash \textbackslash \textbackslash \textbackslash  WHAT THE EXCERPT TELLS YOU (the transduction chain, verbatim): \textbackslash \textbackslash \textbackslash \textbackslash  (1) PHYSICAL TRANSDUCTION: the pressure sensor is "based on     carbon fiber beams" and "responds to the force exerted by     the springs." The carbon-fiber-beam design [ref 35, Hu et     al. 2021, IEEE Sens. J.] is piezoresistive — applied force     bends the carbon-fiber beams, which changes their electrical     resistance. The springs between tip and sensor transmit the     normal force from the tip onto the beam array. \textbackslash \textbackslash \textbackslash \textbackslash  (2) SIGNAL ACQUISITION: "The resistance value of the pressure     sensor changes when the tip of the probe module touches the     surface of the sample. This resistance value is collected by     an ADS1247 acquisition chip, which converts the analog signal     into a digital signal." The ADS1247 is a 24-bit     delta-sigma ADC commonly used with resistive sensors (TI     part, typically bridge-excited). The raw resistance becomes     a digital count. \textbackslash \textbackslash \textbackslash \textbackslash  (3) THRESHOLD COMPARISON: "The digital signal is then transmitted     to an STM32F030C8T6 microprocessor, where it is identified     as the first threshold." The MCU compares the digitized     reading against a pre-set threshold (set in software) to     decide whether the probe has hit the target force; no     conversion to SI force units is described. \textbackslash \textbackslash \textbackslash \textbackslash  WHAT THE EXCERPT DOES NOT TELL YOU: \textbackslash \textbackslash \textbackslash \textbackslash    - The piezoresistive gain coefficient (how many ohms per     newton, or per MPa).   - Whether the raw resistance is zero-corrected, temperature-     compensated, or hysteresis-corrected.   - The procedure that maps the set-threshold integer (used by     the STM32 firmware) to the pressure values reported in     Results (0.5, 1.5, 2.5, 4, 6, 8, 13 MPa).   - Whether the "pressure" values quoted throughout Results are     MEASURED by this sensor or COMMANDED to the rodless     cylinder's pneumatic regulator (these are two very different     things — commanded set-point vs. sensor-read actual force). \textbackslash \textbackslash \textbackslash \textbackslash  So the honest answer to "how does their force sensor KNOW the value of the force?" is: \textbackslash \textbackslash \textbackslash \textbackslash    - It SENSES force via carbon-fiber-beam piezoresistance     (documented in this excerpt).   - It ACQUIRES the sensed ... [truncated in sticky; see journal for full]}\sethlcolor{hlcyan}\hl{The pressure sensor, which is based on carbon fiber beams, is
+capable of quantitatively measuring force and responds to the force
+exerted by the springs. Consequently, the probe module can
+accurately capture force information when the tip makes contact
+with the sample.}
+
+\subsection*{2.3.\ Closed-loop feedback control system}
+
+A programmable logic controller (PLC) (H2U-48MT, Henchman) was
+integrated with the scanning module and the probe module to
+establish a closed-loop feedback control system. The workflow of
+the tactile tomography system is shown in Fig.~4. Firstly, scanning
+paths, scanning speed, and scanning step were programmed. The PLC
+control the X and Y axes to drive the sample to move until the
+target scanning point is right under the tip, and then the rodless
+cylinder of the Z axis drive the probe down. \sethlcolor{hlcyan}\hl{The resistance value
+of the pressure sensor changes when the tip of the probe module
+touches the surface of the sample. This resistance value is
+collected by an ADS1247 acquisition chip, which converts the analog
+signal into a digital signal. The digital signal is then
+transmitted to an STM32F030C8T6 microprocessor, where it is
+identified as the first threshold.} Meanwhile, the position
+information of $Z_0$ is read by the grating sensor, and the
+microprocessor sends this position information to the PLC. The
+rodless cylinder then continues to drive the probe downward, while
+the grating sensor reads a series of positional data as the
+resistance value of the pressure sensor reaches specific
+characteristic thresholds. The PLC stops and resets the probe once
+the resistance value of the pressure sensor attains the target
+threshold. \pdfcomment[icon=Comment,color=yellow]{User input: where they talk about stitching together local estimates to create a global map \textbackslash \textbackslash Claude comments: This is the canonical workflow statement of Chen's local-to-global stitching: scan one point → record (x, y, z) threshold data → advance to next point → repeat until the whole preset area is covered → aggregate all per-point (x, y, z) tuples into projection data → reconstruct a 3D image. That is literally "stitch local estimates into a global map." \textbackslash \textbackslash \textbackslash \textbackslash  The three ingredients in the user's cue map 1:1 to the excerpt:   - "local estimates" = "positional information (x, y, z) corresponding to                         each threshold" (one tuple per scanning point)   - "stitching" = "saved as projection data" + "drive the sample to the                   next scanning point until all preset areas have been                   scanned" (sequential accumulation across the grid)   - "global map" = "reconstruct a 3D image of the internal structure of                    the sample" \textbackslash \textbackslash \textbackslash \textbackslash  ALTERNATIVE PASSAGE CONSIDERED: Page 6, Section 3.2, has a more literal "combining" sentence: "Significantly, by combining the compression depth and its corresponding location information (x and y), Fig. 7c also shows the internal hierarchical structure of the sample, indicating that the tactile tomography system can obtain the internal structure information of the sample with a soft surface layer based on tactile softness of materials." This is a demonstration-scoped statement (tied to Fig. 7c) rather than the general workflow. I picked the page 5 passage because it is the methodological definition, not a per-experiment instance — so it carries the general claim the user was pointing at. \textbackslash \textbackslash \textbackslash \textbackslash  Additional relevant context (not excerpted): page 10 discusses the TRADE-OFF in this stitching workflow — "The low number of scanning points make the projection data insufficient, which causes poor quality of the reconstructed 3D images. Therefore, increasing the scanning speed is one effective strategy to achieve both high scanning efficiency and imaging quality." This confirms that the "stitch local to global" architecture is exactly what bottlenecks the method (sparse point sampling → poor 3D reconstruction), which is coherent with the methodological-class critique you recorded in the cluster-analysis verdict. }\sethlcolor{hlyellow}\hl{The X and Y axes then drive the sample to the next
+scanning point until all preset areas have been scanned. The
+positional information $(x, y, z)$ corresponding to each threshold
+is saved as projection data to reconstruct a 3D image of the
+internal structure of the sample. This projection data is stored
+in a CSV file and displayed in real time through a visual
+interface.}
+
+\section*{3.\ Imaging principle of tactile tomography}
+
+\subsection*{3.1.\ Softness recognition of tactile tomography system}
+
+The ability of a material sample to resist the penetration of hard
+objects into its surface is known as hardness, which is an intrinsic
+property of the material. [36]. According to different measurement
+approach and standard, hardness can be subdivided into Rockwell
+hardness, Vickers hardness, Shore hardness, and Brinell hardness.
+Among these hardness measurements, Shore hardness has been widely
+applied to the hardness testing of soft materials, such as
+elastomers, rubber, soft plastics, and foam [37]. Therefore, the
+softness of soft matter can be characterized by Shore hardness,
+which exhibits a negative correlation with softness. The tactile
+tomography system can
+
+\newpage
+
+% =========== Page 6: chen_page6.tex ===========
+\setcounter{equation}{0}
+
+% ---------- Fig. 8 placeholder ----------
+\begin{center}
+\fbox{\begin{minipage}[c][6.5cm][c]{0.95\textwidth}
+\centering
+\textbf{Fig. 8.}\ Effect of the applied force on the tactile
+softness of materials.\\[4pt]
+\textcolor{gray}{\footnotesize
+3D imaging of compression-depth distribution when the tactile
+tomography system scanned the hierarchical structure model (Fig.~7)
+with a soft surface layer under a pressure of
+\textbf{(a)} 0.5 MPa, \textbf{(b)} 1.5 MPa, \textbf{(c)} 2.5 MPa,
+and \textbf{(d)} 4 MPa respectively. Each panel is a rainbow-colored
+rendered 3D surface (Z scale 0--6 mm). At low force (0.5 MPa) only
+the uppermost staircase plateau resolves; as force increases more
+layers of the stepped interior become visible, until at 4 MPa the
+full staircase structure is recovered.]}
+\end{minipage}}
+\end{center}
+
+\vspace{0.4em}
+
+\textbf{Fig. 8.}\ Effect of the applied force on the tactile softness
+of materials. 3D imaging of compression depth distribution when the
+tactile tomography system scanned the hierarchical structure model
+with a soft surface layer under a pressure of (a) 0.5, (b) 1.5,
+(c) 2.5, and (d) 4 MPa, respectively.
+
+\vspace{0.6em}
+
+% ---------- Prose (Section 3.1 tail) ----------
+\pdfcomment[icon=Comment,color=cyan]{User input: How does the Chen paper recognize the softness?\textbackslash \textbackslash Claude comments: The excerpt gives the complete mechanism of softness recognition in one self-contained passage, moving from physical setup to formal definition in six steps: \textbackslash \textbackslash \textbackslash \textbackslash  (1) PHYSICAL MECHANISM: "applying a constant force through a tip     pressing against the soft material" — the measurement is     force-in, deformation-out, with the constant-force regime     enforced by the closed-loop feedback control system. \textbackslash \textbackslash \textbackslash \textbackslash  (2) CONTROL ARCHITECTURE: "This capability is attributed to the     closed-loop feedback control system" — the control system     (described in Section 2.3 on page 5) is what makes the     constant-force regime possible. Pressure sensor reads tip     force; PLC compares to preset threshold; rodless cylinder     stops Z-axis descent when the threshold is met. \textbackslash \textbackslash \textbackslash \textbackslash  (3) CALIBRATION SUBSTRATES: "a series of two-component epoxy     adhesives (AB glues) with Shore hardnesses of 3, 7.5, 12.5,     17.5, 25, 30, 35, 50, and 60 HC" — 9 calibrated samples     covering a 20× hardness range, measured independently by a     commercial Shore tester (LX-C) to ground-truth their     hardnesses. \textbackslash \textbackslash \textbackslash \textbackslash  (4) OBSERVED RELATIONSHIP: "the AB glues with different Shore     hardnesses exhibit different compression depths. The average     compression depth decreases as the Shore hardness of the AB     glues increases... demonstrating a negative correlation" —     harder sample \$\textbackslash Rightarrow\$ smaller compression depth. This     monotonic relation is the empirical basis for using     compression depth as a proxy for softness. The quantitative     fit (Fig. 5d) is \$Y = 6.23 - 1.62\textbackslash ,X\^\{\}1 + 1.15\textbackslash ,X\^\{\}2\$ with     \$R\^\{\}2 = 0.99596\$. \textbackslash \textbackslash \textbackslash \textbackslash  (5) DEFINITIONAL MOVE: "the softness of soft materials can be     characterized by the compression depth" — the recognition     primitive is \$\textbackslash Delta d\$ (compression depth) itself. \textbackslash \textbackslash \textbackslash \textbackslash  (6) FORMAL DEFINITION (Eq. 1): Softness \$= \textbackslash Delta d / P = \textbackslash Delta     d \textbackslash cdot S / F\$, where \$\textbackslash Delta d\$ is compression depth, \$F\$     is applied force, \$S\$ is contact area, and \$P = F/S\$ is     pressure. This normalizes compression depth by pressure so     softness values are comparable across different probe forces     and contact geometries. \textbackslash \textbackslash \textbackslash \textbackslash  To answer the question in one sentence: Chen recognizes softness by applying a known constant force (set by the closed-loop feedback controller) through a 0.5-mm-diameter probe tip onto the sample, measuring the resulting compression depth \$\textbackslash Delta d\$ at that point (via the grating sensor on the Z-axis), and computing Softness \$= \textbackslash Delta d \textbackslash cdot S / F\$. This is a ... [truncated in sticky; see journal for full]}\sethlcolor{hlcyan}\hl{recognize softness by applying a constant force through a tip
+pressing against the soft material. This capability is attributed
+to the closed-loop feedback control system. As shown in Fig.~5a, a
+series of two-component epoxy adhesives (AB glues) with Shore
+hardnesses of 3, 7.5, 12.5, 17.5, 25, 30, 35, 50, and 60 HC were
+prepared with a size of $15 \times 15$ mm$^2$ and a thickness of
+6 mm, and their hardness values were measured by a Shore hardness
+tester (LX-C) (Fig.~5b). The tactile tomography system pressed each
+AB glue sample with a constant pressure of 2.5 MPa. The scanning
+point for each AB glue is 12, within a scanning area of
+$12 \times 12$ mm$^2$. The scanning results are shown in Fig.~5c,
+where the AB glues with different Shore hardnesses exhibit different
+compression depths. The average compression depth decreases as the
+Shore hardness of the AB glues increases (as shown in Fig.~5d),
+demonstrating a negative correlation. This indicates that the
+softness of soft materials can be characterized by the compression
+depth. Therefore, based on the tactile tomography system, the
+relationship between the softness and compression depth can be
+defined as}
+\begin{equation}
+\text{Softness} \;=\; \frac{\Delta d}{P}
+  \;=\; \frac{\Delta d \cdot S}{F}
+\end{equation}
+where $\Delta d$ is the compression depth, $F$ is the force when
+the tip pressing the sample, and $S$ is the contact area between
+the tip and the sample.
+
+\subsection*{3.2.\ Tactile softness of materials}
+
+The size and thickness of the sample must be taken into account when
+testing Shore hardness. The contact position of the specimen should
+be at least 12 mm from the edge (for Shore A, B, C, and D), and the
+thickness must not be less than 6 mm. Consequently, the compression
+depth will vary if the size and thickness of the sample are less
+than 12 mm and 6 mm, respectively. Similar to tactile softness [38],
+which is perceived through the mechanoreceptors in human skin, the
+tactile softness of materials is proposed for use in a tactile
+tomography system to simulate human haptic perception to recognize
+the softness of soft materials, taking into consideration factors
+such as sample size, sample thickness, and the applied force. As
+shown in Fig.~6a, a frame model was fabricated by 3D printing with
+acrylonitrile butadiene styrene (ABS). The AB glue samples were
+filled in the frame model to form a series of samples with different
+sizes and the same thickness of 6 mm, in which the length and width
+were decreased from 8.0 mm to 3.2 mm (8.0, 6.4, 5.1, 4.0, and 3.2
+mm, respectively) (Fig.~6b). Subsequently, the samples were scanned
+by the tactile tomography system under a constant pressure of 4 MPa.
+Fig.~6c presents that the sample with a length \& width of 8 mm \&
+8 mm possesses the largest compression depth, and the compression
+depth decreases with decreasing length or width of the sample. The
+compression depth of the central area of each sample are larger than
+that of the edge area (Fig.~6d). These results demonstrate that the
+tactile tomography system can effectively simulate human haptic
+perception, allowing for the differentiation of tactile softness
+distribution in materials when the size of the soft matter is less
+than 12 mm.
+
+In addition, a hierarchical structure model was fabricated by 3D
+printing with ABS, and the height difference between each adjacent
+stage is about 0.5 mm (as shown in Fig.~7a). Then the AB glue was
+filled in the hierarchical structure model to form a soft surface
+layer with different thickness (Fig.~7b). The image reconstructed by
+the projection data from the tactile tomography system scanning this
+sample with a constant pressure of 4 MPa is shown in Fig.~7c, the
+compression depth of the samples with different thickness surface
+layers exhibits clear gradation. The compression depth difference
+between each adjacent thickness is also about 0.5 mm (Fig.~7d),
+which consistent with the height difference of each adjacent stage.
+Significantly, by combining the compression depth and its
+corresponding location information ($x$ and $y$), Fig.~7c also
+shows the internal hierarchical structure of the sample, indicating
+that the tactile tomography system can obtain the internal structure
+information of the sample with a soft surface layer based on tactile
+softness of materials.
+
+The object that is buried deep cannot be sensed by the fingers
+unless a large force is applied. Similarly, the tactile tomography
+system is
+
+\newpage
+
+% =========== Page 7: chen_page7.tex ===========
+\setcounter{equation}{1}
+
+% ---------- Fig. 9 placeholder ----------
+\begin{center}
+\fbox{\begin{minipage}[c][9cm][c]{0.95\textwidth}
+\centering
+\textbf{Fig. 9.}\ Theoretical validity of the tactile tomography.\\[4pt]
+\textcolor{gray}{\footnotesize
+\textbf{(a)} Symbol ``\,$+$\,'' model: CAD drawing of a 50 mm $\times$
+50 mm substrate with a raised plus-sign feature at the center.\\[3pt]
+\textbf{(b)} Symbol ``\,$+$\,'' model filled with AB glues:
+photograph showing the glue-covered sample, 50 mm $\times$ 50 mm,
+20 mm glue depth marked.\\[3pt]
+\textbf{(c)} Simulation results of the mechanical process of the
+probe pressing the sample: meshed FEA view with the probe tip (small
+yellow sphere) contacting the red sample block.\\[3pt]
+\textbf{(d)} Simulation results of the sample scanned by the probe
+tip with 676 scanning points: rainbow-colored contour in the
+central square region, red-to-yellow elsewhere.\\[3pt]
+\textbf{(e)} Simulated displacement field of the sample under probe
+loading: rendered 3D surface plot showing the plus-sign structure
+emerging via displacement contrast.\\[3pt]
+\textbf{(f)} Experimental result of the sample scanned by the
+tactile tomography system: cleanly resolved plus-sign with
+step-like vertical extrusion on a red substrate (rainbow Z scale).]}
+\end{minipage}}
+\end{center}
+
+\vspace{0.4em}
+
+\textbf{Fig. 9.}\ Theoretical validity of the tactile tomography.
+(a) Symbol ``+'' model. (b) Symbol ``+'' model filled with AB glues.
+(c) Simulation results of the mechanical process of the probe
+pressing the sample. (d) Simulation results of the sample scanned
+by the probe tip with 676 scanning points. (e) Simulated
+displacement field of the sample under probe loading. (f)
+Experimental result of the sample scanned by the tactile tomography
+system.
+
+\vspace{0.8em}
+
+% ---------- Prose ----------
+unable to obtain the information of the sample with a thicker soft
+surface layer if the applied force is small. \pdfcomment[icon=Comment,color=cyan]{User input: How is the image of a single layer reconstructed in the Chen paper?\textbackslash \textbackslash Claude comments: A SINGLE LAYER in Chen's tomography corresponds to ONE pressure threshold. The image of that layer is reconstructed by the following sequence: \textbackslash \textbackslash \textbackslash \textbackslash  (1) Fix a pressure threshold \$T\$ (e.g., 0.5 MPa for the     shallowest layer, or 4 MPa for the deepest). (2) At each \$(x, y)\$ scanning point, the probe descends under     closed-loop feedback control until the pressure sensor     reading equals \$T\$; the Z-axis grating sensor records the     compression depth \$z\$ at that moment. This is the per-point     mechanism described in Section 2.3 (page 5). (3) The XY stage advances to the next \$(x, y)\$ and step 2     repeats until all preset scanning points have been covered. (4) The set of \$(x, y, z)\$ tuples collected at threshold \$T\$ —     one tuple per scanning point — IS the image of that layer.     Fig. 8a shows this for \$T = 0.5\$ MPa; Fig. 8d shows it for     \$T = 4\$ MPa. \textbackslash \textbackslash \textbackslash \textbackslash  The page-7 excerpt above is the clearest statement of "one threshold \$\textbackslash to\$ one layer." It uses Fig. 8a-d as a direct visual demonstration: four applied pressures, four single-layer images, showing how deeper stages of the hierarchical model become visible as the threshold increases. The nine-thresholds example (pressures 0.5, 0.75, 1.10, 1.50, 1.85, 2.50, 4.00, 5.00 MPa) is the operational form of the full layer-by-layer 3D tomography: nine per-threshold scans, each producing one layer's image, which Movie S1 shows being displayed sequentially. \textbackslash \textbackslash \textbackslash \textbackslash  An alternative excerpt would be the Section 2.3 workflow paragraph (page 5), which describes the per-point descent-to- threshold mechanism in more mechanical detail. I picked the page-7 passage because it explicitly connects the pressure threshold to a layer — the conceptual bridge the user's question ("how is a SINGLE LAYER reconstructed") hinges on — and because Fig. 8a-d concretely show what each single-layer image looks like. Page 5 describes HOW the mechanism works at each scanning point; page 7 is where Chen explains that doing step 2 across all \$(x, y)\$ at one threshold gives you one layer's image. \textbackslash \textbackslash \textbackslash \textbackslash  Note: in Chen's framing, the "image of a single layer" is NOT a 2D top-down slice at fixed \$z\$. It is a 3D surface of \$z\$ values (the interface at which pressure \$= T\$), covering all \$(x, y)\$ in the scanning grid. Fig. 8a-d render these surfaces as rainbow-colored 3D plots. Stacking these per-threshold surfaces across increasing \$T\$ values produces the full layered-tomography reconstruction.}\pdfcomment[icon=Comment,color=yellow]{User input: the complementary evidence: the page-7 Fig. 8 paragraph showing the layer-to-volume demonstration (nine thresholds example) \textbackslash \textbackslash Claude comments: This is the LAYER \$\textbackslash to\$ VOLUME demonstration — the second rung of the POINT \$\textbackslash to\$ LAYER \$\textbackslash to\$ VOLUME ladder, made operational with a concrete nine-threshold recipe. Three reasons to highlight it alongside the two earlier text-to-highlight entries: \textbackslash \textbackslash \textbackslash \textbackslash  (1) ENTRY 1 (page 5 workflow, Section 2.3) highlights the     per-scanning-point MECHANISM ("drive the sample to the next     scanning point until all preset areas have been scanned...     saved as projection data to reconstruct a 3D image").     \$\textbackslash to\$ POINT-level and POINT\$\textbackslash to\$LAYER step in operational     terms. \textbackslash \textbackslash \textbackslash \textbackslash  (2) ENTRY 2 (page 7 methodology summary) highlights the FULL     LADDER IN ONE SENTENCE ("By collecting the projection data     of positional information (x, y, z) corresponding to each     pressure threshold, the system reconstructs layer-by-layer     3D images of the internal structure").     \$\textbackslash to\$ all three levels stated once, compact. \textbackslash \textbackslash \textbackslash \textbackslash  (3) THIS ENTRY (page 7 Fig. 8 discussion) highlights the     LAYER\$\textbackslash to\$VOLUME DEMONSTRATION with a concrete numerical     example: nine pressure thresholds producing nine layers     that together reconstruct the 3D volume, with Movie S1 as     the visual proof.     \$\textbackslash to\$ the layer-to-volume step made tangible and countable. \textbackslash \textbackslash \textbackslash \textbackslash  Together the three highlights form a complete trace: mechanism (page 5) \$\textbackslash to\$ ladder summary (page 7 methodology summary) \$\textbackslash to\$ ladder demonstration (page 7 Fig. 8 paragraph). A reader hovering on the three highlighted passages in sequence sees Chen's local-to-global assembly at three zoom levels. \textbackslash \textbackslash \textbackslash \textbackslash  Alternative that I did NOT add: a text-to-highlight entry for the page-7 methodology-summary passage focused specifically on the POINT part ("compression depth at each X-Y position... at that location"). That passage is already doing double duty via find-evidence entry 4 (local-estimate) and entry 5 (ladder evidence); a third citation in text-to-highlight would be redundant. }\sethlcolor{hlcyan}\hl{As shown in Fig.~8a,
+only the top two stages can be reconstructed and distinguished as
+the tactile tomography system pressed the sample with a pressure of
+0.5 MPa. As the applied force increases, the deeper stage can be
+reconstructed and distinguished, such as the top 4 stages for the
+pressure of 1.5 MPa (Fig.~8b), the top 6 stages for the pressure of
+2.5 MPa (Fig.~8c), and all stage for the pressure of 4 MPa
+(Fig.~8d). Therefore, the tactile tomography system can detect and
+reconstruct the sample layer-by-layer by setting a series of
+threshold corresponding to increasing pressures. For example, nine
+thresholds of 0, 1, 2, 3, 4, 5, 6, and 7 that corresponding to the
+pressures of 0.5, 0.75, 1.10, 1.50, 1.85, 2.50, 4.00, and 5.00 MPa
+were set, and the reconstructed images can be displayed
+layer-by-layer in the host computer (as shown in Movie~S1).} These
+results proved that this imaging system based on the detection of
+tactile softness of materials can image an object by tomography.
+Moreover, Fig.~8d also shows the maximum depth of 6 mm, indicating
+that the tactile tomography system can identify an object buried
+6 mm below the surface. The tomography methodology employed in this
+tactile tomography system is based on mechanical principles and the
+novel parameter of ``tactile softness of materials,'' which
+simulates human haptic perception by integrating the effects of
+sample size, thickness, and applied force. The system utilizes a
+closed-loop feedback control system to drive the probe module to
+scan the sample in the X-Y plane with a preset scanning step and
+speed. During scanning, the Z-axis rodless cylinder applies a
+series of increasing pressures to the sample through the probe. \pdfcomment[icon=Comment,color=green]{User input: Chen's method of computing softness is a local-estimate.\textbackslash \textbackslash Claude comments: SUPPORTS — unambiguous verbatim support, in the authors' own words, on three concurrent dimensions: \textbackslash \textbackslash \textbackslash \textbackslash  (1) SPATIAL LOCALITY: "the grating sensor records the     corresponding compression depth (\$\textbackslash Delta d\$) at each X-Y     position" — one measurement per (x, y) sampling point, not     a global field. The paper uses "at each X-Y position" to     describe the measurement locale. \textbackslash \textbackslash \textbackslash \textbackslash  (2) POINT-WISE DEFINITION OF SOFTNESS: "defines the tactile     softness (Softness = \$\textbackslash Delta d \textbackslash cdot S / F\$), which     characterizes the material's softness AT THAT LOCATION" —     verbatim "at that location" (lowercase-exact in the PDF at     line 94 of page 7 raw). This is Chen explicitly calling     softness a per-location quantity. The locality is not     inferred — the authors state it. \textbackslash \textbackslash \textbackslash \textbackslash  (3) EXPLICIT STITCHING CLAUSE: "By collecting the projection     data of positional information (x, y, z) corresponding to     each pressure threshold, the system reconstructs     layer-by-layer 3D images of the internal structure." — the     3D "global" map is built by collecting many per-point     readings, not solved from a global inverse problem. This is     the local-to-global stitching step that distinguishes     Chen's approach from MBT's PDE-inverse approach (already     recorded in entries 1 and 2 of this journal, and in     ask-question entry 2). \textbackslash \textbackslash \textbackslash \textbackslash  The word "local" does not appear in Chen's paper. But the concepts — per-point measurement, per-location softness value, aggregation-into-global-via-collection — are all stated verbatim. The user's claim "local-estimate" is the natural technical label for exactly what Chen describes. \textbackslash \textbackslash \textbackslash \textbackslash  Alternative excerpt: page 6 Eq. (1) defines Softness \$= \textbackslash Delta d / P = \textbackslash Delta d \textbackslash cdot S / F\$, which is also a per-point formula. I picked the page-7 passage instead because it is the only place in the paper where locality is named explicitly ("at each X-Y position", "at that location") AND the stitching step is stated adjacently — this single paragraph captures the entire local-to-global pipeline in one place. \textbackslash \textbackslash \textbackslash \textbackslash  No contradicting passage. Nowhere in the paper does softness appear as anything other than a per-point scalar.}\pdfcomment[icon=Comment,color=green]{User input: CONCLUSIVE EVIDENCE that they START AT POINTWISE ESTIMATES and move out from there in the Chen paper -> POINT2LAYER -> LAYER2VOLUME\textbackslash \textbackslash Claude comments: SUPPORTS — conclusive, in the authors' own words, in a single contiguous paragraph. The excerpt contains all three levels of the local-to-global ladder stated explicitly and in sequence: \textbackslash \textbackslash \textbackslash \textbackslash  LEVEL 1 — POINTWISE ESTIMATE ("START AT POINTWISE ESTIMATES"): \textbackslash \textbackslash \textbackslash \textbackslash    "the grating sensor records the corresponding compression    depth (\$\textbackslash Delta d\$) at each X-Y position. This compression    depth, combined with the applied force (\$F\$) and the contact    area (\$S\$) between the tip and the sample, defines the    tactile softness (Softness \$= \textbackslash Delta d \textbackslash cdot S / F\$), which    characterizes the material's softness at that location." \textbackslash \textbackslash \textbackslash \textbackslash    \$\textbackslash to\$ per-(x,y) softness value, named "at that location."   This IS the pointwise estimate — one scalar per scanning   point, computed from a local contact measurement. \textbackslash \textbackslash \textbackslash \textbackslash  LEVEL 2 — POINT \$\textbackslash to\$ LAYER ("POINT2LAYER"): \textbackslash \textbackslash \textbackslash \textbackslash    "By collecting the projection data of positional information    \$(x, y, z)\$ corresponding to each pressure threshold..." \textbackslash \textbackslash \textbackslash \textbackslash    \$\textbackslash to\$ for a FIXED pressure threshold, collect the \$(x, y, z)\$   tuples across all scanning points. The set of tuples at one   threshold IS one layer. (Fig. 8a--d on the same page visualize   this directly: Fig. 8a = layer at 0.5 MPa, Fig. 8d = layer at   4 MPa.) Note the verbatim "each pressure threshold" — one   threshold, one layer. \textbackslash \textbackslash \textbackslash \textbackslash  LEVEL 3 — LAYER \$\textbackslash to\$ VOLUME ("LAYER2VOLUME"): \textbackslash \textbackslash \textbackslash \textbackslash    "...the system reconstructs layer-by-layer 3D images of the    internal structure." \textbackslash \textbackslash \textbackslash \textbackslash    \$\textbackslash to\$ stacking layers across multiple pressure thresholds   produces the full 3D volumetric image. "Layer-by-layer 3D   images" is the verbatim phrase for the layer-to-volume   assembly. The earlier page-7 paragraph (Fig. 8 discussion)   explicitly demonstrates this with nine thresholds (0.5, 0.75,   1.10, 1.50, 1.85, 2.50, 4.00, 5.00 MPa) producing nine layers   that together reconstruct the full 3D volume. \textbackslash \textbackslash \textbackslash \textbackslash  NO CONTRADICTING PASSAGE exists. The paper never describes a top-down, volume-first, or layer-first procedure. The volume is always assembled from layers, and each layer is always assembled from per-point readings. The ladder is strict and one-directional: point \$\textbackslash to\$ layer \$\textbackslash to\$ volume. \textbackslash \textbackslash \textbackslash \textbackslash  COMPLEMENTARY EVIDENCE in neighboring passages: \textbackslash \textbackslash \textbackslash \textbackslash    - Page 5 (Section 2.3, find-evidence entry 1 + text-to-     highlight entry 1): the per-scanning-point MECHANISM ("drive     the sample to the next scanning point until all preset areas     have been scanned. The positional information (x, y, z)     corresponding to each threshold is saved as projection dat... [truncated in sticky; see journal for full]}\pdfcomment[icon=Comment,color=yellow]{User input: that shows a global map is stitched together from local estimates \textbackslash \textbackslash Claude comments: The user's cue has three ingredients — "global map," "stitched together," and "local estimates" — and this single sentence maps each to explicit text in the paper: \textbackslash \textbackslash \textbackslash \textbackslash    "local estimates"   \$\textbackslash to\$ "positional information (x, y, z)                              corresponding to each pressure threshold"   "stitched together" \$\textbackslash to\$ "By collecting the projection data"   "global map"        \$\textbackslash to\$ "layer-by-layer 3D images of the                              internal structure" \textbackslash \textbackslash \textbackslash \textbackslash  This is the one-sentence version of the stitching pipeline. Page 5 (text-to-highlight entry 1 of this journal) has the step-by-step workflow version — "drive the sample to the next scanning point until all preset areas have been scanned... saved as projection data to reconstruct a 3D image of the internal structure of the sample." The page 7 sentence compresses the same idea into a single declarative statement suitable for a single highlight. I picked page 7 because the user's request emphasized the GLOBAL MAP half of the stitching ("shows a global map is stitched together") and the page 7 sentence names "layer-by-layer 3D images of the internal structure" as the output explicitly, whereas page 5 names only "a 3D image" more generically. \textbackslash \textbackslash \textbackslash \textbackslash  The page 5 and page 7 highlights complement each other: page 5 is the workflow, page 7 is the summary. Both live in the text-to-highlight journal; they're not duplicates. }\sethlcolor{hlgreen}\hl{As
+the probe interacts with the sample, the pressure sensor detects
+force changes, and the grating sensor records the corresponding
+compression depth ($\Delta d$) at each X-Y position. This
+compression depth, combined with the applied force ($F$) and the
+contact area ($S$) between the tip and the sample, defines the
+tactile softness (Softness = $\Delta d \cdot S / F$), which
+characterizes the material's softness at that location. By
+collecting the projection data of positional information
+$(x, y, z)$ corresponding to each pressure threshold, the system
+reconstructs layer-by-layer 3D images of the internal structure.}
+
+\section*{4.\ Results and discussion}
+
+\subsection*{4.1.\ Theoretical validity of the tactile tomography}
+
+To demonstrate the theoretical validity of the tactile tomography,
+we performed finite element analysis (FEA) to simulate the
+mechanical interaction between the probe tip and samples with
+internal features. As shown in Fig.~9a, a model with a feature of a
+symbol ``$+$'' was fabricated by 3D printing, and this model was
+then filled with a soft surface layer of AB glue (Fig.~9b). A 3D
+FEA model was built to simulate the mechanical process of the probe
+pressing the sample (Fig.~9c), the sample undergoes
+
+\newpage
+
+% =========== Page 8: chen_page8.tex ===========
+\setcounter{equation}{1}
+
+% ---------- Fig. 10 placeholder ----------
+\begin{center}
+\fbox{\begin{minipage}[c][5.5cm][c]{0.95\textwidth}
+\centering
+\textbf{Fig. 10.}\ Scanning resolution of the tactile tomography
+system.\\[4pt]
+\textcolor{gray}{\footnotesize
+\textbf{(a)} A model featuring topographic lines with line
+spacings of 2, 1.5, 1, 0.7, 0.5, and 0.3 mm (all lines 2 mm wide,
+8 mm long), 3D printed.\\[3pt]
+\textbf{(b)} Topographic-lines model filled with a soft surface
+layer of AB glue (photograph).\\[3pt]
+\textbf{(c)} 3D imaging of compression-depth distribution when the
+tactile tomography system scanned (b). Lines above 0.5 mm spacing
+remain cleanly distinguishable in the reconstructed depth map;
+lines at 0.3 mm spacing blur together. X 0--70 mm, Y 0--20 mm,
+Z color scale 0.1--5.2 mm.]}
+\end{minipage}}
+\end{center}
+
+\vspace{0.4em}
+
+\textbf{Fig. 10.}\ Scanning resolution of the tactile tomography
+system. (a) A model featuring topographic lines. (b) Topographic
+lines model filled with a soft surface layer of AB glue. (c) 3D
+imaging of compression depth distribution when the tactile
+tomography system scanned the topographic lines model with a soft
+surface layer.
+
+\vspace{0.8em}
+
+% ---------- Fig. 11 placeholder ----------
+\begin{center}
+\fbox{\begin{minipage}[c][6cm][c]{0.95\textwidth}
+\centering
+\textbf{Fig. 11.}\ Scanning accuracy of the tactile tomography
+system.\\[4pt]
+\textcolor{gray}{\footnotesize
+\textbf{(a)} A gauge block with a length of 30 mm, a width of 9 mm,
+and a height of 3 mm.\\[3pt]
+\textbf{(b)} Gauge block filled with a soft surface layer of AB
+glue; a 20 mm $\times$ 20 mm scanning area is marked on the top
+surface.\\[3pt]
+\textbf{(c)} 3D imaging of compression-depth distribution when the
+tactile tomography system scanned (b). The gauge block reads as a
+flat plateau at $Z \approx 0.1$ mm with a cliff down to
+$Z \approx 2.4$ mm at the edges.\\[3pt]
+\textbf{(d)} Scanning-accuracy distribution corresponding to the
+compression-depth scan, color-coded 98.95\% (lightest) to 100.00\%
+(darkest) across the 20$\times$20 mm scan area.]}
+\end{minipage}}
+\end{center}
+
+\vspace{0.4em}
+
+\textbf{Fig. 11.}\ Scanning accuracy of the tactile tomography
+system. (a) A gauge block with a length of 30 mm, a width of 9 mm,
+and a height of 3 mm. (b) A gauge block filled with a soft surface
+layer of AB glue. (c) 3D imaging of compression depth distribution
+when the tactile tomography system scanned the gauge block with a
+soft surface layer. (d) Scanning accuracy distribution
+corresponding to compression depth when the tactile tomography
+system scanned the gauge block with a soft surface layer.
+
+\vspace{0.6em}
+
+% ---------- Prose ----------
+compression and deformation to a certain displacement as the probe
+tip presses down (Movie~S2). When the sample was scanned by the
+probe tip with 676 scanning points under a constant pressure of 4
+MPa, as shown in Fig.~9d and Movie~S3, the ``$+$'' shaped region
+exhibit distinct stress responses compared to the surrounding
+matrix, and the displacement value of these regions are less than
+that of the surrounding matrix, reflecting mechanical interaction
+differences induced by the internal structure. Fig.~9e presents
+the simulated displacement field of the sample under probe loading.
+According to the color-code displacement vectors, the ``$+$''
+shaped region has lower displacement magnitudes than the surrounding
+matrix, which aligns with the tactile tomography principle that
+internal structures alter the effective thickness of the soft
+surface layer, resulting in different distribution of the tactile
+softness across the samples. In addition, this simulated result is
+consistent with the experimental result (as shown in Fig.~9f),
+confirming that the tactile tomography can effectively translate
+mechanical interaction differences into detectable internal
+structure maps.
+
+\subsection*{4.2.\ Scanning resolution of the tactile tomography system}
+
+Scanning resolution is the key performance parameter in determining
+the detailed quality of scanned imaging. In this article, the x
+stage, y stage, and z stage of the tactile tomography system can
+achieve a minimum step displacement of 10, 10, and 0.1 $\mu$m,
+respectively, which ensures the system has a high scanning
+resolution. To investigate the scanning resolution of the tactile
+tomography system, a model featuring topographic lines was
+fabricated by 3D printing. As shown in Fig.~10a, these lines have
+a length of 8 mm and a width of 2 mm in the x and y directions,
+and are interspaced by 2.0, 1.5, 1.0, 0.7, 0.5, and 0.3 mm,
+respectively. The model was then filled with a soft surface layer
+of AB glue (Fig.~10b), and scanned by the tactile tomography system
+under a constant pressure of 4 MPa. The scanning result is shown
+in Fig.~10c, where the distances between the topographic lines in
+the x and y directions above 0.5 mm can be distinguished, meaning
+that the tactile tomography system possesses a minimum scanning
+resolution of 0.5 mm in both the x and y directions. This scanning
+resolution is typically limited by the diameter of the tip, which
+is also 0.5 mm. Therefore, the scanning resolution in the x and y
+directions can be improved by reducing the diameter of the tip.
+But there is a trade-off between the scanning resolution and the
+diameter of the tip, because a tip with a very small diameter will
+pierce the soft surface layer easily. The scanning resolution in
+the z direction is unaffected by the diameter of the tip, and
+mainly depends on the minimum step displacement. Thus, the tactile
+tomography system can achieve a high scanning resolution of 0.1
+$\mu$m in the z direction, allowing the tactile tomography system
+to recognize an object in more detail.
+
+\subsection*{4.3.\ Scanning accuracy of the tactile tomography system}
+
+Scanning accuracy is another key performance parameter for the
+tactile tomography system, referring to its reliability and
+repeatability.
+
+\newpage
+
+% =========== Page 9: chen_page9.tex ===========
+\setcounter{equation}{1}
+
+% ---------- Fig. 12 placeholder ----------
+\begin{center}
+\fbox{\begin{minipage}[c][8cm][c]{0.95\textwidth}
+\centering
+\textbf{Fig. 12.}\ Scanning speed and scanning step of the tactile
+tomography system.\\[4pt]
+\textcolor{gray}{\footnotesize
+\textbf{(a)--(c)} A spherical-cap model: (a) cross-section with
+4 mm AB-glue layer atop ABS substrate; (b) 3D CAD view; (c)
+photograph of the filled sample.\\[3pt]
+\textbf{(d)--(i)} 3D imaging of compression-depth distribution
+when the tactile tomography system scanned the spherical cap under
+nine speed/step combinations:
+\textbf{(d)} 0.6 mm/s \& 0.5 mm,
+\textbf{(e)} 1.2 mm/s \& 0.5 mm,
+\textbf{(f)} 1.8 mm/s \& 0.5 mm,
+\textbf{(g)} 2.4 mm/s \& 0.5 mm,
+\textbf{(h)} 2.4 mm/s \& 1.0 mm,
+\textbf{(i)} 2.4 mm/s \& 2.0 mm.
+Each panel renders a rainbow-colored 3D dome on a red substrate;
+Z scale 0--3.6 mm. Panels (d)--(g) preserve the smooth cap; (h)
+shows slight facet coarsening; (i) (2 mm step) visibly fails to
+reproduce the cap shape.]}
+\end{minipage}}
+\end{center}
+
+\vspace{0.4em}
+
+\textbf{Fig. 12.}\ Scanning speed and scanning step of the tactile
+tomography system. (a), (b) and (c) A spherical cap model filled
+with a soft surface layer of AB glue. 3D imaging of compression
+depth distribution when the tactile tomography system scanned the
+spherical cap model with a soft surface layer under scanning speeds
+and scanning steps of (d) 0.6 mm/s \& 0.5 mm, (e) 1.2 mm/s \& 0.5
+mm, (f) 1.8 mm/s \& 0.5 mm, (g) 2.4 mm/s \& 0.5 mm, (h) 2.4 mm/s
+\& 1.0 mm, and (i) 2.4 mm/s \& 2.0 mm, respectively.
+
+\vspace{0.6em}
+
+% ---------- Prose ----------
+A gauge block with a length of 30 mm, a width of 9 mm, and a height
+of 3 mm was filled with a soft surface layer of AB glue to
+investigate the scanning accuracy of the tactile tomography system
+(Fig.~11a). The scanning area is $20 \times 20$ mm$^2$ (Fig.~11b),
+and the scanning step is 0.5 mm, resulting in a total number of
+scanning points of 1600. As shown in Fig.~11c, the scanning points
+corresponding to the surface of the gauge block have a relatively
+uniform compression depth. The compression depth of the scanning
+points in other regions presents a slight difference due to the
+incomplete smoothing of the bottom, which was prepared by 3D
+printing with ABS. As a result, a scanning accuracy of over 98.9\%
+is distributed throughout the scanning area (Fig.~11d), and the
+scanning area corresponding to the surface of the gauge block shows
+a high scanning accuracy of over 99.3\%, demonstrating that the
+tactile tomography system has the ability to scan every point
+accurately and stably.
+
+\subsection*{4.4.\ Scanning speed and scanning step of the tactile tomography system}
+
+There is a trade-off between the scanning efficiency and imaging
+quality for scanning imaging, in which the scanning efficiency is
+determined by the scanning speed and scanning step. As shown in
+Fig.~12a, 12b, and 12c, a spherical cap model was filled with a
+soft surface layer of AB glue to investigate the scanning
+efficiency and imaging quality of the tactile tomography system.
+The spherical cap model was scanned by the tactile tomography
+system with scanning speeds and scanning steps of 0.6 mm/s \& 0.5
+mm, 1.2 mm/s \& 0.5 mm, 1.8 mm/s \& 0.5 mm, 2.4 mm/s \& 0.5 mm,
+2.4 mm/s \& 1.0 mm, and 2.4 mm/s \& 2.0 mm, respectively. The
+reconstructed 3D images corresponding to the scanning speeds of
+0.6, 1.2, 1.8, and 2.4 mm/s are shown in Fig.~12d, e, f, and g,
+respectively, and all these 3D images can reproduce the spherical
+cap model. The curved shape of the 3D images remained highly smooth
+as the scanning speed increased to 2.4 mm/s, demonstrating that
+the increase of scanning speed will not greatly degrade the imaging
+quality. Fig.~12g, h, and i show the reconstructed 3D images
+corresponding to the scanning speed and scanning step of 2.4 mm/s
+\& 0.5 mm, 2.4 mm/s \& 1.0 mm, and 2.4 mm/s \& 2.0 mm,
+respectively. There is a relative decrease in the smoothness of
+the curved shape of the 3D images as the scanning step increased,
+and the 3D image could even not reproduce the spherical cap model
+well when the scanning step increased to 2 mm. The
+
+\newpage
+
+% =========== Page 10: chen_page10.tex ===========
+\setcounter{equation}{1}
+
+% ---------- Fig. 13 placeholder ----------
+\begin{center}
+\fbox{\begin{minipage}[c][8cm][c]{0.95\textwidth}
+\centering
+\textbf{Fig. 13.}\ Effect of materials properties on the tactile
+tomography system.\\[4pt]
+\textcolor{gray}{\footnotesize
+\textbf{(a)} Schematic: spherical-cap model filled with AB glues of
+different Shore hardnesses (5, 10, 15, 30 HC) over an ABS
+substrate.\\[3pt]
+\textbf{(b)} 3D imaging of the spherical cap with a 5 HC soft
+surface layer under a constant pressure of 4 MPa.\\[3pt]
+\textbf{(c)} 10 HC, P = 4 MPa. \textbf{(d)} 10 HC, P = 6 MPa.\\[3pt]
+\textbf{(e)} 15 HC, P = 4 MPa. \textbf{(f)} 15 HC, P = 8 MPa.\\[3pt]
+\textbf{(g)} 30 HC, P = 4 MPa. \textbf{(h)} 30 HC, P = 13 MPa.\\[3pt]
+Each panel renders a rainbow-colored 3D dome; Z scale 0--3.6 mm.
+Harder surface layers at fixed 4 MPa give only partial cap
+reconstructions; raising the probe pressure recovers the full cap.]}
+\end{minipage}}
+\end{center}
+
+\vspace{0.4em}
+
+\textbf{Fig. 13.}\ Effect of materials properties on the tactile
+tomography system. (a) A spherical cap model filled with different
+Shore hardness AB glues. (b) 3D imaging of the spherical cap model
+with a 5 HC soft surface layer scanned by the system under a
+constant pressure of 4 MPa. (c) 3D imaging of the spherical cap
+model with a 10 HC soft surface layer scanned by the system under a
+constant pressure of 4 MPa. (d) 3D imaging of the spherical cap
+model with a 10 HC soft surface layer scanned by the system under a
+constant pressure of 6 MPa. (e) 3D imaging of the spherical cap
+model with a 15 HC soft surface layer scanned by the system under a
+constant pressure of 4 MPa. (f) 3D imaging of the spherical cap
+model with a 15 HC soft surface layer scanned by the system under a
+constant pressure of 8 MPa. (g) 3D imaging of the spherical cap
+model with a 30 HC soft surface layer scanned by the system under a
+constant pressure of 4 MPa. (h) 3D imaging of the spherical cap
+model with a 30 HC soft surface layer scanned by the system under a
+constant pressure of 13 MPa.
+
+\vspace{0.8em}
+
+% ---------- Fig. 14 placeholder ----------
+\begin{center}
+\fbox{\begin{minipage}[c][5cm][c]{0.95\textwidth}
+\centering
+\textbf{Fig. 14.}\ Effect of materials types on the tactile
+tomography system.\\[4pt]
+\textcolor{gray}{\footnotesize
+\textbf{(a)--(c)} Schematic cross-sections of the spherical-cap
+model filled with three different soft-layer materials over the ABS
+substrate: (a) AB glue, (b) PDMS, (c) Ecoflex.\\[3pt]
+\textbf{(d)--(f)} 3D imaging of compression-depth distribution
+when the tactile tomography system scanned the spherical cap model
+with a soft surface layer of (d) AB glue, (e) PDMS, and (f)
+Ecoflex. Each panel shows a clean rainbow-colored 3D dome on red
+substrate (Z 0--3.6 mm), demonstrating that the system recovers the
+cap geometry across all three materials.]}
+\end{minipage}}
+\end{center}
+
+\vspace{0.4em}
+
+\textbf{Fig. 14.}\ Effect of materials types on the tactile
+tomography system. A spherical cap model filled with a soft surface
+layer of AB glue (a), PDMS (b), and Ecoflex (c), respectively. 3D
+imaging of compression depth distribution when the tactile
+tomography system scanned the spherical cap model with a soft
+surface layer of AB glue (d), PDMS (e), and Ecoflex (f),
+respectively.
+
+\vspace{0.6em}
+
+% ---------- Prose tail of Section 4.4 ----------
+reason for this phenomenon is that the increase in the scanning
+step will result in a significant reduction in the number of
+scanning points, such as when the number of scanning points is
+1600, 800, and 400 when the scanning step is 0.5, 1.0, and 2.0 mm,
+respectively. The low number of scanning points make the projection
+data insufficient, which causes poor quality of the reconstructed
+3D images. Therefore, increasing the scanning speed is one
+effective strategy to achieve both high scanning efficiency and
+imaging quality for the tactile tomography system.
+
+\newpage
+
+% =========== Page 11: chen_page11.tex ===========
+\setcounter{equation}{1}
+
+% ---------- Fig. 15 placeholder ----------
+\begin{center}
+\fbox{\begin{minipage}[c][9cm][c]{0.95\textwidth}
+\centering
+\textbf{Fig. 15.}\ Nondestructive testing of encapsulated flexible
+printed circuit board.\\[4pt]
+\textcolor{gray}{\footnotesize
+\textbf{(a)} A flexible printed circuit board (photograph of the
+bare FPCB with a serpentine copper trace pattern, 15 mm scale).\\[3pt]
+\textbf{(b)} Flexible printed circuit board encapsulated with a
+soft surface layer (photograph of the black encapsulated block).\\[3pt]
+\textbf{(c)} Scanning area of the encapsulated FPCB: 28 mm $\times$
+10 mm region with a 7.5 mm inner scale bar, showing the trace
+pattern through the encapsulation.\\[3pt]
+\textbf{(d)} Same as (c) with three injected defects: gap,
+scratch, cut (marked by pink dashed boxes).\\[3pt]
+\textbf{(e)} 3D imaging of compression-depth distribution when the
+tactile tomography system scanned the encapsulated FPCB (c): clean
+recovery of the serpentine trace pattern as a rainbow-colored
+embossed surface (Z 0--0.5 mm).\\[3pt]
+\textbf{(f)} Same as (e) for the FPCB with three defects (d): the
+scan shows trace continuity interruptions at the pink-boxed defect
+sites.\\[3pt]
+\textbf{(g)} Ultrasonic C-scan image of the encapsulated FPCB (c):
+blurry greenish map with serpentine outline barely resolved.\\[3pt]
+\textbf{(h)} Ultrasonic C-scan image of the FPCB with three defects
+(d): similarly low-contrast map with the defect sites indicated but
+less distinguishable than in the tactile-tomography scan.]}
+\end{minipage}}
+\end{center}
+
+\vspace{0.4em}
+
+\textbf{Fig. 15.}\ Nondestructive testing of encapsulated flexible
+printed circuit board. (a) A flexible printed circuit board.
+(b) A flexible printed circuit board encapsulated with a soft
+surface layer. (c) Scanning area of the encapsulated flexible
+printed circuit board. (d) Scanning area of the encapsulated
+flexible printed circuit board with three defects. (e) 3D imaging
+of compression depth distribution when the tactile tomography
+system scanned the encapsulated flexible printed circuit board.
+(f) 3D imaging of compression depth distribution when the tactile
+tomography system scanned the encapsulated flexible printed circuit
+board with three defects. (g) Ultrasonic C-scan image of the
+encapsulated flexible printed circuit board. (h) Ultrasonic C-scan
+image of the encapsulated flexible printed circuit board with three
+defects.
+
+\vspace{0.8em}
+
+% ---------- Section 4.5 prose ----------
+\subsection*{4.5.\ Effect of materials properties and materials types on the tactile tomography system}
+
+The property of the surface layer materials, especially hardness,
+can have an impact on the imaging quality of the tactile tomography
+system. As shown in Fig.~13a, the soft surface layer of AB glue was
+prepared with different Shore hardness values of 5, 10, 15, and 30
+HC, respectively. When the samples were scanned by the tactile
+tomography system with a scanning speed and scanning step of 2.4
+mm/s \& 0.5 mm under a constant pressure of 4 MPa (Fig.~13b, c, e,
+and g), the area where the topographical profile of the spherical
+cap model can be reconstructed gradually decreased from the bottom
+to the top as Shore hardness of the soft surface layer increased.
+Even only the top part of the spherical cap model can be
+reconstructed when the Shore hardness of the soft surface layer is
+30 HC (Fig.~13g). The reason is that the increase in hardness of
+the surface layer will reduce the compression depth of the probe
+tip when the samples are scanned by the tactile tomography system
+under the same constant pressure, resulting in the inability of
+this system to detect and reconstruct the complete internal
+structure of the samples. Significantly, the topographical profile
+of the spherical cap model can be completely reconstructed and
+maintain excellent imaging quality when the probe pressure is
+increased for the samples with harder AB glue layer ($P = 6$ MPa
+for 10 HC (Fig.~13d), $P = 8$ MPa for 15 HC (Fig.~13f), and $P =
+13$ MPa for 30 HC (Fig.~13h)). Although the increase of hardness
+of the surface layer, the tactile tomography system can still
+maintain a good imaging quality by increasing the probe pressure.
+The tactile tomography system can adapt to the change in the
+mechanical properties of AB glue with different Shore hardness by
+adjusting the probe pressure. Therefore, the tactile tomography
+system demonstrates excellent adaptability to the surface layer
+materials with different Shore hardness.
+
+In addition to the AB glue, the other two commonly used soft
+materials, PDMS and Ecoflex, were also used as the surface layer
+to further investigate the versatility of the tactile tomography
+system in characterizing samples with different materials
+composition. As shown in Fig.~14a, b, and c, the spherical cap
+model filled with a soft surface layer of AB glue, PDMS, and
+Ecoflex, respectively. These samples were
+
+\newpage
+
+% =========== Page 12: chen_page12.tex ===========
+\setcounter{equation}{1}
+
+% ---------- Fig. 16 placeholder ----------
+\begin{center}
+\fbox{\begin{minipage}[c][8cm][c]{0.95\textwidth}
+\centering
+\textbf{Fig. 16.}\ Fatigue testing of encapsulated flexible printed
+circuit board.\\[4pt]
+\textcolor{gray}{\footnotesize
+\textbf{(a)} Compression depth of the probe tip at the test point
+of the encapsulated FPCB under 300 cycles of scanning: depth vs.
+cycle number 0--300, applied pressure 4 MPa, line held at
+$\approx 0.18$ mm across all cycles (negligible drift).\\[3pt]
+\textbf{(b)} Microscope image of the test point of the
+encapsulated FPCB before scanning: intact orange serpentine trace
+with a smooth encapsulated surface.\\[3pt]
+\textbf{(c)} Microscope image after 300 cycles of scanning: an
+almost indiscernible circular indentation mark on the AB-glue
+encapsulation layer, no crack or puncture.\\[3pt]
+\textbf{(d)} Microscope image of the FPCB itself after 300 cycles
+of scanning: the underlying circuit remains intact with no visible
+deformation.]}
+\end{minipage}}
+\end{center}
+
+\vspace{0.4em}
+
+\textbf{Fig. 16.}\ Fatigue testing of encapsulated flexible printed
+circuit board. (a) Compression depth of the probe tip at the test
+point of the encapsulated FPCB under 300 cycles of scanning.
+(b) Microscope image of the test point of the encapsulated FPCB
+before scanning. (c) Microscope image of the test point of the
+encapsulated FPCB after 300 cycles scanning. (d) Microscope image
+of the test point of the FPCB after 300 cycles scanning.
+
+\vspace{0.8em}
+
+% ---------- Prose ----------
+scanned by the tactile tomography system with a scanning speed and
+scanning step of 2.4 mm/s \& 0.5 mm under a constant pressure of 4
+MPa. Fig.~14d, e, and f presents the reconstructed 3D images
+corresponding to the soft surface layer of AB glue, PDMS, and
+Ecoflex, respectively. All these 3D images successfully
+reconstructed the topographical profile of the spherical cap model
+beneath the soft surface layer of AB glue, PDMS, and Ecoflex,
+indicating that the tactile tomography system has excellent
+universality for different materials.
+
+\subsection*{4.6.\ Application in nondestructive testing of encapsulated flexible printed circuit boards (FPCBs)}
+
+Defect Detection of encapsulated flexible printed circuit boards
+(FPCBs) is one of the most promising applications for the tactile
+tomography system. FPCBs as a popular substrate has been widely
+used in flexible wearable devices [39]. In practice, flexible
+wearable devices are usually encapsulated with a soft layer to
+protect them from the outside environment without sacrificing
+their flexibility [40]. However, the current research mainly
+focuses on the defect detection of FPCBs without packaging.
+Therefore, nondestructive testing of encapsulated FPCBs is still a
+challenge. As shown in Fig.~15a, an FPCB sample consisting of PI
+and copper lines was purchased, and it was then encapsulated with
+a soft layer of AB glue, which was dyed black to prevent detection
+by the human eye and optical microscope (Fig.~15b). The
+encapsulated FPCBs sample without any defect was scanned by the
+tactile tomography system with a scanning speed and scanning step
+of 0.6 mm/s \& 0.5 mm under an effective scanning range of $28
+\times 10$ mm$^2$ (Fig.~15c). The reconstructed 3D image is shown
+in Fig.~15e, in which the layout of the copper lines was
+completely reproduced, demonstrating that the tactile tomography
+system can detect and image the internal structure of flexible
+wearable devices without peeling off the encapsulated layer. To
+investigate the defect detection of the encapsulated FPCB, three
+defects of open the copper lines on the FPCB were made (as shown
+in Fig.~15d). These defects can be found easily on the
+reconstructed 3D image in Fig.~15f, meaning that the tactile
+tomography system possesses the capability for defect detection in
+encapsulated FPCBs. For comparison, ultrasonic imaging (Ultrasonic
+detection system, Feli 650) was also employed to inspect the same
+encapsulated FPCB sample, the corresponding ultrasonic C-scan
+images are presented in Fig.~15g and h. In Fig.~15g, the
+ultrasonic image of the intact encapsulated FPCB shows a
+relatively blurred circuit pattern, and in Fig.~15h, when defects
+exist, the ultrasonic image fails to clearly delineate the defects.
+This is because ultrasonic imaging is susceptible to the influence
+of the encapsulation layer. The acoustic properties of the
+encapsulation material differ from those of the FPCB, causing
+scattering and attenuation of ultrasonic waves, which degrades the
+imaging quality and makes it difficult to accurately identify
+internal defects. This limitation arises from the acoustic
+impedance mismatch and the wave-damping nature of the soft
+
+\newpage
+
+% =========== Page 13: chen_page13.tex ===========
+\setcounter{equation}{1}
+
+% ---------- Prose tail of Section 4.6 ----------
+polymeric materials typically used for encapsulation. In stark
+contrast, the proposed tactile tomography system, which relies on
+mechanical sensing rather than acoustic wave propagation, is not
+susceptible to such limitations. Its imaging efficacy is inherently
+based on the local mechanical interaction (tactile softness)
+between the probe and the sample, which effectively bypasses the
+interfering effects of the encapsulation layer. This key advantage
+allows the tactile tomography system to provide superior imaging
+performance for soft-encapsulated structures, highlighting its
+unique potential for nondestructive testing in applications where
+traditional ultrasonic methods may fail. To demonstrate the
+non-destructiveness of the tactile tomography system, a targeted
+fatigue test was conducted on the encapsulated FPCB sample. A fixed
+point on the encapsulated FPCB was continuously scanned 300 times
+using the tactile tomography system under the test conditions of
+an applied pressure of 4 MPa, a scanning speed and scanning step
+of 0.6 mm/s \& 0.5 mm. Under 300 cycles of constant-pressure
+cyclic compression, the compression depth of the probe tip at the
+test point remained stable (Fig.~16a), indicating that no stress
+distortion occurred in the interaction between the probe and the
+encapsulated FPCB during repeated loading, and thus the FPCB did
+not suffer cumulative mechanical damage. Fig.~16b shows the
+microscope image of the test point of the encapsulated FPCB before
+scanning. After 300 cycles of scanning, the post-scanning image is
+shown in Fig.~16c, only an almost indiscernible indentation mark
+was left on the surface of AB glue encapsulation layer, it neither
+cracked nor was punctured, and the underlying FPCB remained intact
+with no visible deformation (Fig.~16d). These results fully
+demonstrate that the tactile tomography system does not exacerbate
+initial or cumulative damage to the encapsulated FPCB.
+
+\section*{5.\ Conclusion}
+
+In this work, a novel tactile tomography system based on mechanical
+principles with internal 3D imaging capabilities was developed.
+This tactile tomography system can recognize the softness of AB
+glues with Shore hardnesses of 3, 7.5, 12.5, 17.5, 25, 30, 35, 50,
+and 60 HC. For samples with dimensions less than 12 mm in size and
+6 mm in thickness, a novel parameter of ``tactile softness of
+materials'' was introduced, enabling the tactile tomography system
+to perform internal 3D imaging with a maximum detection depth of 6
+mm. The tactile tomography system features a high scanning
+resolution of 0.5 mm in both the x and y directions, and 0.1
+$\mu$m in the z direction. The tactile tomography system possesses
+a scanning accuracy of over 98.9\%, and an optimal scanning speed
+and scanning step of 2.4 mm/s \& 0.5 mm. This system is capable of
+imaging the internal structure and identifying defects in
+encapsulated FPCBs, demonstrating significant potential for
+nondestructive testing of flexible wearable devices.
+
+\section*{CRediT authorship contribution statement}
+
+\textbf{Zhiming Chen:} Writing -- review \& editing,
+Visualization, Methodology, Investigation.
+\textbf{Longxin Qian:} Writing -- original draft, Software, Data
+curation.
+\textbf{Weihao Liang:} Writing -- original draft, Formal analysis,
+Conceptualization.
+\textbf{Kaibang Zhang:} Software, Data curation.
+\textbf{Zichen Liu:} Investigation, Data curation.
+\textbf{Fengming Hu:} Investigation, Data curation.
+\textbf{Chaobin Liu:} Investigation, Data curation.
+\textbf{Kelan Lu:} Investigation, Data curation.
+\textbf{Jingcheng Huang:} Investigation.
+\textbf{Haiquan Li:} Methodology.
+\textbf{Jinxiu Wen:} Visualization, Methodology, Investigation.
+\textbf{Bingpu Zhou:} Methodology, Investigation.
+\textbf{Jianyi Luo:} Writing -- review \& editing, Supervision,
+Investigation, Conceptualization.
+
+\section*{Declaration of competing interest}
+
+The authors declare that they have no known competing financial
+interests or personal relationships that could have appeared to
+influence the work reported in this paper.
+
+\section*{Acknowledgment}
+
+This work was financially supported by Innovation and Strong
+School Engineering Fund of Guangdong Province (2025KCXTD047),
+Guangdong Engineering Technology Research Center (2021J020),
+Natural Science Foundation of Guangdong Province (2021A1515011935),
+National Natural Science Foundation of China (12004285), Hong Kong
+and Macau Joint Research and Development Fund of Wuyi University
+(2019WGALH17).
+
+\section*{Appendix A. Supplementary data}
+
+Supplementary data to this article can be found online at\\
+\url{https://doi.org/10.1016/j.measurement.2026.120300}.
+
+\section*{Data availability}
+
+Data will be made available on request.
+
+\section*{References}
+
+\begin{footnotesize}
+\noindent
+[1] M.W.~Vannier, E.V.~Staab, L.P.~Clarke, Matching clinical and
+biological needs with emerging imaging technologies, Proc. IEEE 91
+(2003) 1562--1573.\\[2pt]
+[2] Y.~Zhou, M.~Yuan, J.~Zhang, G.~Ding, S.~Qin, Review of
+vision-based defect detection research and its perspectives for
+printed circuit board, J. Manuf. Syst. 70 (2023) 557--578.\\[2pt]
+[3] C.~Cao, Michael F.~Toney, T.-K.~Sham, R.~Harder, Paul R.~Shearing,
+X.~Xiao, J.~Wang, Emerging X-ray imaging technologies for energy
+materials, Mater. Today 34 (2020) 132--147.\\[2pt]
+[4] V.~Cnudde, M.N.~Boone, High-resolution X-ray computed
+tomography in geosciences: a review of the current technology and
+applications, Earth Sci. Rev. 123 (2013) 1--17.\\[2pt]
+[5] R.~Richards-Kortum, C.~Lorenzoni, Vanderlei S.~Bagnato,
+K.~Schmeler, Optical imaging for screening and early cancer
+diagnosis in low-resource settings, Nat. Rev. Bioeng. 2 (2023)
+25--43.\\[2pt]
+[6] A.~Sakdinawat, D.~Attwood, Nanoscale X-ray imaging, Nat.
+Photonics 4 (2010) 840--848.\\[2pt]
+[7] S.L.~Bridal, J.-M.~Correas, A.~Saied, P.~Laugier, Milestones
+on the road to higher resolution, quantitative, and functional
+ultrasonic imaging, Proc. IEEE 91 (2003) 1543--1561.\\[2pt]
+[8] Elisabeth G.E.~de Vries, L.~Ruijter, Marjolijn N.L.~Hooge,
+Rudi A.~Dierckx, Sjoerd G.~Elias, Sjoukje F.~Oosting, Integrating
+molecular nuclear imaging in clinical research to improve
+anticancer therapy, Nat. Rev. Clin. Oncol. 16 (2019) 241--255.\\[2pt]
+[9] T.~Lee, Lili X.~Cai, Victor S.~Lelyveld, A.~Hai, A.~Jasanoff,
+Molecular-level functional magnetic resonance imaging of
+dopaminergic signaling, Science 344 (2014) 533--535.\\[2pt]
+[10] D.E.~Newbury, D.B.~Williams, The electron microscope: the
+materials characterization tool of the millennium, Acta Mater. 48
+(2000) 323--346.\\[2pt]
+[11] A.~Viljoen, M.~Mathelié-Guinlet, A.~Ray, N.~Strohmeyer,
+Y.~Oh, P.~Hinterdorfer, Daniel J.~Müller, D.~Alsteens, Yves F.~Dufrêne,
+Force spectroscopy of single cells using atomic force microscopy,
+Nat. Rev. Methods Primers 1 (2021) 533--535.\\[2pt]
+[12] S.~Roath, D.~Newell, A.~Pollack, E.~Alexander, P.-S.~Lin,
+Scanning electron microscopy and the surface morphology of human
+lymphocytes, Nature 273 (1978) 15--18.\\[2pt]
+[13] Y.~Wang, F.~Xie, S.~Ma, L.~Dong, Review of surface profile
+measurement techniques based on optical interferometry, Opt. Lasers
+Eng. 93 (2017) 164--170.\\[2pt]
+[14] J.~Dimastromatteo, T.~Brentnall, Kimberly A.~Kelly, Imaging in
+pancreatic disease, Nat. Rev. Gastroenterol. Hepatol. 14 (2017)
+97--109.\\[2pt]
+[15] E.~Maire, P.J.~Withers, Quantitative X-ray tomography, Int.
+Mater. Rev. 59 (2014) 1--43.\\[2pt]
+[16] Katharine E.~Thomas, A.~Fotaki, Rene M.~Botnar, Vanessa M.~Ferreira,
+Imaging Methods: Magnetic Resonance Imaging, Circulation 122.014068
+(2023).\\[2pt]
+[17] N.~Li, L.~Wang, J.~Jia, Y.~Yang, A novel method for the image
+quality improvement of ultrasonic tomography, IEEE Trans. Instrum.
+Meas. 70 (2021) 1--10.\\[2pt]
+[18] J.~Kim, W.~Brown, Jason R.~Maher, H.~Levinson, A.~Wax,
+Functional optical coherence tomography: principles and progress,
+Physics in Medicine and Biology 60 (2015) R211--R237.\\[2pt]
+[19] J.~Rong, A.~Haider, Troels E.~Jeppesen, L.~Josephson,
+Steven H.~Liang, Radiochemistry for positron emission tomography,
+Nat. Commun. 14 (2023) 17200--17206.\\[2pt]
+[20] K.~Shin, D.~Kim, H.~Park, M.~Sim, H.~Jang, J.~Sohn, S.~Cha,
+J.~Jang, Artificial tactile sensor with pin-type module for depth
+profile and surface topography detection,
+\end{footnotesize}
+
+\newpage
+
+% =========== Page 14: chen_page14.tex ===========
+\setcounter{equation}{1}
+
+\section*{References (continued)}
+
+\begin{footnotesize}
+\noindent
+[20]\,(cont.)\ IEEE Trans. Ind. Electron. 67 (2020) 637--646.\\[2pt]
+[21] G.~Binnig, C.F.~Quate, Ch.~Gerber, Atomic force microscope,
+Phys. Rev. Lett. 56 (2002) 930--933.\\[2pt]
+[22] X.~Chang, S.~Hallais, S.~Roux, K.~Danas, Model reduction
+techniques for quantitative nano-mechanical AFM mode, Meas. Sci.
+Technol. 32 (2021) 075406.\\[2pt]
+[23] D.-H.~Lee, 3-Dimensional profile distortion measured by stylus
+type surface profilometer, Measurement 46 (2013) 803--814.\\[2pt]
+[24] Y.~Ma, L.~Ma, Y.~Zheng, The measurement techniques for angular
+3-D pinholes based on capacitive probe, Measurement 97 (2017)
+145--148.\\[2pt]
+[25] Niels L.~pedersen, Design of cantilever probes for atomic
+force microscopy (AFM), Eng. Optim. 32 (2000) 373--392.\\[2pt]
+[26] L.~Yang, Y.~Wang, X.~Wang, S.~Shafique, F.~Zheng, L.~Huang,
+X.~Liu, J.~Zhang, Y.~Zhu, C.~Xiao, Z.~Hu, Identification the role
+of grain boundaries in polycrystalline photovoltaics via advanced
+atomic force microscope, Small 20 (2024) 930--933.\\[2pt]
+[27] W.~Melitz, J.~Shen, Andrew C.~Kummel, S.~Lee, Kelvin probe
+force microscopy and its application, Surface Science Reports 66
+(2011) 1--27.\\[2pt]
+[28] A.~Gruverman, M.~Alexe, D.~Meier, Piezoresponse force
+microscopy and nanoferroic phenomena, Nat. Commun. 10 (2019)
+930--933.\\[2pt]
+[29] Sithara S.~Nair, C.~Wang, Kenneth J.~Wynne, AFM Peakforce QNM
+mode for measurement of nanosurface mechanical properties of
+Pt-cured silicones, Progress in Organic Coatings 126 (2019)
+119--128.\\[2pt]
+[30] J.~Planès, F.~Houzé, P.~Chrétien, O.~Schneegans, Conducting
+probe atomic force microscopy applied to organic conducting blends,
+Appl. Phys. Lett. 79 (2001) 2993--2995.\\[2pt]
+[31] Robert G.~Cain, S.~Biggs, Neil W.~Page, Force calibration in
+lateral force microscopy, J. Colloid Interface Sci. 227 (2000)
+55--65.\\[2pt]
+[32] Y.~Mei, S.~Wang, X.~Shen, S.~Rabke, S.~Goenezen, Mechanics
+based tomography: a preliminary feasibility study, Sensors 17 (2017)
+1075.\\[2pt]
+[33] L.G.~Olson, R.D.~Throne, E.I.~Rusnak, J.P.~Gannon, Force-based
+stiffness mapping for early detection of breast cancer, Inverse
+Prob. Sci. Eng. 29 (2021) 2239--2273.\\[2pt]
+[34] S.~Goenezen, B.J.~Kim, M.~Kotecha, P.~Luo, M.R.~Hematiyan,
+Mechanics based tomography (MBT): validation using experimental
+data, J. Mech. Phys. Solids 146 (2021) 104187.\\[2pt]
+[35] J.~Hu, Z.~Chen, K.~Lao, H.~Liang, X.~Huang, Z.~Li, J.~Huang,
+X.~Hu, B.~Liang, D.~Ye, J.~Wen, J.~Luo, Cascade amplification
+effect for mechanical stimuli sensors by designing the current path
+through carbon fiber beams, IEEE Sens. J. 21 (2021) 17410--17418.\\[2pt]
+[36] K.~Li, D.~Xue, Hardness of materials: studies at levels from
+atoms to crystals, Chin. Sci. Bull. 54 (2009) 131--136.\\[2pt]
+[37] T.~Vieira, J.~Lundberg, O.~Eriksson, Evaluation of uncertainty
+on Shore hardness measurements of tyre treads and implications to
+tyre/road noise measurements with the Close Proximity method,
+Measurement 162 (2020) 107882.\\[2pt]
+[38] C.~Dhong, R.~Miller, Nicholas B.~Root, S.~Gupta,
+Laure V.~Kayser, Cody W.~Carpenter, Kenneth J.~Loh,
+Vilayanur S.~Ramachandran, Darren J.~Lipomi, Role of indentation
+depth and contact area on human perception of softness for haptic
+interfaces, Sci. Adv. 5 (2019) 938.\\[2pt]
+[39] Y.~Dong, X.~Min, W.~Kim, A 3-D-printed integrated PCB-based
+electrochemical sensor system, IEEE Sens. J. 18 (2018) 2959--2966.\\[2pt]
+[40] T.~Koshi, A.~Takei, T.~Nobeshima, S.~Kanazawa, K.~Nomura,
+S.~Uemura, Stretchability dependency on stiffness of soft
+elastomer encapsulation for polyimide-supported copper serpentine
+interconnects, Flexible Printed Electron. 9 (2024) 015009.
+\end{footnotesize}
+
+\end{document}

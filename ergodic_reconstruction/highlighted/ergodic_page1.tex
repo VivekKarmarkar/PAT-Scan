@@ -1,0 +1,185 @@
+%% =================================================================
+%% Beber et al. IEEE Robotics and Automation Letters, Feb 2026.
+%% DOI 10.1109/LRA.2026.3673907.
+%% Reconstruction of page 1 (printed p. 1).
+%% Contents: IEEE acceptance banner, title, authors, abstract,
+%% Fig. 1 placeholder, index terms, Section I Introduction (opening
+%% paragraphs), author affiliations footer.
+%% =================================================================
+
+\documentclass[11pt]{article}
+
+\usepackage[margin=0.85in]{geometry}
+\usepackage{amsmath, amssymb}
+\usepackage{mathrsfs}
+\usepackage{xcolor}
+\usepackage{fancyhdr}
+
+\pagestyle{fancy}
+\fancyhf{}
+\lhead{\small Beber et al.}
+\rhead{\small IEEE RAL, Accepted Feb 2026}
+\cfoot{\small 1 $\to$ \arabic{page}}
+\renewcommand{\headrulewidth}{0.4pt}
+
+\setcounter{page}{1}
+\setcounter{equation}{0}
+\setlength{\parskip}{6pt}
+\setlength{\parindent}{0pt}
+
+\begin{document}
+
+% ---------- IEEE acceptance banner ----------
+\begin{center}
+\footnotesize
+\pdfcomment[color=green,subject={},open=false,opacity=0.7]{User input: that paper was PUBLISHED after Fall 2025 in ergodic exploration paper\\Claude comments: EVIDENTIAL RELATIONSHIP: supports. DOI embeds 2026; masthead states ACCEPTED FEBRUARY, 2026. Fall 2025 ended by mid-December 2025; Feb 2026 is $\sim$2 months after.}\sethlcolor{hlgreen}\hl{This article has been accepted for publication in IEEE Robotics and
+Automation Letters. This is the author's version which has not been
+fully edited and content may change prior to final publication.
+Citation information: DOI 10.1109/LRA.2026.3673907}
+
+\vspace{0.3em}
+\textbf{\sethlcolor{hlgreen}\hl{IEEE ROBOTICS AND AUTOMATION LETTERS. PREPRINT VERSION.
+ACCEPTED FEBRUARY, 2026}}
+\end{center}
+
+\vspace{1em}
+
+% ---------- Title block ----------
+\begin{center}
+{\Large\bfseries Autonomous Robotic Tissue Palpation and Abnormalities
+Characterisation via Ergodic Exploration}
+
+\vspace{0.8em}
+
+{\normalsize Luca Beber$^{1}$, Edoardo Lamon$^{1}$,
+Matteo Saveriano$^{2}$, Daniele Fontanelli$^{2}$, and
+Luigi Palopoli$^{1}$}
+\end{center}
+
+\vspace{0.8em}
+
+% ---------- Abstract ----------
+\noindent\textbf{Abstract}---We propose a novel autonomous robotic
+palpation framework for real-time elastic mapping during tissue
+exploration using a viscoelastic tissue model. The method combines
+force-based parameter estimation using a commercial force/torque
+sensor with an ergodic control strategy driven by a tailored Expected
+Information Density, which explicitly biases exploration toward
+diagnostically relevant regions by jointly considering model
+uncertainty, stiffness magnitude, and spatial gradients. An Extended
+Kalman Filter is employed to estimate viscoelastic model parameters
+online, while Gaussian Process Regression provides spatial modelling
+of the estimated elasticity, and a Heat Equation Driven Area Coverage
+controller enables adaptive, continuous trajectory planning.
+Simulations on synthetic stiffness maps demonstrate that the proposed
+approach achieves better reconstruction accuracy, enhanced
+segmentation capability, and improved robustness in detecting stiff
+inclusions compared to Bayesian Optimisation-based techniques.
+Experimental validation on a silicone phantom with embedded inclusions
+emulating pathological tissue regions further corroborates the
+potential of the method for autonomous tissue characterisation in
+diagnostic and screening applications.
+
+\vspace{0.6em}
+
+\noindent\textbf{Index Terms}---Medical Robots and Systems;
+Sensor-based Control; Force and Tactile Sensing.
+
+\vspace{0.8em}
+
+% ---------- Fig. 1 placeholder ----------
+\begin{center}
+\fbox{\begin{minipage}[c][6cm][c]{0.90\textwidth}
+\centering
+\textbf{Fig. 1.}\ Experimental setup for the proposed ergodic search.\\[4pt]
+\textcolor{gray}{\footnotesize
+\textbf{(bottom-left)} silicone sample (Ecoflex-0030 matrix with a
+DragonSkin-30NV spherical inclusion);\\
+\textbf{(top-left)} ground-truth elasticity map (Elastic Modulus in kPa)
+obtained using a grid-based approach;\\
+\textbf{(right)} the UR3e robotic manipulator palpating the silicone
+sample. Labelled components: F/T Sensor (Bota SensOne, between flange
+and indenter) and Indenter (3D-printed spherical tip, 5 mm radius).}
+\end{minipage}}
+\end{center}
+
+\vspace{0.4em}
+
+\textbf{Fig. 1.}\ Experimental setup for the proposed ergodic search:
+(bottom-left) silicone sample; (top-left) ground-truth elasticity map
+obtained using a grid-based approach; (right) the robotic manipulator
+palpating the silicone sample.
+
+\vspace{1em}
+
+% ---------- Section I ----------
+\section*{I.\ Introduction}
+
+\textbf{P}ALPATION is a fundamental clinical procedure that allows
+physicians, by touch, to assess tissue stiffness, texture, and the
+presence of abnormalities such as tumours or swollen lymph nodes [1].
+Its speed and non-invasiveness make it crucial for early diagnosis,
+particularly of conditions such as breast cancer. However, palpation
+is inherently subjective and sensitive to inter-practitioner
+variability, which may compromise diagnostic accuracy and
+repeatability for small or deep-seated lesions. For this reason,
+physical examinations are often complemented or replaced by imaging
+techniques such as mammography, the gold standard for early detection
+[2], and ultrasound [3].
+
+Accurate assessment of tissue mechanics is equally critical in
+robot-assisted minimally invasive surgery (RMIS), where robots must
+adapt to variable stiffness for safe navigation and manipulation,
+especially for autonomous systems operating with minimal human
+supervision [4]. To support such needs, several technologies have
+emerged. Imaging-based elastography methods, e.g., ultrasound [5],
+magnetic resonance [6], or laser-based methods [7], estimate tissue
+stiffness but typically provide relative measures, are costly or slow,
+and cannot be easily integrated into RMIS. Tactile sensing, in
+contrast, offers real-time, quantitative stiffness measurements by
+capturing force and deformation. Previous works have shown its
+potential to reduce applied forces, shorten procedures, and improve
+surgical outcomes [8], [9]. Early stiffness mapping used uniform
+probing grids [10], [11], while later methods adopted Bayesian
+Optimisation (BO) to reduce the number of probing actions [12]--[14],
+often coupled with custom tactile sensors [8], [9], [15], guided by
+anatomical priors [16] or with ad-hoc refined segmentation strategies
+[15], [17].
+
+In this work, we propose a method for autonomous robotic palpation
+that enables continuous estimation of elastic tissue stiffness using
+a viscoelastic contact model, relying solely on a commercial
+force/torque (F/T) sensor. The use of a viscoelastic model allows
+more accurate representation of tissue dynamics during palpation
+compared to purely elastic formulations, while abnormality
+characterisation in this work focuses on the estimated elastic
+stiffness. \pdfcomment[color=orange,subject={},open=false,opacity=0.7]{User input: that the Ergodic exploration paper has instrumentation that is designed for EASY ADOPTION meaning that people bad at experiments can use it and so can people just use it at home - that the barrier for adoption is LOW\\Claude comments: EVIDENTIAL RELATIONSHIP: partially\_supports. Low-barrier thesis strongly supported (off-the-shelf, portability, cost-effectiveness, broader applicability, standard-platform compatibility). But 'home use' and 'non-experts' are NOT claimed by the paper; target audience is robotics/RMIS research community.}\sethlcolor{hlorange}\hl{This sensing strategy provides a practical alternative to
+methods based on embedded or specialised sensors, which typically
+require customised hardware integration and lack compatibility with
+standard robotic platforms. In contrast, the use of an off-the-}
+
+\vspace{1em}
+
+% ---------- Footer: submission + affiliations ----------
+\noindent\rule{0.4\textwidth}{0.4pt}\\[4pt]
+{\footnotesize
+Manuscript received: October, 15, 2025; Revised December, 16, 2025;
+Accepted February, 23, 2026.\\[2pt]
+This paper was recommended for publication by Editor Burgner-Kahrs
+Jessica upon evaluation of the Associate Editor and Reviewers'
+comments. This research has been funded by the the PNRR project
+FAIR - Future AI Research (PE00000013), by the European Union
+projects INVERSE (GA no.~101136067) and MAGICIAN (GA no.~101120731)
+and by the MUR Departments of Excellence 2023-27 program
+(L.232/2016).\\[2pt]
+$^{1}$ Department of Information Engineering and Computer Science,
+University of Trento, Trento, Italy. \texttt{name.surname@unitn.it}\\[2pt]
+$^{2}$ Department of Industrial Engineering, University of Trento,
+Trento, Italy. \texttt{name.surname@unitn.org}\\[2pt]
+Digital Object Identifier (DOI): see top of this page.\\[6pt]
+This work is licensed under a Creative Commons Attribution 4.0
+License. For more information, see
+\texttt{https://creativecommons.org/licenses/by/4.0/}
+}
+
+\end{document}
